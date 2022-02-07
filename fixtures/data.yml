@@ -1,0 +1,16 @@
+App\Entity\Ingredient:
+  tomate:
+    name: "Tomate"
+    price: 0.1
+  champignons:
+    name: "Champignons"
+    price: 0.1
+  mozza:
+    name: "Mozzarella"
+    price: 0.4
+  jambom_parme:
+    name: "Jambom de parme"
+    price: 0.6
+  ingredient_aleatoire_{1..30}:
+    name: "<word()>"
+    price: "<randomFloat(2, 0.1, 1.0)>"
