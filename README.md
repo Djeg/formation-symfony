@@ -9,4 +9,4 @@ avec une gestion complète des utilisateurs.
 
 ## La documentation
 
-- [Documentation sur le formt markdown](./doc/tuto_markdown.md)
+- [Documentation sur le format markdown](./doc/tuto_markdown.md)
