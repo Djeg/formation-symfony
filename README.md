@@ -17,6 +17,6 @@ avec une gestion complète des utilisateurs.
   }
 </style>
 
-<p class="mon-cadre">
+<p class="mon-cadre" style="border: 1px solid black">
 Test
 </p>
