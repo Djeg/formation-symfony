@@ -18,7 +18,7 @@ class DishController extends AbstractController
     public function index(DishRepository $dishRepository): Response
     {
         return $this->render('admin/dish/index.html.twig', [
-            'dishes' => $dishRepository->findAll(),
+            'dishes' => $dishRepository->findAllOrderedByPrice(),
         ]);
     }
 
@@ -71,7 +71,7 @@ class DishController extends AbstractController
     #[Route('/{id}', name: 'admin_dish_delete', methods: ['POST'])]
     public function delete(Request $request, Dish $dish, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$dish->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $dish->getId(), $request->request->get('_token'))) {
             $entityManager->remove($dish);
             $entityManager->flush();
         }
