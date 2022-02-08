@@ -1,6 +1,6 @@
 App\Entity\Ingredient:
   tomate:
-    name: "Tomate"
+    name: "tomate"
     price: 0.1
   champignons:
     name: "Champignons"
@@ -16,6 +16,13 @@ App\Entity\Ingredient:
     price: "<randomFloat(2, 0.1, 1.0)>"
 
 App\Entity\Dish:
+  pizza_tomate:
+    name: "Pizza Tomate"
+    description: "<paragraph()>"
+    price: "<randomFloat(2, 8, 13)>"
+    image: "<imageUrl(640, 480, 'Pizza')>"
+    type: "Pizza"
+    ingredients: ["@tomate"]
   pizza_{1..10}:
     name: "Pizza <word()>"
     description: "<paragraph()>"
