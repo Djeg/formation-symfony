@@ -2,23 +2,30 @@
 
 namespace App\Controller\Admin;
 
-use App\DTO\SearchDishCriteria;
 use App\Entity\Dish;
 use App\Form\DishType;
 use App\Form\SearchDishType;
+use App\DTO\SearchDishCriteria;
 use App\Repository\DishRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin/dish')]
 class DishController extends AbstractController
 {
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     */
     #[Route('/', name: 'admin_dish_index', methods: ['GET'])]
     public function index(DishRepository $dishRepository, Request $request): Response
     {
+        // Récupération de l'utilisateur connécté
+        $user = $this->getUser();
+
         // 1. Création du DTO
         $criteria = new SearchDishCriteria();
         // 2. Création du formulaire

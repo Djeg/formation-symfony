@@ -4,6 +4,11 @@
 
 {% block body %}
     <h1>Dish index</h1>
+
+
+    {% if is_granted('ROLE_ADMIN') %}
+      <p>Vous êtes administrateur</p>
+    {% endif %}
     
     {{ form(form) }}
 
