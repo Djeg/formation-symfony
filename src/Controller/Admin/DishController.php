@@ -2,8 +2,10 @@
 
 namespace App\Controller\Admin;
 
+use App\DTO\SearchDishCriteria;
 use App\Entity\Dish;
 use App\Form\DishType;
+use App\Form\SearchDishType;
 use App\Repository\DishRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,10 +17,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class DishController extends AbstractController
 {
     #[Route('/', name: 'admin_dish_index', methods: ['GET'])]
-    public function index(DishRepository $dishRepository): Response
+    public function index(DishRepository $dishRepository, Request $request): Response
     {
+        // 1. Création du DTO
+        $criteria = new SearchDishCriteria();
+        // 2. Création du formulaire
+        $form = $this->createForm(SearchDishType::class, $criteria);
+
+        // 3. On remplie le DTO avec ce que l'utilisateur à spécifié
+        $form->handleRequest($request);
+
         return $this->render('admin/dish/index.html.twig', [
-            'dishes' => $dishRepository->findFivteenWithTomato(),
+            'dishes' => $dishRepository->findAllByCriteria($criteria),
+            'form' => $form->createView(),
         ]);
     }
 

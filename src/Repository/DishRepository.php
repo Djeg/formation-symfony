@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\DTO\SearchDishCriteria;
 use App\Entity\Dish;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,6 +18,23 @@ class DishRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Dish::class);
+    }
+
+    public function findAllByCriteria(SearchDishCriteria $criteria): array
+    {
+        $qb = $this->createQueryBuilder('dish');
+
+        if ($criteria->title) {
+            $qb
+                ->andWhere('dish.name LIKE :title')
+                ->setParameter('title', '%' . $criteria->title . '%');
+        }
+
+        return $qb
+            ->setMaxResults($criteria->limit)
+            ->setFirstResult($criteria->limit * ($criteria->page - 1))
+            ->getQuery()
+            ->getResult();
     }
 
     public function findFivteenWithTomato(): array

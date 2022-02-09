@@ -49,7 +49,7 @@ class DishType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Dish::class,
+            'data_class' => Dish::class, // DTO 
             'method' => 'POST',
         ]);
     }
