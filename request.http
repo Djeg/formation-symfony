@@ -1,0 +1,18 @@
+GET http://localhost:4444/admin/dish/test
+
+###
+
+GET http://localhost:4444/test
+
+###
+
+GET http://localhost:4444/style.css
+
+
+###
+
+GET http://localhost:4444/image.jpg
+
+### J'aimerais récupérer tout les plats
+
+GET http://localhost:4444/dishes (collection)
