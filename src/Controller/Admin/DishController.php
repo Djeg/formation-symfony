@@ -18,6 +18,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class DishController extends AbstractController
 {
     /**
+     * @Route("/test", name="admin_dish_test")
+     */
+    public function test(): Response
+    {
+        return $this->json([
+            'users' => [
+                [
+                    'name' => 'john'
+                ]
+            ]
+        ]);
+    }
+
+
+    /**
      * @IsGranted("ROLE_ADMIN")
      */
     #[Route('/', name: 'admin_dish_index', methods: ['GET'])]
