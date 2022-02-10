@@ -2,10 +2,13 @@
 
 Exemple : J'aimerais récupérer tout les plats
 
-Requete:
+- **Requete**:
+
+```
 GET http://locahost:4444/dishes
-Resource:
-Collection
+```
+
+- **Resource**: Collection
 
 ## 1. J'aimerais récupérer tout les ingrédients
 
