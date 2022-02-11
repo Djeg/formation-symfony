@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\IngredientRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\IngredientRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 #[ORM\Entity(repositoryClass: IngredientRepository::class)]
 class Ingredient
@@ -21,6 +22,9 @@ class Ingredient
     #[ORM\Column(type: 'float')]
     private $price;
 
+    /**
+     * @Ignore
+     */
     #[ORM\ManyToMany(targetEntity: Dish::class, mappedBy: 'ingredients')]
     private $dishes;
 

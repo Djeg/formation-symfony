@@ -1,18 +1,101 @@
-GET http://localhost:4444/admin/dish/test
+GET http://localhost:4444/api/users
 
 ###
 
-GET http://localhost:4444/test
+POST http://localhost:4444/api/users
+Content-Type: application/json
+
+{
+  "email": "test@mail.com",
+  "password": "test"
+}
 
 ###
 
-GET http://localhost:4444/style.css
+PATCH http://localhost:4444/api/users/{id}
+Content-Type: application/json
 
+{
+  "email": "new.mail@mail.com"
+}
 
 ###
 
-GET http://localhost:4444/image.jpg
+DELETE http://localhost:4444/api/users/{id}
 
-### J'aimerais récupérer tout les plats
+###
 
-GET http://localhost:4444/dishes (collection)
+GET http://localhost:4444/api/ingredients
+
+###
+
+GET http://localhost:4444/api/ingredients?limit=4
+
+###
+
+GET http://localhost:4444/api/ingredients?limit=4&name=Pizza%
+
+###
+
+POST http://localhost:4444/api/ingredients
+Content-Type: application/json
+
+{
+  "name": "Mon ingrédient",
+  "price": 0.25
+}
+
+###
+
+PATCH http://localhost:4444/api/ingredients/{id}
+Content-Type: application/json
+
+{
+  "price": 0.50
+}
+
+###
+
+DELETE http://localhost:4444/api/ingredients/{id}
+
+###
+
+GET http://localhost:4444/api/dishes
+
+###
+
+GET http://localhost:4444/api/dishes?limit=4
+
+###
+
+GET http://localhost:4444/api/dishes?limit=4&name=Pizza%
+
+###
+
+GET http://localhost:4444/api/dishes?limit=4&page=2
+
+###
+
+POST http://localhost:4444/api/dishes
+Content-Type: application/json
+
+{
+  "name": "Mon plat",
+  "price": 9.21,
+  "description": "Mon plat",
+  "type": "entrée",
+  "image": "https://placeholder.com/640/480"
+}
+
+###
+
+PATCH http://localhost:4444/api/dishes/{id}
+Content-Type: application/json
+
+{
+  "price": 0.50
+}
+
+###
+
+DELETE http://localhost:4444/api/dishes/{id}
