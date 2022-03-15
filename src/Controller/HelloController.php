@@ -37,4 +37,10 @@ class HelloController
 
         return $response;
     }
+
+    #[Route('/bonjour/{nom}', name: 'app_hello_bonjour')]
+    public function bonjour(string $nom): Response
+    {
+        return new Response("Bonjour $nom, comment allez-vous ?");
+    }
 }
