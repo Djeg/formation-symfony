@@ -21,3 +21,7 @@ servant de support au cours :).
 
 Vous avez aussi la possibilité d'utiliser [l'éditeur de code github](https://github1s.com/Djeg/formation-symfony/tree/session/14-03-22.18-03-22) afin
 d'explorer le projet.
+
+## Exercices
+
+1. [La requête et la réponse](./exos/request-response.exos.md)
