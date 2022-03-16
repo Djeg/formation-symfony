@@ -35,12 +35,47 @@ class BookController extends AbstractController
         $books = $repository->findAll();
         $html = '';
 
-        $book1 = $repository->find(1);
-
         foreach ($books as $book) {
             $html .= "<p>{$book->getTitle()}</p>";
         }
 
         return new Response($html);
+    }
+
+    #[Route('/livres/{id}')]
+    public function one(BookRepository $repository, int $id): Response
+    {
+        // Récupération d'un livre par son id
+        $book = $repository->find($id);
+
+        // On test si le livre éxiste
+        if (!$book) {
+            // retour d'une réponse 404
+            return new Response("Le livre n'éxiste pas", 404);
+        }
+
+        return new Response($book->getTitle());
+    }
+
+    #[Route('/livres/{id}/supprimer')]
+    public function remove(
+        BookRepository $repository,
+        EntityManagerInterface $manager,
+        int $id,
+    ): Response {
+        // Récupération d'un livre
+        $book = $repository->find($id);
+
+        // On test si le livre éxiste
+        if (!$book) {
+            // retour d'une réponse 404
+            return new Response("Le livre n'éxiste pas", 404);
+        }
+
+        $manager->remove($book);
+
+        $manager->flush();
+
+        return new Response("Le livre {$id} à bien été supprimé");
     }
 }
