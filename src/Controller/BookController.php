@@ -22,6 +22,7 @@ class BookController extends AbstractController
         $book->setDescription('Description de mon livre');
 
         $manager->persist($book);
+        $manager->remove($book);
 
         $manager->flush();
 
@@ -33,6 +34,8 @@ class BookController extends AbstractController
     {
         $books = $repository->findAll();
         $html = '';
+
+        $book1 = $repository->find(1);
 
         foreach ($books as $book) {
             $html .= "<p>{$book->getTitle()}</p>";

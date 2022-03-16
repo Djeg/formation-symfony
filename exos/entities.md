@@ -46,3 +46,30 @@ de livre. Exemple:
 <p>Titre du dexième livre</p>
 <p>Titre du troisième livre</p>
 ```
+
+## Récupérer un seul livre
+
+Dans le controller `BookController`, ajouter une methode `one` avec la route suivante :
+`/livres/{id}`.
+
+Grace au repository `BookRepository` et à la méthode `find`, Récupéré le livre
+avec l'identifiant passer dans le paramètre de la route.
+
+Si il n'y pas ed livre, alors retourner une réponse avec le code HTTP 404,
+Sinon retourner une réponse avec le titre du livre.
+
+## Supprimer un livre
+
+Dans le controller `BookController`, ajouter une methode `remove` avec la route suivante :
+`/livres/{id}/supprimer`.
+
+Grace au repository `BookRepository` et à la méthode `find`, Récupéré le livre
+avec l'identifiant passer dans le paramètre de la route.
+
+Supprimer le livre en utilisant le manager (`EntityManagerInterface` et la méthode `remove`).
+
+Si le livre existe dans la base de données et qu'il a bien était supprimé
+retourner une réponse avec le texte : `Le livre {id} à bien été supprimé`.
+
+Si le livre n'éxiste pas dans la base de données retourner une réponse avec le code
+http 404.
