@@ -18,3 +18,16 @@ Généré une entité livre avec les champs suivant :
 | title       | string | no       |
 | description | text   | yes      |
 | price       | float  | no       |
+
+## Insérer un nouveau livre
+
+Dans un controller `BookController` qui hérite de `AbstractController`. Ajouter une méthode `new` attaché la route
+suivante : `/book/new`
+
+Dans cet méthode créer un noueau livre avec un titre, une description et un prix de votre choix.
+
+Enregistrer ce livre dans la base de données en utilisant `EntityManagerInterface`.
+
+Retourner une réponse qui affiche : `Livre $id : $titre`.
+
+Vous pouvez tester cette route avec le fichier `request.http`.

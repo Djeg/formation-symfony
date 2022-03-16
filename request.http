@@ -16,3 +16,7 @@ GET http://127.0.0.1:8001/bonjour/Jean
 ###
 
 GET http://127.0.0.1:8001/additionner/3.436438/1.34937493?precision=1
+
+###
+
+GET http://127.0.0.1:8001/creer-livre
