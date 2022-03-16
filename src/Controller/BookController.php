@@ -28,15 +28,16 @@ class BookController extends AbstractController
         return new Response('Le livre ' . $book->getId() . ' à bien été créé');
     }
 
+    #[Route('/livres')]
     public function list(BookRepository $repository): Response
     {
         $books = $repository->findAll();
+        $html = '';
 
         foreach ($books as $book) {
-            $book->getId();
-            $book->getTitle();
+            $html .= "<p>{$book->getTitle()}</p>";
         }
 
-        return new Response('');
+        return new Response($html);
     }
 }

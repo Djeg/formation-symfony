@@ -34,7 +34,7 @@ Vous pouvez tester cette route avec le fichier `request.http`.
 
 ## Lister tout les livres
 
-Dans le controller `BookController`, ajouter une méthode `lisa avec la route suivante : `/livres`.
+Dans le controller `BookController`, ajouter une méthode `list` avec la route suivante : `/livres`.
 
 Récupérer tout les livres graçe à lé méthode `findAll` du `BookRepository`.
 
