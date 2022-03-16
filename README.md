@@ -25,3 +25,4 @@ d'explorer le projet.
 ## Exercices
 
 1. [La requête et la réponse](./exos/request-response.exos.md)
+2. [Les entitès](./exos/entities.md)
