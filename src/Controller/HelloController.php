@@ -13,27 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HelloController extends AbstractController
 {
-    #[Route('/creer-livre')]
-    public function createBook(EntityManagerInterface $manager): Response
-    {
-        $book = new Book();
-        $book->setTitle('Mon premier livre');
-        $book->setPrice(12.5);
-        $book->setDescription('Description de mon livre');
-
-        // On demande au manager de doctrine de prendre en compte
-        // le nouveau livre. Cette instruction n'enregistre dans
-        // la base.
-        $manager->persist($book);
-
-        // On demande au manager de doctrine de mettre à jour
-        // la base de données
-        $manager->flush();
-
-        return new Response('Le nouveau livre à bien été créé: ' . $book->getTitle());
-    }
-
-
     #[Route('/hello/{nom}', name: 'app_hello_hello', methods: ['GET'])]
     public function hello(Request $request, string $nom): Response
     {
