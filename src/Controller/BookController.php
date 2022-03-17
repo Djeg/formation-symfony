@@ -34,10 +34,10 @@ class BookController extends AbstractController
 
         $manager->flush();
 
-        return new Response('Le livre à bien été enregistré');
+        return $this->redirectToRoute('app_book_list');
     }
 
-    #[Route('/livres')]
+    #[Route('/livres', name: 'app_book_list')]
     public function list(BookRepository $repository): Response
     {
         $books = $repository->findAll();
