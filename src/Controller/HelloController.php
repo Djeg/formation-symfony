@@ -38,7 +38,9 @@ class HelloController extends AbstractController
         // Récupére un cookie
         $request->cookies->get('Nom du cookie');
 
-        return $response;
+        return $this->render('hello/hello.html.twig', [
+            'nom' => $nom,
+        ]);
     }
 
     #[Route('/bonjour/{nom}', name: 'app_hello_bonjour')]
