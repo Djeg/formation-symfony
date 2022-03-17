@@ -8,25 +8,33 @@ use App\Entity\Book;
 use App\Repository\BookRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BookController extends AbstractController
 {
     #[Route('/creer-livre')]
-    public function new(EntityManagerInterface $manager): Response
+    public function new(Request $request, EntityManagerInterface $manager): Response
     {
+        if ($request->isMethod('GET')) {
+            return $this->render('book/new.html.twig');
+        }
+
         $book = new Book();
-        $book->setTitle('Livre de test');
-        $book->setPrice(12.2);
-        $book->setDescription('Description de mon livre');
+        $title = $request->request->get('title');
+        $price = (float)$request->request->get('price');
+        $description = $request->request->get('description');
+
+        $book->setTitle($title);
+        $book->setPrice($price);
+        $book->setDescription($description);
 
         $manager->persist($book);
-        $manager->remove($book);
 
         $manager->flush();
 
-        return new Response('Le livre ' . $book->getId() . ' à bien été créé');
+        return new Response('Le livre à bien été enregistré');
     }
 
     #[Route('/livres')]
