@@ -4,6 +4,11 @@
 
 {% block body %}
 
+<a href="{{ path('app_calculatrice_multiplier', {
+  'x': x,
+  'y': y,
+}) }}">Lien vers la multiplication</a>
+
 <h1>{{ x }} + {{ y }} = {{ resultat }}</h1>
 
 {% endblock %}
