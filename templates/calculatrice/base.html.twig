@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  {{ include('calculatrice/_menu.html.twig', {x: y, y: y}) }}
+
+  {% block content %}{% endblock %}
+{% endblock %}
