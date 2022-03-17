@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Calculatrice: Soustraction</title>
-  </head>
-  <body>
-    <h1>Soustraire</h1>
-    <p>{{ x }} - {{ y }} = {{ resultat }}</p>
-  </body>
-</html>
+{% extends 'base.html.twig' %}
+
+{% block title %}Calculatrice - Soustraction{% endblock %}
+
+{% block body %}
+
+<h1>{{ x }} - {{ y }} = {{ resultat }}</h1>
+
+{% endblock %}
