@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CalculatriceController
+class CalculatriceController extends AbstractController
 {
     #[Route('/additionner/{x}/{y}', name: 'app_calculatrice_additionner')]
     public function additionner(Request $request, float $x, float $y): Response
@@ -16,7 +17,11 @@ class CalculatriceController
         $precision = (int)$request->query->get('precision');
         $resultat = round($x + $y, $precision);
 
-        return new Response("$x + $y = $resultat");
+        return $this->render('calculatrice/additionner.html.twig', [
+            'x' => $x,
+            'y' => $y,
+            'resultat' => $resultat,
+        ]);
     }
 
     #[Route('/soustraire/{x}/{y}', name: 'app_calculatrice_soustraire')]
@@ -25,7 +30,11 @@ class CalculatriceController
         $precision = (int)$request->query->get('precision');
         $resultat = round($x - $y, $precision);
 
-        return new Response("$x - $y = $resultat");
+        return $this->render('calculatrice/soustraire.html.twig', [
+            'x' => $x,
+            'y' => $y,
+            'resultat' => $resultat,
+        ]);
     }
 
     #[Route('/multiplier/{x}/{y}', name: 'app_calculatrice_multiplier')]
@@ -34,7 +43,11 @@ class CalculatriceController
         $precision = (int)$request->query->get('precision');
         $resultat = round($x * $y, $precision);
 
-        return new Response("$x * $y = $resultat");
+        return $this->render('calculatrice/multiplier.html.twig', [
+            'x' => $x,
+            'y' => $y,
+            'resultat' => $resultat,
+        ]);
     }
 
     #[Route('/diviser/{x}/{y}', name: 'app_calculatrice_diviser')]
@@ -43,7 +56,11 @@ class CalculatriceController
         $precision = (int)$request->query->get('precision');
         $resultat = round($x / $y, $precision);
 
-        return new Response("$x / $y = $resultat");
+        return $this->render('calculatrice/diviser.html.twig', [
+            'x' => $x,
+            'y' => $y,
+            'resultat' => $resultat,
+        ]);
     }
 
     #[Route('/calcule/{x}/{y}', name: 'app_calculatrice_calcule')]
@@ -67,7 +84,7 @@ class CalculatriceController
             return $this->diviser($request, $x, $y);
         }
 
-        return new Response("Oops je connais pas l'operation", 400);
+        return $this->render('calculatrice/erreur.html.twig');
 
         /* switch ($operation) {
             case "additionner":
