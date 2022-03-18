@@ -89,7 +89,6 @@ class BookController extends AbstractController
         }
 
         $manager->remove($book);
-
         $manager->flush();
 
         return $this->redirectToRoute('app_book_list');

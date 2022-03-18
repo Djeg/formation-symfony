@@ -1,0 +1,26 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block page_title %}
+	Modifier un auteur
+{% endblock %}
+
+{% block content %}
+	<p>
+		<a href="{{ path('app_author_list') }}">Retour à la liste des auteurs</a>
+	</p>
+
+	<form method="POST">
+		<div>
+			<input name="name" type="text" value="{{ author.name }}"/>
+		</div>
+		<div>
+			<textarea name="description">{{ author.description }}</textarea>
+		</div>
+		<div>
+			<input name="image" type="text" value="{{ author.image }}"/>
+		</div>
+		<div>
+			<button type="submit">Envoyer</button>
+		</div>
+	</form>
+{% endblock %}
