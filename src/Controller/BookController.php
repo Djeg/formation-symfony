@@ -14,11 +14,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class BookController extends AbstractController
 {
-    #[Route('/creer-livre')]
-    public function new(Request $request, EntityManagerInterface $manager): Response
+    #[Route('/livres/nouveau', name: 'app_book_create')]
+    public function create(Request $request, EntityManagerInterface $manager): Response
     {
         if ($request->isMethod('GET')) {
-            return $this->render('book/new.html.twig');
+            return $this->render('book/create.html.twig');
         }
 
         $book = new Book();
@@ -41,17 +41,14 @@ class BookController extends AbstractController
     public function list(BookRepository $repository): Response
     {
         $books = $repository->findAll();
-        $html = '';
 
-        foreach ($books as $book) {
-            $html .= "<p>{$book->getTitle()}</p>";
-        }
-
-        return new Response($html);
+        return $this->render('book/list.html.twig', [
+            'books' => $books,
+        ]);
     }
 
-    #[Route('/livres/{id}')]
-    public function one(BookRepository $repository, int $id): Response
+    #[Route('/livres/{id}/modifier', name: 'app_book_update')]
+    public function update(Request $request, EntityManagerInterface $manager, BookRepository $repository, int $id): Response
     {
         // Récupération d'un livre par son id
         $book = $repository->find($id);
@@ -62,10 +59,21 @@ class BookController extends AbstractController
             return new Response("Le livre n'éxiste pas", 404);
         }
 
-        return new Response($book->getTitle());
+        if ($request->isMethod('GET')) {
+            return $this->render('book/update.html.twig', ['book' => $book]);
+        }
+
+        $book->setTitle($request->request->get('title'));
+        $book->setPrice((float)$request->request->get('price'));
+        $book->setDescription($request->request->get('description'));
+
+        $manager->persist($book);
+        $manager->flush();
+
+        return $this->redirectToRoute('app_book_list');
     }
 
-    #[Route('/livres/{id}/supprimer')]
+    #[Route('/livres/{id}/supprimer', name: 'app_book_remove')]
     public function remove(
         BookRepository $repository,
         EntityManagerInterface $manager,
@@ -84,6 +92,6 @@ class BookController extends AbstractController
 
         $manager->flush();
 
-        return new Response("Le livre {$id} à bien été supprimé");
+        return $this->redirectToRoute('app_book_list');
     }
 }
