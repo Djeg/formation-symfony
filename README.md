@@ -27,3 +27,4 @@ d'explorer le projet.
 1. [La requête et la réponse](./exos/request-response.exos.md)
 2. [Les entitès](./exos/entities.md)
 3. [La vue (Twig)](./exos/twig.md)
+4. [Faire un CRUD](./exos/crud.md)
