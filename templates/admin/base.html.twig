@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Admin -
+	{% block sub_title %}{% endblock %}
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+	<link rel="stylesheet" href="/css/admin.css"/>
+{% endblock %}
+
+{% block body %}
+	<header>
+		<nav>
+			<a href="{{ path('app_admin_bookAdmin_retrieve') }}">
+				Liste des livres
+			</a>
+		</nav>
+	</header>
+
+	<h1>
+		{% block page_title %}
+			Administration
+		{% endblock %}
+	</h1>
+
+	{% block content %}{% endblock %}
+{% endblock %}
