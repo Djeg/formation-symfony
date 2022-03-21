@@ -19,24 +19,23 @@
 			<a href="{{ path('app_admin_bookAdmin_retrieve') }}">
 				Liste des livres
 			</a>
-		</nav>
-		<nav>
 			<a href="{{ path('app_admin_authorAdmin_retrieve') }}">
 				Liste des auteurs
 			</a>
-		</nav>
-		<nav>
 			<a href="{{ path('app_admin_categoryAdmin_retrieve') }}">
 				Liste des catégories
 			</a>
 		</nav>
 	</header>
 
-	<h1>
-		{% block page_title %}
-			Administration
-		{% endblock %}
-	</h1>
+  <div class="container">
+    <h1>
+      {% block page_title %}
+        Administration
+      {% endblock %}
+    </h1>
 
-	{% block content %}{% endblock %}
+
+    {% block content %}{% endblock %}
+  </div>
 {% endblock %}

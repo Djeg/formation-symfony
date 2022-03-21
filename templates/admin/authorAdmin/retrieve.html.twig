@@ -11,7 +11,7 @@
 {% block content %}
 
 	<div>
-		<a href="{{ path('app_admin_authorAdmin_create') }}">
+		<a class="button" href="{{ path('app_admin_authorAdmin_create') }}">
 			Nouveau auteur
 			<i class="fa-solid fa-circle-plus"></i>
 		</a>
@@ -31,10 +31,10 @@
 					<td>{{ author.id }}</td>
 					<td>{{ author.name }}</td>
 					<td>
-						<a href="{{ path('app_admin_authorAdmin_update', { id: author.id }) }}">
+						<a class="button" href="{{ path('app_admin_authorAdmin_update', { id: author.id }) }}">
 							<i class="fa-solid fa-pen"></i>
 						</a>
-						<a href="{{ path('app_admin_authorAdmin_delete', { id: author.id }) }}">
+						<a class="button" href="{{ path('app_admin_authorAdmin_delete', { id: author.id }) }}">
 							<i class="fa-solid fa-trash"></i>
 						</a>
 					</td>

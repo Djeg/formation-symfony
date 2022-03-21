@@ -11,7 +11,7 @@
 {% block content %}
 
 	<div>
-		<a href="{{ path('app_admin_bookAdmin_create') }}">
+		<a class="button" href="{{ path('app_admin_bookAdmin_create') }}">
 			Nouveau livre
 			<i class="fa-solid fa-circle-plus"></i>
 		</a>
@@ -36,10 +36,10 @@
 						€
 					</td>
 					<td>
-						<a href="{{ path('app_admin_bookAdmin_update', { id: book.id }) }}">
+						<a class="button" href="{{ path('app_admin_bookAdmin_update', { id: book.id }) }}">
 							<i class="fa-solid fa-pen"></i>
 						</a>
-						<a href="{{ path('app_admin_bookAdmin_delete', { id: book.id }) }}">
+						<a class="button" href="{{ path('app_admin_bookAdmin_delete', { id: book.id }) }}">
 							<i class="fa-solid fa-trash"></i>
 						</a>
 					</td>

@@ -1,8 +1,21 @@
+:root {
+  --color-purple: #310a31;
+  --color-rythm: #847996;
+  --color-opal: #88b7b5;
+  --color-blue: #a7cab1;
+  --color-eggshell: #f4ecd6;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  min-width: 100vw;
 }
 
 h1,
@@ -16,4 +29,48 @@ h6 {
 
 .font-display {
   font-family: "Lobster", serif;
+}
+
+header {
+  display: flex;
+  background-color: var(--color-purple);
+  color: var(--color-eggshell);
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem;
+}
+
+header nav {
+  display: flex;
+}
+header nav a {
+  display: flex;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.6rem;
+  color: var(--color-eggshell);
+}
+
+.container {
+  width: 1456px;
+  min-height: 80vh;
+  padding: 0.6rem 2rem;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.button {
+  outline: none;
+  display: inline-block;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: var(--color-rythm);
+  color: var(--color-eggshell);
+  border: none;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
 }
