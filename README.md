@@ -7,7 +7,7 @@ Faire un CRUD d'entité.
 
 Pour installer ce projet chez vous suivez le guide :
 
-1. [Télécharger](https://github.com/Djeg/formation-symfony/archive/refs/heads/session/14-03-22.18-03-22.zip) ou cloner ce repository sur votre machine
+1. [Télécharger](https://github.com/Djeg/formation-symfony/archive/refs/heads/session/21-03-22.25-03-22.zip) ou cloner ce repository sur votre machine
 2. Ouvrez le projet dans VSCode
 3. Intaller les dépendances avec la commande : `composer install`
 4. Configuré votre base de données dans le fichier `.env`
@@ -20,7 +20,7 @@ Vous retrouverez les slides de la formation [ici](https://slides.com/davidjegat-
 Vous retrouverez aussi dans le répertoire [`doc`](./doc) toute la série de document
 servant de support au cours :).
 
-Vous avez aussi la possibilité d'utiliser [l'éditeur de code github](https://github1s.com/Djeg/formation-symfony/tree/session/14-03-22.18-03-22) afin
+Vous avez aussi la possibilité d'utiliser [l'éditeur de code github](https://github1s.com/Djeg/formation-symfony/tree/session/21-03-22.25-03-22) afin
 d'explorer le projet.
 
 ## Exercices
