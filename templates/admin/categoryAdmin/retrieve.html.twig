@@ -1,0 +1,46 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block sub_title %}
+	Liste des categories
+{% endblock %}
+
+{% block page_title %}
+	Liste des categories
+{% endblock %}
+
+{% block content %}
+
+	<div>
+		<a href="{{ path('app_admin_categoryAdmin_create') }}">
+			Nouvelle categorie
+			<i class="fa-solid fa-circle-plus"></i>
+		</a>
+	</div>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nom</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for category in categories %}
+				<tr>
+					<td>{{ category.id }}</td>
+					<td>{{ category.name }}</td>
+					<td>
+						<a href="{{ path('app_admin_categoryAdmin_update', { id: category.id }) }}">
+							<i class="fa-solid fa-pen"></i>
+						</a>
+						<a href="{{ path('app_admin_categoryAdmin_delete', { id: category.id }) }}">
+							<i class="fa-solid fa-trash"></i>
+						</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+{% endblock %}
