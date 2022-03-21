@@ -11,7 +11,8 @@ Pour installer ce projet chez vous suivez le guide :
 2. Ouvrez le projet dans VSCode
 3. Intaller les dépendances avec la commande : `composer install`
 4. Configuré votre base de données dans le fichier `.env`
-5. Créez votre schèma avec la commande : `symfony console doctrine:schema:update --force`
+5. Créez la base de données avec la commande : `symfony console doctrine:database:create`
+6. Créez votre schèma avec la commande : `symfony console doctrine:schema:update --force`
 
 ## Documentation
 
