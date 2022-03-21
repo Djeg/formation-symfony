@@ -16,11 +16,14 @@ class Book
     #[ORM\Column(type: 'string', length: 255)]
     private $title;
 
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $description;
+
     #[ORM\Column(type: 'float')]
     private $price;
 
-    #[ORM\Column(type: 'text', nullable: true)]
-    private $description;
+    #[ORM\Column(type: 'array', nullable: true)]
+    private $pictures = [];
 
     public function getId(): ?int
     {
@@ -39,6 +42,18 @@ class Book
         return $this;
     }
 
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
     public function getPrice(): ?float
     {
         return $this->price;
@@ -51,14 +66,14 @@ class Book
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getPictures(): ?array
     {
-        return $this->description;
+        return $this->pictures;
     }
 
-    public function setDescription(?string $description): self
+    public function setPictures(?array $pictures): self
     {
-        $this->description = $description;
+        $this->pictures = $pictures;
 
         return $this;
     }
