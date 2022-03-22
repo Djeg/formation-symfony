@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
+use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,24 +18,20 @@ class CategoryAdminController extends AbstractController
     #[Route('/admin/categories/nouveau', name: 'app_admin_categoryAdmin_create', methods: ['GET', 'POST'])]
     public function create(Request $request, EntityManagerInterface $manager): Response
     {
-        // si la méthode HTTP est GET (obtenir)
-        if ($request->isMethod('GET')) {
-            // Affichage de la page de création d'une categorie
-            return $this->render('admin/categoryAdmin/create.html.twig');
+        $form = $this->createForm(CategoryType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($form->getData());
+            $manager->flush();
+
+            return $this->redirectToRoute('app_admin_categoryAdmin_retrieve');
         }
 
-        // si la méthode HTTP est POST (créer)
-
-        // Création du nouveau categorie
-        $category = (new Category())
-            ->setName($request->request->get('name'));
-
-        // Enregistrement, persistence du nouveau categorie
-        $manager->persist($category);
-        $manager->flush();
-
-        // Redirection vers la page de la liste des categories
-        return $this->redirectToRoute('app_admin_categoryAdmin_retrieve');
+        return $this->render('admin/categoryAdmin/create.html.twig', [
+            'formView' => $form->createView(),
+        ]);
     }
 
     #[Route('/admin/categories', name: 'app_admin_categoryAdmin_retrieve', methods: ['GET'])]
@@ -65,27 +62,20 @@ class CategoryAdminController extends AbstractController
             return new Response("Le categorie n'éxiste pas", 404);
         }
 
-        // Si la méthode HTTP est GET (obtenir)
-        if ($request->isMethod('GET')) {
-            // Affichage du formulaire de mise à jour du categorie
-            return $this->render('admin/categoryAdmin/update.html.twig', [
-                'category' => $category,
-            ]);
+        $form = $this->createForm(CategoryType::class, $category);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($form->getData());
+            $manager->flush();
+
+            return $this->redirectToRoute('app_admin_categoryAdmin_retrieve');
         }
 
-        // Si la méthode HTTP est POST (créer)
-
-        // Mettre à jour notre categorie avec les données du
-        // formulaire
-        $category
-            ->setName($request->request->get('name'));
-
-        // Enregistrement du categorie en base de données
-        $manager->persist($category);
-        $manager->flush();
-
-        // Redirection vers la page de liste des categories
-        return $this->redirectToRoute('app_admin_categoryAdmin_retrieve');
+        return $this->render('admin/categoryAdmin/update.html.twig', [
+            'formView' => $form->createView(),
+        ]);
     }
 
     #[Route('/admin/categories/{id}/supprimer', name: 'app_admin_categoryAdmin_delete', methods: ['GET'])]

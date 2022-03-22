@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Entity\Author;
+use App\Form\AuthorType;
 use App\Repository\AuthorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,26 +18,20 @@ class AuthorAdminController extends AbstractController
     #[Route('/admin/auteurs/nouveau', name: 'app_admin_authorAdmin_create', methods: ['GET', 'POST'])]
     public function create(Request $request, EntityManagerInterface $manager): Response
     {
-        // si la méthode HTTP est GET (obtenir)
-        if ($request->isMethod('GET')) {
-            // Affichage de la page de création d'un auteur
-            return $this->render('admin/authorAdmin/create.html.twig');
+        $form = $this->createForm(AuthorType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($form->getData());
+            $manager->flush();
+
+            return $this->redirectToRoute('app_admin_authorAdmin_retrieve');
         }
 
-        // si la méthode HTTP est POST (créer)
-
-        // Création du nouveau auteur
-        $author = (new Author())
-            ->setName($request->request->get('name'))
-            ->setDescription($request->request->get('description'))
-            ->setPictures($request->request->get('pictures'));
-
-        // Enregistrement, persistence du nouveau auteur
-        $manager->persist($author);
-        $manager->flush();
-
-        // Redirection vers la page de la liste des auteurs
-        return $this->redirectToRoute('app_admin_authorAdmin_retrieve');
+        return $this->render('admin/authorAdmin/create.html.twig', [
+            'formView' => $form->createView(),
+        ]);
     }
 
     #[Route('/admin/auteurs', name: 'app_admin_authorAdmin_retrieve', methods: ['GET'])]
@@ -67,29 +62,20 @@ class AuthorAdminController extends AbstractController
             return new Response("Le auteur n'éxiste pas", 404);
         }
 
-        // Si la méthode HTTP est GET (obtenir)
-        if ($request->isMethod('GET')) {
-            // Affichage du formulaire de mise à jour du auteur
-            return $this->render('admin/authorAdmin/update.html.twig', [
-                'author' => $author,
-            ]);
+        $form = $this->createForm(AuthorType::class, $author);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($form->getData());
+            $manager->flush();
+
+            return $this->redirectToRoute('app_admin_authorAdmin_retrieve');
         }
 
-        // Si la méthode HTTP est POST (créer)
-
-        // Mettre à jour notre auteur avec les données du
-        // formulaire
-        $author
-            ->setName($request->request->get('name'))
-            ->setDescription($request->request->get('description'))
-            ->setPictures($request->request->get('pictures'));
-
-        // Enregistrement du auteur en base de données
-        $manager->persist($author);
-        $manager->flush();
-
-        // Redirection vers la page de liste des auteurs
-        return $this->redirectToRoute('app_admin_authorAdmin_retrieve');
+        return $this->render('admin/authorAdmin/update.html.twig', [
+            'formView' => $form->createView(),
+        ]);
     }
 
     #[Route('/admin/auteurs/{id}/supprimer', name: 'app_admin_authorAdmin_delete', methods: ['GET'])]

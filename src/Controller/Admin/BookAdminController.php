@@ -18,8 +18,7 @@ class BookAdminController extends AbstractController
     #[Route('/admin/livres/nouveau', name: 'app_admin_bookAdmin_create', methods: ['GET', 'POST'])]
     public function create(Request $request, EntityManagerInterface $manager): Response
     {
-        $book = new Book();
-        $form = $this->createForm(BookType::class, $book);
+        $form = $this->createForm(BookType::class);
 
         $form->handleRequest($request);
 
