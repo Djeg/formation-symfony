@@ -1,4 +1,4 @@
-# Exercice Formulaire
+# Exercice Formulaire & Relation
 
 ## Petit Rappel
 
@@ -26,3 +26,10 @@ d'une catégorie, plus un bouton submit.
 
 Dans le controller `CategoryAdminController`, modifier les méthodes
 `create` et `update` pour utiliser le formulaire.
+
+## Relation entre les livres et la catégories
+
+En vous aidant du [schèma suivant](https://github.com/Djeg/formation-symfony/blob/session/21-03-22.25-03-22/doc/UML%20Projet%20Book%20Sell.png). Ajouter une relation entre les livres et les catégories.
+
+Dans le formulaire `BookType` ajouter un champs de type `EntityType` afin de pouvoir
+séléctionner plusieurs catégories.
