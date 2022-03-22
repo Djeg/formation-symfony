@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Author;
 use App\Entity\Book;
+use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -42,6 +43,13 @@ class BookType extends AbstractType
                 // si false alors une select box sera utilisé
                 // si true alors des checkboxes (ou radio box) seront utilisé
                 'expanded' => false,
+            ])
+            ->add('categories', EntityType::class, [
+                'label' => 'Catégories du livre :',
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Envoyer',
