@@ -31,3 +31,4 @@ d'explorer le projet.
 2. [Les entitès](./exos/entities.md)
 3. [La vue (Twig)](./exos/twig.md)
 4. [Faire un CRUD](./exos/crud.md)
+5. [Les formulaires](./exos/form.md)
