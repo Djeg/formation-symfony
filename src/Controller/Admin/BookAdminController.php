@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Entity\Book;
+use App\Form\BookType;
 use App\Repository\BookRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,27 +18,23 @@ class BookAdminController extends AbstractController
     #[Route('/admin/livres/nouveau', name: 'app_admin_bookAdmin_create', methods: ['GET', 'POST'])]
     public function create(Request $request, EntityManagerInterface $manager): Response
     {
-        // si la méthode HTTP est GET (obtenir)
-        if ($request->isMethod('GET')) {
-            // Affichage de la page de création d'un livre
-            return $this->render('admin/bookAdmin/create.html.twig');
+        $book = new Book();
+        $form = $this->createForm(BookType::class, $book);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($form->getData());
+            $manager->flush();
+
+            return $this->redirectToRoute('app_admin_bookAdmin_retrieve');
         }
 
-        // si la méthode HTTP est POST (créer)
+        $formView = $form->createView();
 
-        // Création du nouveau livre
-        $book = (new Book())
-            ->setTitle($request->request->get('title'))
-            ->setDescription($request->request->get('description'))
-            ->setPrice((float)$request->request->get('price'))
-            ->setPictures($request->request->get('pictures'));
-
-        // Enregistrement, persistence du nouveau livre
-        $manager->persist($book);
-        $manager->flush();
-
-        // Redirection vers la page de la liste des livres
-        return $this->redirectToRoute('app_admin_bookAdmin_retrieve');
+        return $this->render('admin/bookAdmin/create.html.twig', [
+            'formView' => $formView,
+        ]);
     }
 
     #[Route('/admin/livres', name: 'app_admin_bookAdmin_retrieve', methods: ['GET'])]
@@ -68,30 +65,22 @@ class BookAdminController extends AbstractController
             return new Response("Le livre n'éxiste pas", 404);
         }
 
-        // Si la méthode HTTP est GET (obtenir)
-        if ($request->isMethod('GET')) {
-            // Affichage du formulaire de mise à jour du livre
-            return $this->render('admin/bookAdmin/update.html.twig', [
-                'book' => $book,
-            ]);
+        $form = $this->createForm(BookType::class, $book);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($form->getData());
+            $manager->flush();
+
+            return $this->redirectToRoute('app_admin_bookAdmin_retrieve');
         }
 
-        // Si la méthode HTTP est POST (créer)
+        $formView = $form->createView();
 
-        // Mettre à jour notre livre avec les données du
-        // formulaire
-        $book
-            ->setTitle($request->request->get('title'))
-            ->setDescription($request->request->get('description'))
-            ->setPrice((float)$request->request->get('price'))
-            ->setPictures($request->request->get('pictures'));
-
-        // Enregistrement du livre en base de données
-        $manager->persist($book);
-        $manager->flush();
-
-        // Redirection vers la page de liste des livres
-        return $this->redirectToRoute('app_admin_bookAdmin_retrieve');
+        return $this->render('admin/bookAdmin/update.html.twig', [
+            'formView' => $formView,
+        ]);
     }
 
     #[Route('/admin/livres/{id}/supprimer', name: 'app_admin_bookAdmin_delete', methods: ['GET'])]
