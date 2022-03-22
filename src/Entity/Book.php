@@ -25,6 +25,9 @@ class Book
     #[ORM\Column(type: 'array', nullable: true)]
     private $pictures = [];
 
+    #[ORM\ManyToOne(targetEntity: Author::class, inversedBy: 'books')]
+    private $author;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Book
     public function setPictures(?array $pictures): self
     {
         $this->pictures = $pictures;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?Author
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?Author $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
