@@ -128,6 +128,20 @@ class BookRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findLastTenMatchingTitle(string $title): array
+    {
+        $queryBuilder = $this->createQueryBuilder('book');
+        $queryBuilder->setMaxResults(10);
+        $queryBuilder->andWhere('book.title LIKE :title');
+        $queryBuilder->setParameter('title', "%$title%");
+
+        return $queryBuilder
+            // Générer la requête
+            ->getQuery()
+            // Éxécute la requête et retourne ses résultats
+            ->getResult();
+    }
+
     /*
     public function findOneBySomeField($value): ?Book
     {

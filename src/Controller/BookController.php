@@ -40,4 +40,14 @@ class BookController extends AbstractController
             'books' => $books,
         ]);
     }
+
+    #[Route('/rechercher/{title}', name: 'app_book_titleSearch')]
+    public function titleSearch(string $title, BookRepository $repository): Response
+    {
+        $books = $repository->findLastTenMatchingTitle($title);
+
+        return $this->render('book/titleSearch.html.twig', [
+            'books' => $books,
+        ]);
+    }
 }
