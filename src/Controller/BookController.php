@@ -30,4 +30,14 @@ class BookController extends AbstractController
             'books' => $books,
         ]);
     }
+
+    #[Route('/auteur/{id}/livres', name: 'app_book_lastForAuthor')]
+    public function lastForAuthor(int $id, BookRepository $repository): Response
+    {
+        $books = $repository->findLastTenForAuthor($id);
+
+        return $this->render('book/lastForAuthor.html.twig', [
+            'books' => $books,
+        ]);
+    }
 }

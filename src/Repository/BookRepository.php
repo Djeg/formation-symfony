@@ -113,6 +113,21 @@ class BookRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findLastTenForAuthor(int $id): array
+    {
+        $queryBuilder = $this->createQueryBuilder('book');
+        $queryBuilder->setMaxResults(10);
+        $queryBuilder->leftJoin('book.author', 'author');
+        $queryBuilder->andWhere('author.id = :id');
+        $queryBuilder->setParameter('id', $id);
+
+        return $queryBuilder
+            // Générer la requête
+            ->getQuery()
+            // Éxécute la requête et retourne ses résultats
+            ->getResult();
+    }
+
     /*
     public function findOneBySomeField($value): ?Book
     {
