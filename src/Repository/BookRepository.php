@@ -142,6 +142,32 @@ class BookRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findBySearch(?string $title, int $limit = 5, int $page = 1): array
+    {
+        if ($limit === 0) {
+            $limit = 5;
+        }
+
+        if ($page === 0) {
+            $page = 1;
+        }
+
+        $queryBuilder = $this->createQueryBuilder('book');
+        $queryBuilder->setMaxResults($limit);
+        $queryBuilder->setFirstResult($limit * ($page - 1));
+
+        if ($title) {
+            $queryBuilder->andWhere('book.title LIKE :title');
+            $queryBuilder->setParameter('title', "%$title%");
+        }
+
+        return $queryBuilder
+            // Générer la requête
+            ->getQuery()
+            // Éxécute la requête et retourne ses résultats
+            ->getResult();
+    }
+
     /*
     public function findOneBySomeField($value): ?Book
     {

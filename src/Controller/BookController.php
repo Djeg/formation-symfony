@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -47,6 +48,20 @@ class BookController extends AbstractController
         $books = $repository->findLastTenMatchingTitle($title);
 
         return $this->render('book/titleSearch.html.twig', [
+            'books' => $books,
+        ]);
+    }
+
+    #[Route('/rechercher', name: 'app_book_search')]
+    public function search(BookRepository $repository, Request $request): Response
+    {
+        $title = $request->query->get('titre');
+        $limit = (int)$request->query->get('limite');
+        $page = (int)$request->query->get('page');
+
+        $books = $repository->findBySearch($title, $limit, $page);
+
+        return $this->render('book/search.html.twig', [
             'books' => $books,
         ]);
     }
