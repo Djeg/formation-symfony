@@ -20,4 +20,14 @@ class BookController extends AbstractController
             'books' => $books,
         ]);
     }
+
+    #[Route('/les-moins-chers', name: 'app_book_cheap')]
+    public function cheap(BookRepository $repository): Response
+    {
+        $books = $repository->findFiveLastCheaper();
+
+        return $this->render('book/cheap.html.twig', [
+            'books' => $books,
+        ]);
+    }
 }

@@ -100,6 +100,19 @@ class BookRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findFiveLastCheaper(): array
+    {
+        $queryBuilder = $this->createQueryBuilder('book');
+        $queryBuilder->setMaxResults(5);
+        $queryBuilder->orderBy('book.price', 'ASC');
+
+        return $queryBuilder
+            // Générer la requête
+            ->getQuery()
+            // Éxécute la requête et retourne ses résultats
+            ->getResult();
+    }
+
     /*
     public function findOneBySomeField($value): ?Book
     {
