@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Page d'accueil</h1>
+
+{% for book in books %}
+  <p>{{ book.title }} ({{ book.id }})</p>
+{% endfor %}
+
+{% endblock %}

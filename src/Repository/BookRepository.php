@@ -87,6 +87,19 @@ class BookRepository extends ServiceEntityRepository
             ->getResult(); // array de App\Entity\Book
     }
 
+    public function findFiveLast(): array
+    {
+        $queryBuilder = $this->createQueryBuilder('book');
+        $queryBuilder->setMaxResults(5);
+        $queryBuilder->orderBy('book.id', 'DESC');
+
+        return $queryBuilder
+            // Générer la requête
+            ->getQuery()
+            // Éxécute la requête et retourne ses résultats
+            ->getResult();
+    }
+
     /*
     public function findOneBySomeField($value): ?Book
     {
