@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\DTO\SearchBook;
 use App\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -165,6 +166,37 @@ class BookRepository extends ServiceEntityRepository
             // Générer la requête
             ->getQuery()
             // Éxécute la requête et retourne ses résultats
+            ->getResult();
+    }
+
+    public function findAllFilteredBy(SearchBook $searchBook): array
+    {
+        $queryBuilder = $this->createQueryBuilder('book');
+
+        $queryBuilder->setMaxResults($searchBook->limit);
+        $queryBuilder->setFirstResult($searchBook->limit * ($searchBook->page - 1));
+        $queryBuilder->orderBy('book.' . $searchBook->sortBy, $searchBook->direction);
+
+        if ($searchBook->title) {
+            $queryBuilder->andWhere('book.title LIKE :title');
+            $queryBuilder->setParameter('title', "%{$searchBook->title}%");
+        }
+
+        if ($searchBook->authorName) {
+            $queryBuilder->leftJoin('book.author', 'author');
+            $queryBuilder->andWhere('author.name LIKE :authorName');
+            $queryBuilder->setParameter('authorName', "%{$searchBook->authorName}%");
+        }
+
+        if ($searchBook->categories) {
+            $queryBuilder->leftJoin('book.categories', 'category');
+            $queryBuilder->andWhere($queryBuilder->expr()->in('category.id', $searchBook->categories->map(function ($category) {
+                return $category->getId();
+            })));
+        }
+
+        return $queryBuilder
+            ->getQuery()
             ->getResult();
     }
 

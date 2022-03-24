@@ -6,17 +6,17 @@ namespace App\DTO;
 
 class SearchBook
 {
-    public $title;
+    public ?string $title = null;
 
-    public $limit;
+    public int $limit = 10;
 
-    public $page;
+    public int $page = 1;
 
-    public $sortBy;
+    public string $sortBy = 'id';
 
-    public $direction;
+    public string $direction = 'DESC';
 
-    public $authorName;
+    public ?string $authorName = null;
 
-    public $categories;
+    public $categories = null;
 }

@@ -13,7 +13,8 @@ Pour installer ce projet chez vous suivez le guide :
 4. Configuré votre base de données dans le fichier `.env`
 5. Créez la base de données avec la commande : `symfony console doctrine:database:create`
 6. Créez votre schèma avec la commande : `symfony console doctrine:schema:update --force`
-7. Démarrez le serveur symfony avec la commande : `symfony server:start`
+7. Insérer les données dans la base avec la commande : `symfony console hautelook:fixtures:load`
+8. Démarrez le serveur symfony avec la commande : `symfony server:start`
 
 ## Documentation
 

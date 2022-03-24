@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\DTO\SearchBook;
+use App\Form\SearchBookType;
 use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,6 +64,27 @@ class BookController extends AbstractController
         $books = $repository->findBySearch($title, $limit, $page);
 
         return $this->render('book/search.html.twig', [
+            'books' => $books,
+        ]);
+    }
+
+    #[Route('/trouver-livres', name: 'app_book_searchBook')]
+    public function searchBook(Request $request, BookRepository $repository): Response
+    {
+        $books = [];
+        $form = $this->createForm(SearchBookType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // rechercher les livres
+            $searchBook = $form->getData();
+
+            $books = $repository->findAllFilteredBy($searchBook);
+        }
+
+        return $this->render('book/searchBook.html.twig', [
+            'formView' => $form->createView(),
             'books' => $books,
         ]);
     }
