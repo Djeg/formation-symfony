@@ -34,3 +34,4 @@ d'explorer le projet.
 5. [Les formulaires & Relations](./exos/form.md)
 6. [Les Query Builder (les requêtes à la base de données)](./exos/query-builder.md)
 7. [Les fixtures](./exos/fixtures.md)
+8. [Le formulaire de recherche](./exos/search-form.md)
