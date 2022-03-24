@@ -1,0 +1,9 @@
+App\Entity\Category:
+  category1:
+    name: "Science Fiction"
+
+  category2:
+    name: "Fantaisie"
+
+  category3:
+    name: "Policier"

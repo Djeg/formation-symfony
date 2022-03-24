@@ -33,3 +33,4 @@ d'explorer le projet.
 4. [Faire un CRUD](./exos/crud.md)
 5. [Les formulaires & Relations](./exos/form.md)
 6. [Les Query Builder (les requêtes à la base de données)](./exos/query-builder.md)
+7. [Les fixtures](./exos/fixtures.md)
