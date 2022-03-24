@@ -9,3 +9,33 @@ App\Entity\Category:
     name: "Fantaisie"
   category3:
     name: "Policier"
+  # Création d'un fixtures range
+  category{4..50}:
+    # Génération d'un donnée "fake" (fausse)
+    # Alice utilise la librairie : https://fakerphp.github.io/formatters/numbers-and-strings/
+    name: "<word()>"
+
+App\Entity\Author:
+  author1:
+    name: "J.K.Rowling"
+    description: "<text()>"
+  author{2..50}:
+    name: "<firstName()> <lastName()>"
+    description: "<text()>"
+
+App\Entity\Book:
+  book1:
+    title: "Harry Potter"
+    description: "<text()>"
+    price: 8.5
+    # Alice permet d'attacher des relation : https://github.com/nelmio/alice/blob/master/doc/relations-handling.md
+    # On attache ce livre à l'author1
+    author: "@author1"
+    # On attache le livre à 2 catégories : @category1, @category2
+    categories: ["@category1", "@category2"]
+  book{2..100}:
+    title: "<catchPhrase()>"
+    description: "<text()>"
+    price: "<numberBetween(5.0, 40.0)>"
+    author: "@author*"
+    categories: "4x @category*"
