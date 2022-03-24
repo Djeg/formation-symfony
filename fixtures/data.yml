@@ -1,9 +1,11 @@
+# Ici, le nom complet de l'entité que l'on veut
+# générer
 App\Entity\Category:
+  # Un identifiant libre
   category1:
+    # les champs de l'entité concerné (Category)
     name: "Science Fiction"
-
   category2:
     name: "Fantaisie"
-
   category3:
     name: "Policier"
