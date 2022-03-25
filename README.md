@@ -1,4 +1,4 @@
-# Formation Symfony 6 - Les fondamentaux
+# Formation Symfony 6 - Intermédiaire
 
 Dans cette formation vous approfondirez vos connaissances Symfony 6
 avec les Formulaires et les relations doctrine :).
