@@ -1,7 +1,9 @@
 # Formation Symfony 6 - Les fondamentaux
 
-Dans cette formation vous apprendrez les fondamentaux de symfony 6.
-Faire un CRUD d'entité.
+Dans cette formation vous approfondirez vos connaissances Symfony 6
+avec les Formulaires et les relations doctrine :).
+
+Au programme: Réaliser un formulaire de recherche complet et complexe !
 
 ## Installation
 
