@@ -7,7 +7,9 @@ use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,13 +24,18 @@ class SearchBookType extends AbstractType
                 'label' => 'Titre :',
                 'required' => false,
             ])
-            ->add('limit', NumberType::class, [
+            ->add('limit', IntegerType::class, [
                 'label' => 'Limite :',
-                'required' => false,
+                'required' => true,
+                'attr' => [
+                    'min' => 5,
+                    'max' => 50,
+                    'step' => 5,
+                ]
             ])
             ->add('page', NumberType::class, [
                 'label' => 'Page :',
-                'required' => false,
+                'required' => true,
             ])
             ->add('sortBy', ChoiceType::class, [
                 'label' => 'Trier par :',
@@ -65,6 +72,8 @@ class SearchBookType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => SearchBook::class,
+            'method' => 'GET',
+            'csrf_protection' => false,
         ]);
     }
 }

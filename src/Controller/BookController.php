@@ -72,16 +72,14 @@ class BookController extends AbstractController
     public function searchBook(Request $request, BookRepository $repository): Response
     {
         $books = [];
-        $form = $this->createForm(SearchBookType::class);
+        $form = $this->createForm(SearchBookType::class, new SearchBook());
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // rechercher les livres
-            $searchBook = $form->getData();
+        // rechercher les livres
+        $searchBook = $form->getData();
 
-            $books = $repository->findAllFilteredBy($searchBook);
-        }
+        $books = $repository->findAllFilteredBy($searchBook);
 
         return $this->render('book/searchBook.html.twig', [
             'formView' => $form->createView(),

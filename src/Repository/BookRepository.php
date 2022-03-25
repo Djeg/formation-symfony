@@ -188,7 +188,7 @@ class BookRepository extends ServiceEntityRepository
             $queryBuilder->setParameter('authorName', "%{$searchBook->authorName}%");
         }
 
-        if ($searchBook->categories) {
+        if ($searchBook->categories && !$searchBook->categories->isEmpty()) {
             $queryBuilder->leftJoin('book.categories', 'category');
             $queryBuilder->andWhere($queryBuilder->expr()->in('category.id', $searchBook->categories->map(function ($category) {
                 return $category->getId();
