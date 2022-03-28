@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\DTO\Admin\AdminAuthorSearch;
 use App\Entity\Author;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -45,32 +46,20 @@ class AuthorRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Author[] Returns an array of Author objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findByAdminSearch(AdminAuthorSearch $search): array
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $queryBuilder = $this->createQueryBuilder('author');
+        $queryBuilder->setMaxResults($search->limit);
+        $queryBuilder->setFirstResult($search->limit * ($search->page - 1));
+        $queryBuilder->orderBy("author.{$search->sortBy}", $search->direction);
 
-    /*
-    public function findOneBySomeField($value): ?Author
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
+        if ($search->name !== null) {
+            $queryBuilder->andWhere('author.name LIKE :name');
+            $queryBuilder->setParameter('name', "%{$search->name}%");
+        }
+
+        return $queryBuilder
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
 }

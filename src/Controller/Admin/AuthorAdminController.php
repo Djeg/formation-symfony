@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
+use App\DTO\Admin\AdminAuthorSearch;
 use App\Entity\Author;
+use App\Form\Admin\AdminSearchAuthorType;
 use App\Form\AuthorType;
 use App\Repository\AuthorRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,14 +37,18 @@ class AuthorAdminController extends AbstractController
     }
 
     #[Route('/admin/auteurs', name: 'app_admin_authorAdmin_retrieve', methods: ['GET'])]
-    public function retrieve(AuthorRepository $repository): Response
+    public function retrieve(AuthorRepository $repository, Request $request): Response
     {
-        // Récupérer tout les auteurs depuis le repository
-        $authors = $repository->findAll();
+        $form = $this->createForm(AdminSearchAuthorType::class, new AdminAuthorSearch());
+
+        $form->handleRequest($request);
+
+        $authors = $repository->findByAdminSearch($form->getData());
 
         // Affichage de tout les auteurs
         return $this->render('admin/authorAdmin/retrieve.html.twig', [
             'authors' => $authors,
+            'formView' => $form->createView(),
         ]);
     }
 
