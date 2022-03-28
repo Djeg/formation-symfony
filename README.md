@@ -38,3 +38,4 @@ d'explorer le projet.
 6. [Les Query Builder (les requêtes à la base de données)](./exos/query-builder.md)
 7. [Les fixtures](./exos/fixtures.md)
 8. [Le formulaire de recherche](./exos/search-form.md)
+9. [Le Frontend](./exos/frontend.md)
