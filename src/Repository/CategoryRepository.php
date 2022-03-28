@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\DTO\Admin\AdminSearchCategory;
 use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -45,32 +46,20 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Category[] Returns an array of Category objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findByAdminSearch(AdminSearchCategory $search): array
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $queryBuilder = $this->createQueryBuilder('category');
+        $queryBuilder->setMaxResults($search->limit);
+        $queryBuilder->setFirstResult($search->limit * ($search->page - 1));
+        $queryBuilder->orderBy("category.{$search->sortBy}", $search->direction);
 
-    /*
-    public function findOneBySomeField($value): ?Category
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
+        if ($search->name !== null) {
+            $queryBuilder->andWhere('category.name LIKE :name');
+            $queryBuilder->setParameter('name', "%{$search->name}%");
+        }
+
+        return $queryBuilder
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
 }

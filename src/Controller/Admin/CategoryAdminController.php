@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
+use App\DTO\Admin\AdminSearchCategory;
 use App\Entity\Category;
+use App\Form\Admin\AdminSearchCategoryType;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,14 +37,21 @@ class CategoryAdminController extends AbstractController
     }
 
     #[Route('/admin/categories', name: 'app_admin_categoryAdmin_retrieve', methods: ['GET'])]
-    public function retrieve(CategoryRepository $repository): Response
+    public function retrieve(CategoryRepository $repository, Request $request): Response
     {
-        // Récupérer tout les categories depuis le repository
-        $categories = $repository->findAll();
+        // Création du formulaire de recherche
+        $form = $this->createForm(AdminSearchCategoryType::class, new AdminSearchCategory());
+
+        // On remplie le formulaire avec les données de l'utilisateur
+        $form->handleRequest($request);
+
+        // On récupére les catégories
+        $categories = $repository->findByAdminSearch($form->getData());
 
         // Affichage de tout les categories
         return $this->render('admin/categoryAdmin/retrieve.html.twig', [
             'categories' => $categories,
+            'formView' => $form->createView(),
         ]);
     }
 
