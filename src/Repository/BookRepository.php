@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\DTO\Admin\AdminBookSearch;
 use App\DTO\SearchBook;
 use App\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -200,15 +201,36 @@ class BookRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    /*
-    public function findOneBySomeField($value): ?Book
+    public function findByAdminSearch(AdminBookSearch $search): array
     {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
+        $queryBuilder = $this->createQueryBuilder('book');
+        $queryBuilder->setMaxResults($search->limit);
+        $queryBuilder->setFirstResult($search->limit * ($search->page - 1));
+        $queryBuilder->orderBy("book.{$search->sortBy}", $search->direction);
+
+        if ($search->title !== null) {
+            $queryBuilder->andWhere('book.title LIKE :title');
+            $queryBuilder->setParameter('title', "%{$search->title}%");
+        }
+
+        if ($search->authorName !== null) {
+            $queryBuilder->leftJoin('book.author', 'author');
+            $queryBuilder->andWhere('author.name LIKE :authorName');
+            $queryBuilder->setParameter('authorName', "%{$search->authorName}%");
+        }
+
+        if ($search->minPrice !== null) {
+            $queryBuilder->andWhere('book.price >= :minPrice');
+            $queryBuilder->setParameter('minPrice', $search->minPrice);
+        }
+
+        if ($search->maxPrice !== null) {
+            $queryBuilder->andWhere('book.price <= :maxPrice');
+            $queryBuilder->setParameter('maxPrice', $search->maxPrice);
+        }
+
+        return $queryBuilder
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
 }
