@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DTO\Admin;
 
-class AdminSearchCategory
+class AdminCategorySearch
 {
     public int $limit = 10;
 

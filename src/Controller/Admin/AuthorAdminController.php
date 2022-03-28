@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\DTO\Admin\AdminAuthorSearch;
-use App\Entity\Author;
 use App\Form\Admin\AdminSearchAuthorType;
-use App\Form\AuthorType;
+use App\Form\Admin\AdminAuthorType;
 use App\Repository\AuthorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +19,7 @@ class AuthorAdminController extends AbstractController
     #[Route('/admin/auteurs/nouveau', name: 'app_admin_authorAdmin_create', methods: ['GET', 'POST'])]
     public function create(Request $request, EntityManagerInterface $manager): Response
     {
-        $form = $this->createForm(AuthorType::class);
+        $form = $this->createForm(AdminAuthorType::class);
 
         $form->handleRequest($request);
 
@@ -68,7 +67,7 @@ class AuthorAdminController extends AbstractController
             return new Response("Le auteur n'éxiste pas", 404);
         }
 
-        $form = $this->createForm(AuthorType::class, $author);
+        $form = $this->createForm(AdminAuthorType::class, $author);
 
         $form->handleRequest($request);
 

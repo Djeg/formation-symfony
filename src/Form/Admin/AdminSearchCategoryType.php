@@ -2,7 +2,7 @@
 
 namespace App\Form\Admin;
 
-use App\DTO\Admin\AdminSearchCategory;
+use App\DTO\Admin\AdminCategorySearch;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AdminSearchCategoryType extends AbstractType
+class AdminCategorySearchType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -52,7 +52,7 @@ class AdminSearchCategoryType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => AdminSearchCategory::class,
+            'data_class' => AdminCategorySearch::class,
             'method' => 'GET',
             'csrf_protection' => false,
         ]);

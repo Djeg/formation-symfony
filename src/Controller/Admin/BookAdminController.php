@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\DTO\Admin\AdminBookSearch;
-use App\Entity\Book;
 use App\Form\Admin\AdminSearchBookType;
-use App\Form\BookType;
+use App\Form\Admin\AdminBookType;
 use App\Repository\BookRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +19,7 @@ class BookAdminController extends AbstractController
     #[Route('/admin/livres/nouveau', name: 'app_admin_bookAdmin_create', methods: ['GET', 'POST'])]
     public function create(Request $request, EntityManagerInterface $manager): Response
     {
-        $form = $this->createForm(BookType::class);
+        $form = $this->createForm(AdminBookType::class);
 
         $form->handleRequest($request);
 
@@ -70,7 +69,7 @@ class BookAdminController extends AbstractController
             return new Response("Le livre n'éxiste pas", 404);
         }
 
-        $form = $this->createForm(BookType::class, $book);
+        $form = $this->createForm(AdminBookType::class, $book);
 
         $form->handleRequest($request);
 

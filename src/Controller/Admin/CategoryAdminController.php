@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use App\DTO\Admin\AdminSearchCategory;
-use App\Entity\Category;
-use App\Form\Admin\AdminSearchCategoryType;
-use App\Form\CategoryType;
+use App\DTO\Admin\AdminCategorySearch;
+use App\Form\Admin\AdminCategorySearchType;
+use App\Form\Admin\AdminCategoryType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +19,7 @@ class CategoryAdminController extends AbstractController
     #[Route('/admin/categories/nouveau', name: 'app_admin_categoryAdmin_create', methods: ['GET', 'POST'])]
     public function create(Request $request, EntityManagerInterface $manager): Response
     {
-        $form = $this->createForm(CategoryType::class);
+        $form = $this->createForm(AdminCategoryType::class);
 
         $form->handleRequest($request);
 
@@ -40,7 +39,7 @@ class CategoryAdminController extends AbstractController
     public function retrieve(CategoryRepository $repository, Request $request): Response
     {
         // Création du formulaire de recherche
-        $form = $this->createForm(AdminSearchCategoryType::class, new AdminSearchCategory());
+        $form = $this->createForm(AdminCategorySearchType::class, new AdminCategorySearch());
 
         // On remplie le formulaire avec les données de l'utilisateur
         $form->handleRequest($request);
@@ -71,7 +70,7 @@ class CategoryAdminController extends AbstractController
             return new Response("Le categorie n'éxiste pas", 404);
         }
 
-        $form = $this->createForm(CategoryType::class, $category);
+        $form = $this->createForm(AdminCategoryType::class, $category);
 
         $form->handleRequest($request);
 

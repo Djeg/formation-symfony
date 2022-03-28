@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\DTO\Admin\AdminBookSearch;
-use App\DTO\SearchBook;
 use App\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -50,7 +49,7 @@ class BookRepository extends ServiceEntityRepository
     /**
      * @return Book[] Returns an array of Book objects
      */
-    public function findExample()
+    /*public function findExample()
     {
         // Le language utilisé par se query builder: DQL (Doctrine Query Language)
         // Création d'un constructeur de requête nommé "book"
@@ -87,119 +86,7 @@ class BookRepository extends ServiceEntityRepository
             ->getQuery()
             // Récupére les résultats de la requête
             ->getResult(); // array de App\Entity\Book
-    }
-
-    public function findFiveLast(): array
-    {
-        $queryBuilder = $this->createQueryBuilder('book');
-        $queryBuilder->setMaxResults(5);
-        $queryBuilder->orderBy('book.id', 'DESC');
-
-        return $queryBuilder
-            // Générer la requête
-            ->getQuery()
-            // Éxécute la requête et retourne ses résultats
-            ->getResult();
-    }
-
-    public function findFiveLastCheaper(): array
-    {
-        $queryBuilder = $this->createQueryBuilder('book');
-        $queryBuilder->setMaxResults(5);
-        $queryBuilder->orderBy('book.price', 'ASC');
-
-        return $queryBuilder
-            // Générer la requête
-            ->getQuery()
-            // Éxécute la requête et retourne ses résultats
-            ->getResult();
-    }
-
-    public function findLastTenForAuthor(int $id): array
-    {
-        $queryBuilder = $this->createQueryBuilder('book');
-        $queryBuilder->setMaxResults(10);
-        $queryBuilder->leftJoin('book.author', 'author');
-        $queryBuilder->andWhere('author.id = :id');
-        $queryBuilder->setParameter('id', $id);
-
-        return $queryBuilder
-            // Générer la requête
-            ->getQuery()
-            // Éxécute la requête et retourne ses résultats
-            ->getResult();
-    }
-
-    public function findLastTenMatchingTitle(string $title): array
-    {
-        $queryBuilder = $this->createQueryBuilder('book');
-        $queryBuilder->setMaxResults(10);
-        $queryBuilder->andWhere('book.title LIKE :title');
-        $queryBuilder->setParameter('title', "%$title%");
-
-        return $queryBuilder
-            // Générer la requête
-            ->getQuery()
-            // Éxécute la requête et retourne ses résultats
-            ->getResult();
-    }
-
-    public function findBySearch(?string $title, int $limit = 5, int $page = 1): array
-    {
-        if ($limit === 0) {
-            $limit = 5;
-        }
-
-        if ($page === 0) {
-            $page = 1;
-        }
-
-        $queryBuilder = $this->createQueryBuilder('book');
-        $queryBuilder->setMaxResults($limit);
-        $queryBuilder->setFirstResult($limit * ($page - 1));
-
-        if ($title) {
-            $queryBuilder->andWhere('book.title LIKE :title');
-            $queryBuilder->setParameter('title', "%$title%");
-        }
-
-        return $queryBuilder
-            // Générer la requête
-            ->getQuery()
-            // Éxécute la requête et retourne ses résultats
-            ->getResult();
-    }
-
-    public function findAllFilteredBy(SearchBook $searchBook): array
-    {
-        $queryBuilder = $this->createQueryBuilder('book');
-
-        $queryBuilder->setMaxResults($searchBook->limit);
-        $queryBuilder->setFirstResult($searchBook->limit * ($searchBook->page - 1));
-        $queryBuilder->orderBy('book.' . $searchBook->sortBy, $searchBook->direction);
-
-        if ($searchBook->title) {
-            $queryBuilder->andWhere('book.title LIKE :title');
-            $queryBuilder->setParameter('title', "%{$searchBook->title}%");
-        }
-
-        if ($searchBook->authorName) {
-            $queryBuilder->leftJoin('book.author', 'author');
-            $queryBuilder->andWhere('author.name LIKE :authorName');
-            $queryBuilder->setParameter('authorName', "%{$searchBook->authorName}%");
-        }
-
-        if ($searchBook->categories && !$searchBook->categories->isEmpty()) {
-            $queryBuilder->leftJoin('book.categories', 'category');
-            $queryBuilder->andWhere($queryBuilder->expr()->in('category.id', $searchBook->categories->map(function ($category) {
-                return $category->getId();
-            })));
-        }
-
-        return $queryBuilder
-            ->getQuery()
-            ->getResult();
-    }
+    }*/
 
     public function findByAdminSearch(AdminBookSearch $search): array
     {

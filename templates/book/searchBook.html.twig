@@ -1,9 +1,0 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-  {{ form(formView) }}
-
-  {% for book in books %}
-    <p>{{ book.title }} ({{ book.price }} €)</p>
-  {% endfor %}
-{% endblock %}
