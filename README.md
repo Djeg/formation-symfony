@@ -11,8 +11,8 @@ Pour installer ce projet chez vous suivez le guide :
 
 1. [Télécharger](https://github.com/Djeg/formation-symfony/archive/refs/heads/session/28-03-22.01-04-22.zip) ou cloner ce repository sur votre machine
 2. Ouvrez le projet dans VSCode
-3. Intaller les dépendances avec la commande : `composer install`
-4. Configuré votre base de données dans le fichier `.env`
+3. Configuré votre base de données dans le fichier `.env`
+4. Intaller les dépendances avec la commande : `composer install`
 5. Créez la base de données avec la commande : `symfony console doctrine:database:create`
 6. Créez votre schèma avec la commande : `symfony console doctrine:schema:update --force`
 7. Insérer les données dans la base avec la commande : `symfony console hautelook:fixtures:load`
