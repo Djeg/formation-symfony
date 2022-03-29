@@ -28,7 +28,17 @@
 <h2>Les dernières catégories</h2>
 
 {% for category in categories %}
-  <p>{{ category.name }}</p>
+  <p>
+    <a href="{{ path('app_front_book_search', {
+      'search_book[categoryName]': category.name,
+      'search_book[limit]': 10,
+      'search_book[page]': 1,
+      'search_book[sortBy]': 'id',
+      'search_book[direction]': 'DESC',
+    }) }}">
+      {{ category.name }}
+    </a>
+  </p>
 {% endfor %}
 
 {% endblock %}
