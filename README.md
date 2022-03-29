@@ -39,3 +39,4 @@ d'explorer le projet.
 7. [Les fixtures](./exos/fixtures.md)
 8. [Le formulaire de recherche](./exos/search-form.md)
 9. [Le Frontend](./exos/frontend.md)
+10. [La sécurité](./exos/security.md)

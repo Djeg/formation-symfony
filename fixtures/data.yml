@@ -39,3 +39,9 @@ App\Entity\Book:
     price: "<numberBetween(5.0, 40.0)>"
     author: "@author*"
     categories: "4x @category*"
+
+App\Entity\User:
+  user1:
+    email: "john@mail.com"
+    roles: ["ROLE_USER"]
+    password: \$2y\$13\$v8XmXZV9nY8okg.q2cYj3uxBrsz5dm/EdyRT.GdNdVOBfBFoyFVT6
