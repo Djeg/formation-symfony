@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1>{{ book.title }}</h1>
+<p>
+  <a href="{{ path('app_front_home_home') }}">Accueil</a>
+</p>
+
+<p>
+  Prix: {{ book.price }} €
+  <br />
+  Auteur: {{ book.author.name }}
+</p>
+
+<p>{{ book.description }}</p>
+
+{% endblock %}

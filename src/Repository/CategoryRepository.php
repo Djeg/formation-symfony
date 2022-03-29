@@ -62,4 +62,9 @@ class CategoryRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findTenLast(): array
+    {
+        return $this->findByAdminSearch(new AdminCategorySearch());
+    }
 }

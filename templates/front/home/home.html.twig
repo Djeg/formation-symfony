@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Bienvenue</h1>
+
+<h2>Les derniers livres</h2>
+
+{% for book in books %}
+  <p>
+    <a href="{{ path('app_front_book_show', {
+      id: book.id,
+    }) }}">
+    {{ book.title }}: {{ book.price }} €
+    </a>
+  </p>
+{% endfor %}
+
+<h2>Les derniers auteurs</h2>
+
+{% for author in authors %}
+  <p>{{ author.name }}</p>
+{% endfor %}
+
+<h2>Les dernières catégories</h2>
+
+{% for category in categories %}
+  <p>{{ category.name }}</p>
+{% endfor %}
+
+{% endblock %}

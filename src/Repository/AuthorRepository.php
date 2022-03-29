@@ -62,4 +62,12 @@ class AuthorRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findFiveLast(): array
+    {
+        $search = new AdminAuthorSearch();
+        $search->limit = 5;
+
+        return $this->findByAdminSearch($search);
+    }
 }

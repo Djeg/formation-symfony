@@ -12,7 +12,7 @@ class AdminCategorySearch
 
     public string $sortBy = 'id';
 
-    public string $direction = 'ASC';
+    public string $direction = 'DESC';
 
     public ?string $name = null;
 }

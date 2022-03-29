@@ -120,4 +120,9 @@ class BookRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findTenLast(): array
+    {
+        return $this->findByAdminSearch(new AdminBookSearch());
+    }
 }
