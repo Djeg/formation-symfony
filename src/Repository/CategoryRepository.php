@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\DTO\Admin\AdminCategorySearch;
+use App\DTO\CategorySearch;
 use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -46,7 +46,7 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
-    public function findByAdminSearch(AdminCategorySearch $search): array
+    public function findBySearch(CategorySearch $search): array
     {
         $queryBuilder = $this->createQueryBuilder('category');
         $queryBuilder->setMaxResults($search->limit);
@@ -65,6 +65,6 @@ class CategoryRepository extends ServiceEntityRepository
 
     public function findTenLast(): array
     {
-        return $this->findByAdminSearch(new AdminCategorySearch());
+        return $this->findBySearch(new CategorySearch());
     }
 }

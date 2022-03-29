@@ -10,7 +10,7 @@
 <p>
   Prix: {{ book.price }} €
   <br />
-  Auteur: {{ book.author.name }}
+  Auteur: <a href="{{ path('app_front_author_show', {id: book.author.id}) }}">{{ book.author.name }}</a>
 </p>
 
 <p>{{ book.description }}</p>

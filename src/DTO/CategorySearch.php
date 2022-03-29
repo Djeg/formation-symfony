@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\DTO\Admin;
+namespace App\DTO;
 
-class AdminCategorySearch
+class CategorySearch
 {
     public int $limit = 10;
 

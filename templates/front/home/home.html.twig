@@ -18,7 +18,11 @@
 <h2>Les derniers auteurs</h2>
 
 {% for author in authors %}
-  <p>{{ author.name }}</p>
+  <p>
+    <a href="{{ path('app_front_author_show', {id: author.id}) }}">
+      {{ author.name }}
+    </a>
+  </p>
 {% endfor %}
 
 <h2>Les dernières catégories</h2>

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\DTO\Admin;
+namespace App\DTO;
 
-class AdminBookSearch
+class BookSearch
 {
     public int $limit = 10;
 
@@ -17,6 +17,10 @@ class AdminBookSearch
     public ?string $title = null;
 
     public ?string $authorName = null;
+
+    public ?string $categoryName = null;
+
+    public ?int $authorId = null;
 
     public ?float $maxPrice = null;
 

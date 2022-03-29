@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use App\DTO\Admin\AdminCategorySearch;
+use App\DTO\CategorySearch;
 use App\Form\Admin\AdminCategorySearchType;
 use App\Form\Admin\AdminCategoryType;
 use App\Repository\CategoryRepository;
@@ -39,13 +39,13 @@ class CategoryAdminController extends AbstractController
     public function retrieve(CategoryRepository $repository, Request $request): Response
     {
         // Création du formulaire de recherche
-        $form = $this->createForm(AdminCategorySearchType::class, new AdminCategorySearch());
+        $form = $this->createForm(AdminCategorySearchType::class, new CategorySearch());
 
         // On remplie le formulaire avec les données de l'utilisateur
         $form->handleRequest($request);
 
         // On récupére les catégories
-        $categories = $repository->findByAdminSearch($form->getData());
+        $categories = $repository->findBySearch($form->getData());
 
         // Affichage de tout les categories
         return $this->render('admin/categoryAdmin/retrieve.html.twig', [

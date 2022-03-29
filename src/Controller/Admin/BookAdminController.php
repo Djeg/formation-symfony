@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use App\DTO\Admin\AdminBookSearch;
+use App\DTO\BookSearch;
 use App\Form\Admin\AdminSearchBookType;
 use App\Form\Admin\AdminBookType;
 use App\Repository\BookRepository;
@@ -40,11 +40,11 @@ class BookAdminController extends AbstractController
     #[Route('/admin/livres', name: 'app_admin_bookAdmin_retrieve', methods: ['GET'])]
     public function retrieve(BookRepository $repository, Request $request): Response
     {
-        $form = $this->createForm(AdminSearchBookType::class, new AdminBookSearch());
+        $form = $this->createForm(AdminSearchBookType::class, new BookSearch());
 
         $form->handleRequest($request);
 
-        $books = $repository->findByAdminSearch($form->getData());
+        $books = $repository->findBySearch($form->getData());
 
         // Affichage de tout les livres
         return $this->render('admin/bookAdmin/retrieve.html.twig', [

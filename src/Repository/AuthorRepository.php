@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\DTO\Admin\AdminAuthorSearch;
+use App\DTO\AuthorSearch;
 use App\Entity\Author;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -46,7 +46,7 @@ class AuthorRepository extends ServiceEntityRepository
         }
     }
 
-    public function findByAdminSearch(AdminAuthorSearch $search): array
+    public function findBySearch(AuthorSearch $search): array
     {
         $queryBuilder = $this->createQueryBuilder('author');
         $queryBuilder->setMaxResults($search->limit);
@@ -65,9 +65,9 @@ class AuthorRepository extends ServiceEntityRepository
 
     public function findFiveLast(): array
     {
-        $search = new AdminAuthorSearch();
+        $search = new AuthorSearch();
         $search->limit = 5;
 
-        return $this->findByAdminSearch($search);
+        return $this->findBySearch($search);
     }
 }

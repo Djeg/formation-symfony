@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1>Rechercher des livres</h1>
+
+{{ form(formView) }}
+
+{% for book in books %}
+  <p>
+    <a href="{{ path('app_front_book_show', {id: book.id}) }}">
+      {{ book.title }} : {{ book.price }} €
+    </a>
+  </p>
+{% endfor %}
+
+{% endblock %}

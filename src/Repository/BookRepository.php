@@ -2,7 +2,8 @@
 
 namespace App\Repository;
 
-use App\DTO\Admin\AdminBookSearch;
+use App\DTO\BookSearch;
+use App\Entity\Author;
 use App\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -88,7 +89,7 @@ class BookRepository extends ServiceEntityRepository
             ->getResult(); // array de App\Entity\Book
     }*/
 
-    public function findByAdminSearch(AdminBookSearch $search): array
+    public function findBySearch(BookSearch $search): array
     {
         $queryBuilder = $this->createQueryBuilder('book');
         $queryBuilder->setMaxResults($search->limit);
@@ -104,6 +105,18 @@ class BookRepository extends ServiceEntityRepository
             $queryBuilder->leftJoin('book.author', 'author');
             $queryBuilder->andWhere('author.name LIKE :authorName');
             $queryBuilder->setParameter('authorName', "%{$search->authorName}%");
+        }
+
+        if ($search->categoryName !== null) {
+            $queryBuilder->leftJoin('book.categories', 'category');
+            $queryBuilder->andWhere('category.name LIKE :categoryName');
+            $queryBuilder->setParameter('categoryName', "%{$search->categoryName}%");
+        }
+
+        if ($search->authorId !== null) {
+            $queryBuilder->leftJoin('book.author', 'author');
+            $queryBuilder->andWhere('author.id = :authorId');
+            $queryBuilder->setParameter('authorId', $search->authorId);
         }
 
         if ($search->minPrice !== null) {
@@ -123,6 +136,14 @@ class BookRepository extends ServiceEntityRepository
 
     public function findTenLast(): array
     {
-        return $this->findByAdminSearch(new AdminBookSearch());
+        return $this->findBySearch(new BookSearch());
+    }
+
+    public function findTenLastForAuthor(Author $author): array
+    {
+        $search = new BookSearch();
+        $search->authorId = $author->getId();
+
+        return $this->findBySearch($search);
     }
 }
