@@ -1,0 +1,74 @@
+:root {
+  --color-purple: #310a31;
+  --color-rythm: #847996;
+  --color-opal: #88b7b5;
+  --color-blue: #a7cab1;
+  --color-eggshell: #f4ecd6;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  min-width: 100vw;
+  align-items: stretch;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Outfit", sans-serif;
+}
+
+.logo {
+  font-family: "Lobster", serif;
+  font-size: 2rem;
+  color: var(--color-purle);
+  display: flex;
+  text-align: center;
+  align-items: center;
+  margin: 0.6rem;
+  margin-right: 2rem;
+}
+
+header {
+  display: flex;
+  background-color: var(--color-eggshell);
+  color: var(--color-purle);
+  padding: 0rem 1.2rem;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+header nav {
+  display: flex;
+  align-items: stretch;
+}
+
+header nav a {
+  display: flex;
+  align-items: center;
+  padding: 1.2rem;
+  text-align: center;
+  cursor: pointer;
+  color: var(--color-purle);
+  text-decoration: none;
+  transition: all 0.5s;
+}
+header nav a:hover {
+  background-color: var(--color-purple);
+  color: var(--color-eggshell);
+}
+
+.container {
+  padding: 0.6rem 1.2rem;
+}
