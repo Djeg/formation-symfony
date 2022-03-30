@@ -53,3 +53,12 @@ public function index(UserPasswordHasherInterface $passwordHasher)
 ```
 
 Lien de la documentation : https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+
+## 3. Restreindre l'acces à l'administration
+
+En utilisant l'attribut PHP : `IsGranted` ([example](../src/Controller/Admin/BookAdminController.php))
+restreindre l'accès à tout l'administration uniquement pour les utilisateurs
+avec le `ROLE_ADMIN`.
+
+Dans le fichier `fixtures/data.yml` ajouter un utilisateur de votre choix
+avec le roles : `ROLE_ADMIN`.
