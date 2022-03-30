@@ -24,6 +24,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     private $password;
 
+    public function __construct()
+    {
+        // Vous pouvez initialisé des relations
+        // $this->addBasket(new Basket());
+    }
+
     public function getId(): ?int
     {
         return $this->id;

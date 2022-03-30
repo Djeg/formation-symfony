@@ -40,3 +40,4 @@ d'explorer le projet.
 8. [Le formulaire de recherche](./exos/search-form.md)
 9. [Le Frontend](./exos/frontend.md)
 10. [La sécurité](./exos/security.md)
+11. [Le Panier](./exos/basket.md)
