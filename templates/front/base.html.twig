@@ -27,10 +27,23 @@
       <a href="{{ path('app_security_signIn') }}">
         <i class="fa-solid fa-user"></i>
       </a>
+      {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_admin_bookAdmin_retrieve') }}">
+          Admin
+        </a>
+      {% endif %}
     </nav>
 	</header>
 
   <div class="container">
+
+    {% if app.user %}
+      <p>{{ app.user.email }}</p>
+      <p>Vous êtes connécté</p>
+    {% else %}
+      <p>Vous n'êtes pas connécté</p>
+    {% endif %}
+
     <h1>
       {% block page_title %}{% endblock %}
     </h1>

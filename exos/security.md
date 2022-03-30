@@ -62,3 +62,46 @@ avec le `ROLE_ADMIN`.
 
 Dans le fichier `fixtures/data.yml` ajouter un utilisateur de votre choix
 avec le roles : `ROLE_ADMIN`.
+
+## 4. Lien vers l'administration
+
+En utilisant la fonction twig `is_granted`, faire en sorte
+que si je suis connécté en tant qu'administrateur, un lien
+vers la liste des livres de l'admin doit apparaitre
+dans le menu.
+
+## 5. Le profile
+
+Dans le controller `SecurityController` ajouter une méthode `profil` avec
+la route `/mon-profile`.
+
+Cette méthode doit être uniquement accessible au utilisateur connécté
+(`IsGranted('ROLE_USER')`).
+
+Cette page doit proposer le formulaire suivant:
+
+| nom      | type         | Requis |
+| -------- | ------------ | ------ |
+| email    | EmailType    | non    |
+| password | PasswordType | non    |
+
+Un fois le formulaire validé, les informations de l'utilisateur doivent
+changé. ATTENTION : L'utilisateur doit être redirigé vers la page
+de connexion.
+
+## 6. Les liens
+
+En utilisant la variable twig `app.user` ainsi que la fonction twig
+`is_granted` :
+
+Dans le menu, si je ne suis pas connécté et que je clique sur le logo
+"User", alors je dois être redirigé vers la pade de connexion.
+
+Dans la page de connexion, un lien vers la page de création de compte
+doit être disponible.
+
+Dans le menu, si je suis connécté et que je clique sur le logo
+"User", alors je dois me rendre sur la page de mon profile.
+
+Dans le menu, si je suis connécté, afficher une lien pour me
+déconnécter.

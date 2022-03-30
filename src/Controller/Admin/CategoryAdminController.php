@@ -21,6 +21,7 @@ class CategoryAdminController extends AbstractController
     #[Route('/admin/categories/nouveau', name: 'app_admin_categoryAdmin_create', methods: ['GET', 'POST'])]
     public function create(Request $request, EntityManagerInterface $manager): Response
     {
+        // $this->getUser(); // App\Entity\User | null
         $form = $this->createForm(AdminCategoryType::class);
 
         $form->handleRequest($request);
