@@ -24,7 +24,7 @@
       <a href="{{ path('app_front_book_search') }}">
         <i class="fa-solid fa-magnifying-glass"></i>
       </a>
-      <a href="{{ path('app_security_signIn') }}">
+      <a href="{{ path('app_security_profil') }}">
         <i class="fa-solid fa-user"></i>
       </a>
       {% if is_granted('ROLE_ADMIN') %}
@@ -32,18 +32,15 @@
           Admin
         </a>
       {% endif %}
+      {% if app.user %}
+        <a href="{{ path('app_logout') }}">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </a>
+      {% endif %}
     </nav>
 	</header>
 
   <div class="container">
-
-    {% if app.user %}
-      <p>{{ app.user.email }}</p>
-      <p>Vous êtes connécté</p>
-    {% else %}
-      <p>Vous n'êtes pas connécté</p>
-    {% endif %}
-
     <h1>
       {% block page_title %}{% endblock %}
     </h1>
