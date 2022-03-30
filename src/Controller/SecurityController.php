@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Form\Front\SignInType;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -28,5 +32,36 @@ class SecurityController extends AbstractController
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+    #[Route('/inscription', name: 'app_security_signIn')]
+    public function signIn(
+        Request $request,
+        UserPasswordHasherInterface $crypter,
+        UserRepository $repository,
+    ): Response {
+        $form = $this->createForm(SignInType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
+
+            // $crypter->isPasswordValid($user, 'coucoulesamis');
+
+            // Cryptage du mot de passe !
+            $user->setPassword($crypter->hashPassword(
+                $user,
+                $user->getPassword(),
+            ));
+
+            $repository->add($user);
+
+            return $this->redirectToRoute('app_login');
+        }
+
+        return $this->render('security/signIn.html.twig', [
+            'formView' => $form->createView(),
+        ]);
     }
 }
