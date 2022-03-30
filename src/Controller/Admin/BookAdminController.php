@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[IsGranted('ROLE_ADMIN')]
 class BookAdminController extends AbstractController
 {
     #[Route('/admin/livres/nouveau', name: 'app_admin_bookAdmin_create', methods: ['GET', 'POST'])]

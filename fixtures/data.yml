@@ -45,3 +45,7 @@ App\Entity\User:
     email: "john@mail.com"
     roles: ["ROLE_USER"]
     password: \$2y\$13\$v8XmXZV9nY8okg.q2cYj3uxBrsz5dm/EdyRT.GdNdVOBfBFoyFVT6
+  user2:
+    email: "admin@mail.com"
+    roles: ["ROLE_ADMIN"]
+    password: \$2y\$13\$mhY0dIUTJFEXLdH1VD7yp.v5eO1pXmi0ETkfF1BC0QUe5HsTopbSW

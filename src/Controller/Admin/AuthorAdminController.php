@@ -9,11 +9,13 @@ use App\Form\Admin\AdminSearchAuthorType;
 use App\Form\Admin\AdminAuthorType;
 use App\Repository\AuthorRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[IsGranted('ROLE_ADMIN')]
 class AuthorAdminController extends AbstractController
 {
     #[Route('/admin/auteurs/nouveau', name: 'app_admin_authorAdmin_create', methods: ['GET', 'POST'])]

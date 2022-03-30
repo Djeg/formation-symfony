@@ -9,11 +9,13 @@ use App\Form\Admin\AdminCategorySearchType;
 use App\Form\Admin\AdminCategoryType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[IsGranted('ROLE_ADMIN')]
 class CategoryAdminController extends AbstractController
 {
     #[Route('/admin/categories/nouveau', name: 'app_admin_categoryAdmin_create', methods: ['GET', 'POST'])]
