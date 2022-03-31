@@ -41,3 +41,4 @@ d'explorer le projet.
 9. [Le Frontend](./exos/frontend.md)
 10. [La sécurité](./exos/security.md)
 11. [Le Panier](./exos/basket.md)
+12. [Les API REST](./exos/api.md)
