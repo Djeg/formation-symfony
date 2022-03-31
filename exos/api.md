@@ -45,3 +45,45 @@ une méthode `list` avec la route suivante :
 En utilisant la méthode du controller `$this->json(...);`
 ainsi que l'attribut PHP `#[Ignore()]` faire en sorte
 de retourner toutes les catégories en JSON.
+
+## 4. Rechercher des livres
+
+Créer un formulaire : `App\Form\API\ApiSearchBookType` attaché au DTO:
+`App\DTO\BookSearch` (`symfony console make:form API\\ApiSearchBook`).
+
+Graçe à la méthode [`getBlockPrefix`](../src/Form/API/ApiSearchBookType.php), supprimé
+le prefix du formulaire.
+
+Configure les options du formulaire dans la méthode [`configureOptions`](../src/Form/API/ApiSearchBookType.php).
+
+Personaliser vos champs de formulaire.
+
+Utiliser ce formulaire dans le controller `App\Controller\API\BookController::list`.
+
+## 5. Recherche des auteurs
+
+Créer un formulaire : `App\Form\API\ApiSearchAuthorType` attaché au DTO:
+`App\DTO\AuthorSearch` (`symfony console make:form API\\ApiSearchAuthor`).
+
+Graçe à la méthode [`getBlockPrefix`](../src/Form/API/ApiSearchBookType.php), supprimé
+le prefix du formulaire.
+
+Configure les options du formulaire dans la méthode [`configureOptions`](../src/Form/API/ApiSearchBookType.php).
+
+Personaliser vos champs de formulaire.
+
+Utiliser ce formulaire dans le controller `App\Controller\API\AuthorController::list`.
+
+## 5. Recherche des catégories
+
+Créer un formulaire : `App\Form\API\ApiSearchCategoryType` attaché au DTO:
+`App\DTO\CategorySearch` (`symfony console make:form API\\ApiSearchCategory`).
+
+Graçe à la méthode [`getBlockPrefix`](../src/Form/API/ApiSearchBookType.php), supprimé
+le prefix du formulaire.
+
+Configure les options du formulaire dans la méthode [`configureOptions`](../src/Form/API/ApiSearchBookType.php).
+
+Personaliser vos champs de formulaire.
+
+Utiliser ce formulaire dans le controller `App\Controller\API\CategoryController::list`.
