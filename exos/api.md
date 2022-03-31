@@ -24,7 +24,7 @@ En utilisant la méthode du controller `$this->json(...);`
 ainsi que l'attribut PHP `#[Ignore()]` faire en sorte
 de retourner tout les livres en JSON.
 
-## 2. La liste de tout les autheurs
+## 2. La liste de tout les auteurs
 
 Dans un controller : `API\AuthorController` ajouter
 une méthode `list` avec la route suivante :
@@ -35,7 +35,7 @@ En utilisant la méthode du controller `$this->json(...);`
 ainsi que l'attribut PHP `#[Ignore()]` faire en sorte
 de retourner tout les auteurs en JSON.
 
-## 3. La liste de tout les autheurs
+## 3. La liste de tout les catégories
 
 Dans un controller : `API\CategoryController` ajouter
 une méthode `list` avec la route suivante :
