@@ -7,7 +7,12 @@
     <p>Votre panier est vide</p>
   {% else %}
     {% for book in app.user.basket.books %}
-      <p>{{ book.title }} : {{ book.price }} €</p>
+      <p>
+        {{ book.title }} : {{ book.price }} €
+        <a href="{{ path('app_security_removeBasket', {id: book.id}) }}">
+          Supprimer du panier
+        </a>
+      </p>
     {% endfor %}
 
     <p>Total : {{ app.user.basket.total }} €</p>

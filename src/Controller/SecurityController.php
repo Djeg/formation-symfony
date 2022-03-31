@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Book;
 use App\Form\Front\ProfilType;
 use App\Form\Front\SignInType;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -101,5 +104,33 @@ class SecurityController extends AbstractController
     public function basket(): Response
     {
         return $this->render('security/basket.html.twig');
+    }
+
+    #[IsGranted('ROLE_USER')]
+    #[Route('/mon-panier/{id}/ajouter', name: 'app_security_addBasket')]
+    public function addBasket(Book $book, EntityManagerInterface $manager): Response
+    {
+        $basket = $this->getUser()->getBasket();
+
+        $basket->addBook($book);
+
+        $manager->persist($basket);
+        $manager->flush();
+
+        return $this->redirectToRoute('app_security_basket');
+    }
+
+    #[IsGranted('ROLE_USER')]
+    #[Route('/mon-panier/{id}/supprimer', name: 'app_security_removeBasket')]
+    public function removeBasket(Book $book, EntityManagerInterface $manager): Response
+    {
+        $basket = $this->getUser()->getBasket();
+
+        $basket->removeBook($book);
+
+        $manager->persist($basket);
+        $manager->flush();
+
+        return $this->redirectToRoute('app_security_basket');
     }
 }

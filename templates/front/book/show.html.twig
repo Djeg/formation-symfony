@@ -8,6 +8,12 @@
 </p>
 
 <p>
+  <a href="{{ path('app_security_addBasket', {id: book.id}) }}">
+    Ajouter au panier
+  </a>
+</p>
+
+<p>
   Prix: {{ book.price }} €
   <br />
   Auteur: <a href="{{ path('app_front_author_show', {id: book.author.id}) }}">{{ book.author.name }}</a>
