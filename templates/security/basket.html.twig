@@ -1,0 +1,15 @@
+{% extends 'front/base.html.twig' %}
+
+{% block content %}
+  <h1>Mon Panier</h1>
+
+  {% if app.user.basket.books.count() == 0 %}
+    <p>Votre panier est vide</p>
+  {% else %}
+    {% for book in app.user.basket.books %}
+      <p>{{ book.title }} : {{ book.price }} €</p>
+    {% endfor %}
+
+    <p>Total : {{ app.user.basket.total }} €</p>
+  {% endif %}
+{% endblock %}

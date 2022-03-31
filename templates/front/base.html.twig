@@ -27,6 +27,9 @@
       <a href="{{ path('app_security_profil') }}">
         <i class="fa-solid fa-user"></i>
       </a>
+      <a href="{{ path('app_security_basket') }}">
+        <i class="fa-solid fa-basket-shopping"></i>
+      </a>
       {% if is_granted('ROLE_ADMIN') %}
         <a href="{{ path('app_admin_bookAdmin_retrieve') }}">
           Admin

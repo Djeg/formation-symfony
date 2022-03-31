@@ -95,4 +95,11 @@ class SecurityController extends AbstractController
             'formView' => $form->createView(),
         ]);
     }
+
+    #[IsGranted('ROLE_USER')]
+    #[Route('/mon-panier', name: 'app_security_basket')]
+    public function basket(): Response
+    {
+        return $this->render('security/basket.html.twig');
+    }
 }
