@@ -1,9 +1,14 @@
 # Formation Symfony 6 - Intermédiaire
 
-Dans cette formation vous approfondirez vos connaissances Symfony 6
-avec les Formulaires et les relations doctrine :).
+Dans cette formation vous perfectionnerais vos connaissances Symfony 6
+avec la sécurité, le query builder et les API's :).
 
-Au programme: Réaliser un formulaire de recherche complet et complexe !
+Au programme:
+
+- Mettre en place un système d'authentification et d'authorization
+  avec formulaire de connexion, gestion de profile et des roles.
+- Mettre en place un panier, système classique des sites de commerce
+- Introduire une API Rest simple :).
 
 ## Installation
 
