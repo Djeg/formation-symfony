@@ -87,3 +87,56 @@ Configure les options du formulaire dans la méthode [`configureOptions`](../src
 Personaliser vos champs de formulaire.
 
 Utiliser ce formulaire dans le controller `App\Controller\API\CategoryController::list`.
+
+## 6. La création d'un auteur
+
+Créer un formulaire `App\Form\API\ApiAuthorType` attaché à l'entité
+`Author`.
+
+Dans ce formulaire, configuré le pour être un formulaire d'api
+(vous pouvez vous inspirer du formulaire : [`ApiBookType`](../src/Form/API/ApiBookType.php)).
+
+Ajouter dans le controller `App\Controller\Api\AuthorController` une methode "create"
+avec la route :
+
+```
+POST /api/authors
+```
+
+Dans ce controller et graçe au formulaire créé plus haut, sauvegarder et
+retourner un nouvel auteur (Vous pouvez vous inspirez de : [`BookController::create`](../src/Controller/API/BookController.php#L57)).
+
+Vous pouvez tester en utilisant le fichier [`request.http`](../request.http).
+
+## 6. La mise à jour d'un auteur
+
+Ajouter dans le controller `App\Controller\Api\AuthorController` une methode "update"
+avec la route :
+
+```
+PATCH /api/authors/{id}
+```
+
+Dans ce controller et graçe au formulaire créé plus haut, sauvegarder et
+retourner l'auteur modifié (Vous pouvez vous inspirez de : [`BookController::update`](../src/Controller/API/BookController.php#L106)).
+
+Vous pouvez tester en utilisant le fichier [`request.http`](../request.http).
+
+## 7. La suppression d'un auteur
+
+Ajouter dans le controller `App\Controller\Api\AuthorController` une methode "delete"
+avec la route :
+
+```
+DELETE /api/authors/{id}
+```
+
+Dans ce controller supprimé et
+retourner l'auteur (Vous pouvez vous inspirez de : [`BookController::delete`](../src/Controller/API/BookController.php#L155)).
+
+Vous pouvez tester en utilisant le fichier [`request.http`](../request.http).
+
+## 8. Créer, metre à jour et supprimer des catégories
+
+En répétant les étapes concernant les auteurs faire la même
+chose pour les catégories.
