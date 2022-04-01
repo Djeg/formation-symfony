@@ -2,6 +2,39 @@ GET http://127.0.0.1:8001/api/books?limit=3
 
 ###
 
+GET http://127.0.0.1:8001/api/books/83628632
+
+###
+
+POST http://127.0.0.1:8001/api/books
+Content-Type: application/json
+
+{
+  "title": "Mon Livre",
+  "description" : "Ma Description",
+  "price": 8.5,
+  "author": 251,
+  "pictures": [
+    "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.guim.co.uk%2Fimg%2Fstatic%2Fsys-images%2FGuardian%2FPix%2Fpictures%2F2014%2F7%2F30%2F1406719264487%2Ffd90e162-93de-41b1-aea5-f8e49227e85b-1360x2040.jpeg%3Fw%3D1200%26q%3D55%26auto%3Dformat%26usm%3D12%26fit%3Dmax%26s%3D6aec5983026d71051e0abf881c79ab6f&f=1&nofb=1",
+    "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fd28hgpri8am2if.cloudfront.net%2Fbook_images%2Fonix%2Fcvr9781608870394%2Fharry-potter-9781608870394_hr.jpg&f=1&nofb=1"
+  ]
+}
+
+###
+
+PATCH http://127.0.0.1:8001/api/books/601
+Content-Type: application/json
+
+{
+  "title": "Mon Livre Modifié"
+}
+
+###
+
+DELETE http://127.0.0.1:8001/api/books/600
+
+###
+
 GET http://127.0.0.1:8001/api/authors?name=J.K
 
 ###
