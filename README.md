@@ -5,7 +5,7 @@ de réaliser une semaine de projet symfony complète :).
 
 ## Installation
 
-1. Télécharger ou cloner le projet
+1. [Télécharger](https://github.com/Djeg/formation-symfony/archive/refs/heads/session-projet/04-04-22.08-04-22.zip) ou cloner le projet
 2. Ouvrez avec VSCODe
 3. Éditez le paramètre `DATABASE_URL` dans le fichier `.env`
 4. Installez les dépendances : `composer install`
