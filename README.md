@@ -32,6 +32,7 @@ Cette application est une pizzeria contenant les fonctionallité suivant:
 - Une connexion
 - Une inscription
 - La possibilité de passer une commande
+- En bonus : Configurez et commandez une pizza personnalisé
 
 ## Suivez le guide
 
