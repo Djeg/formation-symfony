@@ -1,17 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block navbar %}
+  {% include 'admin/_navbar.html.twig' %}
+{% endblock %}
+
 {% block title %}
   PizzaShopAdmin - {% block sub_title '' %}
 {% endblock %}
-
-{% block body %}
-  <header></header>
-
-  <div class="container">
-    {% block content '' %}
-  </div>
-
-  <footer></footer>
-{% endblock %}
-
 

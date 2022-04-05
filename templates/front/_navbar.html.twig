@@ -1,0 +1,23 @@
+<nav class="right-nav">
+  <a href="{{ path('app_front_home_home') }}">
+    <i class="fa-solid fa-house"></i>
+  </a>
+</nav>
+<nav class="left-nav">
+  <a href="">
+    <i class="fa-solid fa-basket-shopping"></i>
+  </a>
+  <a href="{{ path('app_front_user_profile') }}">
+    <i class="fa-solid fa-user"></i>
+  </a>
+  {% if app.user %}
+    <a href="{{ path('app_front_user_logout') }}">
+      <i class="fa-solid fa-right-from-bracket"></i>
+    </a>
+  {% endif %}
+  {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('app_admin_home_home') }}">
+      <i class="fa-solid fa-gear"></i>
+    </a>
+  {% endif %}
+</nav>

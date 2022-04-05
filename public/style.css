@@ -31,6 +31,11 @@ html {
   color: var(--color-black);
   font-size: var(--base-font-size);
 }
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 h1,
 .text-display {
   font-family: "Lobster", sans-serif;
@@ -41,4 +46,85 @@ h4,
 h5,
 h6 {
   font-family: "Outfit", sans-serif;
+}
+.container {
+  flex-grow: 2;
+  align-self: center;
+  width: 1024px;
+  padding-bottom: 1.6rem;
+}
+@media screen and (max-width: 1024px) {
+  .container {
+    width: 100%;
+  }
+}
+
+/*
+==============================
+Définition des class du header
+==============================
+*/
+.header {
+  width: 100%;
+}
+.header .navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(54, 54, 54, 0.7);
+  backdrop-filter: blur(10);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+}
+.navbar > nav {
+  display: flex;
+}
+.navbar a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem;
+  cursor: pointer;
+  color: var(--color-white);
+  font-size: 1.4rem;
+  text-decoration: none;
+  outline: none;
+}
+
+/*
+====================
+Définition du footer
+====================
+*/
+footer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 342px;
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+footer .container {
+  display: flex;
+  align-items: center;
+  padding-bottom: 0;
+}
+footer .container .logo p {
+  font-family: "Lobster", sans-serif;
+  font-size: 2rem;
+  text-align: center;
+}
+footer .container .logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.6rem;
+}
+footer .container .nav p {
+  padding: 0rem;
+  margin: 0.6rem 0;
+}
+footer .container .nav p a {
+  color: var(--color-white);
+  font-weight: 600;
+  text-decoration: none;
+  outline: none;
 }

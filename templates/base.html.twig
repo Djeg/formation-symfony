@@ -16,6 +16,42 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <header class="header {% block header_class '' %}">
+          <nav class="navbar">
+            {% block navbar '' %}
+          </nav>
+
+          {% block hero '' %}
+        </header>
+
+        <div class="container">
+          {% block body %}{% endblock %}
+        </div>
+
+        <footer class="footer">
+          <div class="container">
+            <div class="logo">
+              <p>PizzaShop</p>
+            </div>
+            <nav class="nav">
+              <h4>Plan du site :</h4>
+              <p>
+                <a href="">Accueil</a>
+              </p>
+              <p>
+                <a href="">Accueil</a>
+              </p>
+              <p>
+                <a href="">Accueil</a>
+              </p>
+              <p>
+                <a href="">Accueil</a>
+              </p>
+              <p>
+                <a href="">Accueil</a>
+              </p>
+            </nav>
+          </div>
+        </footer>
     </body>
 </html>
