@@ -18,6 +18,8 @@ App\Entity\Address:
 # Voici la liste des utilisateurs de l'application
 App\Entity\User:
   user:
+    firstname: John
+    lastname: Doe
     email: "user@pizza-shop.com"
     roles: ["ROLE_USER"]
     address: "@address_1"
@@ -25,6 +27,8 @@ App\Entity\User:
     password: \$2y\$13\$ahyDEIQ5rxD4APepoy59Ee4C6shhshhvBw7r/DE4/ipiGFbIhfAIm
     phone: <fr_FR:phoneNumber()>
   admin:
+    firstname: Admin
+    lastname: Admin
     email: "admin@pizza-shop.com"
     roles: ["ROLE_ADMIN"]
     address: "@address_*"

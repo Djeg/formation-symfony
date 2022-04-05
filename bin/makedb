@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+symfony console do:da:dr --force || true
+symfony console do:da:cr
+symfony console do:sc:up --force
+symfony console ha:fi:lo -n

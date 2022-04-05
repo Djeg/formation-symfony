@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Voici la class de controlleur affichane la page
+ * Voici la class de controlleur d'affichage de la page
  * d'accueil de l'administration
  */
 #[IsGranted('ROLE_ADMIN')]

@@ -37,6 +37,9 @@ class Address
     #[ORM\OneToOne(mappedBy: 'address', targetEntity: User::class, cascade: ['persist', 'remove'])]
     private $user;
 
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $supplement;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -132,6 +135,18 @@ class Address
         }
 
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getSupplement(): ?string
+    {
+        return $this->supplement;
+    }
+
+    public function setSupplement(?string $supplement): self
+    {
+        $this->supplement = $supplement;
 
         return $this;
     }
