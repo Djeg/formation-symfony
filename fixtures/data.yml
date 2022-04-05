@@ -23,9 +23,11 @@ App\Entity\User:
     address: "@address_1"
     # password: user
     password: \$2y\$13\$ahyDEIQ5rxD4APepoy59Ee4C6shhshhvBw7r/DE4/ipiGFbIhfAIm
+    phone: <fr_FR:phoneNumber()>
   admin:
     email: "admin@pizza-shop.com"
-    roles: ["ROLE_ADMIn"]
+    roles: ["ROLE_ADMIN"]
     address: "@address_*"
     # password: admin
     password: \$2y\$13\$AySyX3lvRrxJsvInORUideyy6QmFbyPxzp1vmBaOXVJP/e6d3TeOK
+    phone: <fr_FR:phoneNumber()>

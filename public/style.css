@@ -1,0 +1,44 @@
+/**
+ * Voici le style de l'intégralité de l'application
+ */
+
+/*
+============================
+Définition des Variables CSS
+============================
+*/
+:root {
+  --color-white: #efefef;
+  --color-black: #363636;
+  --color-green: #cef9d0;
+  --color-red: #f9cece;
+  --color-grey: #dddddd;
+  --base-font-size: 18px;
+}
+
+/*
+============================================
+Définition du style des éléments principaux:
+html, body, h* etc ...
+============================================
+*/
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  font-size: var(--base-font-size);
+}
+h1,
+.text-display {
+  font-family: "Lobster", sans-serif;
+}
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Outfit", sans-serif;
+}
