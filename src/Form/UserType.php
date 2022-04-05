@@ -58,13 +58,14 @@ class UserType extends AbstractType
         $builder
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'required' => true,
+                'required' => $options['mode'] === 'create',
                 'first_options' => [
                     'label' => 'Mot de passe :',
                 ],
                 'second_options' => [
                     'label' => 'Répétez le mot de passe :',
-                ]
+                ],
+                'mapped' => $options['mode'] === 'create',
             ])
             ->add('phone', TelType::class, [
                 'label' => 'Téléphone :',
@@ -84,8 +85,10 @@ class UserType extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,
             'admin' => false,
+            'mode' => 'create',
         ]);
 
         $resolver->setAllowedTypes('admin', 'boolean');
+        $resolver->setAllowedValues('mode', ['create', 'update']);
     }
 }

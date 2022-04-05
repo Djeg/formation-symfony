@@ -3,6 +3,13 @@
 {% block content %}
 <h1>Liste des utilisateurs</h1>
 
+<p>
+  <a href="{{ path('app_admin_user_create') }}">
+    <i class="fa-solid fa-circle-plus"></i>
+    Ajouter un utilisateur
+  </a>
+</p>
+
 <div>
   <h2>Rechecher</h2>
   {{ form_start(form) }}
@@ -28,10 +35,10 @@
         <td>{{ user.email }}</td>
         <td>{{ user.phone }}</td>
         <td>
-          <a href="">
+          <a href="{{ path('app_admin_user_update', {id: user.id}) }}">
             <i class="fa-solid fa-pen"></i>
           </a>
-          <a href="">
+          <a href="{{ path('app_admin_user_delete', {id: user.id}) }}">
             <i class="fa-solid fa-trash"></i>
           </a>
         </td>
