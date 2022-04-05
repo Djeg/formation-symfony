@@ -4,6 +4,7 @@ namespace App\Controller\Front;
 
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -73,6 +74,42 @@ class UserController extends AbstractController
         }
 
         return $this->render('front/user/signUp.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * Voici ici la page de profile d'un utilisateur
+     */
+    #[Route('/mon-profil', name: 'app_front_user_profile')]
+    #[IsGranted('ROLE_USER')]
+    public function profile(
+        Request $request,
+        UserRepository $repository,
+        UserPasswordHasherInterface $hasher,
+    ): Response {
+        $form = $this->createForm(UserType::class, $this->getUser(), [
+            'mode' => 'update'
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
+
+            if ($form->get('password')->getData()) {
+                $user->setPassword($hasher->hashPassword(
+                    $user,
+                    $form->get('password')->getData(),
+                ));
+            }
+
+            $repository->add($user);
+
+            return $this->redirectToRoute('app_front_user_logout');
+        }
+
+        return $this->render('front/user/profile.html.twig', [
             'form' => $form->createView(),
         ]);
     }
