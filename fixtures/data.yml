@@ -1,3 +1,31 @@
 # Vous pouvez pacer les fixtures de la base
 # de données dans ce fichier afin de créer
 # une base de données remplie avec vos données :)
+
+# Voici les fixtures concernant les adresses
+App\Entity\Address:
+  address_1:
+    country: France
+    city: Paris
+    street: 13 rue lafayette
+    zipCode: 75002
+  address_{2..50}:
+    country: France
+    city: <fr_FR:city()>
+    street: <fr_FR:streetAddress()>
+    zipCode: <fr_FR:postcode()>
+
+# Voici la liste des utilisateurs de l'application
+App\Entity\User:
+  user:
+    email: "user@pizza-shop.com"
+    roles: ["ROLE_USER"]
+    address: "@address_1"
+    # password: user
+    password: \$2y\$13\$ahyDEIQ5rxD4APepoy59Ee4C6shhshhvBw7r/DE4/ipiGFbIhfAIm
+  admin:
+    email: "admin@pizza-shop.com"
+    roles: ["ROLE_ADMIn"]
+    address: "@address_*"
+    # password: admin
+    password: \$2y\$13\$AySyX3lvRrxJsvInORUideyy6QmFbyPxzp1vmBaOXVJP/e6d3TeOK
