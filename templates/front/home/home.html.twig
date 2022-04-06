@@ -1,5 +1,25 @@
 {% extends 'front/base.html.twig' %}
 
 {% block body %}
-<h1>PizzaShop</h1>
+<h1>Nos Pizzas</h1>
+
+<div class="pizza-list">
+  {% for pizza in pizzas %}
+    <div class="pizza-thumb">
+      <div class="img">
+        <div class="black-frame"></div>
+        <img src="{{ pizza.image }}" alt="{{ pizza.name }}" />
+      </div>
+      <h2 class="text-display">{{ pizza.name }}</h2>
+      <p class="description">{{ pizza.description }}</p>
+      <div class="actions">
+        <p class="price text-display">{{ pizza.price }}&nbsp;€</p>
+        <a href="" class="btn">
+          <i class="fa-solid fa-cart-shopping"></i>
+          Ajouter au panier
+        </a>
+      </div>
+    </div>
+  {% endfor %}
+</div>
 {% endblock %}

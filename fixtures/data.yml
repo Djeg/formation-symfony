@@ -35,3 +35,16 @@ App\Entity\User:
     # password: admin
     password: \$2y\$13\$AySyX3lvRrxJsvInORUideyy6QmFbyPxzp1vmBaOXVJP/e6d3TeOK
     phone: <fr_FR:phoneNumber()>
+
+# Voici une liste de pizza de l'application PizzaShop
+App\Entity\Pizza:
+  pizza_1:
+    name: La Margarita
+    price: 10.23
+    description: <fr_FR:catchPhrase())>
+    image: <randomElement(['https://images.pexels.com/photos/2619967/pexels-photo-2619967.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'https://images.pexels.com/photos/263041/pexels-photo-263041.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'https://images.pexels.com/photos/1146760/pexels-photo-1146760.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'])>
+  pizza_{2..20}:
+    name: "La <fr_FR:word()>"
+    price: <randomFloat(2, 10, 19)>
+    description: <fr_FR:catchPhrase())>
+    image: <randomElement(['https://images.pexels.com/photos/2619967/pexels-photo-2619967.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'https://images.pexels.com/photos/263041/pexels-photo-263041.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'https://images.pexels.com/photos/1146760/pexels-photo-1146760.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'])>
