@@ -1,0 +1,50 @@
+{% extends 'front/base.html.twig' %}
+
+{% block body %}
+<h1>Mon Panier</h1>
+
+{# Test si le panier est vide #}
+{% if app.user.basket.isEmpty() %}
+<h2>Votre panier est vide</h2>
+{% else %}
+
+{# on boucle sur tout les item du panier #}
+{% for item in app.user.basket.basketItems %}
+  <div class="pizza-thumb">
+    <div class="img">
+      <div class="black-frame"></div>
+      <img src="{{ item.pizza.image }}" alt="{{ item.pizza.name }}" />
+    </div>
+    <h2 class="text-display">{{ item.pizza.name }}</h2>
+    <p class="description">{{ item.pizza.description }}</p>
+    <div class="quantity">
+      <a href="{{ path('app_front_basket_decrease', {id: item.id}) }}" class="btn">
+        <i class="fa-solid fa-circle-minus"></i>
+      </a>
+      <p class="price">{{ item.quantity }}</p>
+      <a href="{{ path('app_front_basket_increase', {id: item.id}) }}" class="btn">
+        <i class="fa-solid fa-circle-plus"></i>
+      </a>
+    </div>
+    <div class="actions">
+      <p class="price text-display">{{ item.total }}&nbsp;€</p>
+      <a href="{{ path('app_front_basket_delete', {id: item.id}) }}" class="btn">
+        <i class="fa-solid fa-trash"></i>
+        Supprimer du panier
+      </a>
+    </div>
+  </div>
+{% endfor %}
+
+<h2>Total : {{ app.user.basket.total }} €</h2>
+<div class="btn-group">
+  <a href="" class="btn">
+    <i class="fa-solid fa-credit-card"></i>
+    Commander
+  </a>
+</div>
+
+{% endif %}
+
+
+{% endblock %}

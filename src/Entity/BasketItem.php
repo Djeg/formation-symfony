@@ -64,4 +64,13 @@ class BasketItem
 
         return $this;
     }
+
+    /**
+     * Calcule le total d'un item. L'idée est de multiplier
+     * la quantité par le prix de la pizza
+     */
+    public function getTotal(): float
+    {
+        return $this->quantity * $this->pizza->getPrice();
+    }
 }

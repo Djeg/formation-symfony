@@ -73,4 +73,28 @@ class Basket
 
         return $this;
     }
+
+    /**
+     * Test si le panier est vide. Retourne vrai
+     * si il n'y a aucun item dans le panier et 
+     * faux si le panier passède au moins 1 item.
+     */
+    public function isEmpty(): bool
+    {
+        return 0 === $this->basketItems->count();
+    }
+
+    /**
+     * Calcule le total générale de tout les items du panier
+     */
+    public function getTotal(): float
+    {
+        $total = 0;
+
+        foreach ($this->basketItems as $item) {
+            $total += $item->getTotal();
+        }
+
+        return $total;
+    }
 }

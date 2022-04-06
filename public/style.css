@@ -223,3 +223,15 @@ Design des miniatures des pizzas
   text-align: center;
   margin: 0;
 }
+.pizza-thumb .quantity {
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pizza-thumb .quantity .price {
+  color: white;
+  font-family: "Lobster", sans-serif;
+  font-size: 2.5rem;
+  margin: 0rem 1.4rem;
+}

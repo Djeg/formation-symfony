@@ -14,7 +14,7 @@
       <p class="description">{{ pizza.description }}</p>
       <div class="actions">
         <p class="price text-display">{{ pizza.price }}&nbsp;€</p>
-        <a href="" class="btn">
+        <a href="{{ path('app_front_basket_add', {id: pizza.id}) }}" class="btn">
           <i class="fa-solid fa-cart-shopping"></i>
           Ajouter au panier
         </a>

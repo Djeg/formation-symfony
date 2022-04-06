@@ -18,15 +18,16 @@ use Symfony\Component\Routing\Annotation\Route;
  * du panier d'un utilisateur. Nous pouvons,
  * ajouter, supprimer et commander un panier.
  */
+#[IsGranted('ROLE_USER')]
+#[Route('/panier')]
 class BasketController extends AbstractController
 {
     /**
      * Ajoute une pizza dans le panier de l'utilisateur
      * connécté
      */
-    #[IsGranted('ROLE_USER')]
-    #[Route('/panier/{id}/ajouter', name: 'app_front_basket_add')]
-    public function add(Pizza $pizza, BasketRepository $repository): Response
+    #[Route('/{id}/ajouter', name: 'app_front_basket_add')]
+    public function add(Pizza $pizza, BasketItemRepository $repository): Response
     {
         // Récupére l'utilisateur connécté
         /** @var User */
@@ -39,17 +40,67 @@ class BasketController extends AbstractController
         // cette item doit être attaché à la pizza
         // et doit avoir une quantité de 1
         $item = new BasketItem();
+        $item->setBasket($basket);
         $item->setPizza($pizza);
         $item->setQuantity(1);
 
-        // On rajoute l'item dans le panier
-        $basket->addBasketItem($item);
-
         // On enregistre la panier
-        $repository->add($basket);
+        $repository->add($item);
 
         // On redirige vers la page qui affiche
         // le panier
+        return $this->redirectToRoute('app_front_basket_display');
+    }
+
+    /**
+     * Affiche la totalité du panier
+     */
+    #[Route('/', name: 'app_front_basket_display')]
+    public function display(): Response
+    {
+        return $this->render('front/basket/display.html.twig');
+    }
+
+    /**
+     * Permet d'ajouter 1 à la quantité d'un item donnée
+     */
+    #[Route('/{id}/augmenter', name: 'app_front_basket_increase')]
+    public function increase(BasketItem $item, BasketItemRepository $repository): Response
+    {
+        $item->setQuantity($item->getQuantity() + 1);
+
+        $repository->add($item);
+
+        return $this->redirectToRoute('app_front_basket_display');
+    }
+
+    /**
+     * Supprime un item du panier
+     */
+    #[Route('/{id}/supprimer', name: 'app_front_basket_delete')]
+    public function delete(BasketItem $item, BasketItemRepository $repository): Response
+    {
+        $repository->remove($item);
+
+        return $this->redirectToRoute('app_front_basket_display');
+    }
+
+    /**
+     * Permet d'enlever 1 à la quantité d'un item du panier
+     */
+    #[Route('/{id}/diminuer', name: 'app_front_basket_decrease')]
+    public function decrease(BasketItem $item, BasketItemRepository $repository): Response
+    {
+        $item->setQuantity($item->getQuantity() - 1);
+
+        if ($item->getQuantity() === 0) {
+            return $this->redirectToRoute('app_front_basket_delete', [
+                'id' => $item->getId(),
+            ]);
+        }
+
+        $repository->add($item);
+
         return $this->redirectToRoute('app_front_basket_display');
     }
 }
