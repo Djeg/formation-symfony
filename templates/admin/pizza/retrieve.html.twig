@@ -1,0 +1,34 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+<h1>Liste des Pizzas</h1>
+
+<p>
+  <a href="{{ path('app_admin_pizza_create') }}" class="btn">
+    <i class="fa-solid fa-circle-plus"></i>
+    Ajouter une Pizza
+  </a>
+</p>
+
+{% for pizza in pizzas %}
+  <div class="pizza-thumb">
+    <div class="img">
+      <div class="black-frame"></div>
+      <img src="{{ pizza.image }}" alt="{{ pizza.name }}" />
+    </div>
+    <h2 class="text-display">{{ pizza.name }}</h2>
+    <p class="description">{{ pizza.description }}</p>
+    <div class="actions">
+      <a href="{{ path('app_admin_pizza_update', {id: pizza.id}) }}" class="btn">
+        <i class="fa-solid fa-pen"></i>
+        Modifier
+      </a>
+      <a href="{{ path('app_admin_pizza_delete', {id: pizza.id}) }}" class="btn">
+        <i class="fa-solid fa-trash"></i>
+        Supprimer
+      </a>
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}
