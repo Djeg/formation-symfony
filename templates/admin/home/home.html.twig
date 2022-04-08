@@ -2,4 +2,25 @@
 
 {% block body %}
 <h1>Administration</h1>
+
+<div>
+  <a href="{{ path('app_admin_pizza_retrieve') }}" class="btn">
+    <i class="fa-solid fa-pizza-slice"></i>
+    Gérer les pizzas
+  </a>
+</div>
+
+<div>
+  <a href="{{ path('app_admin_user_retrieve') }}" class="btn">
+    <i class="fa-solid fa-users"></i>
+    Gérer les utitlisateurs
+  </a>
+</div>
+
+<div>
+  <a href="{{ path('app_admin_order_retrieve') }}" class="btn">
+    <i class="fa-solid fa-file-invoice-dollar"></i>
+    Gérer les commandes
+  </a>
+</div>
 {% endblock %}
