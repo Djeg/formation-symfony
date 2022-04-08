@@ -6,6 +6,7 @@ use App\Repository\BasketRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Translation\Util\ArrayConverter;
 
 #[ORM\Entity(repositoryClass: BasketRepository::class)]
 class Basket
@@ -19,7 +20,7 @@ class Basket
     #[ORM\JoinColumn(nullable: false)]
     private $user;
 
-    #[ORM\OneToMany(mappedBy: 'basket', targetEntity: BasketItem::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'basket', targetEntity: BasketItem::class, orphanRemoval: false)]
     private $basketItems;
 
     public function __construct()
@@ -82,6 +83,18 @@ class Basket
     public function isEmpty(): bool
     {
         return 0 === $this->basketItems->count();
+    }
+
+    /**
+     * Vide le panier de tout ces items
+     */
+    public function empty(): self
+    {
+        foreach ($this->basketItems as $item) {
+            $this->removeBasketItem($item);
+        }
+
+        return $this;
     }
 
     /**

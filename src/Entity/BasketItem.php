@@ -17,7 +17,7 @@ class BasketItem
     private $quantity;
 
     #[ORM\ManyToOne(targetEntity: Basket::class, inversedBy: 'basketItems')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $basket;
 
     #[ORM\ManyToOne(targetEntity: Pizza::class)]

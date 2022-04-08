@@ -1,0 +1,21 @@
+{% extends 'front/base.html.twig' %}
+
+{% block body %}
+<h1>Confirmation</h1>
+
+
+<p>
+  Votre commande d'un montant de {{ order.total }} € à bien été prise en commpte !
+  <br />
+  Nous la préparons dans les meilleurs délai !
+  <br />
+  Merci, et bonne appètit !
+</p>
+
+<a href="{{ path('app_front_home_home') }}" class="btn">
+  <i class="fa-solid fa-circle-arrow-left"></i>
+  Retour au site
+</a>
+
+
+{% endblock %}

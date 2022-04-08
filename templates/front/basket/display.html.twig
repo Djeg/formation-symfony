@@ -37,8 +37,9 @@
 {% endfor %}
 
 <h2>Total : {{ app.user.basket.total }} €</h2>
+
 <div class="btn-group">
-  <a href="" class="btn">
+  <a href="{{ path('app_front_basket_order') }}" class="btn">
     <i class="fa-solid fa-credit-card"></i>
     Commander
   </a>

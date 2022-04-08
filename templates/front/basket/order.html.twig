@@ -1,0 +1,73 @@
+{% extends 'front/base.html.twig' %}
+
+{% block body %}
+<h1>Commander</h1>
+
+{# Test si le panier est vide #}
+{% if app.user.basket.isEmpty() %}
+  <h2>Votre panier est vide</h2>
+
+{% else %}
+  {# On affiche le récapitulatif de la commande : #}
+  <h2>Récapitulatif</h2>
+
+  {% for item in app.user.basket.basketItems %}
+    <p>{{ item.quantity }}x {{ item.pizza.name }} : {{ item.total }} €</p>
+  {% endfor %}
+
+  <h3>Total à payer : {{ app.user.basket.total }} €</h3>
+
+  <h2>Pour la livraison</h2>
+
+  {{ form_start(form) }}
+
+  <div class="form-group">
+    {{ form_row(form.address.country) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.address.city) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.address.zipCode) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.address.street) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.address.supplement) }}
+  </div>
+
+  <h2>Payez</h2>
+
+  <div class="form-group">
+    {{ form_row(form.number) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.expirationYear) }}
+    {{ form_row(form.expirationMonth) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.cvc) }}
+  </div>
+
+  <h3>Total à payer : {{ app.user.basket.total }} €</h3>
+
+  <div class="btn-group">
+    <button type="submit" class="btn">
+      <i class="fa-solid fa-credit-card"></i>
+      Payer
+    </button>
+  </div>
+
+  {{ form_end(form) }}
+
+{% endif %}
+
+
+{% endblock %}
