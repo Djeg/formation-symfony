@@ -34,6 +34,17 @@ Cette application est une pizzeria contenant les fonctionallité suivant:
 - La possibilité de passer une commande
 - En bonus : Configurez et commandez une pizza personnalisé
 
+## Organiser votre travail
+
+En symfony, lorsque nous avons une nouvelle fonctionalité
+il suffit de suivre ces étapes :
+
+1. Le DTO ou Le/Les Entité(s)
+2. Les Formulaires
+3. Le Repository
+4. Le Controller
+5. Le HTML / CSS
+
 ## Suivez le guide
 
 Afin de réaliser cette application, vous trouverez l"intégralité du design
