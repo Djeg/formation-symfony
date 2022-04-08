@@ -1,0 +1,48 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+<h1>Liste des commandes</h1>
+
+<div>
+  <h2>Rechecher</h2>
+  {{ form_start(form) }}
+    {{ form_rest(form) }}
+
+    <button type="submit" class="btn">Rechercher</button>
+  {{ form_end(form)}}
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Fait par</th>
+      <th>Fait le</th>
+      <th>Mise à jour le</th>
+      <th>Status</th>
+      <th>Total</th>
+      <th>Action</th> 
+    </tr>
+  </thead>
+  <tbody>
+    {% for order in orders %}
+      <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ order.user.email }}</td>
+        <td>{{ order.createdAt|date('d/m/Y à H:i') }}</td>
+        <td>{{ order.updatedAt|date('d/m/Y à H:i') }}</td>
+        <td>{{ order.statusLabel }}</td>
+        <td>{{ order.total }} €</td>
+        <td>
+          <a href="{{ path('app_admin_order_update', {id: order.id}) }}">
+            <i class="fa-solid fa-pen"></i>
+          </a>
+          <a href="{{ path('app_admin_order_delete', {id: order.id}) }}">
+            <i class="fa-solid fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

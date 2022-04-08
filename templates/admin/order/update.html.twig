@@ -1,0 +1,28 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block sub_title 'Modifier une commande' %}
+
+{% block body %}
+<h1>{% block page_title 'Modifier une commande' %}</h1>
+
+<p>
+  <a href="{{ path('app_admin_order_retrieve') }}">
+    <i class="fa-solid fa-circle-arrow-left"></i>
+    Retour à la liste
+  </a>
+</p>
+
+{{ form_start(form) }}
+
+{{ form_rest(form) }}
+
+<div class="btn-group">
+  <button type="submit">
+    <i class="fa-solid fa-square-pen"></i>
+    Modifier
+  </button>
+</div>
+
+
+{{ form_end(form) }}
+{% endblock %}

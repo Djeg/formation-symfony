@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\DTO\OrderSearch;
 use App\Entity\Order;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -60,5 +61,33 @@ class OrderRepository extends ServiceEntityRepository
             ->setParameter('id', $user->getId())
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * Récupére toutes les commandes filtré par le DTO
+     * OrderSearch
+     */
+    public function findAllBySearch(OrderSearch $search): array
+    {
+        $qb = $this
+            ->createQueryBuilder('o')
+            ->setMaxResults($search->limit)
+            ->setFirstResult($search->limit * ($search->page - 1))
+            ->orderBy("o.{$search->sortBy}", $search->direction);
+
+        if ($search->statuses) {
+            $qb
+                ->andWhere('o.status IN (:statuses)')
+                ->setParameter('statuses', $search->statuses);
+        }
+
+        if ($search->user) {
+            $qb
+                ->leftJoin('o.user', 'u')
+                ->andWhere('u.id = :userId')
+                ->setParameter('userId', $search->user->getId());
+        }
+
+        return $qb->getQuery()->getResult();
     }
 }

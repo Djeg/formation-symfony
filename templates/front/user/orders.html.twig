@@ -10,13 +10,14 @@
   {% for order in orders %}
     <div class="order">
       <h2>Commande n° {{ order.id }}</h2>
-      <p>Fait le  : {{ order.createdAt|date('d/m/Y à h:m') }}</p>
+      <p>Fait le  : {{ order.createdAt|date('d/m/Y à H:i') }}</p>
       <p>Status : <strong>{{ order.statusLabel }}</strong></p>
       <h3>Récupitulatif :</h3>
       {% for item in order.items %}
         <p>{{ item.quantity }}x {{ item.pizza.name }} : {{ item.total }} €</p>
       {% endfor %}
       <h3>Total payé : {{ order.total }} €</h3>
+      <hr />
     </div>
   {% endfor %}
 
