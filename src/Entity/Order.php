@@ -166,4 +166,24 @@ class Order
 
         return $total;
     }
+
+    /**
+     * Permet d'afficher le status en français
+     */
+    public function getStatusLabel(): string
+    {
+        if (self::$STATUS_TODO === $this->status) {
+            return 'En cours de préparation';
+        }
+
+        if (self::$STATUS_DELIVERING === $this->status) {
+            return 'En cours de livraison';
+        }
+
+        if (self::$STATUS_DONE === $this->status) {
+            return 'Finie';
+        }
+
+        return 'Annulée';
+    }
 }

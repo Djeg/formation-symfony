@@ -3,6 +3,7 @@
 namespace App\Controller\Front;
 
 use App\Form\UserType;
+use App\Repository\OrderRepository;
 use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -111,6 +112,21 @@ class UserController extends AbstractController
 
         return $this->render('front/user/profile.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * Voici la page qui permet de consulter les commandes
+     * d'un utilisateurs
+     */
+    #[Route('/mes-commandes', name: 'app_front_user_orders')]
+    #[IsGranted('ROLE_USER')]
+    public function orders(OrderRepository $repository): Response
+    {
+        $orders = $repository->findAllForUser($this->getUser());
+
+        return $this->render('front/user/orders.html.twig', [
+            'orders' => $orders,
         ]);
     }
 }
