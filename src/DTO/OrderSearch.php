@@ -8,6 +8,8 @@ use App\Entity\User;
 
 /**
  * Contient tout les champs de recherche pour des commandes.
+ * 
+ * @see App\Form\OrderSearchType
  */
 class OrderSearch
 {
