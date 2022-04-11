@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\BookRepository;
+use App\Repository\AuthorRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: BookRepository::class)]
-class Book
+#[ORM\Entity(repositoryClass: AuthorRepository::class)]
+class Author
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -14,13 +16,10 @@ class Book
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $title;
+    private $name;
 
     #[ORM\Column(type: 'text', nullable: true)]
     private $description;
-
-    #[ORM\Column(type: 'float')]
-    private $price;
 
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
@@ -28,23 +27,27 @@ class Book
     #[ORM\Column(type: 'datetime')]
     private $updatedAt;
 
-    #[ORM\ManyToOne(targetEntity: Author::class, inversedBy: 'books')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $author;
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Book::class, orphanRemoval: true)]
+    private $books;
+
+    public function __construct()
+    {
+        $this->books = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getName(): ?string
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(string $title): self
+    public function setName(string $name): self
     {
-        $this->title = $title;
+        $this->name = $name;
 
         return $this;
     }
@@ -57,18 +60,6 @@ class Book
     public function setDescription(?string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getPrice(): ?float
-    {
-        return $this->price;
-    }
-
-    public function setPrice(float $price): self
-    {
-        $this->price = $price;
 
         return $this;
     }
@@ -97,14 +88,32 @@ class Book
         return $this;
     }
 
-    public function getAuthor(): ?Author
+    /**
+     * @return Collection<int, Book>
+     */
+    public function getBooks(): Collection
     {
-        return $this->author;
+        return $this->books;
     }
 
-    public function setAuthor(?Author $author): self
+    public function addBook(Book $book): self
     {
-        $this->author = $author;
+        if (!$this->books->contains($book)) {
+            $this->books[] = $book;
+            $book->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBook(Book $book): self
+    {
+        if ($this->books->removeElement($book)) {
+            // set the owning side to null (unless already changed)
+            if ($book->getAuthor() === $this) {
+                $book->setAuthor(null);
+            }
+        }
 
         return $this;
     }
