@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>{% block page_title 'Nouvel Auteur' %}</h1>
+
+<p>
+	<a href="{{ path('app_admin_author_list') }}">Retour à la liste</a>
+</p>
+
+{{ form_start(form) }}
+	{{ form_rest(form)}}
+
+	<button type="submit">Envoyer</button>
+
+{{ form_end(form)}}
+
+{% endblock %}
