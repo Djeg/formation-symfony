@@ -19,3 +19,7 @@ Pour installer ce projet, rien de plus simple :
 ## Les supports
 
 Vous retrouverez les slides de la formation juste [ici](https://slides.com/davidjegat-1/sf5-training-foundation/fullscreen)
+
+## Les exercices
+
+- [exos de révision](./doc/exos-revision.md)
