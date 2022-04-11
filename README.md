@@ -8,7 +8,7 @@ des entitès :).
 
 Pour installer ce projet, rien de plus simple :
 
-- Télécharger le projet
+- [Télécharger](https://github.com/Djeg/formation-symfony/archive/refs/heads/session/11-04-22.15-04-22.zip) le projet
 - Ouvrez le projet dans VSCode
 - Éditez le fichier `.env` afin de spécifier l'url de connexion à votre base de données (`DATABASE_URL`).
 - Lancer la commande : `composer install`
