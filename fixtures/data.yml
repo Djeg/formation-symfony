@@ -1,0 +1,19 @@
+# Génération des auteurs de la base de données
+App\Entity\Author:
+  # Création d'une clefs de génération qui nous
+  # servira à identifié l'auteur pour la mise en
+  # place des relations
+  author1:
+    # In spécifie les propriétès et leurs valeurs
+    # de l'entité Author que l'on veut générer
+    name: John
+    description: Description de john
+    createdAt: <dateTime()>
+    updatedAt: <dateTime()>
+  # Mise en place de fixtures range. C'est à dire
+  # la génération de l'author2 jusqu'a l'auteur 50
+  author{2..50}:
+    name: <fr_FR:name()>
+    description: <fr_FR:realText()>
+    createdAt: <dateTime()>
+    updatedAt: <dateTime()>
