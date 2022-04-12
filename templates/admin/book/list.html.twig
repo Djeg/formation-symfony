@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Liste des livres</h1>
+
+<p>
+	<a href="">Créer un livre</a>
+</p>
+
+{# Test si nous avons des livres #}
+{% if books is empty %}
+	<p>Il n'y a pas encore de livre</p>
+{% else %}
+
+<table>
+	<thead>
+		<tr>
+			<th>Identifiant</th>
+			<th>Titre</th>
+			<th>Date de création</th>
+			<th>Date de mise à jour</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for book in books %}
+			<tr>
+				<td>{{ book.id }}</td>
+				<td>{{ book.title }}</td>
+				<td>{{ book.createdAt|date('d/m/Y à h:i') }}</td>
+				<td>{{ book.updatedAt|date('d/m/Y à h:i') }}</td>
+				<td>
+					<a href="">Modifier</a>
+					<a href="">Supprimer</a>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+{% endif %}
+
+{% endblock %}
