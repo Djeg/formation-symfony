@@ -23,3 +23,14 @@ Vous retrouverez les slides de la formation juste [ici](https://slides.com/david
 ## Les exercices
 
 - [exos de révision](./doc/exos-revision.md)
+
+## L'ordre de dévelopement
+
+Quand on as une fonctionalité à développer, il suffit de suivre un ordre
+simple :
+
+1. Le DTO / L'entité
+2. Le repository (faire les requêtes à la base de données si il y a)
+3. Le FormType
+4. Le controller
+5. La vue (twig)
