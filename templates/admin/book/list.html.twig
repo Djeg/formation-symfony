@@ -30,7 +30,9 @@
 				<td>{{ book.createdAt|date('d/m/Y à h:i') }}</td>
 				<td>{{ book.updatedAt|date('d/m/Y à h:i') }}</td>
 				<td>
-					<a href="">Modifier</a>
+					<a href="{{ path('app_admin_book_update', {
+						id: book.id,
+					}) }}">Modifier</a>
 					<a href="">Supprimer</a>
 				</td>
 			</tr>
