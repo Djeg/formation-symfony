@@ -23,6 +23,7 @@ Vous retrouverez les slides de la formation juste [ici](https://slides.com/david
 ## Les exercices
 
 - [exos de révision](./doc/exos-revision.md)
+- [exos fixtures](./doc/exos-fixtures.md)
 
 ## L'ordre de dévelopement
 

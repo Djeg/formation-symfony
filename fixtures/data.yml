@@ -26,4 +26,4 @@ App\Entity\Book:
     price: 8.5
     createdAt: <dateTime()>
     updatedAt: <dateTime()>
-    author: "@author1"
+    author: "@author*"
