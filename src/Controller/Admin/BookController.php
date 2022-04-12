@@ -57,4 +57,12 @@ class BookController extends AbstractController
 			'form' => $form->createView(),
 		]);
 	}
+
+	#[Route('/admin/livres/{id}/supprimer', name: 'app_admin_book_delete', methods: ['GET'])]
+	public function delete(Book $book, BookRepository $repository): Response
+	{
+		$repository->remove($book);
+
+		return $this->redirectToRoute('app_admin_book_list');
+	}
 }
