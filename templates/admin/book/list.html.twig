@@ -17,6 +17,7 @@
 		<tr>
 			<th>Identifiant</th>
 			<th>Titre</th>
+			<th>Auteur</th>
 			<th>Date de création</th>
 			<th>Date de mise à jour</th>
 			<th>Actions</th>
@@ -27,6 +28,7 @@
 			<tr>
 				<td>{{ book.id }}</td>
 				<td>{{ book.title }}</td>
+				<td>{{ book.author.name }}</td>
 				<td>{{ book.createdAt|date('d/m/Y à h:i') }}</td>
 				<td>{{ book.updatedAt|date('d/m/Y à h:i') }}</td>
 				<td>
