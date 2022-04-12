@@ -27,3 +27,10 @@ App\Entity\Book:
     createdAt: <dateTime()>
     updatedAt: <dateTime()>
     author: "@author*"
+  book{2..100}:
+    title: <fr_FR:catchPhrase()>
+    description: <fr_FR:realText()>
+    price: <randomFloat(2, 5, 40)>
+    createdAt: <dateTime()>
+    updatedAt: <dateTime()>
+    author: "@author*"

@@ -65,4 +65,14 @@ class BookController extends AbstractController
 
 		return $this->redirectToRoute('app_admin_book_list');
 	}
+
+	#[Route('/admin/livres/par-prix/{min}/{max}', name: 'app_admin_book_listByPrice')]
+	public function listByPrice(BookRepository $repository, float $min, float $max): Response
+	{
+		$books = $repository->findByPriceBetween($min, $max);
+
+		return $this->render('admin/book/listByPrice.html.twig', [
+			'books' => $books,
+		]);
+	}
 }

@@ -45,32 +45,19 @@ class BookRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Book[] Returns an array of Book objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Récupére tout les livres dont le prix est entre
+     * le minimum et maximum spécifié en paramètre
+     */
+    public function findByPriceBetween(float $minimum, float $maximum): array
     {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
+        return $this
+            ->createQueryBuilder('book')
+            ->andWhere('book.price >= :min')
+            ->andWhere('book.price <= :max')
+            ->setParameter('min', $minimum)
+            ->setParameter('max', $maximum)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Book
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
