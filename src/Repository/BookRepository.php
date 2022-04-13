@@ -61,4 +61,19 @@ class BookRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * Recherche des livres par nom d'auteur
+     */
+    public function findByAuthorName(string $authorName): array
+    {
+        return $this
+            ->createQueryBuilder('book')
+            ->leftJoin('book.author', 'author')
+            ->andWhere('author.name LIKE :name')
+            ->setParameter('name', "%$authorName%")
+            ->orderBy('book.price', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }

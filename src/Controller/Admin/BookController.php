@@ -75,4 +75,14 @@ class BookController extends AbstractController
 			'books' => $books,
 		]);
 	}
+
+	#[Route('/admin/livres/par-auteur/{authorName}', name: 'app_admin_author_listByAuthorName')]
+	public function listByAuthorName(BookRepository $repository, string $authorName): Response
+	{
+		$books = $repository->findByAuthorName($authorName);
+
+		return $this->render('admin/book/listByAuthorName.html.twig', [
+			'books' => $books,
+		]);
+	}
 }
