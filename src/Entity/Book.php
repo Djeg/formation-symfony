@@ -6,6 +6,7 @@ use App\Repository\BookRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation\Timestampable;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 class Book
@@ -25,9 +26,11 @@ class Book
     private $price;
 
     #[ORM\Column(type: 'datetime')]
+    #[Timestampable(on: 'create')]
     private $createdAt;
 
     #[ORM\Column(type: 'datetime')]
+    #[Timestampable(on: 'update')]
     private $updatedAt;
 
     #[ORM\ManyToOne(targetEntity: Author::class, inversedBy: 'books')]

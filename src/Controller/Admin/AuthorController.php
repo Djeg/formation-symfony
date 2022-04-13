@@ -30,7 +30,9 @@ class AuthorController extends AbstractController
 	public function create(Request $request, AuthorRepository $repository): Response
 	{
 		// Création d'un formulaire :
-		$form = $this->createForm(AuthorType::class, new Author());
+		$form = $this->createForm(AuthorType::class, new Author(), [
+			'handleDates' => false,
+		]);
 
 		// On remplie notre formulaire avec les données de request si il y en as
 		$form->handleRequest($request);
@@ -53,7 +55,9 @@ class AuthorController extends AbstractController
 	public function update(Author $author, Request $request, AuthorRepository $repository): Response
 	{
 		// Création d'un formulaire :
-		$form = $this->createForm(AuthorType::class, $author);
+		$form = $this->createForm(AuthorType::class, $author, [
+			'handleDates' => true,
+		]);
 
 		// On remplie notre formulaire avec les données de request si il y en as
 		$form->handleRequest($request);

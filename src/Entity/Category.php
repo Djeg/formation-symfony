@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation\Timestampable;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -17,9 +18,11 @@ class Category
     private $title;
 
     #[ORM\Column(type: 'datetime')]
+    #[Timestampable(on: 'create')]
     private $createdAt;
 
     #[ORM\Column(type: 'datetime')]
+    #[Timestampable(on: 'update')]
     private $updatedAt;
 
     public function getId(): ?int

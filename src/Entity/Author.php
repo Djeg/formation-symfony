@@ -6,6 +6,7 @@ use App\Repository\AuthorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation\Timestampable;
 
 #[ORM\Entity(repositoryClass: AuthorRepository::class)]
 class Author
@@ -22,9 +23,11 @@ class Author
     private $description;
 
     #[ORM\Column(type: 'datetime')]
+    #[Timestampable(on: 'create')]
     private $createdAt;
 
     #[ORM\Column(type: 'datetime')]
+    #[Timestampable(on: 'update')]
     private $updatedAt;
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Book::class, orphanRemoval: true)]
