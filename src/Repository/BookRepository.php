@@ -53,6 +53,7 @@ class BookRepository extends ServiceEntityRepository
     {
         return $this
             ->createQueryBuilder('book')
+            ->orderBy('book.price', 'ASC')
             ->andWhere('book.price >= :min')
             ->andWhere('book.price <= :max')
             ->setParameter('min', $minimum)

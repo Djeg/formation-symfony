@@ -79,4 +79,14 @@ class AuthorController extends AbstractController
 
 		return $this->redirectToRoute('app_admin_author_list');
 	}
+
+	#[Route('/admin/auteurs/par-nom/{name}', name: 'app_admin_author_listByName')]
+	public function listByName(AuthorRepository $repository, string $name): Response
+	{
+		$authors = $repository->findByName($name);
+
+		return $this->render('admin/author/listByName.html.twig', [
+			'authors' => $authors,
+		]);
+	}
 }
