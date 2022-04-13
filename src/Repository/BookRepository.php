@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\DTO\BookSearchCriteria;
 use App\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -90,5 +91,40 @@ class BookRepository extends ServiceEntityRepository
             ->orderBy('book.price', 'ASC')
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * Recherche tout les livres correspondant
+     * au critère de recherche
+     */
+    public function findByCriteria(BookSearchCriteria $criteria): array
+    {
+        $qb =  $this
+            ->createQueryBuilder('book')
+            ->setMaxResults($criteria->limit)
+            ->setFirstResult($criteria->limit * ($criteria->page - 1))
+            ->orderBy('book.' . $criteria->orderBy, 'DESC');
+
+        if ($criteria->title) {
+            $qb
+                ->andWhere('book.title like :title')
+                ->setParameter('title', "%{$criteria->title}%");
+        }
+
+        if ($criteria->authorName) {
+            $qb
+                ->leftJoin('book.author', 'author')
+                ->andWhere('author.name LIKE :authorName')
+                ->setParameter('authorName', "%{$criteria->authorName}%");
+        }
+
+        if ($criteria->categoryName) {
+            $qb
+                ->leftJoin('book.categories', 'category')
+                ->andWhere('category.title LIKE :categoryName')
+                ->setParameter('categoryName', "%{$criteria->categoryName}%");
+        }
+
+        return $qb->getQuery()->getResult();
     }
 }
