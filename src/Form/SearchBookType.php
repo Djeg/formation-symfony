@@ -48,12 +48,17 @@ class SearchBookType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => BookSearchCriteria::class,
+            // !!! POUR UN FORMULAIRE DE RECHERCHE UTILISEZ LA METHODE GET !!!
             'method' => 'GET',
+            // !!! POUR UN FORMULAIRE DE RECHERCHE PAS BESOIN DE TOKEN DE SECURITE !!!
             'csrf_protection' => false,
         ]);
     }
 
     /**
+     * !! ON DESACTIVE LE PREFIX
+     *
+     * 
      * Désactive le prefix du formulaire, permettant d'avoir
      * de belle urls.
      */
