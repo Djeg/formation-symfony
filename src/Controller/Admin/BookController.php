@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
+use App\DTO\BookSearchCriteria;
 use App\Entity\Book;
 use App\Form\BookType;
+use App\Form\SearchBookType;
 use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,11 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class BookController extends AbstractController
 {
-	#[Route('/admin/livres', name: 'app_admin_book_list', methods: ['GET'])]
+	#[Route('/admin/livres', name: 'app_admin_book_list', methods: ['GET', 'POST'])]
 	public function list(BookRepository $repository): Response
 	{
+		$form = $this->createForm(SearchBookType::class, new BookSearchCriteria());
+
 		return $this->render('admin/book/list.html.twig', [
 			'books' => $repository->findAll(),
+			'form' => $form->createView(),
 		]);
 	}
 

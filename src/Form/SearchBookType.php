@@ -17,12 +17,15 @@ class SearchBookType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'label' => 'Par titre :',
+                'required' => false,
             ])
             ->add('authorName', TextType::class, [
                 'label' => 'Par nom d\'auteur :',
+                'required' => false,
             ])
             ->add('categoryName', TextType::class, [
                 'label' => 'Par nom de catégorie :',
+                'required' => false,
             ])
             ->add('limit', IntegerType::class, [
                 'label' => 'Nombre de résultat :',
@@ -45,6 +48,16 @@ class SearchBookType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => BookSearchCriteria::class,
+            'method' => 'GET',
         ]);
+    }
+
+    /**
+     * Désactive le prefix du formulaire, permettant d'avoir
+     * de belle urls.
+     */
+    public function getBlockPrefix(): string
+    {
+        return '';
     }
 }

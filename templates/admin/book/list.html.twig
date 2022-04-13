@@ -14,34 +14,11 @@
 
 
 <h2>Rechercher</h2>
-<form>
-	<div>
-		<label>Par titre :</label>
-		<input type="text" name="title" id="title" />
-	</div>
-	<div>
-		<label>Par Auteur :</label>
-		<input type="text" name="author" id="author" />
-	</div>
-	<div>
-		<label>Par Category :</label>
-		<input type="text" name="category" id="category" />
-	</div>
-	<div>
-		<label>Nombre de résultat par page :</label>
-		<input type="text" name="limit" id="limit" value="15" />
-	</div>
-	<div>
-		<label>Page :</label>
-		<input type="text" name="page" id="page" value="1" />
-	</div>
-	<div>
-		<label>Trier par :</label>
-		<select name="sortBy">
-			<option value="price">Prix</option>
-		</select>
-	</div>
-</form>
+{{ form_start(form) }}
+	{{ form_rest(form) }}
+
+	<button type="submit">Rechercher</button>
+{{ form_end(form) }}
 
 <table>
 	<thead>
