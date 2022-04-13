@@ -19,13 +19,19 @@ class BookController extends AbstractController
 	#[Route('/admin/livres', name: 'app_admin_book_list', methods: ['GET'])]
 	public function list(BookRepository $repository, Request $request): Response
 	{
+		// On créé le formulaire de recherche
+		// ATTENTION à bien donné le DTO en second argument
 		$form = $this->createForm(SearchBookType::class, new BookSearchCriteria());
 
+		// On remplie le formulaire avec ce que l'utilisateur
+		// viens de spécifier
 		$form->handleRequest($request);
 
+		// On obtient le DTO du formulaire (BookSearchCriteria)
 		$searchCriteria = $form->getData();
 
 		return $this->render('admin/book/list.html.twig', [
+			// On lance la recherche graçe au repository
 			'books' => $repository->findByCriteria($searchCriteria),
 			'form' => $form->createView(),
 		]);
