@@ -20,13 +20,17 @@ class AuthorType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description :',
-            ])
-            ->add('createdAt', DateTimeType::class, [
-                'label' => 'Date de création :',
-            ])
-            ->add('updatedAt', DateTimeType::class, [
-                'label' => 'Date de mise à jour :',
             ]);
+
+        if ($options['handleDates']) {
+            $builder
+                ->add('createdAt', DateTimeType::class, [
+                    'label' => 'Date de création :',
+                ])
+                ->add('updatedAt', DateTimeType::class, [
+                    'label' => 'Date de mise à jour :',
+                ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
