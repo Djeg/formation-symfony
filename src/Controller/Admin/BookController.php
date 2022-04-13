@@ -85,4 +85,14 @@ class BookController extends AbstractController
 			'books' => $books,
 		]);
 	}
+
+	#[Route('/admin/livres/par-category/{categoryName}', name: 'app_admin_book_listByCategoryName')]
+	public function listByCategoryName(BookRepository $repository, string $categoryName): Response
+	{
+		$books = $repository->findByCategoryName($categoryName);
+
+		return $this->render('admin/book/listByCategoryName.html.twig', [
+			'books' => $books,
+		]);
+	}
 }

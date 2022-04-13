@@ -18,6 +18,13 @@ App\Entity\Author:
     createdAt: <dateTime()>
     updatedAt: <dateTime()>
 
+# Génération des catégories
+App\Entity\Category:
+  category{1..100}:
+    title: <fr_FR:catchPhrase()>
+    createdAt: <dateTime()>
+    updatedAt: <dateTime()>
+
 # Génération des livres
 App\Entity\Book:
   book1:
@@ -27,6 +34,7 @@ App\Entity\Book:
     createdAt: <dateTime()>
     updatedAt: <dateTime()>
     author: "@author*"
+    categories: "2x @category*"
   book{2..100}:
     title: <fr_FR:catchPhrase()>
     description: <fr_FR:realText()>
@@ -34,3 +42,4 @@ App\Entity\Book:
     createdAt: <dateTime()>
     updatedAt: <dateTime()>
     author: "@author*"
+    categories: "<numberBetween(2, 5)>x @category*"

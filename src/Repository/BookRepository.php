@@ -76,4 +76,19 @@ class BookRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * Recherche des livres par leurs catégorie
+     */
+    public function findByCategoryName(string $categoryName): array
+    {
+        return $this
+            ->createQueryBuilder('book')
+            ->leftJoin('book.categories', 'category')
+            ->andWhere('category.title LIKE :category')
+            ->setParameter('category', "%$categoryName%")
+            ->orderBy('book.price', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }
