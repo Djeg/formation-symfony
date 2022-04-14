@@ -84,7 +84,7 @@ class AuthorRepository extends ServiceEntityRepository
 
         if ($criterias->updatedAtStop) {
             $qb
-                ->andWhere('authir.updatedAt <= :end')
+                ->andWhere('author.updatedAt <= :end')
                 ->setParameter('end', $criterias->updatedAtStop);
         }
 

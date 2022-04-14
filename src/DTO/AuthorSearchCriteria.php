@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\DTO;
 
 use DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Contient tout les champs de recherche pour un auteur
@@ -19,6 +21,8 @@ class AuthorSearchCriteria
 	/**
 	 * Contient la limite des résultats
 	 */
+	#[Assert\Positive()]
+	#[Assert\GreaterThanOrEqual(10)]
 	public int $limit = 15;
 
 	/**

@@ -24,7 +24,13 @@ class AuthorController extends AbstractController
 
 		$form->handleRequest($request);
 
-		$authors = $repository->findByCriteria($form->getData());
+		if ($form->isSubmitted() && $form->isValid()) {
+			$criteria = $form->getData();
+		} else {
+			$criteria = new AuthorSearchCriteria();
+		}
+
+		$authors = $repository->findByCriteria($criteria);
 
 		return $this->render('admin/author/list.html.twig', [
 			'authors' => $authors,

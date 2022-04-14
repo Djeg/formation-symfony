@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\DTO\AuthorSearchCriteria;
+use DateTime;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -22,29 +23,33 @@ class SearchAuthorType extends AbstractType
             ])
             ->add('limit', IntegerType::class, [
                 'label' => 'Nombre de résultat par page :',
-                'required' => true,
+                'required' => false,
+                'empty_data' => '15',
             ])
             ->add('page', IntegerType::class, [
                 'label' => 'Page :',
-                'required' => true,
+                'required' => false,
+                'empty_data' => '1',
             ])
             ->add('orderBy', ChoiceType::class, [
                 'label' => 'Trier par :',
-                'required' => true,
+                'required' => false,
                 'choices' => [
                     'Identifiant' => 'id',
                     'Nom' => 'name',
                     'Date de création' => 'createdAt',
                     'Date de mise à jour' => 'updatedAt',
                 ],
+                'empty_data' => 'id',
             ])
             ->add('direction', ChoiceType::class, [
                 'label' => 'Sens du trie :',
-                'required' => true,
+                'required' => false,
                 'choices' => [
                     'Croissant' => 'ASC',
                     'Décroissant' => 'DESC',
                 ],
+                'empty_data' => 'ASC',
             ])
             ->add('updatedAtStart', DateTimeType::class, [
                 'label' => 'Mise à jour à partie de :',
