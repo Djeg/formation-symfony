@@ -7,6 +7,13 @@
 	<a href="{{ path('app_admin_author_create') }}">Créer un auteur</a>
 </p>
 
+<h2>Rechercher</h2>
+{{ form_start(form) }}
+	{{ form_rest(form) }}
+
+	<button type="submit">Rechercher</button>
+{{ form_end(form) }}
+
 {# Test si nous avons des auteurs #}
 {% if authors is empty %}
 	<p>Il n'y a pas encore d'auteurs</p>

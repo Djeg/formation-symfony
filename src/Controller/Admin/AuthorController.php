@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
+use App\DTO\AuthorSearchCriteria;
 use App\Entity\Author;
 use App\Form\AuthorType;
+use App\Form\SearchAuthorType;
 use App\Repository\AuthorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,13 +18,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AuthorController extends AbstractController
 {
 	#[Route('/admin/auteurs', name: 'app_admin_author_list', methods: ['GET'])]
-	public function list(AuthorRepository $repository): Response
+	public function list(AuthorRepository $repository, Request $request): Response
 	{
-		// Récupération de tout les auteurs
-		$authors = $repository->findAll();
+		$form = $this->createForm(SearchAuthorType::class, new AuthorSearchCriteria());
+
+		$form->handleRequest($request);
+
+		$authors = $repository->findByCriteria($form->getData());
 
 		return $this->render('admin/author/list.html.twig', [
 			'authors' => $authors,
+			'form' => $form->createView(),
 		]);
 	}
 

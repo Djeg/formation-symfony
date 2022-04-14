@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\DTO\AuthorSearchCriteria;
 use App\Entity\Author;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -58,5 +59,35 @@ class AuthorRepository extends ServiceEntityRepository
             ->orderBy('author.name', 'DESC')
             ->getQuery()
             ->getResult();
+    }
+
+    public function findByCriteria(AuthorSearchCriteria $criterias): array
+    {
+        $qb = $this
+            ->createQueryBuilder('author')
+            ->setMaxResults($criterias->limit)
+            ->setFirstResult($criterias->limit * ($criterias->page - 1))
+            //->orderBy("author.{$criterias->orderBy}", $criterias->direction);
+            ->orderBy("author.$criterias->orderBy", $criterias->direction);
+
+        if ($criterias->name) {
+            $qb
+                ->andWhere('author.name LIKE :name')
+                ->setParameter('name', "%$criterias->name%");
+        }
+
+        if ($criterias->updatedAtStart) {
+            $qb
+                ->andWhere('author.updatedAt >= :start')
+                ->setParameter('start', $criterias->updatedAtStart);
+        }
+
+        if ($criterias->updatedAtStop) {
+            $qb
+                ->andWhere('authir.updatedAt <= :end')
+                ->setParameter('end', $criterias->updatedAtStop);
+        }
+
+        return $qb->getQuery()->getResult();
     }
 }
