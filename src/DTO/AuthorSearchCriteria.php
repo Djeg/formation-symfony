@@ -21,8 +21,8 @@ class AuthorSearchCriteria
 	/**
 	 * Contient la limite des résultats
 	 */
-	#[Assert\Positive()]
-	#[Assert\GreaterThanOrEqual(10)]
+	#[Assert\Positive(message: 'La limite doit être positive')]
+	#[Assert\GreaterThanOrEqual(10, message: 'La limite doit être supérieur à {{ compared_value }}')]
 	public int $limit = 15;
 
 	/**
