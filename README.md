@@ -25,6 +25,7 @@ Vous retrouverez les slides de la formation juste [ici](https://slides.com/david
 - [exos de révision](./doc/exos-revision.md)
 - [exos fixtures](./doc/exos-fixtures.md)
 - [exos repository](./doc/exos-repository.md)
+- [exos api](./doc/exos-api.md)
 
 ## L'ordre de dévelopement
 
