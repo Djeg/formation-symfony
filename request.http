@@ -56,3 +56,37 @@ Content-Type: application/json
 ###
 
 DELETE http://127.0.0.1:8001/api/auteurs/53
+
+###
+
+GET http://127.0.0.1:8001/api/livres?limit=2
+
+###
+
+POST http://127.0.0.1:8001/api/livres
+Content-Type: application/json
+
+{
+	"title": "Harry potter",
+	"description": "Description",
+	"price": 9.55,
+	"author": 52,
+	"categories": [3, 4]
+}
+
+###
+
+GET http://127.0.0.1:8001/api/livres/101
+
+###
+
+PATCH http://127.0.0.1:8001/api/livres/101
+Content-Type: application/json
+
+{
+	"title": "Nouveau titre"
+}
+
+###
+
+DELETE http://127.0.0.1:8001/api/livres/101

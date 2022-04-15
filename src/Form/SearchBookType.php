@@ -29,12 +29,18 @@ class SearchBookType extends AbstractType
             ])
             ->add('limit', IntegerType::class, [
                 'label' => 'Nombre de résultat :',
+                'required' => false,
+                'empty_data' => '10',
             ])
             ->add('page', IntegerType::class, [
                 'label' => 'Page :',
+                'required' => false,
+                'empty_data' => '1',
             ])
             ->add('orderBy', ChoiceType::class, [
                 'label' => 'Trier par :',
+                'required' => false,
+                'empty_data' => 'id',
                 'choices' => [
                     'prix' => 'price',
                     'identifiant' => 'id',
