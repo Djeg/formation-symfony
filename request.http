@@ -12,3 +12,12 @@ Content-Type: application/json
 ###
 
 GET http://127.0.0.1:8001/api/categories/4
+
+###
+
+PUT http://127.0.0.1:8001/api/categories/4
+Content-Type: application/json
+
+{
+	"title": "Nouveau titre"
+}

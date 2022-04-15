@@ -49,4 +49,30 @@ class CategoryController extends AbstractController
 	{
 		return $this->json($category);
 	}
+
+	#[Route('/api/categories/{id}', name: 'app_api_category_update', methods: ['PUT', 'PATCH'])]
+	public function update(
+		Category $category,
+		CategoryRepository $repository,
+		Request $request,
+	): Response {
+		// Création du formulaire
+		$form = $this->createForm(CategoryType::class, $category, [
+			'method' => $request->getMethod(),
+		]);
+
+		// On remplie le formulaire
+		$form->handleRequest($request);
+
+		// On test si le formulaire à une erreur
+		if (!$form->isSubmitted() || !$form->isValid()) {
+			return $this->json($form->getErrors(true), 400);
+		}
+
+		// On enregistre la catégorie
+		$repository->add($form->getData());
+
+		// On affiche la catégorie en JSON
+		return $this->json($form->getData());
+	}
 }
