@@ -18,4 +18,9 @@ class CategoryController extends AbstractController
 
 		return $this->json($categories);
 	}
+
+	#[Route('/api/categories', name: 'app_api_category_create', methods: ['POST'])]
+	public function create(): Response
+	{
+	}
 }

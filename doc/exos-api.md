@@ -119,3 +119,23 @@ GET http://xxx.com/books?orderBy=+prix&authorId=54 (OK)
 ```
 GET http://xxx.com/api/categories
 ```
+
+1. Récupérer toutes les catégories
+
+GET http://xxx.com/api/categories
+
+2. Créer une catégorie
+
+POST http://xxx.com/api/categories
+
+3. Récupérer une seule catégorie par son id
+
+GET http://xxx.com/api/categories/2
+
+4. Mettre à jour une catégorie
+
+PUT/PATCH http://xxx.com/api/categories/2
+
+5. Supprimer une catégorie
+
+DELETE http://xxx.com/api/categories/2
