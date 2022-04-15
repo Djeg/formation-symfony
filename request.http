@@ -3,3 +3,4 @@ GET http://127.0.0.1:8001/api/categories
 ###
 
 POST http://127.0.0.1:8001/api/categories
+Content-Type: application/json

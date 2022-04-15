@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller\API;
 
+use App\Form\API\CategoryType;
 use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -20,7 +22,24 @@ class CategoryController extends AbstractController
 	}
 
 	#[Route('/api/categories', name: 'app_api_category_create', methods: ['POST'])]
-	public function create(): Response
+	public function create(Request $request, CategoryRepository $repository): Response
 	{
+		// Création du formulaire
+		$form = $this->createForm(CategoryType::class);
+
+		// On remplie le formulaire
+		$form->handleRequest($request);
+
+		// On test si le formulaire à un problème
+		if (!$form->isSubmitted() || !$form->isValid()) {
+			// Ici on affiche l'erreur
+			return $this->json('erreur');
+		}
+
+		// On enregistre la category en base de données
+		$repository->add($form->getData());
+
+		// On affiche la catégory en json
+		return $this->json($form->getData());
 	}
 }
