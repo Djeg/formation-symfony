@@ -8,7 +8,7 @@ namespace App\DTO;
  * Cette class contient tout les champs de recherche
  * disponible afin de rechercher de livres.
  */
-class BookSearchCriteria
+class BookSearchCriteria implements SearchCriteria
 {
 	/**
 	 * Contient la recherche par titre
@@ -42,4 +42,14 @@ class BookSearchCriteria
 	 * Contient le champ du trie
 	 */
 	public string $orderBy = 'price';
+
+	public function getLimit(): int
+	{
+		return $this->limit;
+	}
+
+	public function getPage(): int
+	{
+		return $this->page;
+	}
 }

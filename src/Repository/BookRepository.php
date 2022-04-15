@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\DTO\BookSearchCriteria;
+use App\DTO\SearchCriteria;
 use App\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -15,7 +16,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Book[]    findAll()
  * @method Book[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class BookRepository extends ServiceEntityRepository
+class BookRepository extends ServiceEntityRepository implements SearchableRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -97,7 +98,7 @@ class BookRepository extends ServiceEntityRepository
      * Recherche tout les livres correspondant
      * au critère de recherche
      */
-    public function findByCriteria(BookSearchCriteria $criteria): array
+    public function findByCriteria(SearchCriteria $criteria): array
     {
         $qb =  $this
             ->createQueryBuilder('book')

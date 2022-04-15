@@ -14,22 +14,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AuthorController extends AbstractController
+class AuthorController extends BaseController
 {
 	#[Route('/api/auteurs', name: 'app_api_author_list', methods: ['GET'])]
 	public function list(AuthorRepository $repository, Request $request): Response
 	{
-		$form = $this->createForm(SearchAuthorType::class, new AuthorSearchCriteria());
-
-		$form->handleRequest($request);
-
-		$criterias = $form->isSubmitted() && $form->isValid()
-			? $form->getData()
-			: new AuthorSearchCriteria();
-
-		$authors = $repository->findByCriteria($criterias);
-
-		return $this->json($authors);
+		return $this->listEntities(
+			SearchAuthorType::class,
+			new AuthorSearchCriteria(),
+			$repository,
+		);
 	}
 
 	#[Route('/api/auteurs', name: 'app_api_author_create', methods: ['POST'])]

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\DTO\AuthorSearchCriteria;
+use App\DTO\SearchCriteria;
 use App\Entity\Author;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -15,7 +16,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Author[]    findAll()
  * @method Author[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AuthorRepository extends ServiceEntityRepository
+class AuthorRepository extends ServiceEntityRepository implements SearchableRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -61,7 +62,7 @@ class AuthorRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findByCriteria(AuthorSearchCriteria $criterias): array
+    public function findByCriteria(SearchCriteria $criterias): array
     {
         $qb = $this
             ->createQueryBuilder('author')

@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Contient tout les champs de recherche pour un auteur
  */
-class AuthorSearchCriteria
+class AuthorSearchCriteria implements SearchCriteria
 {
 	/**
 	 * Contient la recherche par nom
@@ -48,4 +48,14 @@ class AuthorSearchCriteria
 	 * Contient la date de fin
 	 */
 	public ?DateTime $updatedAtStop = null;
+
+	public function getLimit(): int
+	{
+		return $this->limit;
+	}
+
+	public function getPage(): int
+	{
+		return $this->page;
+	}
 }

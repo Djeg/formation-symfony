@@ -14,22 +14,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class BookController extends AbstractController
+class BookController extends BaseController
 {
 	#[Route('/api/livres', name: 'app_api_book_list', methods: ['GET'])]
 	public function list(BookRepository $repository, Request $request): Response
 	{
-		$form = $this->createForm(SearchBookType::class, new BookSearchCriteria());
-
-		$form->handleRequest($request);
-
-		$criterias = $form->isSubmitted() && $form->isValid()
-			? $form->getData()
-			: new BookSearchCriteria();
-
-		$books = $repository->findByCriteria($criterias);
-
-		return $this->json($books);
+		return $this->listEntities(
+			SearchBookType::class,
+			new BookSearchCriteria(),
+			$repository,
+		);
 	}
 
 	#[Route('/api/livres', name: 'app_api_book_create', methods: ['POST'])]
