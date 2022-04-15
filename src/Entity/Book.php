@@ -40,8 +40,6 @@ class Book
     #[ORM\ManyToMany(targetEntity: Category::class)]
     private $categories;
 
-    private $page;
-
     public function __construct()
     {
         $this->categories = new ArrayCollection();

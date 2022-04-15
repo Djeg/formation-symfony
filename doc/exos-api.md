@@ -120,22 +120,54 @@ GET http://xxx.com/books?orderBy=+prix&authorId=54 (OK)
 GET http://xxx.com/api/categories
 ```
 
-1. Récupérer toutes les catégories
+## Api pour les auteurs
 
-GET http://xxx.com/api/categories
+### 1. Lister tout les auteurs
 
-2. Créer une catégorie
+Créez un controller `API\AuthorController`. Ajouter une
+méthode "list" avec le route : `GET /api/authors`.
 
-POST http://xxx.com/api/categories
+Retourner en json tout les auteurs
 
-3. Récupérer une seule catégorie par son id
+### 2. Créer un nouvel auteur
 
-GET http://xxx.com/api/categories/2
+Créez un formulaire d'api `AuthorType`. Ajouter une
+méthode "create" au controller `AuthorController` de l'api
+avec la route : `POST /api/auteurs`
 
-4. Mettre à jour une catégorie
+Valider le formulaire et retourner l'auteur créé en JSON
 
-PUT/PATCH http://xxx.com/api/categories/2
+### 3. Afficher un auteur
 
-5. Supprimer une catégorie
+Dans le controller `AuthorController`; ajouter une méthode
+`get` avec la route suivante : `GET /api/authors/{id}`.
 
-DELETE http://xxx.com/api/categories/2
+Retourner l'auteur en JSON
+
+### 4. Modifier un auteur
+
+Dans le controller `AuthorController`; ajouter une méthode
+`update` avec la route suivante : `PATCH /api/authors/{id}`.
+
+Mettre à jour et retourner l'auteur en JSON
+
+### 5. Supprimer un auteur
+
+Dans le controller `AuthorController`; ajouter une méthode
+`delete` avec la route suivante : `DELETE /api/authors/{id}`.
+
+Supprimer l'auteur et le retourner en JSON
+
+## Api pour les livres
+
+Répéter les mêmes opération que pour les auteurs
+
+### 1. Lister tout les livres
+
+### 2. Créer un nouvel livre
+
+### 3. Afficher un livre
+
+### 4. Modifier un livre
+
+### 5. Supprimer un livre
