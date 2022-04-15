@@ -6,5 +6,9 @@ POST http://127.0.0.1:8001/api/categories
 Content-Type: application/json
 
 {
-	"title": "Test category"
+	"title": "Test"
 }
+
+###
+
+GET http://127.0.0.1:8001/api/categories/4

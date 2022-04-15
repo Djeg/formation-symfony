@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\API;
 
+use App\Entity\Category;
 use App\Form\API\CategoryType;
 use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,13 +34,19 @@ class CategoryController extends AbstractController
 		// On test si le formulaire à un problème
 		if (!$form->isSubmitted() || !$form->isValid()) {
 			// Ici on affiche l'erreur
-			return $this->json('erreur');
+			return $this->json($form->getErrors(true), 400);
 		}
 
 		// On enregistre la category en base de données
 		$repository->add($form->getData());
 
 		// On affiche la catégory en json
-		return $this->json($form->getData());
+		return $this->json($form->getData(), 201);
+	}
+
+	#[Route('/api/categories/{id}', name: 'app_api_category_get', methods: ['GET'])]
+	public function get(Category $category): Response
+	{
+		return $this->json($category);
 	}
 }
