@@ -75,4 +75,12 @@ class CategoryController extends AbstractController
 		// On affiche la catégorie en JSON
 		return $this->json($form->getData());
 	}
+
+	#[Route('/api/categories/{id}', name: 'app_api_category_delete', methods: ['DELETE'])]
+	public function delete(Category $category, CategoryRepository $repository): Response
+	{
+		$repository->remove($category);
+
+		return $this->json($category);
+	}
 }
