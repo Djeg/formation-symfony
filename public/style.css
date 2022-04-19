@@ -1,0 +1,53 @@
+/*
+SECTION GENERALE
+================
+Contient le design de toutes les balises "nu",
+sans class. Contient les variables css.
+*/
+:root {
+  --base-font-size: 14px;
+  --color-white: #EFEFEF;
+  --color-black: #363636;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: var(--base-font-size);
+}
+h1 {
+  font-family: 'Lobster', sans-serif;
+  font-size: 2rem;
+}
+h2, h3, h4, h5, h6 {
+  font-family: 'Outfit';
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100%;
+}
+.content-center {
+  width: 1024px;
+}
+footer {
+  min-height: 400px;
+  width: 100%;
+  background-color: var(--color-black);
+}
+
+/*
+HERO UNIT
+=========
+En tête de la page d'accueil
+*/
+.hero {
+  min-height: 400px; 
+  background-color: var(--color-black);
+  box-sizing: border-box;
+}
+.hero-container {
+  display: flex;
+}
