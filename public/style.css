@@ -32,10 +32,79 @@ h2, h3, h4, h5, h6 {
 .content-center {
   width: 1024px;
 }
+
+/*
+FOOTER
+======
+Contient le design du pied de page
+*/
 footer {
   min-height: 400px;
   width: 100%;
   background-color: var(--color-black);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+footer .content-center {
+  flex-direction: row;
+  display: flex;
+}
+footer .logo {
+  display: flex;
+  align-items: center;
+}
+footer .logo p {
+  font-size: 3rem;
+  font-family: 'Lobster', sans-serif;
+  color: var(--color-white);
+  margin-right: 2rem;
+}
+footer .menu {
+  display: flex;
+  flex-direction: column;
+}
+footer .menu h3 {
+  color: var(--color-white);
+}
+footer .menu a {
+  display: flex;
+  color: var(--color-white);
+  text-decoration: none;
+  margin-bottom: .6rem;
+  font-weight: bold;
+}
+
+/*
+HEADER
+======
+Bar de navigation du haut de page
+*/
+.header {
+  width: 100%;
+  min-height: 80px;
+  background-color: rgba(54, 54, 54, 0.7);
+  backdrop-filter: blur(5px);
+  position: fixed;
+  top: 0;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: space-between;
+  z-index: 10;
+}
+.header > div {
+  display: flex;
+}
+.header a {
+  display: flex;
+  margin: .6rem 1rem;
+  font-size: 1.7rem;
+  color: var(--color-white);
+  cursor: pointer;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
 }
 
 /*
@@ -44,10 +113,141 @@ HERO UNIT
 En tête de la page d'accueil
 */
 .hero {
-  min-height: 400px; 
+  min-height: 600px; 
   background-color: var(--color-black);
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  z-index: -2;
 }
 .hero-container {
   display: flex;
+  position: relative; 
+  flex-direction: column;
+  justify-content: center;
+  z-index: 0;
+}
+.hero-container h1 {
+  text-align: center;
+  color: var(--color-white);
+  font-size: 6rem;
+  margin: 1.6rem 0rem;
+}
+.hero-container .subtitle {
+  text-align: center;
+  color: var(--color-white);
+  font-size: 1.4rem;
+}
+.hero .img-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  object-fit: cover;
+  filter: blur(5px);
+}
+.hero .img-container .black-frame {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.hero .img-container img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/*
+PIZZA THUMB
+===========
+Design d'une carte de pizza
+*/
+.pizza-thumb {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  padding: 0rem .6rem;
+  overflow: hidden;
+  margin-bottom: 1.4rem;
+}
+.pizza-thumb-header {
+  text-align: center;
+  font-size: 3rem;
+  font-family: 'Lobster', sans-serif;
+  color: var(--color-white);
+  margin-bottom: 1rem;
+}
+.pizza-thumb-body {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--color-white);
+}
+.pizza-thumb-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 8rem;
+  align-items: center;
+}
+.pizza-thumb-footer .price {
+  font-family: 'Lobster', sans-serif;
+  font-size: 3rem;
+  color: var(--color-white);
+}
+.pizza-thumb-img {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  filter: blur(2px);
+}
+.pizza-thumb-img .black-frame {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.pizza-thumb-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/*
+BUTTONS
+=======
+Design des boutons
+*/
+.btn {
+  display: flex;
+  border-radius: 5px;
+  background-color: rgba(206, 249, 208, 0.72);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  color: var(--color-black);
+  padding: 1.6rem;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  align-items: center;
+} 
+.btn i {
+  display: flex;
+  font-size: 2.2rem;
+  margin-right: 1rem;
+}
+.btn span {
+  display: flex;
+  font-weight: 600;
+  font-size: 1.2rem;
 }

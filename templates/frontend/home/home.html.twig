@@ -1,31 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-
-<div class="hero">
-  <div class="hero-container">
-    <header class="header"></header>
-    <h1>PizzaShop</h1>
-    <p class="subtitle">Vos meilleurs pizza à porté de click !</p>
-  </div> 
-</div>
-
-<div class="content">
-
-  <div class="content-center">
-    <h1>Nos Pizzas</h1>
-
-    {% for pizza in pizzas %}
-
-      <div class="pizza-thumb">
-        {{  pizza.title }}
-      </div>
-
-    {% endfor %}
+{% block hero %}
+  <div class="hero">
+    <div class="hero-container">
+      <h1>PizzaShop</h1>
+      <p class="subtitle">Vos meilleurs pizza à porté de click !</p>
+    </div> 
+    <div class="img-container">
+      <div class="black-frame"></div>
+      <img src="https://cdn.pixabay.com/photo/2020/03/21/02/26/pizza-4952508_960_720.jpg" />
+    </div>
   </div>
+{% endblock %}
 
-</div>
+{% block content %}
+  <h1>Nos Pizzas</h1>
 
-<footer></footer>
+  {% for pizza in pizzas %}
 
+    <div class="pizza-thumb">
+      <p class="pizza-thumb-header">
+        {{ pizza.title }}
+      </p>
+      <p class="pizza-thumb-body">
+        {{ pizza.description }}
+      </p>
+      <div class="pizza-thumb-footer">
+        <p class="price">
+          {{ pizza.price}}&nbsp;€
+        </p>
+        <bouton class="btn">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span>Ajouter au panier</span>
+        </bouton>
+      </div>
+      <div class="pizza-thumb-img">
+        <div class="black-frame"></div>
+        <img src="{{ pizza.image }}" alt="{{ pizza.title }}" />
+      </div>
+    </div>
+
+  {% endfor %}
 {% endblock %}
