@@ -7,6 +7,7 @@ namespace App\Controller\Frontend;
 use App\Entity\User;
 use App\Form\RegistrationType;
 use App\Repository\UserRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,6 +43,34 @@ class UserController extends AbstractController
         }
 
         return $this->render('frontend/user/registration.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/mon-profil', name: 'app_frontend_user_profile', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
+    public function profile(Request $request, UserRepository $repository, UserPasswordHasherInterface $hasher): Response
+    {
+        // Création du formulaire d'inscription
+        $form = $this->createForm(RegistrationType::class, $this->getUser());
+
+        // On remplie le formulaire avec les données
+        // que l'utilisateur à spécifié
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var User */
+            $user = $form->getData();
+
+            if ($form->get('password')->getData()) {
+                $user->setPassword($hasher->hashPassword($user, $form->get('password')->getData()));
+            }
+            // On crypte le mot de passe de l'utilisateur
+
+            $repository->add($user);
+        }
+
+        return $this->render('frontend/user/profile.html.twig', [
             'form' => $form->createView(),
         ]);
     }
