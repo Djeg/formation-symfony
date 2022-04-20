@@ -28,6 +28,10 @@ h2, h3, h4, h5, h6 {
   flex-direction: column;
   align-items: center;
   min-width: 100%;
+  margin-top: 90px;
+}
+.content.no-margin {
+  margin-top: 0;
 }
 .content-center {
   width: 1024px;

@@ -10,3 +10,30 @@ App\Entity\Pizza:
     description: <fr_FR:realText()>
     price: <randomFloat(2, 8, 19)>
     image: <randomElement(['https://cdn.pixabay.com/photo/2017/09/30/15/10/plate-2802332_960_720.jpg', 'https://cdn.pixabay.com/photo/2017/12/10/14/47/pizza-3010062_960_720.jpg', 'https://cdn.pixabay.com/photo/2016/11/29/13/02/cheese-1869708_960_720.jpg', 'https://cdn.pixabay.com/photo/2020/04/29/03/30/pizza-5107039_960_720.jpg'])>
+
+# Génération des utilisateurs
+App\Entity\User:
+  user_admin:
+    email: admin@pizza-shop.com
+    roles: ["ROLE_ADMIN"]
+    firstname: admin
+    lastname: admin
+    # Le mot de passe doit être crypté !!!
+    # Ici le mot de passe est admin
+    password: \$2y\$13\$eR61MJwRaGCtQ3eb83IjWurJGouaOM57enISktrnQdki3VidQFlFu
+    phone: 0606060606
+    city: Paris
+    street: 2 avenue du port
+    zipCode: 75001
+  user_user:
+    email: user@pizza-shop.com
+    firstname: John
+    lastname: Doe
+    roles: ["ROLE_USER"]
+    # Le mot de passe doit être crypté !!!
+    # Ici le mot de passe est userc
+    password: \$2y\$13\$NR7FR73JgQWHwTk9ZD/mouzcf939H8ujXrA6HIg.FsahisOIh7fFu
+    phone: 0606060606
+    city: Paris
+    street: 2 avenue du port
+    zipCode: 75001
