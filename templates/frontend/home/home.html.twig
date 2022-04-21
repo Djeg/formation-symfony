@@ -31,10 +31,10 @@
         <p class="price">
           {{ pizza.price}}&nbsp;€
         </p>
-        <bouton class="btn">
+        <a class="btn" href="{{ path('app_frontend_cart_add', {id: pizza.id}) }}">
           <i class="fa-solid fa-cart-shopping"></i>
           <span>Ajouter au panier</span>
-        </bouton>
+        </a>
       </div>
       <div class="pizza-thumb-img">
         <div class="black-frame"></div>

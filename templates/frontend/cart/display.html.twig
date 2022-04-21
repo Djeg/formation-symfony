@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+  <h1>Mon Panier</h1>
+
+  {% for item in app.user.cart.items %}
+
+    <div class="pizza-thumb">
+      <p class="pizza-thumb-header">
+        {{ item.pizza.title }}
+      </p>
+      <p class="pizza-thumb-body">
+        {{ item.pizza.description }}
+      </p>
+      <div class="pizza-thumb-footer">
+        <a class="btn" href="{{ path('app_frontend_cart_decrement', {id: item.id}) }}">
+          <i class="fa-solid fa-circle-minus"></i>
+        </a>
+        <p class="price">
+          {{ item.quantity }}
+        </p>
+        <a class="btn" href="{{ path('app_frontend_cart_increment', {id: item.id}) }}">
+          <i class="fa-solid fa-circle-plus"></i>
+        </a>
+      </div>
+      <div class="pizza-thumb-footer">
+        <p class="price">
+          {{ item.total }}&nbsp;€
+        </p>
+        <a class="btn" href="{{ path('app_frontend_cart_remove', {id: item.id}) }}">
+          <i class="fa-solid fa-trash"></i>
+        </a>
+      </div>
+      <div class="pizza-thumb-img">
+        <div class="black-frame"></div>
+        <img src="{{ item.pizza.image }}" alt="{{ item.pizza.title }}" />
+      </div>
+    </div>
+
+  {% endfor %}
+
+  <h2>Total : {{ app.user.cart.total }} €</h2>
+{% endblock %}

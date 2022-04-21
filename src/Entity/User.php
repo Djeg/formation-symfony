@@ -45,6 +45,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $supplement;
 
+    #[ORM\OneToOne(mappedBy: 'user', targetEntity: Cart::class, cascade: ['persist', 'remove'])]
+    private $cart;
+
+    public function __construct()
+    {
+        $this->cart = new Cart();
+        $this->cart->setUser($this);
+        $this->roles = ['ROLE_USER'];
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -195,6 +205,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setSupplement(?string $supplement): self
     {
         $this->supplement = $supplement;
+
+        return $this;
+    }
+
+    public function getCart(): ?Cart
+    {
+        return $this->cart;
+    }
+
+    public function setCart(Cart $cart): self
+    {
+        // set the owning side of the relation if necessary
+        if ($cart->getUser() !== $this) {
+            $cart->setUser($this);
+        }
+
+        $this->cart = $cart;
 
         return $this;
     }

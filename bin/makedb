@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+symfony console doctrine:database:drop --force || true
+symfony console doctrine:database:create
+symfony console doctrine:schema:update --force
+symfony console hautelook:fixtures:load -n
