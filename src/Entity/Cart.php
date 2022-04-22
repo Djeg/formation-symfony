@@ -19,7 +19,7 @@ class Cart
     #[ORM\JoinColumn(nullable: false)]
     private $user;
 
-    #[ORM\OneToMany(mappedBy: 'cart', targetEntity: Item::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(mappedBy: 'cart', targetEntity: Item::class, cascade: ['persist'])]
     private $items;
 
     public function __construct()

@@ -21,7 +21,6 @@ class Item
     private $pizza;
 
     #[ORM\ManyToOne(targetEntity: Cart::class, inversedBy: 'items')]
-    #[ORM\JoinColumn(nullable: false)]
     private $cart;
 
     #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: 'items')]
