@@ -5,6 +5,8 @@ de commerce simple : Une pizzeria.
 
 Vous retrouverez l'intégralité du design de l'application [ici](https://www.figma.com/file/UTthEDYvWiqKHjANXyYK6O/PizzaShop?node-id=0%3A1).
 
+L'application est disponible sur l'url suivante : https://dry-scrubland-24235.herokuapp.com/
+
 ## Intructions d'installation
 
 1. [Télécharger](https://github.com/Djeg/formation-symfony/archive/refs/heads/session-projet/19-04-22.22-04-22.zip) ou cloner le projet
