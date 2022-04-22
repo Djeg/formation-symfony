@@ -74,7 +74,7 @@ class Cart
         return $this;
     }
 
-    public function getTotal(): int
+    public function getTotal(): float
     {
         $total = 0;
 

@@ -248,10 +248,10 @@ Design des boutons
 .btn i {
   display: flex;
   font-size: 2.2rem;
-  margin-right: 1rem;
 }
 .btn span {
   display: flex;
   font-weight: 600;
   font-size: 1.2rem;
+  margin-left: 1rem;
 }

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+  <h1>Passez la commande</h1>
+
+  {% for item in app.user.cart.items %}
+    <p>{{ item.quantity }} pizza(s) {{ item.pizza.title }}. Total : {{ item.total }} €</p>
+  {% endfor %}
+
+  <h2>Vos Coordonnées</h2>
+
+  {{ form_start(form) }}
+    {{ form_rest(form) }}
+
+    <h3>Total : {{ app.user.cart.total }} €</h3>
+    <button type="submit" class="btn">
+      <i class="fa-solid fa-credit-card"></i>
+      <span>Payez</span>
+    </button>
+
+  {{ form_end(form) }}
+{% endblock %}

@@ -24,6 +24,9 @@ class Item
     #[ORM\JoinColumn(nullable: false)]
     private $cart;
 
+    #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: 'items')]
+    private $purchaseOrder;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -65,8 +68,34 @@ class Item
         return $this;
     }
 
-    public function getTotal(): int
+    public function getTotal(): float
     {
         return $this->pizza->getPrice() * $this->quantity;
+    }
+
+    public function getPurchaseOrder(): ?Order
+    {
+        return $this->purchaseOrder;
+    }
+
+    public function setPurchaseOrder(?Order $purchaseOrder): self
+    {
+        $this->purchaseOrder = $purchaseOrder;
+
+        return $this;
+    }
+
+    public function getStripeLineItem(): array
+    {
+        return [
+            'quantity' => $this->quantity,
+            'price_data' => [
+                'currency' => 'eur',
+                'product_data' => [
+                    'name' => $this->pizza->getTitle(),
+                ],
+                'unit_amount' => $this->pizza->getPrice() * 100,
+            ],
+        ];
     }
 }
