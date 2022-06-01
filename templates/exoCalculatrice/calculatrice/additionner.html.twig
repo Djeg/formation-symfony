@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    calculatrice : {% block operation_title %}addition{% endblock %}
+{% endblock %}
+
+
+{% block body %}
+    <nav>
+        <a href="{{ path('app_exoCalculatrice_calculatrice_additionner', {x: x, y: y}) }}">Addition</a>
+        <a href="{{ path('app_exoCalculatrice_calculatrice_soustraction', {x: x, y: y}) }}">Soustraction</a>
+        <a href="{{ path('app_exoCalculatrice_calculatrice_multiplication', {x: x, y: y}) }}">Multiplication</a>
+        <a href="{{ path('app_exoCalculatrice_calculatrice_division', {x: x, y: y}) }}">Division</a>
+    </nav>
+
+    <h1>calculatrice : {{ block('operation_title') }}</h1>
+    <p>le résultat de {{ x }} {% block operation %}+{% endblock %} {{ y }} = {{ result }}</p>
+{% endblock %}
