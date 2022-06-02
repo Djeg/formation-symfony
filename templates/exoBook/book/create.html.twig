@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <form method="POST">
+        <div>
+            <label for="title">Titre du livre</label>
+            <input type="text" name="title" id="title" />
+        </div>
+        <div>
+            <label for="price">Prix du livre</label>
+            <input type="money" name="price" id="price" />
+        </div>
+        <div>
+            <button type="submit">Envoyer</button>
+        </div>
+    </form>
+{% endblock %}

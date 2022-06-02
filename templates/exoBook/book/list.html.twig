@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{# Afficher le titre et le prix des livres dans une balise ul / li #}
+<ul>
+    {% for book in books %}
+        <li> {{ book.title }} : {{ book.price }} €</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
