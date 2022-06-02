@@ -13,7 +13,7 @@ Cette série d'éxercices nescessite des prérequis :
     ```
                       username  password           nom de la base
                            |    |                        |
-    DATABASE_URL="mysql://root:root@127.0.0.1:5050/formation-sf6"
+    DATABASE_URL="mysql://root:root@127.0.0.1:3306/formation-sf6"
     ```
 
 2. Créez votre base de données en utilisant la commande symfony :
