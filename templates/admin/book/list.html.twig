@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Liste des livres</h1>
+
+    <nav>
+        <a href="{{ path('app_admin_book_create') }}">Ajouter un livre</a>
+    </nav>
+
+    {% for book in books %}
+        <div>
+            {% if book.imageUrl %}
+                <p>
+                    <img src="{{ book.imageUrl }}" alt="{{ book.title }}" />
+                </p>
+            {% endif %}
+            <p>{{ book.title }} : {{ book.price }} €</p>
+            <nav>
+                <a href="{{ path('app_admin_book_update', {id: book.id}) }}">Modifier</a>
+                <a href="{{ path('app_admin_book_remove', {id: book.id}) }}">Supprimer</a>
+            </nav>
+        </div>
+    {% endfor %}
+{% endblock %}

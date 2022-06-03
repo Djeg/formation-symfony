@@ -1,0 +1,10 @@
+{% extends 'admin/book/create.html.twig' %}
+
+{% block pageTitle %}
+    Modifier : {{ book.title }}
+{% endblock %}
+
+{% block titleValue %}{{ book.title }}{% endblock %}
+{% block priceValue %}{{ book.price }}{% endblock %}
+{% block descriptionValue %}{{ book.description }}{% endblock %}
+{% block imageUrlValue %}{{ book.imageUrl }}{% endblock %}
