@@ -39,4 +39,16 @@ class AuthorController extends AbstractController
         // afficher le formulaire (la page twig)
         return $this->render('admin/author/create.html.twig');
     }
+
+    #[Route('app_admin_author_list', name: 'app_admin_author_list')]
+    public function list(AuthorRepository $repository): Response
+    {
+        // Récupérer les auteurs depuis la base de donnés
+        $authors = $repository->findAll();
+
+        // Afficher la page HTML
+        return $this->render('admin/author/list.html.twig', [
+            'authors' => $authors,
+        ]);
+    }
 }

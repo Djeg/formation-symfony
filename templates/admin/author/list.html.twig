@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Liste des auteurs</h1>
+
+    <nav>
+        <a href="{{ path('app_admin_author_create') }}">Ajouter un auteur</a>
+    </nav>
+
+    {% for author in authors %}
+        <div>
+            {% if author.imageUrl %}
+                <p>
+                    <img src="{{ author.imageUrl }}" alt="{{ author.name }}" />
+                </p>
+            {% endif %}
+            <p>{{ author.name }}</p>
+            <nav>
+                <a href="{{ path('app_admin_author_update', {id: author.id}) }}">Modifier</a>
+                <a href="{{ path('app_admin_author_remove', {id: author.id}) }}">Supprimer</a>
+            </nav>
+        </div>
+    {% endfor %}
+{% endblock %}
