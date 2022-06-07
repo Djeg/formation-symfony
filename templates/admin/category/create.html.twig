@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{% block pageTitle %}Création d'une nouvelle catégorie{% endblock %}</h1>
+
+    <nav>
+        <a href="{{ path('app_admin_category_list') }}">Retour à la liste</a>
+    </nav>
+
+    <form method="post">
+        <div>
+            <label for="name">Nom de la catégorie :</label>
+            <input type="text" id="name" name="name" value="{% block nameValue '' %}" />
+        </div>
+
+        <button type="submit">Envoyer</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Liste des catégories</h1>
+
+    <nav>
+        <a href="{{ path('app_admin_category_create') }}">Ajouter une catégorie</a>
+    </nav>
+
+    {% for category in categories %}
+        <div>
+            <p>{{ category.name }}</p>
+            <nav>
+                <a href="{{ path('app_admin_category_update', {id: category.id}) }}">Modifier</a>
+                <a href="{{ path('app_admin_category_remove', {id: category.id}) }}">Supprimer</a>
+            </nav>
+        </div>
+    {% endfor %}
+{% endblock %}
