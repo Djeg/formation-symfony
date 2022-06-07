@@ -40,7 +40,7 @@ class AuthorController extends AbstractController
         return $this->render('admin/author/create.html.twig');
     }
 
-    #[Route('app_admin_author_list', name: 'app_admin_author_list')]
+    #[Route('/admin/auteurs', name: 'app_admin_author_list')]
     public function list(AuthorRepository $repository): Response
     {
         // Récupérer les auteurs depuis la base de donnés
@@ -81,5 +81,18 @@ class AuthorController extends AbstractController
         return $this->render('admin/author/update.html.twig', [
             'author' => $author,
         ]);
+    }
+
+    #[Route('/admin/auteurs/{id}/supprimer', name: 'app_admin_author_remove')]
+    public function remove(int $id, AuthorRepository $repository): Response
+    {
+        // Récupération de l'auteur depuis son id
+        $author = $repository->find($id);
+
+        // Supprimer l'auteur de la base de données
+        $repository->remove($author, true);
+
+        // Rediriger vers la liste
+        return $this->redirectToRoute('app_admin_author_list');
     }
 }
