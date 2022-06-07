@@ -51,4 +51,35 @@ class AuthorController extends AbstractController
             'authors' => $authors,
         ]);
     }
+
+    #[Route('/admin/auteurs/{id}', name: 'app_admin_author_update')]
+    public function update(int $id, Request $request, AuthorRepository $repository): Response
+    {
+        // récupérer l'auteur à partir de l'id
+        $author = $repository->find($id);
+
+        // Tester si le formulaire à était envoyé
+        if ($request->isMethod('POST')) {
+            // Récupérer les données rentré dans le formulaire
+            $name = $request->request->get('name');
+            $description = $request->request->get('description');
+            $imageUrl = $request->request->get('imageUrl');
+
+            // Mettre à jour les informations de l'auteur
+            $author->setName($name);
+            $author->setDescription($description);
+            $author->setImageUrl($imageUrl);
+
+            // Enregistrer l'auteur
+            $repository->add($author, true);
+
+            // rediriger vers la page liste
+            return $this->redirectToRoute('app_admin_author_list');
+        }
+
+        // afficher le formulaire de mise à jour de l'auteur
+        return $this->render('admin/author/update.html.twig', [
+            'author' => $author,
+        ]);
+    }
 }
