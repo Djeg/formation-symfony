@@ -10,6 +10,7 @@ Configurer le formulaire pour afficher les champs de formulaire suivant :
 | nom         | type         | options                                         |
 | ----------- | ------------ | ----------------------------------------------- |
 | title       | TextType     | label: Titre du livre, required: true           |
+| price       | MoneyType    | label: Prix du livre, required: true            |
 | description | TextareaType | label: Description du livre, required: false    |
 | imageUrl    | UrlType      | label: URL de l'image du livre, required: false |
 | author      | EntityType   | label: Choix de l'auteur, required: false       |
