@@ -53,11 +53,8 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/admin/categories/{id}', name: 'app_admin_category_update')]
-    public function update(int $id, Request $request, CategoryRepository $repository): Response
+    public function update(Category $category, Request $request, CategoryRepository $repository): Response
     {
-        // récupérer l'categorie à partir de l'id
-        $category = $repository->find($id);
-
         // Tester si le formulaire à était envoyé
         if ($request->isMethod('POST')) {
             // Récupérer les données rentré dans le formulaire
@@ -80,11 +77,8 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/admin/categories/{id}/supprimer', name: 'app_admin_category_remove')]
-    public function remove(int $id, CategoryRepository $repository): Response
+    public function remove(Category $category, CategoryRepository $repository): Response
     {
-        // Récupération de l'categorie depuis son id
-        $category = $repository->find($id);
-
         // Supprimer l'categorie de la base de données
         $repository->remove($category, true);
 

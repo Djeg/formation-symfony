@@ -54,11 +54,8 @@ class AuthorController extends AbstractController
     }
 
     #[Route('/admin/auteurs/{id}', name: 'app_admin_author_update')]
-    public function update(int $id, Request $request, AuthorRepository $repository): Response
+    public function update(Author $author, Request $request, AuthorRepository $repository): Response
     {
-        // Récuperation de l'auteur
-        $author = $repository->find($id);
-
         // Création du formulaire
         $form = $this->createForm(AdminAuthorType::class, $author);
 
@@ -85,11 +82,8 @@ class AuthorController extends AbstractController
     }
 
     #[Route('/admin/auteurs/{id}/supprimer', name: 'app_admin_author_remove')]
-    public function remove(int $id, AuthorRepository $repository): Response
+    public function remove(Author $author, AuthorRepository $repository): Response
     {
-        // Récupération de l'auteur depuis son id
-        $author = $repository->find($id);
-
         // Supprimer l'auteur de la base de données
         $repository->remove($author, true);
 
