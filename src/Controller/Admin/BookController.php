@@ -57,24 +57,18 @@ class BookController extends AbstractController
 
     // Attacher une route (OK)
     #[Route('/admin/livres/{id}', name: 'app_admin_book_update')]
-    public function update(int $id, BookRepository $repository, Request $request): Response
+    public function update(Book $book, BookRepository $repository, Request $request): Response
     {
-        // Récupérer le livre que l'on veut modifier (OK)
-        $book = $repository->find($id);
+        // Création du formulaire
+        $form = $this->createForm(AdminBookType::class, $book);
 
-        // Tester si le formulaire a était envoyé (OK)
-        if ($request->isMethod('POST')) {
-            // Récupérer les infos envoyé par l'utilisateur en utilisant la Request (OK)
-            $title = $request->request->get('title');
-            $price = $request->request->get('price');
-            $description = $request->request->get('description');
-            $imageUrl = $request->request->get('imageUrl');
+        // On remplie le formulaire avec les données envoyés par l'utilisateur
+        $form->handleRequest($request);
 
-            // Méttre à jour les information du livre avec les infos récupéré (OK)
-            $book->setTitle($title);
-            $book->setPrice((float)$price);
-            $book->setDescription($description);
-            $book->setImageUrl($imageUrl);
+        // Tester si le formulaire à était envoyé et est valide
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Récupération du livre
+            $book = $form->getData();
 
             // Insérer/Enregistrer le nouveau livre dans la base de données (OK)
             $repository->add($book, true);
@@ -83,8 +77,9 @@ class BookController extends AbstractController
             return $this->redirectToRoute('app_admin_book_list');
         }
 
-        // Afficher le formulaire d'édition d'un livre
+        // Afficher la page html contenant le formulaire de création d'un livre (OK)
         return $this->render('admin/book/update.html.twig', [
+            'form' => $form->createView(),
             'book' => $book,
         ]);
     }
