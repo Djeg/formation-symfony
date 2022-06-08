@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
+use App\Form\AdminCategoryType;
 use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,24 +17,27 @@ class CategoryController extends AbstractController
     #[Route('/admin/categories/nouveau', name: 'app_admin_category_create')]
     public function create(Request $request, CategoryRepository $repository): Response
     {
-        // Tester si le formulaire a était envoyé
-        if ($request->isMethod('POST')) {
-            // Récupérer les données du formulaire
-            $name = $request->request->get('name');
+        // Création du formulaire
+        $form = $this->createForm(AdminCategoryType::class);
 
-            // Créer l'categorie à partir des données du formulaire
-            $category = new Category();
-            $category->setName($name);
+        // On remplie le formulaire avec les données de l'utilisateur
+        $form->handleRequest($request);
 
-            // enregistrer l'categorie grâce au répository
+        // On test si le formulaire est envoyé et est valide
+        if ($form->isSubmitted() && $form->isValid()) {
+            // on récupére la catégorie
+            $category = $form->getData();
+
+            // Enregistrement en base de données
             $repository->add($category, true);
 
-            // Rediriger l'utilisateur vers la liste des categories
-            return $this->redirectToRoute('app_admin_category_list');
+            return $this->redirectToRoute('app_admin_category_create');
         }
 
         // afficher le formulaire (la page twig)
-        return $this->render('admin/category/create.html.twig');
+        return $this->render('admin/category/create.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     #[Route('/admin/categories', name: 'app_admin_category_list')]

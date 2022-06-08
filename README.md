@@ -18,3 +18,4 @@ symfony console d:s:u --force
 -   [CRUD des livres](./exos/crud-book.md)
 -   [CRUD des auteurs](./exos/crud-author.md)
 -   [CRUD des catégories](./exos/crud-category.md)
+-   [Formulaire pour les auteurs](./exos/form-author.md)

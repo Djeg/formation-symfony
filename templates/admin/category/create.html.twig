@@ -7,12 +7,5 @@
         <a href="{{ path('app_admin_category_list') }}">Retour à la liste</a>
     </nav>
 
-    <form method="post">
-        <div>
-            <label for="name">Nom de la catégorie :</label>
-            <input type="text" id="name" name="name" value="{% block nameValue '' %}" />
-        </div>
-
-        <button type="submit">Envoyer</button>
-    </form>
+    {{ form(form) }}
 {% endblock %}
