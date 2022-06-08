@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Entity\Book;
+use App\Form\AdminBookType;
 use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,20 +18,16 @@ class BookController extends AbstractController
     #[Route('/admin/livres/nouveau', name: 'app_admin_book_create')]
     public function create(Request $request, BookRepository $repository): Response
     {
-        // Tester si le formulaire à était envoyé (OK)
-        if ($request->isMethod('POST')) {
-            // Récupérer les infos envoyé par l'utilisateur en utilisant la Request (OK)
-            $title = $request->request->get('title');
-            $price = $request->request->get('price');
-            $description = $request->request->get('description');
-            $imageUrl = $request->request->get('imageUrl');
+        // Création du formulaire
+        $form = $this->createForm(AdminBookType::class);
 
-            // Création du livre ! (OK)
-            $book = new Book();
-            $book->setTitle($title);
-            $book->setPrice((float)$price);
-            $book->setDescription($description);
-            $book->setImageUrl($imageUrl);
+        // On remplie le formulaire avec les données envoyés par l'utilisateur
+        $form->handleRequest($request);
+
+        // Tester si le formulaire à était envoyé et est valide
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Récupération du livre
+            $book = $form->getData();
 
             // Insérer/Enregistrer le nouveau livre dans la base de données (OK)
             $repository->add($book, true);
@@ -40,7 +37,9 @@ class BookController extends AbstractController
         }
 
         // Afficher la page html contenant le formulaire de création d'un livre (OK)
-        return $this->render('admin/book/create.html.twig');
+        return $this->render('admin/book/create.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     // Attacher une route

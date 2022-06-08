@@ -50,6 +50,8 @@ class AdminBookType extends AbstractType
                 'class' => Category::class,
                 'choice_label' => 'name',
                 'multiple' => true,
+                // false === select box
+                // true === checkbox
                 'expanded' => true,
             ])
             ->add('send', SubmitType::class, [
