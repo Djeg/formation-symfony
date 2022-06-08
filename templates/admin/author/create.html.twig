@@ -7,22 +7,5 @@
         <a href="{{ path('app_admin_author_list') }}">Retour à la liste</a>
     </nav>
 
-    <form method="post">
-        <div>
-            <label for="name">Nom de l'auteur :</label>
-            <input type="text" id="name" name="name" value="{% block nameValue '' %}" />
-        </div>
-
-        <div>
-            <label for="description">Description de l'auteur :</label>
-            <textarea id="description" name="description">{% block descriptionValue '' %}</textarea>
-        </div>
-
-        <div>
-            <label for="imageUrl">URL del l'image de l'auteur :</label>
-            <input type="text" name="imageUrl" id="imageUrl" value="{% block imageUrlValue '' %}" />
-        </div>
-
-        <button type="submit">Envoyer</button>
-    </form>
+    {{ form(form) }}
 {% endblock %}
