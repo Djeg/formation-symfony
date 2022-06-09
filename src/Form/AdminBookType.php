@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Author;
 use App\Entity\Book;
 use App\Entity\Category;
+use App\Entity\PublishingHouse;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -53,6 +54,16 @@ class AdminBookType extends AbstractType
                 // false === select box
                 // true === checkbox
                 'expanded' => true,
+            ])
+            ->add('publishingHouse', EntityType::class, [
+                'label' => "Choix de la maison d'édition :",
+                'class' => PublishingHouse::class,
+                'required' => false,
+                'choice_label' => 'name',
+                'multiple' => false,
+                // false === select box
+                // true === checkbox
+                'expanded' => false,
             ])
             ->add('send', SubmitType::class, [
                 'label' => 'Envoyer',
