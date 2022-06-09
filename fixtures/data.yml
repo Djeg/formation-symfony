@@ -1,0 +1,19 @@
+App\Entity\Category:
+    category_1:
+        name: Science Fiction
+    category_2:
+        name: Policier
+    category_3:
+        name: Drama
+    category_4:
+        name: Literature
+    category_{5..25}:
+        name: <fr_FR:word()>
+# Générer l'auteur suivant :
+
+# id: auteur_1
+# name: J.K Rowling
+# description: utilisé le formateur « realText »
+# imageUrl: utilisé le formateur « imageUrl »
+
+# Générer ensuite les auteur de 2 à 50 avec que des fausses données !!
