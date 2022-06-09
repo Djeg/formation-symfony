@@ -9,11 +9,41 @@ App\Entity\Category:
         name: Literature
     category_{5..25}:
         name: <fr_FR:word()>
-# Générer l'auteur suivant :
 
-# id: auteur_1
-# name: J.K Rowling
-# description: utilisé le formateur « realText »
-# imageUrl: utilisé le formateur « imageUrl »
+App\Entity\Author:
+    author_1:
+        name: J.K. Rowling
+        description: <fr_FR:realText()>
+        imageUrl: <imageUrl()>
+    author_{2..50}:
+        name: <fr_FR:name()>
+        description: <fr_FR:realText()>
+        imageUrl: <imageUrl()>
 
-# Générer ensuite les auteur de 2 à 50 avec que des fausses données !!
+App\Entity\PublishingHouse:
+    house_1:
+        name: Galimard
+        description: <fr_FR:realText()>
+        country: France
+    house_{2..50}:
+        name: <fr_FR:company()>
+        description: <fr_FR:realText()>
+        country: <fr_FR:countryCode()>
+
+App\Entity\Book:
+    book_1:
+        title: Harry Potter
+        price: 4.9
+        author: "@author_1"
+        description: <fr_FR:realText()>
+        imageUrl: <imageUrl()>
+        publishingHouse: "@house_1"
+        categories: ["@category_1", "@category_3"]
+    book_{2..100}:
+        title: <fr_FR:catchPhrase()>
+        price: <randomFloat(2, 4, 50)>
+        author: "@author_*"
+        description: <fr_FR:realText()>
+        imageUrl: <imageUrl()>
+        categories: "5x @category_*"
+        publishingHouse: "@house_*"
