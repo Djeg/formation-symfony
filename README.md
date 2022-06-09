@@ -21,3 +21,5 @@ symfony console d:s:u --force
 -   [Formulaire pour les auteurs](./exos/form-author.md)
 -   [Formulaire pour les livres](./exos/form-book.md)
 -   [Maison d'éditions](./exos/publisher.md)
+-   [Page d'accueil de notre site](./exos/home.md)
+-   [Page de catégorie !](./exos/category.md)

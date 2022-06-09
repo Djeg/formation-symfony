@@ -39,28 +39,40 @@ class BookRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Book[] Returns an array of Book objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('b')
-//            ->andWhere('b.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('b.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findAllByTitleDesc(): array
+    {
+        $min = 22.3;
+        $qb = $this->createQueryBuilder('book');
 
-//    public function findOneBySomeField($value): ?Book
-//    {
-//        return $this->createQueryBuilder('b')
-//            ->andWhere('b.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        return $qb
+            ->andWhere('book.price >= :minimum')
+            ->setParameter('minimum', $min)
+            ->orderBy('book.title', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    //    /**
+    //     * @return Book[] Returns an array of Book objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('book')
+    //            ->andWhere('book.title = "Harry Potter"')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('b.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult();
+    //    }
+
+    //    public function findOneBySomeField($value): ?Book
+    //    {
+    //        return $this->createQueryBuilder('b')
+    //            ->andWhere('b.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

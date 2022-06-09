@@ -47,7 +47,7 @@ class BookController extends AbstractController
     public function list(BookRepository $repository): Response
     {
         // Récupérer les livres depuis la base de données
-        $books = $repository->findAll();
+        $books = $repository->findAllByTitleDesc();
 
         // Afficher la page html de la liste des livres
         return $this->render('admin/book/list.html.twig', [
