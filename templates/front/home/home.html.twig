@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Nos derniers livres</h1>
+
+<hr />
+
+{% for book in books %}
+    <div>
+        <p>{{ book.title }}</p>
+        <p>Prix : {{ book.price }} €</p>
+        <p>Catégories :</p>
+        <nav>
+            {% for category in book.categories %}
+                <a href="">{{ category.name }}</a>
+            {% endfor %}
+        </nav>
+    </div>
+    <hr />
+{% endfor %}
+
+{% endblock %}
