@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h1>Nos derniers livres</h1>
+<h1>{% block pageTitle %}Nos derniers livres{% endblock %}</h1>
 
 <hr />
 
@@ -12,7 +12,7 @@
         <p>Catégories :</p>
         <nav>
             {% for category in book.categories %}
-                <a href="">{{ category.name }}</a>
+                <a href="{{ path('app_front_category_display', {id: category.id}) }}">{{ category.name }}</a>
             {% endfor %}
         </nav>
     </div>
