@@ -23,3 +23,4 @@ symfony console d:s:u --force
 -   [Maison d'éditions](./exos/publisher.md)
 -   [Page d'accueil de notre site](./exos/home.md)
 -   [Page de catégorie !](./exos/category.md)
+-   [Page de recherche de livre](./exos/search.md)
