@@ -11,7 +11,7 @@
 ```
 symfony console doctrine:database:create
 symfony console d:s:u --force
-symfony h:f:l -n
+symfony console h:f:l -n
 ```
 
 ## Les exercices

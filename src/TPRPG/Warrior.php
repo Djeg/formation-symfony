@@ -8,8 +8,8 @@ class Warrior extends Character
 {
     public function __construct(
         string $name,
-        int $maxLife = 100,
         Weapon $weapon,
+        int $maxLife = 100,
     ) {
         parent::__construct($name, $maxLife + 10, $weapon);
     }
