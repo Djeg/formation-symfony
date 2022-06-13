@@ -26,3 +26,5 @@ symfony h:f:l -n
 -   [Page de catégorie !](./exos/category.md)
 -   [Page de recherche de livre](./exos/search.md)
 -   [Page de recherche des catégories](./exos/search-categories.md)
+-   [Page de recherche des auteurs](./exos/search-authors.md)
+-   [Page de recherche avancée des livres](./exos/advanced-book-search.md)
