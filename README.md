@@ -24,3 +24,4 @@ symfony console d:s:u --force
 -   [Page d'accueil de notre site](./exos/home.md)
 -   [Page de catégorie !](./exos/category.md)
 -   [Page de recherche de livre](./exos/search.md)
+-   [Page de recherche des catégories](./exos/search-categories.md)
