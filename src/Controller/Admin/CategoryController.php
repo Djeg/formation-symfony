@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
+use App\DTO\SearchCategoryCriteria;
 use App\Entity\Category;
 use App\Form\AdminCategoryType;
+use App\Form\SearchCategoryType;
 use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -41,14 +43,24 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/admin/categories', name: 'app_admin_category_list')]
-    public function list(CategoryRepository $repository): Response
+    public function list(CategoryRepository $repository, Request $request): Response
     {
-        // Récupérer les categories depuis la base de donnés
-        $categories = $repository->findAll();
+        // Création des critéres de recherche
+        $criteria = new SearchCategoryCriteria();
+
+        // Création du formulaire avec les critéres de recherche
+        $form = $this->createForm(SearchCategoryType::class, $criteria);
+
+        // On remplie le formulaire avec les données envoyer par l'utilisateur
+        $form->handleRequest($request);
+
+        // On récupére toutes les catégories filtré
+        $categories = $repository->findByCriteria($criteria);
 
         // Afficher la page HTML
         return $this->render('admin/category/list.html.twig', [
             'categories' => $categories,
+            'form' => $form->createView(),
         ]);
     }
 
