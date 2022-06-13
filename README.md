@@ -14,6 +14,8 @@ symfony console d:s:u --force
 symfony console h:f:l -n
 ```
 
+6. N'oublier pas de demarrer le serveur symfony : `symfony server:start`
+
 ## Les exercices
 
 -   [CRUD des livres](./exos/crud-book.md)
