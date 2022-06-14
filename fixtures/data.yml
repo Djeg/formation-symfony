@@ -47,3 +47,20 @@ App\Entity\Book:
         imageUrl: <imageUrl()>
         categories: "5x @category_*"
         publishingHouse: "@house_*"
+
+App\Entity\User:
+    user_admin:
+        email: admin@mail.com
+        roles: ["ROLE_ADMIN"]
+        # password: admin
+        password: \$2y\$13\$UWGWTNRMfbLe58M21.VXc.PAHhAGyIjF6Foo/som4qq9BeGvIhg0W
+    user_user:
+        email: user@mail.com
+        roles: ["ROLE_USER"]
+        # password: user
+        password: \$2y\$13\$HQ1hG8f7QMyChyezhFPtS.vhE7vVSUw9gWcSpWanR/XmiDKs3WzL2
+    user_{1..50}:
+        email: <safeEmail()>
+        roles: ["ROLE_USER"]
+        # password: user
+        password: \$2y\$13\$HQ1hG8f7QMyChyezhFPtS.vhE7vVSUw9gWcSpWanR/XmiDKs3WzL2
