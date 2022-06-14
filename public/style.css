@@ -19,7 +19,7 @@ header {
 
 header nav {
     display: flex;
-    align-items: stretch;
+    align-items: center;
 }
 
 header nav a {

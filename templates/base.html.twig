@@ -15,11 +15,21 @@
     <body>
         <header>
             <nav>
-                <a href="">Accueil</a>
+                <a href="{{ path('app_front_home_home') }}">Accueil</a>
             </nav>
 
+            {% if app.user %}
+                <nav>
+                    <div>Bienvenue {{ app.user.email }}</div>
+                </nav>
+            {% endif %}
+
             <nav>
-                <a href="">Se Connecter</a>
+                {% if app.user %}
+                    <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                {% else %}
+                    <a href="{{ path('app_login') }}">Se Connecter</a>
+                {% endif %}
             </nav>
         </header>
         {% block body %}{% endblock %}
