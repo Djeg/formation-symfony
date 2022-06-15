@@ -67,6 +67,8 @@ Enregistré le panier dans la base de données.
 
 Rediriger vers la page d'affichage du panier.
 
+Ajouter un lien dans l'affichage du panier sur chaque livres afin de le supprimer du panier.
+
 ## Validation du panier
 
 Dans le controller `App\Controller\Front\BasketController`, ajouter une méthode
