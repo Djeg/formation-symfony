@@ -18,6 +18,9 @@
                 <a href="{{ path('app_front_category_display', {id: category.id}) }}">{{ category.name }}</a>
             {% endfor %}
         </nav>
+        <p>
+            <a href="{{ path('app_front_basket_add', {id: book.id}) }}">Ajouter au panier</a>
+        </p>
     </div>
     <hr />
 {% endfor %}
