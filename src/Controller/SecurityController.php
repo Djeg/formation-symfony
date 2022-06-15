@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Form\ProfileType;
 use App\Form\RegistrationType;
 use App\Repository\UserRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -65,5 +67,30 @@ class SecurityController extends AbstractController
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+    #[IsGranted('ROLE_USER')]
+    #[Route('/mon-profil', name: 'app_security_myProfile')]
+    public function myProfile(Request $request, UserRepository $repository): Response
+    {
+        // Récupértion de l'utilisateur connécté
+        $user = $this->getUser();
+
+        // Création du formulaire
+        $form = $this->createForm(ProfileType::class, $user);
+
+        // On remplie le formulaire avec les données envoyé par l'utilisateur
+        $form->handleRequest($request);
+
+        // On test si le formulaire est envoyé et valide
+        if ($form->isSubmitted() && $form->isValid()) {
+            // On enregistre l'utilisateur en base de données
+            $repository->add($user, true);
+        }
+
+        // On affiche la page HTML
+        return $this->render('security/myProfile.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }
