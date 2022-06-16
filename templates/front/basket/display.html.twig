@@ -3,6 +3,10 @@
 {% block body %}
     <h1>Mon Panier</h1>
 
+    {% if app.user.basket.books|length == 0 %}
+        <h2>Votre panier est vide :)</h2>
+    {% endif %}
+
     {% for book in app.user.basket.books %}
         <div>
             <p>{{ book.title }}</p>
