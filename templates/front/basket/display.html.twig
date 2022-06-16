@@ -12,7 +12,7 @@
             <p>{{ book.title }}</p>
             <p>Prix : {{ book.price }} €</p>
             <p>
-                <a href="">Supprimer du panier</a>
+                <a href="{{ path('app_front_basket_remove', {id: book.id}) }}">Supprimer du panier</a>
             </p>
         </div>
         <hr />
