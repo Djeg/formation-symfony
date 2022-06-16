@@ -32,3 +32,4 @@ symfony console h:f:l -n
 -   [Page de recherche avancée des livres](./exos/advanced-book-search.md)
 -   [Modification de mon profil](./exos/profile.md)
 -   [Création d'un système de panier](./exos/basket.md)
+-   [REST - Création d'url](./exos/rest.md)
