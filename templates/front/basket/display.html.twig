@@ -21,6 +21,6 @@
     <h2>Total : {{ app.user.basket.getTotal() }} €</h2>
 
     <p>
-        <a href="">Valider</a>
+        <a href="{{ path('app_front_basket_validate') }}">Valider</a>
     </p>
 {% endblock %}

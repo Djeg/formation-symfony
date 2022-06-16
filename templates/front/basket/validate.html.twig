@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Validation</h1>
+
+    {% for book in app.user.basket.books %}
+        <div>
+            <p>{{ book.title }}</p>
+            <p>Prix : {{ book.price }} €</p>
+        </div>
+        <hr />
+    {% endfor %}
+
+    <h2>Total : {{ app.user.basket.getTotal() }} €</h2>
+
+    {{ form(form) }}
+{% endblock %}
