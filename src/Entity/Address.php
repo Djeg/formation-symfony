@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AddressRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation\Timestampable;
 
 #[ORM\Entity(repositoryClass: AddressRepository::class)]
 class Address
@@ -22,9 +23,11 @@ class Address
     #[ORM\Column(type: 'string', length: 255)]
     private $zipCode;
 
+    #[Timestampable(on: 'create')]
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
+    #[Timestampable(on: 'update')]
     #[ORM\Column(type: 'datetime')]
     private $updatedAt;
 

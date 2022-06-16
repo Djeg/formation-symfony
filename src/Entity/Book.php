@@ -45,6 +45,9 @@ class Book
     #[ORM\Column(type: 'datetime')]
     private $updatedAt;
 
+    #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: 'books')]
+    private $userOrder;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -171,6 +174,18 @@ class Book
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getUserOrder(): ?Order
+    {
+        return $this->userOrder;
+    }
+
+    public function setUserOrder(?Order $userOrder): self
+    {
+        $this->userOrder = $userOrder;
 
         return $this;
     }
