@@ -31,4 +31,11 @@ class BasketController extends AbstractController
 
         return $this->redirectToRoute('app_front_basket_display');
     }
+
+    #[IsGranted('ROLE_USER')]
+    #[Route('/mon-panier', name: 'app_front_basket_display')]
+    public function display(): Response
+    {
+        return $this->render('front/basket/display.html.twig');
+    }
 }

@@ -67,4 +67,15 @@ class Basket
 
         return $this;
     }
+
+    public function getTotal(): float
+    {
+        $total = 0.0;
+
+        foreach ($this->books as $book) {
+            $total = $total + $book->getPrice();
+        }
+
+        return $total;
+    }
 }
