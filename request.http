@@ -7,3 +7,13 @@ GET https://google.fr
 ###
 
 GET http://127.0.0.1:8001/api/users/56
+
+###
+
+POST http://127.0.0.1:8001/api/users
+Content-Type: application/json
+
+{
+    "email": "testouille3@api.com",
+    "password": "testouille"
+}
