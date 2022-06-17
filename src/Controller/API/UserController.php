@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller\API;
 
+use App\DTO\SearchUserCriteria;
 use App\Entity\User;
 use App\Form\API\ApiRegistrationType;
+use App\Form\API\ApiSearchUserType;
 use App\Form\RegistrationType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,10 +20,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     #[Route('', name: 'app_api_user_list', methods: ['GET'])]
-    public function list(UserRepository $repository): Response
+    public function list(UserRepository $repository, Request $request): Response
     {
+        // Création des critères de recherche
+        $criteria = new SearchUserCriteria();
+
+        // Création du formulaire de recherche
+        $form = $this->createForm(ApiSearchUserType::class, $criteria);
+
+        // On remplie le formulaire
+        $form->handleRequest($request);
+
         // Récupération de tout les utilisateurs
-        $users = $repository->findAll();
+        $users = $repository->findByCriteria($criteria);
 
         // On retourne la collection d'utilisateur
         return $this->json($users);

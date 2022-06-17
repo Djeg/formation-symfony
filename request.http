@@ -10,6 +10,10 @@ GET http://127.0.0.1:8001/api/users/56
 
 ###
 
+GET http://127.0.0.1:8001/api/users?limit=2&sortBy=email
+
+###
+
 POST http://127.0.0.1:8001/api/users
 Content-Type: application/json
 
