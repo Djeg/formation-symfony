@@ -33,3 +33,4 @@ symfony console h:f:l -n
 -   [Modification de mon profil](./exos/profile.md)
 -   [Création d'un système de panier](./exos/basket.md)
 -   [REST - Création d'url](./exos/rest.md)
+-   [API - Resource pour les auteurs](./exos/api-authors.md)
