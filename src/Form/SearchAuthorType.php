@@ -22,27 +22,31 @@ class SearchAuthorType extends AbstractType
             ])
             ->add('orderBy', ChoiceType::class, [
                 'label' => 'Trier par :',
-                'required' => true,
+                'required' => false,
                 'choices' => [
                     'Identifiant' => 'id',
                     'Nom' => 'name',
                 ],
+                'empty_data' => 'id',
             ])
             ->add('direction', ChoiceType::class, [
                 'label' => 'Sens du trie :',
-                'required' => true,
+                'required' => false,
                 'choices' => [
                     'Croissant' => 'ASC',
                     'Décroissant' => 'DESC',
                 ],
+                'empty_data' => 'ASC'
             ])
             ->add('limit', NumberType::class, [
                 'label' => 'Nombre de résultats :',
-                'required' => true,
+                'required' => false,
+                'empty_data' => 25,
             ])
             ->add('page', NumberType::class, [
                 'label' => 'Page :',
-                'required' => true,
+                'required' => false,
+                'empty_data' => 1,
             ])
             ->add('send', SubmitType::class, [
                 'label' => 'Envoyer',
