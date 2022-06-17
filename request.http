@@ -21,3 +21,35 @@ Content-Type: application/json
     "email": "testouille3@api.com",
     "password": "testouille"
 }
+
+###
+
+GET http://127.0.0.1:8001/api/authors?limit=2
+
+###
+
+GET http://127.0.0.1:8001/api/authors/52
+
+###
+
+PATCH http://127.0.0.1:8001/api/authors/52
+Content-Type: application/json
+
+{
+    "name": "Nouveau nom d'auteur"
+}
+
+###
+
+DELETE http://127.0.0.1:8001/api/authors/52
+
+###
+
+POST http://127.0.0.1:8001/api/authors
+Content-Type: application/json
+
+{
+    "name": "Test auteur",
+    "description": "Description de l'auteur",
+    "imageUrl": "http://img.com/img"
+}
