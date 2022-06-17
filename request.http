@@ -1,5 +1,9 @@
-POST http://127.0.0.1:8001/admin/livres/nouveau
-User-Agent: VSCode
-Content-Type: application/x-www-form-urlencoded
+GET https://github.com
 
-title=Test&price=13.5&description=test&imageUrl=test
+###
+
+GET https://google.fr
+
+###
+
+GET http://127.0.0.1:8001/api/users/56
