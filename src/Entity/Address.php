@@ -35,7 +35,7 @@ class Address
     private $updatedAt;
 
     #[ORM\OneToOne(inversedBy: 'address', targetEntity: User::class, cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $user;
 
     public function getId(): ?int

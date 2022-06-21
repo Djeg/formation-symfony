@@ -1,2 +1,45 @@
 # Ce fichier contiendra les fixtures de la
 # base de données :)
+App\Entity\Address:
+    address_admin:
+        city: <fr_FR:city()>
+        street: <fr_FR:streetAddress()>
+        zipCode: <fr_FR:postcode()>
+        user: "@user_admin"
+    address_user:
+        city: <fr_FR:city()>
+        street: <fr_FR:streetAddress()>
+        zipCode: <fr_FR:postcode()>
+        user: "@user_user"
+
+    address_{1..20}:
+        city: <fr_FR:city()>
+        street: <fr_FR:streetAddress()>
+        zipCode: <fr_FR:postcode()>
+
+App\Entity\User:
+    user_admin:
+        email: admin@mail.com
+        # password: admin
+        password: \$2y\$13\$8ATLuwmhkUOGsNv4gBiRTuyiV9UtPnHPzne/R5d87RkBsSKQL1Jqq
+        firstname: Admin
+        lastname: Admin
+        phone: 0606060606
+        roles: ["ROLE_ADMIN"]
+        address: "@address_admin"
+    user_user:
+        email: user@mail.com
+        # password: user
+        password: \$2y\$13\$PB/ooq5z1c0N6RZnqNL25OXH.xTaIdJnKztqZSzmUjh0cROgcbw8y
+        firstname: User
+        lastname: User
+        phone: 0606060606
+        address: "@address_user"
+    user_{1..20}:
+        email: <safeEmail()>
+        # password: password
+        password: \$2y\$13\$oYJu3M9uc6cCs7PAUZpf/uYme1lQn0rEUtoo.OHZdbHvB5vWpopoa
+        firstname: <fr_FR:firstName()>
+        lastname: <fr_FR:lastName()>
+        phone: 0606060606
+        address: "@address_*"
