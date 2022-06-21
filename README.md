@@ -3,10 +3,13 @@
 Pizza shop est un projet d'entrainement de création d'application
 en utilisant Symfony 6.
 
-## Les Maquettes
+## Les Maquettes et L'UML
 
 Vous retrouverez les maquettes de l'application juste
 [ici](https://www.figma.com/file/UTthEDYvWiqKHjANXyYK6O/PizzaShop?node-id=0%3A1)
+
+Vous retrouverez aussi le diagramm de class des entités du projet
+juste [ici](https://www.figma.com/file/smU6ZoD8wUyNPXRFnKrYWM/PizzaShop-UML?node-id=0%3A1)
 
 ## Installation
 
