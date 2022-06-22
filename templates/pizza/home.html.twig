@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Nos Pizzas</h1>
+
+    {% for pizza in pizzas %}
+        <div>
+            <h3>{{ pizza.name }}</h3>
+            {% if pizza.imageUrl %}
+            <p>
+                <img src="{{ pizza.imageUrl }}" alt="{{ pizza.name }}" />
+            </p>
+            {% endif %}
+            <p>{{ pizza.description }}</p>
+            <p>Prix : {{ pizza.price }} €</p>
+            <p>
+                <a href="">Ajouter au panier</a>
+            </p>
+        </div>
+    {% endfor %}
+{% endblock %}

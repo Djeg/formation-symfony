@@ -42,4 +42,16 @@ App\Entity\User:
         firstname: <fr_FR:firstName()>
         lastname: <fr_FR:lastName()>
         phone: 0606060606
-        address: "@address_*"
+        address: "@address_<current()>"
+
+App\Entity\Pizza:
+    pizza_margarita:
+        name: La Margarita
+        description: <fr_FR:realText()>
+        price: 10.2
+        imageUrl: https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80
+    pizza_{1..15}:
+        name: <it_IT:realText(20)>
+        description: <fr_FR:realText()>
+        price: <randomFloat(2, 9, 19)>
+        imageUrl: https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80
