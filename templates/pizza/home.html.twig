@@ -1,21 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Nos Pizzas</h1>
-
-    {% for pizza in pizzas %}
-        <div>
-            <h3>{{ pizza.name }}</h3>
-            {% if pizza.imageUrl %}
-            <p>
-                <img src="{{ pizza.imageUrl }}" alt="{{ pizza.name }}" />
-            </p>
-            {% endif %}
-            <p>{{ pizza.description }}</p>
-            <p>Prix : {{ pizza.price }} €</p>
-            <p>
-                <a href="">Ajouter au panier</a>
-            </p>
+    <div class="hero-unit">
+        <div class="hero-bg-image">
+            <img src="/images/banner.jpg" />
+            <div class="hero-bg-image-frame"></div>
         </div>
-    {% endfor %}
+        <h1>PizzaShop</h1>
+        <p class="hero-subtitle">Votre pizzeria en ligne</p>
+    </div>
+    <div class="container">
+        <h1>Nos Pizzas</h1>
+
+        {% for pizza in pizzas %}
+            <div class="pizza-card">
+                <div class="pizza-card-bg-image">
+                    <img src="{{ pizza.imageUrl }}" alt="{{ pizza.name }}" />
+                    <div class="pizza-card-bg-image-frame"></div>
+                </div>
+                <h3>{{ pizza.name }}</h3>
+                <p class="description">{{ pizza.description }}</p>
+                <div class="pizza-card-footer">
+                    <div class="price">
+                        {{ pizza.price }} €
+                    </div>
+                    <a class="btn" href="">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span>Ajouter au panier</span>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
