@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mg-top">
+        <h1>Mon Panier</h1>
+
+        {% if app.user.basket.articles|length == 0 %}
+            <p>Votre panier est vide !</p>
+        {% else %}
+            {% for article in app.user.basket.articles %}
+                <div class="pizza-card">
+                    <div class="pizza-card-bg-image">
+                        <img src="{{ article.pizza.imageUrl }}" alt="{{ article.pizza.name }}" />
+                        <div class="pizza-card-bg-image-frame"></div>
+                    </div>
+                    <h3>{{ article.pizza.name }}</h3>
+                    <p class="description">{{ article.pizza.description }}</p>
+                    <div class="quantity-container">
+                        <a class="btn minus" href="#">
+                            <i class="fa-solid fa-circle-minus"></i>
+                        </a>
+                        <p class="quantity">{{ article.quantity }}</p>
+                        <a class="btn plus" href="#">
+                            <i class="fa-solid fa-circle-plus"></i>
+                        </a>
+                    </div>
+                    <div class="pizza-card-footer">
+                        <div class="price">
+                            {{ article.pizza.price }} €
+                        </div>
+                        <a class="btn" href="">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span>Ajouter au panier</span>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
+
