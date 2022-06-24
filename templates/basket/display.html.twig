@@ -16,11 +16,11 @@
                     <h3>{{ article.pizza.name }}</h3>
                     <p class="description">{{ article.pizza.description }}</p>
                     <div class="quantity-container">
-                        <a class="btn minus" href="#">
+                        <a class="btn minus" href="{{ path('app_basket_decrease', {id: article.id}) }}">
                             <i class="fa-solid fa-circle-minus"></i>
                         </a>
                         <p class="quantity">{{ article.quantity }}</p>
-                        <a class="btn plus" href="#">
+                        <a class="btn plus" href="{{ path('app_basket_increase', {id: article.id}) }}">
                             <i class="fa-solid fa-circle-plus"></i>
                         </a>
                     </div>
