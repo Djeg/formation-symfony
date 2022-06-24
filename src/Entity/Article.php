@@ -32,6 +32,9 @@ class Article
     #[ORM\Column(type: 'datetime')]
     private $updatedAt;
 
+    #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: 'articles')]
+    private $userOrder;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -100,5 +103,17 @@ class Article
     public function getTotal(): float
     {
         return round($this->quantity * $this->pizza->getPrice(), 2);
+    }
+
+    public function getUserOrder(): ?Order
+    {
+        return $this->userOrder;
+    }
+
+    public function setUserOrder(?Order $userOrder): self
+    {
+        $this->userOrder = $userOrder;
+
+        return $this;
     }
 }
