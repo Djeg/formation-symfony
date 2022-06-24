@@ -38,7 +38,7 @@
 
             <h2>Total : {{ app.user.basket.total }} €</h2>
             <p>
-                <a href="#" class="btn">Valider</a>
+                <a href="{{ path('app_order_display') }}" class="btn">Valider</a>
             </p>
         {% endif %}
     </div>

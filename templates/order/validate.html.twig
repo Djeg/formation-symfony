@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mg-top">
+        <h1>Commande reçu avec succés !</h1>
+        
+        <p>Votre commande vous sera livré sous peu de temps !</p>
+
+        <h2>Récapitulatif :</p>
+
+        <ul>
+        {% for article in order.articles %}
+            <li>{{ article.quantity }}x {{ article.pizza.name }} ({{ article.total }} €)</li>
+        {% endfor %}
+        </ul>
+
+        <p>Total : {{ order.total }} €</p>
+    </div>
+{% endblock %}
+

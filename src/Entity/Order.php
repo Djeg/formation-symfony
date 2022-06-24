@@ -123,4 +123,15 @@ class Order
 
         return $this;
     }
+
+    public function getTotal(): float
+    {
+        $total = 0.0;
+
+        foreach ($this->articles as $article) {
+            $total += $article->getTotal();
+        }
+
+        return round($total, 2);
+    }
 }
