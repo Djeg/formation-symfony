@@ -26,7 +26,7 @@
                     </div>
                     <div class="pizza-card-footer">
                         <div class="price">
-                            {{ article.pizza.price }} €
+                            {{ article.total }} €
                         </div>
                         <a class="btn" href="">
                             <i class="fa-solid fa-cart-shopping"></i>
@@ -35,6 +35,11 @@
                     </div>
                 </div>
             {% endfor %}
+
+            <h2>Total : {{ app.user.basket.total }} €</h2>
+            <p>
+                <a href="#" class="btn">Valider</a>
+            </p>
         {% endif %}
     </div>
 {% endblock %}
