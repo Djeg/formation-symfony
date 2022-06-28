@@ -194,3 +194,11 @@ footer .sitemap ul li {
     font-size: 1.2rem;
     cursor: pointer;
 }
+
+p.error {
+    text-align: center;
+    color: rgb(146, 103, 103);
+    font-weight: bold;
+    margin: 0;
+    padding: .4rem;
+}
