@@ -68,6 +68,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!$hasError) {
         // Enregistrement en base de données !
+        // 1 connéction à la base de données
+        $pdo = new PDO('mysql:dbname=pizza-shop-php;host=127.0.0.1;port=5050', 'root', 'root');
+
+        // 2. Préparation de la requête SQL
+        $statement = $pdo->prepare('INSERT INTO users (firstname, lastname, email, password, phone, city, zipCode, street, supplement) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        $statement->execute([
+            $firstname,
+            $lastname,
+            $email,
+            password_hash($password, PASSWORD_DEFAULT),
+            $phone,
+            $city,
+            $zipCode,
+            $street,
+            $supplement,
+        ]);
+
+        // Rediréction vers la page de connection
+        header('Location: /connexion.php');
+
+        // ARRET DU SCRIPT
+        return;
     }
 }
 
