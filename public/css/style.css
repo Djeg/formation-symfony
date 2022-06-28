@@ -48,6 +48,9 @@ footer {
     min-height: 400px;
     display: flex;
     border-top: 10px solid var(--color-gold);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 h1 {
@@ -156,4 +159,38 @@ button i {
     display:flex;
     justify-content: center;
     margin: 1.4rem 0;
+}
+
+/**
+ * Design du footer
+ */
+.footer-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+footer .logo {
+    font-family: 'Lobster', sans-serif;
+    color: var(--color-gold);
+    font-size: 3rem;
+    margin-right: 2rem;
+}
+
+footer .sitemap p {
+    font-size: 1.4rem;
+    color: var(--color-gold)
+}
+
+footer .sitemap ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+footer .sitemap ul li {
+    padding: 0;
+    margin: .6rem 0;
+    font-size: 1.2rem;
+    cursor: pointer;
 }
