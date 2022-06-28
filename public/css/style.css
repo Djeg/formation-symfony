@@ -1,0 +1,159 @@
+/**
+ * Création de variable CSS
+ */
+:root {
+    --color-black: #141929;
+    --color-gold: #CCAB7B;
+    --color-white: #F7F3F4;
+    --color-green: #CEF9D0;
+}
+
+/**
+ * Style de balises body, html et main
+ */
+body, html {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    min-width: 100vw;
+    min-height: 100vh;
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+    background-color: var(--color-black);
+    color: var(--color-white);
+}
+header {
+    background-color: rgba(20, 25, 41, .5);
+    backdrop-filter: blur(4px);
+    padding: .6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid var(--color-gold);
+}
+main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    margin-top: 80px;
+    align-items: center;
+}
+footer {
+    min-height: 400px;
+    display: flex;
+    border-top: 10px solid var(--color-gold);
+}
+
+h1 {
+    color: var(--color-gold);
+    font-family: 'Lobster', sans-serif;
+}
+
+h2, h3, h4 {
+    color: var(--color-gold);
+}
+
+/**
+ * CSS du header de la page
+ */
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav a {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-self: center;
+    color: var(--color-white);
+    cursor:pointer;
+    text-decoration: none;
+    font-size: 2rem;
+    padding: .6rem;
+}
+
+header nav > div {
+    display: flex;
+    align-items: center;
+}
+
+/**
+ * Style du contenu de la balise main
+ */
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 1024px;
+}
+
+/**
+ * Ajout de style pour les formulaire
+ */
+.form-vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: .6rem;
+}
+.form-vertical .form-group {
+    display: flex;
+    align-items: center;
+    margin: .6rem 0;
+}
+.form-vertical .form-group label {
+    display: flex;
+    padding: .6rem;
+    flex-basis: 20%;
+}
+
+input, textarea {
+    display: flex;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid var(--color-gold);
+    padding: .6rem;
+    color: var(--color-white);
+    background-color: transparent;
+    font-size: 1.2rem;
+}
+.form-group input {
+    flex-basis: 80%;
+}
+button {
+    display: flex;
+    padding: 1.2rem 1.4rem;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    background-color: var(--color-gold);
+    color: var(--color-black);
+    align-items: center;
+    font-size: 1.2rem;
+    box-shadow: 0px 0px 5px black;
+    cursor: pointer;
+    transition: all .5s;
+}
+button:hover {
+    background-color: var(--color-black);
+    color: var(--color-gold);
+    box-shadow: 0px 0px 5px var(--color-gold);
+}
+button i {
+    display: flex;
+    padding: 0 .6rem;
+}
+
+.btn-group {
+    display:flex;
+    justify-content: center;
+    margin: 1.4rem 0;
+}
