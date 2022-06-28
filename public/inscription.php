@@ -1,97 +1,23 @@
 <?php
-// Récupération des données du formulaire
-$firstname = isset($_POST['firstname']) ? $_POST['firstname'] : '';
-$lastname = isset($_POST['lastname']) ? $_POST['lastname'] : '';
-$email = isset($_POST['email']) ? $_POST['email'] : '';
-$password = isset($_POST['password']) ? $_POST['password'] : '';
-$repeatedPassword = isset($_POST['repeatedPassword']) ? $_POST['repeatedPassword'] : '';
-$phone = isset($_POST['phone']) ? $_POST['phone'] : '';
-$city = isset($_POST['city']) ? $_POST['city'] : '';
-$zipCode = isset($_POST['zipCode']) ? $_POST['zipCode'] : '';
-$street = isset($_POST['street']) ? $_POST['street'] : '';
-$supplement = isset($_POST['supplement']) ? $_POST['supplement'] : '';
 
-// Création d'un tableaux de récéptacle à erreur
-$errors = [
-    'firstname' => '',
-    'lastname' => '',
-    'email' => '',
-    'password' => '',
-    'repeatedPassword' => '',
-    'phone' => '',
-    'city' => '',
-    'zipCode' => '',
-    'street' => '',
-    'supplement' => '',
-];
+// on inclut composer. Cela vas nous permettre d'utiliser
+// les « use ». Ces use peuvent être importé et généré automatiquement
+// par notre éditeur de code.
+require_once './../vendor/autoload.php';
 
-// On test si le formulaire à bien était envoyé :
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // On valide le nom
-    if (!$firstname || strlen($firstname) < 2) {
-        $errors['firstname'] = 'Vous devez spécifier un prénom de 2 caractères minimum';
-    }
+// Le use permet de faire référence à une classe,
+// ici la class « InscriptionController » situé 
+// dans l'espace de nom : "App\Controller".
+// L'éspace de nom correspond au répertoire dans src.
+use App\Controller\InscriptionController;
 
-    // On valide le prénom
-    if (!$lastname || strlen($lastname) < 2) {
-        $errors['lastname'] = 'Vous devez spécifier un nom de 2 caractères minimum';
-    }
+// Création du controller d'inscription
+$controller = new InscriptionController();
 
-    // On valide l'email
-    if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors['email'] = 'Votre email n\'est pas valide';
-    }
-
-    // On valide le mot de passe
-    if (!$password || strlen($password) < 6) {
-        $errors['password'] = 'Votre mot de passe est trop court, 6 caractères minimum';
-    }
-
-    // On valide le mot de passe
-    if (!$repeatedPassword || strlen($repeatedPassword) < 6) {
-        $errors['repeatedPassword'] = 'Votre mot de passe est trop court, 6 caractères minimum';
-    }
-
-    // On valie les deux mots de passe
-    if ($password !== $repeatedPassword) {
-        $errors['repeatedPassword'] = 'Vos deux mot de passes doivent correspondre';
-    }
-
-    // On test si il n'y a pas d'erreur
-    $hasError = false;
-    foreach ($errors as $key => $value) {
-        if ($value) {
-            $hasError = true;
-            break;
-        }
-    }
-
-    if (!$hasError) {
-        // Enregistrement en base de données !
-        // 1 connéction à la base de données
-        $pdo = new PDO('mysql:dbname=pizza-shop-php;host=127.0.0.1;port=5050', 'root', 'root');
-
-        // 2. Préparation de la requête SQL
-        $statement = $pdo->prepare('INSERT INTO users (firstname, lastname, email, password, phone, city, zipCode, street, supplement) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
-        $statement->execute([
-            $firstname,
-            $lastname,
-            $email,
-            password_hash($password, PASSWORD_DEFAULT),
-            $phone,
-            $city,
-            $zipCode,
-            $street,
-            $supplement,
-        ]);
-
-        // Rediréction vers la page de connection
-        header('Location: /connexion.php');
-
-        // ARRET DU SCRIPT
-        return;
-    }
-}
+// Démarage du controller d'inscription. Cette méthode
+// nous retourne un Objet App\View\InscriptionView avec toutes
+// les données nescessaire pour afficher le HTML
+$view = $controller->start();
 
 ?>
 
@@ -141,74 +67,74 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h2>Vos informations personelles</h2>
                 <div class="form-group">
                     <label for="lastname">Votre nom :</label>
-                    <input type="text" name="lastname" id="lastname" value="<?= $lastname ?>">
+                    <input type="text" name="lastname" id="lastname" value="<?= $view->newUser->lastname ?>">
                 </div>
-                <? if ($errors['lastname']) : ?>
-                    <p class="error"><?= $errors['lastname'] ?></p>
+                <? if ($view->errors->lastname) : ?>
+                    <p class="error"><?= $view->errors->lastname ?></p>
                 <? endif ?>
                 <div class="form-group">
                     <label for="firstname">Votre prénom :</label>
-                    <input type="text" name="firstname" id="firstname" value="<?= $firstname ?>">
+                    <input type="text" name="firstname" id="firstname" value="<?= $view->newUser->firstname ?>">
                 </div>
-                <? if ($errors['firstname']) : ?>
-                    <p class="error"><?= $errors['firstname'] ?></p>
+                <? if ($view->errors->firstname) : ?>
+                    <p class="error"><?= $view->errors->firstname ?></p>
                 <? endif ?>
                 <div class="form-group">
                     <label for="email">Votre email :</label>
-                    <input type="email" name="email" id="email" value="<?= $email ?>">
+                    <input type="email" name="email" id="email" value="<?= $view->newUser->email ?>">
                 </div>
-                <? if ($errors['email']) : ?>
-                    <p class="error"><?= $errors['email'] ?></p>
+                <? if ($view->errors->email) : ?>
+                    <p class="error"><?= $view->errors->email ?></p>
                 <? endif ?>
                 <div class="form-group">
                     <label for="password">Votre mot de passe :</label>
-                    <input type="password" name="password" id="password" value="<?= $password ?>">
+                    <input type="password" name="password" id="password" value="<?= $view->password ?>">
                 </div>
-                <? if ($errors['password']) : ?>
-                    <p class="error"><?= $errors['password'] ?></p>
+                <? if ($view->errors->password) : ?>
+                    <p class="error"><?= $view->errors->password ?></p>
                 <? endif ?>
                 <div class="form-group">
                     <label for="repeatedPassword">Répéter votre mot de passe :</label>
-                    <input type="password" name="repeatedPassword" id="repeatedPassword" value="<?= $repeatedPassword ?>">
+                    <input type="password" name="repeatedPassword" id="repeatedPassword" value="<?= $view->newUser->repeatedPassword ?>">
                 </div>
-                <? if ($errors['repeatedPassword']) : ?>
-                    <p class="error"><?= $errors['repeatedPassword'] ?></p>
+                <? if ($view->errors->repeatedPassword) : ?>
+                    <p class="error"><?= $view->errors->repeatedPassword ?></p>
                 <? endif ?>
                 <div class="form-group">
                     <label for="phone">Numéro de téléphone :</label>
-                    <input type="text" name="phone" id="phone" value="<?= $phone ?>">
+                    <input type="text" name="phone" id="phone" value="<?= $view->newUser->phone ?>">
                 </div>
-                <? if ($errors['phone']) : ?>
-                    <p class="error"><?= $errors['phone'] ?></p>
+                <? if ($view->errors->phone) : ?>
+                    <p class="error"><?= $view->errors->phone ?></p>
                 <? endif ?>
                 <h2>Votre adresse</h2>
                 <div class="form-group">
                     <label for="city">Ville :</label>
-                    <input type="text" name="city" id="city" value="<?= $city ?>">
+                    <input type="text" name="city" id="city" value="<?= $view->newUser->city ?>">
                 </div>
-                <? if ($errors['city']) : ?>
-                    <p class="error"><?= $errors['city'] ?></p>
+                <? if ($view->errors->city) : ?>
+                    <p class="error"><?= $view->errors->city ?></p>
                 <? endif ?>
                 <div class="form-group">
                     <label for="zipCode">Code postale :</label>
-                    <input type="text" name="zipCode" id="zipCode" value="<?= $zipCode ?>">
+                    <input type="text" name="zipCode" id="zipCode" value="<?= $view->newUser->zipCode ?>">
                 </div>
-                <? if ($errors['zipCode']) : ?>
-                    <p class="error"><?= $errors['zipCode'] ?></p>
+                <? if ($view->errors->zipCode) : ?>
+                    <p class="error"><?= $view->errors->zipCode ?></p>
                 <? endif ?>
                 <div class="form-group">
                     <label for="street">N° et nom de la voie :</label>
-                    <input type="text" name="street" id="street" value="<?= $street ?>">
+                    <input type="text" name="street" id="street" value="<?= $view->newUser->street ?>">
                 </div>
-                <? if ($errors['street']) : ?>
-                    <p class="error"><?= $errors['street'] ?></p>
+                <? if ($view->errors->street) : ?>
+                    <p class="error"><?= $view->errors->street ?></p>
                 <? endif ?>
                 <div class="form-group">
                     <label for="supplement">Complément d'adresse :</label>
-                    <textarea name="supplement" id="supplement"><?= $supplement ?></textarea>
+                    <textarea name="supplement" id="supplement"><?= $view->newUser->supplement ?></textarea>
                 </div>
-                <? if ($errors['supplement']) : ?>
-                    <p class="error"><?= $errors['supplement'] ?></p>
+                <? if ($view->errors->supplement) : ?>
+                    <p class="error"><?= $view->errors->supplement ?></p>
                 <? endif ?>
                 <div class="btn-group">
                     <button type="submit">
