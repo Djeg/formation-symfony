@@ -12,23 +12,23 @@ namespace App\Model\DTO;
  */
 class NewUser
 {
-    public ?string $firstname;
+    public ?string $firstname = '';
 
-    public ?string $lastname;
+    public ?string $lastname = '';
 
-    public ?string $password;
+    public ?string $password = '';
 
-    public ?string $repeatedPassword;
+    public ?string $repeatedPassword = '';
 
-    public ?string $phone;
+    public ?string $phone = '';
 
-    public ?string $city;
+    public ?string $city = '';
 
-    public ?string $zipCode;
+    public ?string $zipCode = '';
 
-    public ?string $street;
+    public ?string $street = '';
 
-    public ?string $supplement;
+    public ?string $supplement = '';
 
     /**
      * Lors de la construction de l'objet on remplie les propriétés
