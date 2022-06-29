@@ -18,6 +18,8 @@ class NewUser
 
     public ?string $password = '';
 
+    public ?string $email = '';
+
     public ?string $repeatedPassword = '';
 
     public ?string $phone = '';
