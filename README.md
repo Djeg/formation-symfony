@@ -24,9 +24,12 @@ Vous retrouverey dans ce projet 2 répertoires :
 1. [Télécharger le code du projet](https://github.com/Djeg/formation-symfony/archive/refs/heads/session-php-projet/27.06.22-01.07.22.zip)
 2. Extraire le code dans le répertoire htdocs ou www de MAMP
 3. Ouvrir le répertoire avec VScode
-4. Dans un terminal lancer la commande : `composer install`
+4. Dans un terminal (celui de VSCode) lancer la commande : `composer install`
 5. Configurer la base de données dans le fichier [InscriptionController](./src/Controller/InscriptionController.php#L74)
 6. [Insérer la base de données dans phpmyadmin](./sql/pizza-shop-php.sql)
+
+Vous pouvez afficher la page de votre choix en vous rendant via votre navigateur dans la répertoire
+public suivie du nom de la page.
 
 ## Les étapes :
 
