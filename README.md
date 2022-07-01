@@ -43,3 +43,18 @@ Vous pouvez commencer l'application par la page d'inscription :
 2. Afficher le formulaire d'inscription
 3. En utilisant les données POST et MySQL, enregistrer une nouvelle
    utilisateur dans la base de données. Attention les champs doivent être validé !
+
+### 2. Le validator
+
+L'objectif est de créer une class « Validator » qui à pour objectif
+de valider les données d'un objet ...
+
+Vous pouvez créer autant de class que souhaiter afin de réaliser cette
+validation.
+
+Ce validator doit retourner un tableaux d'erreur, ou un objet d'erreur.
+Cette objet ou ce tableaux peut être vide signifiant qu'il n'y a aucune
+erreurs.
+
+Utiliser ce validator dans la class "ConnexionController", "InscriptionController"
+et "NewPizzaController".
