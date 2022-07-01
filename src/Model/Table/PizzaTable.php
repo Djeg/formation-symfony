@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use PDO;
+use App\Model\DTO\Pizza;
 use App\Model\DTO\NewPizza;
 
 /**
@@ -40,5 +42,22 @@ class PizzaTable extends BaseTable
             $pizza->price,
             $pizza->imageUrl,
         ]);
+    }
+
+    /**
+     * Récupére toutes les pizzas de la base de données
+     */
+    public function findAll(): array
+    {
+        $tableName = self::TABLE_NAME;
+        $request = <<<SQL
+            SELECT *
+            FROM $tableName
+        SQL;
+
+        $statement = $this->pdo->prepare($request);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_CLASS, Pizza::class);
     }
 }
