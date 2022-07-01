@@ -25,7 +25,7 @@ Vous retrouverey dans ce projet 2 répertoires :
 2. Extraire le code dans le répertoire htdocs ou www de MAMP
 3. Ouvrir le répertoire avec VScode
 4. Dans un terminal (celui de VSCode) lancer la commande : `composer install`
-5. Configurer la base de données dans le fichier [InscriptionController](./src/Controller/InscriptionController.php#L74)
+5. Configurer la base de données dans le fichier [BaseTable](./src/Model/Table/BaseTable.php)
 6. [Insérer la base de données dans phpmyadmin](./sql/pizza-shop-php.sql)
 
 Vous pouvez afficher la page de votre choix en vous rendant via votre navigateur dans la répertoire
