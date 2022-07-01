@@ -7,14 +7,25 @@ namespace App\Model\DTO;
 /**
  * Contient les possibles erreurs d'un nouvel utilisateur
  */
-class NewUserError extends NewUser
+class NewUserError
 {
-    /**
-     * Lors de sa construction nous laissons tout les
-     * champs vide. C'est l'InscriptionController qui s'occupe
-     * de les remplir !
-     */
-    public function __construct()
-    {
-    }
+    public ?array $firstname = [];
+
+    public ?array $lastname = [];
+
+    public ?array $password = [];
+
+    public ?array $email = [];
+
+    public ?array $repeatedPassword = [];
+
+    public ?array $phone = [];
+
+    public ?array $city = [];
+
+    public ?array $zipCode = [];
+
+    public ?array $street = [];
+
+    public ?array $supplement = [];
 }

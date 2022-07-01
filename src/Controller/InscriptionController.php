@@ -8,7 +8,13 @@ use PDO;
 use App\Model\DTO\NewUser;
 use App\Model\DTO\NewUserError;
 use App\Model\Table\UserTable;
+use App\Validator\Constraint\EmailConstraint;
+use App\Validator\Constraint\LengthConstraint;
+use App\Validator\Constraint\NotBlankConstraint;
+use App\Validator\Constraint\SameAsConstraint;
+use App\Validator\Validator;
 use App\View\InscriptionView;
+use LengthException;
 
 /**
  * Voici le controller de la page inscription. Ce controller
@@ -24,65 +30,51 @@ class InscriptionController
     {
         // Création du nouvel utilisateur
         $newUser = new NewUser();
-
         // Création des erreurs du nouvel utilisateur
         $errors = new NewUserError();
-
         // Création de la table user
         $table = new UserTable();
 
         // On test si le formulaire à bien était envoyé :
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // On valide le nom
-            if (!$newUser->firstname || strlen($newUser->firstname) < 2) {
-                $errors->firstname = 'Vous devez spécifier un prénom de 2 caractères minimum';
+
+            // Validation du nouvel utilisateur
+            $validator = (new Validator())
+                ->addConstraint('firstname', [
+                    new NotBlankConstraint(),
+                    new LengthConstraint(2),
+                ])
+                ->addConstraint('lastname', [
+                    new NotBlankConstraint(),
+                    new LengthConstraint(2),
+                ])
+                ->addConstraint('email', [
+                    new NotBlankConstraint(),
+                    new EmailConstraint(),
+                ])
+                ->addConstraint('password', [
+                    new NotBlankConstraint(),
+                    new LengthConstraint(6),
+                ])
+                ->addConstraint('repeatedPassword', [
+                    new NotBlankConstraint(),
+                    new SameAsConstraint('password'),
+                ]);
+
+
+            if (!$validator->validate($newUser)) {
+                return new InscriptionView($newUser, $validator->fill($errors));
             }
 
-            // On valide le prénom
-            if (!$newUser->lastname || strlen($newUser->lastname) < 2) {
-                $errors->lastname = 'Vous devez spécifier un nom de 2 caractères minimum';
-            }
+            // Enregistrement en base de données !
+            // 1 connéction à la base de données
+            $table->insertOne($newUser);
 
-            // On valide l'email
-            if (!$newUser->email || !filter_var($newUser->email, FILTER_VALIDATE_EMAIL)) {
-                $errors->email = 'Votre email n\'est pas valide';
-            }
+            // Rediréction vers la page de connection
+            header('Location: /connexion.php');
 
-            // On valide le mot de passe
-            if (!$newUser->password || strlen($newUser->password) < 6) {
-                $errors->password = 'Votre mot de passe est trop court, 6 caractères minimum';
-            }
-
-            // On valide le mot de passe
-            if (!$newUser->repeatedPassword || strlen($newUser->repeatedPassword) < 6) {
-                $errors->repeatedPassword = 'Votre mot de passe est trop court, 6 caractères minimum';
-            }
-
-            // On valie les deux mots de passe
-            if ($newUser->password !== $newUser->repeatedPassword) {
-                $errors->repeatedPassword = 'Vos deux mot de passes doivent correspondre';
-            }
-
-            // On test si il n'y a pas d'erreur
-            $hasError = false;
-            foreach ($errors as $key => $value) {
-                if ($value) {
-                    $hasError = true;
-                    break;
-                }
-            }
-
-            if (!$hasError) {
-                // Enregistrement en base de données !
-                // 1 connéction à la base de données
-                $table->insertOne($newUser);
-
-                // Rediréction vers la page de connection
-                header('Location: /connexion.php');
-
-                // On retourne la vue de l'inscription
-                return new InscriptionView($newUser, $errors);
-            }
+            // On retourne la vue de l'inscription
+            return new InscriptionView($newUser, $errors);
         }
 
         // On retourne la vue de l'inscription
