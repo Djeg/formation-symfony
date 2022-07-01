@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Model\Table\UserTable;
 use PDO;
 use App\View\ConnexionView;
 
@@ -23,6 +24,9 @@ class ConnexionController
         // erreurs reliées au crédentielles
         $view = new ConnexionView();
 
+        // Création de la table user
+        $table = new UserTable();
+
         // Vérifier que le formulaire à bien était envoyé
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Valider les champs du formulaire
@@ -40,14 +44,7 @@ class ConnexionController
 
             // Enregistrement en base de données !
             // 1 connéction à la base de données
-            $pdo = new PDO('mysql:dbname=pizza-shop-php;host=127.0.0.1;port=5050', 'root', 'root');
-
-            // 2. Préparation de la requête SQL
-            $statement = $pdo->prepare('SELECT * from users WHERE email = ? LIMIT 1');
-            $statement->execute([$view->credential->email]);
-
-            // Récupération de ce qu'il y a en base de données
-            $user = $statement->fetch(PDO::FETCH_ASSOC);
+            $user = $table->findOneByEmail($view->credential->email);
 
             // Vérifier si l'email correspond à une utilisateur dans la base de données
             if (false === $user) {

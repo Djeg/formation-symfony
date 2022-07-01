@@ -7,6 +7,7 @@ namespace App\Controller;
 use PDO;
 use App\Model\DTO\NewUser;
 use App\Model\DTO\NewUserError;
+use App\Model\Table\UserTable;
 use App\View\InscriptionView;
 
 /**
@@ -26,6 +27,9 @@ class InscriptionController
 
         // Création des erreurs du nouvel utilisateur
         $errors = new NewUserError();
+
+        // Création de la table user
+        $table = new UserTable();
 
         // On test si le formulaire à bien était envoyé :
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -71,21 +75,7 @@ class InscriptionController
             if (!$hasError) {
                 // Enregistrement en base de données !
                 // 1 connéction à la base de données
-                $pdo = new PDO('mysql:dbname=pizza-shop-php;host=127.0.0.1;port=5050', 'root', 'root');
-
-                // 2. Préparation de la requête SQL
-                $statement = $pdo->prepare('INSERT INTO users (firstname, lastname, email, password, phone, city, zipCode, street, supplement) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
-                $statement->execute([
-                    $newUser->firstname,
-                    $newUser->lastname,
-                    $newUser->email,
-                    password_hash($newUser->password, PASSWORD_DEFAULT),
-                    $newUser->phone,
-                    $newUser->city,
-                    $newUser->zipCode,
-                    $newUser->street,
-                    $newUser->supplement,
-                ]);
+                $table->insertOne($newUser);
 
                 // Rediréction vers la page de connection
                 header('Location: /connexion.php');
