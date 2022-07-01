@@ -10,7 +10,7 @@ namespace App\Model\DTO;
 class NewUserError extends NewUser
 {
     /**
-     * Lors de se construction nous laissons tout les
+     * Lors de sa construction nous laissons tout les
      * champs vide. C'est l'InscriptionController qui s'occupe
      * de les remplir !
      */
