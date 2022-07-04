@@ -54,3 +54,11 @@ Cette page HTML doit hérité de `templates/base.html.twig` ou bien d'une autre 
 vie un héritage multiple.
 
 Cette méthode doit être accesible avec la page `/calculatrice/diviser`.
+
+### Les paramètres de routes
+
+Toujours dans le controller [`CalculatriceController`](../src/Controller/CalculatriceController.php)
+
+Dans la route : soustraire, multiplier et diviser faire en sorte
+de recevoir 2 paramètre entier (x et y), de calculer le total et pour
+finir d'afficher le résultat dans un template twig :)
