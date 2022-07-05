@@ -21,6 +21,8 @@ multiplication, division, puissance, modulo, racine carrè.
 
 > Vous pouvez vous inspirer du code présent dans la [`CalculatriceController`](../src/Controller/CalculatriceController.php)
 
+> N'hésitez pas à faire un jolie design :)
+
 ## Fiche d'aide
 
 Vous avez la possibilité de consulter la fiche d'aide : https://slides.com/davidjegat-1/sf5-cheat-sheets/fullscreen
