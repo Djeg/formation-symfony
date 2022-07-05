@@ -1,0 +1,6 @@
+GET https://google.fr
+Content-Type: application/json
+
+{
+    "email": "test@mail.com"
+}
