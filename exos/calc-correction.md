@@ -74,3 +74,24 @@ afin de créer ce controller, il faut utiliser la commande `symfony console make
 
 ![make controller](./img/make%3Acontroller.png)
 ![make controller 2](./img/make%3Acontroller2.png)
+
+## Le controller :
+
+### La namespace
+
+![namespace](./img/namespace.png)
+
+### Les uses
+
+![uses](./img/uses.png)
+
+### La route
+
+![route1](./img/route1.png)
+![route2](./img/route2.png)
+![route3](./img/route3.png)
+
+### Les conventions de nommage
+
+![nommage](./img/nommage1.png)
+![nommage 2](./img/nommage2.png)
