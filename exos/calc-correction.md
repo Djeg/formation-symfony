@@ -116,3 +116,4 @@ afin de créer ce controller, il faut utiliser la commande `symfony console make
 ## La page d'accueil de la calculatrice
 
 1. [Supprimer les variables dans le CalculatriceController](https://github.com/Djeg/formation-symfony/commit/8ef315db300498fc5f636c654fed4b67c2b5f09b)
+2. [Création de la page d'accueil de la calculatrice](https://github.com/Djeg/formation-symfony/commit/a89f491233bfde80b83a45f23247e6a7902812a0)
