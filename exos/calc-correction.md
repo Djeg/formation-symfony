@@ -132,3 +132,7 @@ Vous retrouverez le code [ici](https://github.com/Djeg/formation-symfony/commit/
 
 1. Créer un fichier `templates/calculatrice/additionner.html.twig` et placer
    le [HTML de la page](../templates/calculatrice/additionner.html.twig).
+
+## Les pages d'opération
+
+En suivant la même logique nous pouvons ajouter toutes [les autres opérations](../src/Controller/CalculatriceController.php)
