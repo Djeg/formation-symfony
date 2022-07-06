@@ -19,3 +19,9 @@ interactive de la calculatrice.
 
 > Astuce : Vous pouvez utiliser `cd` pour déplacer dans le projet tout juste
 > créé et lancer la commande `code .`.
+
+## 2. Organisation
+
+Un projet contient 3 dossiers à connaître par coeur :
+
+![sf orga](./img/sf-orga.png)
