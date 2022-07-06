@@ -91,7 +91,7 @@ class CalculatriceController extends AbstractController
         $total = $x % $y;
 
         // affichage de la page html
-        return $this->render('calculatrice/puissance.html.twig', [
+        return $this->render('calculatrice/modulo.html.twig', [
             'x' => $x,
             'y' => $y,
             'total' => $total,
