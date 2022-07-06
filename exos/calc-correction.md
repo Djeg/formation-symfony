@@ -126,4 +126,4 @@ afin de créer ce controller, il faut utiliser la commande `symfony console make
 
 ### 2. Ajout du code de la page additionner :
 
-Vous retrouverez le code [ici](https://github.com/Djeg/formation-symfony/commit/445e8256ae8bceabe8c8cef3d1a9cd54f30e2cdcc)
+Vous retrouverez le code [ici](https://github.com/Djeg/formation-symfony/commit/445e8256ae8bceabe8c8cef3d1a9cd54f30e2cdc)
