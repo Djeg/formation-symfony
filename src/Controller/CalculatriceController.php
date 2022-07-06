@@ -9,10 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CalculatriceController extends AbstractController
 {
     #[Route('/calculatrice', name: 'app_calculatrice_index')]
-    public function accueil(): Response
+    public function index(): Response
     {
-        return $this->render('calculatrice/index.html.twig', [
-            'controller_name' => 'CalculatriceController',
-        ]);
+        return $this->render('calculatrice/index.html.twig');
     }
 }
