@@ -112,3 +112,7 @@ afin de créer ce controller, il faut utiliser la commande `symfony console make
 ### 3. Supprimer « encore »
 
 ![encore](./img/encore.png)
+
+## La page d'accueil de la calculatrice
+
+1. [Supprimer les variables dans le CalculatriceController](https://github.com/Djeg/formation-symfony/commit/8ef315db300498fc5f636c654fed4b67c2b5f09b)

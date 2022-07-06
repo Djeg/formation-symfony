@@ -1,20 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CalculatriceController!{% endblock %}
+{% block title %}Calculatrice{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<h1>Calculatrice</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<form method="POST">
+    <label for="x">Premier nombre :</label>
+    <input type="number" name="x" id="x" />
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/djeg/Project/formation-sf6/src/Controller/CalculatriceController.php'|file_link(0) }}">src/Controller/CalculatriceController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/djeg/Project/formation-sf6/templates/calculatrice/index.html.twig'|file_link(0) }}">templates/calculatrice/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <label for="operation">Opération :</label>
+    <select name="operation">
+        <option value="additionner">+</option>
+        <option value="soustraire">-</option>
+        <option value="multiplier">*</option>
+        <option value="diviser">/</option>
+        <option value="modulo">%</option>
+        <option value="puissance">**</option>
+        <option value="racineCarre">racine carré</option>
+    </select>
+
+    <label for="y">Deuxième nombre :</label>
+    <input type="number" name="y" id="y" />
+
+    <button type="submit">Calculer</button>
+</form>
 {% endblock %}
