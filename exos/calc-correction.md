@@ -95,3 +95,20 @@ afin de créer ce controller, il faut utiliser la commande `symfony console make
 
 ![nommage](./img/nommage1.png)
 ![nommage 2](./img/nommage2.png)
+
+## La vue :
+
+### 1. Utiliser la méthode "render" du controller
+
+![render](./img/render.png)
+![render2](./img/render2.png)
+
+### 2. Utiliser twig
+
+![twig](./img/twig1.png)
+![twig 2](./img/twig2.png)
+![twig 3](./img/twig3.png)
+
+### 3. Supprimer « encore »
+
+![encore](./img/encore.png)
