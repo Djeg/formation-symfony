@@ -14,3 +14,8 @@ interactive de la calculatrice.
    projet symfony :
 
 ![Symfony new](./img/symfony-new.png)
+
+3. Ouvrir VSCode dans le projet tout juste créé
+
+> Astuce : Vous pouvez utiliser `cd` pour déplacer dans le projet tout juste
+> créé et lancer la commande `code .`.
