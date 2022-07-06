@@ -6,7 +6,16 @@
 
 {% block body %}
     <h1>Calculatrice : Additionner</h1>
-    <p>
-        Le résultat de {{ x }} + {{ y }} = {{ total }}
-    </p>
+    <p>Résulat</p>
+    <math>
+        <mrow>
+            <mi>x</mi><mo>+</mo><mi>y</mi>
+        </mrow>
+        <mo>=</mo>
+        <mrow>
+            <mi>{{ x }}</mi><mo>+</mo><mi>{{ y }}</mi>
+        </mrow>
+        <mo>=</mo>
+        <mi>{{ total }}</mi>
+    </math>
 {% endblock %}

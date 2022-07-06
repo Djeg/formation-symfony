@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -9,9 +10,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CalculatriceController extends AbstractController
 {
     #[Route('/calculatrice', name: 'app_calculatrice_index')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        return $this->render('calculatrice/index.html.twig');
+        // Si la requête est POST (si le formulaire a été envoyé)
+        if ($request->isMethod('GET')) {
+            // on affiche la page html
+            return $this->render('calculatrice/index.html.twig');
+        }
+
+        // Récupérer x, y et l'operation
+        $x = $request->request->get('x');
+        $y = $request->request->get('y');
+        $operation = $request->request->get('operation');
+
+        // On redirige vers l'opération
+        return $this->redirectToRoute("app_calculatrice_$operation", [
+            'x' => $x,
+            'y' => $y,
+        ]);
     }
 
     #[Route('/calculatrice/additionner/{x}/{y}', name: 'app_calculatrice_additionner')]
