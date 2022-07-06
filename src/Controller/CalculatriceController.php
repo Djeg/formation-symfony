@@ -13,4 +13,18 @@ class CalculatriceController extends AbstractController
     {
         return $this->render('calculatrice/index.html.twig');
     }
+
+    #[Route('/calculatrice/additionner/{x}/{y}', name: 'app_calculatrice_additionner')]
+    public function additionner(int $x, int $y): Response
+    {
+        // calculer la total
+        $total = $x + $y;
+
+        // afficher la page de l'addition
+        return $this->render('calculatrice/additionner.html.twig', [
+            'x' => $x,
+            'y' => $y,
+            'total' => $total,
+        ]);
+    }
 }
