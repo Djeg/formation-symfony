@@ -54,3 +54,23 @@ http://127.0.0.1:8000
 ```
 
 > ATTENTION : Le port peut varier, ce n'est pas forcèment le port 8000
+
+## 4. Création d'un controller
+
+Symfony utilise des controller afin de représenter les pages de notre site
+internet. Un controller est une classe, chaque méthodes de cette class
+réprésente une page.
+
+Pour créer ce controller il faut utiliser la console symfony.
+
+> Astuce : Vous pouvez lister toutes les commandes de la console symfony
+> avec leurs notice d'utilisation en tapant `symfony console`
+
+Nous allons créer un controller pour notre calculatrice : `CalculatriceController`,
+afin de créer ce controller, il faut utiliser la commande `symfony console make:controller`
+
+> Astuce : Vous n'êtes pas obligé de taper `make:controller` en entier, les 2 premières
+> lettres de chaque mot suffisent : `symfony console ma:co`
+
+![make controller](./img/make%3Acontroller.png)
+![make controller 2](./img/make%3Acontroller2.png)
