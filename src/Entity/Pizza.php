@@ -16,11 +16,11 @@ class Pizza
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[ORM\Column(type: 'text', nullable: true)]
-    private $description;
-
     #[ORM\Column(type: 'float')]
     private $price;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $description;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $imageUrl;
@@ -42,18 +42,6 @@ class Pizza
         return $this;
     }
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
     public function getPrice(): ?float
     {
         return $this->price;
@@ -62,6 +50,18 @@ class Pizza
     public function setPrice(float $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
