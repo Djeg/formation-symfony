@@ -8,3 +8,7 @@
 ## Correction Interactive de la calculatrice
 
 -   [Calculatrice : Correction interactive](./exos/calc-correction.md)
+
+## CRUD des pizzas
+
+-   [Le CRUD des pizzas](./exos/crud-pizzas.md)
