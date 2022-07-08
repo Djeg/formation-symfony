@@ -15,6 +15,12 @@
         <li>
             #{{ pizza.id }}
             {{ pizza.name }} ({{ pizza.price }} €)
+            <a href="{{ path('app_pizza_update', {
+                'id': pizza.id
+            }) }}">Modifier</a>
+            <a href="{{ path('app_pizza_remove', {
+                'id': pizza.id
+            }) }}">Supprimer</a>
         </li>
     {% endfor %}
 </ul>
