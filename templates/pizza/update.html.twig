@@ -5,6 +5,10 @@
 {% block body %}
     <h1>Modifier la pizza : {{ pizza.name }} </h1>
 
+    <p>
+        <a href="{{ path('app_pizza') }}">Retour à la liste des pizzas</a>
+    </p>
+
     <form method="POST">
         <label for="name">Nom :</label>
         <input type="text" id="name" name="name" value="{{ pizza.name }}"/>
