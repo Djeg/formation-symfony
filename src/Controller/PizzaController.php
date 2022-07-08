@@ -12,10 +12,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class PizzaController extends AbstractController
 {
     #[Route('/pizza', name: 'app_pizza')]
-    public function index(): Response
+    public function index(PizzaRepository $repository): Response
     {
+        // récupération de toutes les pizzas
+        $pizzas = $repository->findAll();
+
+        // Afficher dans un fichier html les pizzas
         return $this->render('pizza/index.html.twig', [
-            'controller_name' => 'PizzaController',
+            'pizzas' => $pizzas,
         ]);
     }
 
