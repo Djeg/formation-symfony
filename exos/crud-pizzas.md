@@ -63,3 +63,37 @@ Pour cela, utilisez le PizzaRepository afin de récupérer toutes les pizzas
 de la base de données.
 
 > Il doit y avoir d'afficher le nom et le prix de la pizza !
+
+## 8. Modifier une pizza (PARTIE 1)
+
+Dans le PizzaController, ajouter une page qui correspond à la route `/pizza/{id}/modifier`
+vous pouvez nommer cette méthode « update ».
+
+Récupérer le paramètre de route `id` et utilisez le `PizzaRepository` pour récupérer
+la pizza avec l'identifiant spécifié dans la Route.
+
+Afficher un formulaire avec les champs suivant :
+
+| nom du champ | input    |
+| ------------ | -------- |
+| nom          | text     |
+| prix         | number   |
+| description  | textarea |
+| imageUrl     | url      |
+
+**ATTENTION** : Les champs doivent être préremplie avec ce que contient la pizza !
+
+> ASTUCE : Vous pouvez utiliser la méthode `$repository->find($id)` afin de récupérer une pizza
+
+## 9. Modifier une pizza (PARTIE 2)
+
+Dans le PizzaController et dans la méthode update créé juste au dessus :
+
+1. Tester si le formulaire à été envoyé
+2. Récupérer les données du formulaire
+3. Modifier la pizza avec les données du formulaire
+4. Utiliser le repository afin d'enregistrer la pizza en base de données
+5. Si tout c'est bien passé, rediriger vers la liste des pizzas
+
+> ASTUCE : Vous pouvez utiliser `$repository->add($pizza, true);` afin d'enregistrer
+> la pizza en base de données
