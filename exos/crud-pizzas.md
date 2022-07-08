@@ -85,6 +85,15 @@ Afficher un formulaire avec les champs suivant :
 
 > ASTUCE : Vous pouvez utiliser la méthode `$repository->find($id)` afin de récupérer une pizza
 
+> ASTUCE : Vous pouvez faire un lien dynamique en utilisant la fonction twig `path` en spécifiant
+> en second argument les paramères de la route !
+>
+> ```twig
+> path('nom_de_la_route', {
+>   'nom_du_parametre': valeur
+> })
+> ```
+
 ## 9. Modifier une pizza (PARTIE 2)
 
 Dans le PizzaController et dans la méthode update créé juste au dessus :
