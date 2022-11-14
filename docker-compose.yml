@@ -5,8 +5,6 @@ services:
     image: mysql
     restart: always
     command: --default-authentication-plugin=mysql_native_password
-    volumes:
-      - ./:/app
     environment:
       MYSQL_ROOT_PASSWORD: "root"
     ports:
@@ -20,3 +18,17 @@ services:
     environment:
       PMA_ARBITRARY: 1
       PMA_HOST: mysql
+
+  app:
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    volumes:
+      - .:/app
+    command: "php -S 0.0.0.0:${APP_PORT} -t public public/index.php"
+
