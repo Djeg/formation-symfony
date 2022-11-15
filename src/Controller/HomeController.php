@@ -19,7 +19,7 @@ class HomeController extends AbstractController
      * Affiche la page d'accueil
      */
     #[Route('/', name: 'app_home_index', methods: ['GET'])]
-    public function index(BookRepository $repository): Response
+    public function index(BookRepository $repository, Request $request): Response
     {
         // Afficher le template twig "home/index.html.twig" :
         return $this->render('home/index.html.twig');

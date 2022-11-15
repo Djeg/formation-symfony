@@ -51,3 +51,64 @@ Twig est un petit langage inspiré par Python. Sa syntax est très allégée :
 #}
 Bonjour {{ user.name }} !
 ```
+
+## L'inclusion
+
+Il est possible d'inclure de petit bout de HTML en utilisant
+la fonction twig `include` :
+
+```twig
+{# _menu.html.twig #}
+<nav>
+  <ul>
+    <li>Menu</li>
+  </ul>
+</nav>
+```
+
+```twig
+{# index.html.twig #}
+{{ include('_menu.html.twig') }}
+```
+
+## L'héritage
+
+Il est possible d'utiliser une technique bien plus puissante : L'héritage.
+
+C'est la possibilité de reprendre le contenue d'un fichier twig et de réécrire
+des parties précises (les block)
+
+Exemple :
+
+```twig
+{# base.html.twig #}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {% block stylesheets %}
+        {% endblock %}
+
+        {% block javascripts %}
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+    </body>
+</html>
+```
+
+```twig
+{# home/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}LookBook - Accueil{% endblock %}
+
+{% block body %}
+  <h1>Coucou les amis !</h1>
+
+  <p>Hey hey</p>
+{% endblock %}
+```

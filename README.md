@@ -7,6 +7,7 @@
 3. [Les Controller & Les Routes](./assets/cours/controller-et-routes.md)
 4. [Le Model (Doctrine)](./assets/cours/doctrine.md)
 5. [La Vue (Twig)](./assets/cours/view.md)
+6. [Le request & les formulaires](./assets/cours/request-form.md)
 
 ## Les execices :
 
