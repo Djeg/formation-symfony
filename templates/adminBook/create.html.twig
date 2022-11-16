@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LookBook Admin - Nouveau Livre{% endblock %}
+
+{% block body %}
+  <h1>{% block pageTitle %}Nouveau Livre{% endblock %}</h1>
+
+  <form method="POST">
+    <div>
+      <input type="text" name="title" placeholder="Titre du livre" value="{% block bookTitleValue '' %}" />
+    </div>
+    <div>
+      <textarea name="description" placeholder="Description du livre">{% block bookDescriptionValue '' %}</textarea>
+    </div>
+    <div>
+      <input type="text" name="genre" placeholder="Genre du livre" value="{% block bookGenreValue '' %}"/>
+    </div>
+    <div>
+      <button type="submit">Envoyer</button>
+    </div>
+  </form>
+{% endblock %}

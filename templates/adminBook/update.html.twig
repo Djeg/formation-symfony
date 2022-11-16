@@ -1,0 +1,13 @@
+{% extends 'adminBook/create.html.twig' %}
+
+{% block title %}
+  LookBook Admin - Éditer le livre « {{ book.title }} »
+{% endblock %}
+
+{% block pageTitle %}
+Edition de « {{ book.title }} »
+{% endblock %}
+
+{% block bookTitleValue %}{{ book.title }}{% endblock %}
+{% block bookDescriptionValue %}{{ book.description }}{% endblock %}
+{% block bookGenreValue %}{{ book.genre }}{% endblock %}

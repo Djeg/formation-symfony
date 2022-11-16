@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LookBook Admin - Liste des livres{% endblock %}
+
+{% block body %}
+<h1>Liste des livres</h1>
+
+{% for book in books %}
+  <p>{{ book.title }}</p>
+{% endfor %}
+
+{% endblock %}
