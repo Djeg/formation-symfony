@@ -112,3 +112,36 @@ Exemple :
   <p>Hey hey</p>
 {% endblock %}
 ```
+
+## Faire des liens entre les pages !
+
+Pour faire un lien en HTML on utilise la balise : `<a>`. Cette dernière
+pour fonctionner à besoin d'un attribut `href` :
+
+```html
+<a href="/lien/vers/ma/page">Coucou</a>
+```
+
+Le problème : Le contenu de notre HREF, c'est une route ! Nous ne mettons pas les liens diréctement dans la balise a.href. Nous allons plutôt demander à Symfony de générer cette partie pour nous :
+
+```twig
+<a href="{{ path('app_adminBook_list') }}">Liste des livres</a>
+```
+
+Pour faire des liens entre nos pages, nous utilisons la fonction twig : `path`. Cette fonction, accèpte 1 paramètre : la nom de la route.
+
+**ATTENTION** : Il éxiste des routes qui sont « dynamique » (des routes avec des varaiables) ! Pour ces routes la, il faut spécifier un second paramètre à la fonction `path` avec le contenu des variables :
+
+```twig
+<a href="{{ path('app_adminBook_update', { id: book.id }) }}">Mettre à jour</a>
+```
+
+## Ajouter des feuilles de styles ou du javascript
+
+**les feuilles de styles et le javascript** se sont des resources **PUBLIC** (qui se range dans le dossier `public`). Vous pouvez ajouter ce que vous voulez dans le répertoire et y accéder comme ceci :
+
+```html
+<link rel="stylesheet" href="/style.css" />
+```
+
+La balise `link` est généralement ajouté dans le template `base.html.twig` !

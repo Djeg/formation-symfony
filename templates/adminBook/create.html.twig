@@ -5,6 +5,10 @@
 {% block body %}
   <h1>{% block pageTitle %}Nouveau Livre{% endblock %}</h1>
 
+  <p>
+    <a href="{{ path('app_adminBook_list') }}">Revenir à la liste</a>
+  </p>
+
   <form method="POST">
     <div>
       <input type="text" name="title" placeholder="Titre du livre" value="{% block bookTitleValue '' %}" />
