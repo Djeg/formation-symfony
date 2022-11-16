@@ -11,6 +11,7 @@ docker-compose exec app composer install
 
 # On met en place la base de données
 docker-compose exec app symfony console do:da:cr
+docker-compose exec app symfony console do:sc:up --force
 
 echo "=============================="
 echo "Installation terminé !"
