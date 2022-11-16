@@ -13,3 +13,4 @@
 
 1. [Le controller et les routes](./assets/exos/controller.md)
 2. [Le CRUD de Livre](./assets/exos/crud-book.md)
+3. [Le design](./assets/exos/le-design.md)
