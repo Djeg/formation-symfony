@@ -30,5 +30,5 @@ services:
       - ${APP_PORT}:${APP_PORT}
     volumes:
       - .:/app
-    command: "php -S 0.0.0.0:${APP_PORT} -t public public/index.php"
+    command: "symfony server:start --port=${APP_PORT}"
 
