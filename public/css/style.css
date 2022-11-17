@@ -1,0 +1,274 @@
+/*
+ * Style Générale
+ *
+ * Tout le styles des balises nu (sans classe, sans id) ainse
+ * que les variables css
+ */
+:root {
+  --color-platinium: #f0f0f0;
+  --color-gray: #dddddd;
+  --color-grey: #acacac;
+  --color-black: #3F403F;
+  --color-black-90: #4e504e;
+  --color-cafe: #2b1b0f;
+  --color-red: #964343;
+  --color-green: #328136;
+  --font-size: 18px;
+  --font-default: 'Noto Sans', sans-serif;
+  --font-fantasy: 'Lobster', sans-serif;
+  --mg-none: 0;
+  --mg-small: .6rem;
+  --mg-medium: 1rem;
+  --mg-large: 1.8rem;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-size: var(--font-size);
+  background-color: var(--color-platinium);
+  color: var(--color-black);
+  font-family: var(--font-default);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.ft-fantasy {
+  font-family: var(--font-fantasy);
+}
+
+/*
+ * Le Layout
+ *
+ * Concerne la disposition générale de la page
+ */
+.top-bar {
+  background-color: var(--color-cafe);
+  color: var(--color-platinium);
+  padding: var(--mg-medium);
+  display: flex;
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  flex-grow: 2;
+}
+
+.sidebar {
+  background-color: var(--color-black);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  color: var(--color-platinium);
+  flex-basis: 280px;
+}
+
+.page-content {
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0 var(--mg-medium);
+}
+
+/*
+ * La top bar
+ *
+ * Contient toutes les classes pour la top bar !
+ */
+.logo {
+  font-family: var(--font-fantasy);  
+  font-size: 2em;
+  padding: var(--mg-small);
+  margin: var(--mg-none);
+}
+
+/*
+ * La sidebar
+ *
+ * Contient toutes les class css de la sidebar
+ */
+.vertical-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-bottom: 1px solid var(--color-black-90);
+}
+
+.vertical-menu .title {
+  display: flex;
+  align-items: center;
+  padding: var(--mg-small);
+  cursor: pointer;
+  transition: all .25s;
+  font-family: var(--font-fantasy);
+  font-size: 1.4rem;
+}
+.vertical-menu .title .label {
+  margin: 0;
+}
+.vertical-menu .title:hover {
+  background-color: var(--color-platinium);
+  color: var(--color-black);
+}
+.vertical-menu .title .icon {
+  margin: var(--mg-small);
+  margin-left: 0;
+}
+.vertical-menu .title .direction {
+  flex-grow: 2;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: right;
+  padding: var(--mg-small);
+}
+.vertical-menu .title .direction.up {
+  display: none;
+}
+.vertical-menu.open .title .direction.down {
+  display: none;
+}
+.vertical-menu.open .title .direction.up {
+  display: flex;
+}
+
+.vertical-menu .menu {
+  list-style: none;
+  margin: var(--mg-none);
+  padding: var(--mg-none);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background-color: var(--color-black-90);
+  transition: all .25s;
+  max-height: 0;
+  overflow: hidden;
+}
+.vertical-menu.open .menu {
+  max-height: 1500px;
+}
+.vertical-menu .menu li {
+  margin: var(--mg-none);
+  padding: var(--mg-none);
+  display: flex;
+}
+.vertical-menu .menu li a {
+  display: flex;
+  align-items: center;
+  color: var(--color-platinium);
+  text-decoration: none;
+  cursor: pointer;
+  padding: var(--mg-small);
+  transition: all .25s;
+  width: 100%;
+}
+.vertical-menu .menu li a:hover {
+  background-color: var(--color-cafe);
+}
+.vertical-menu .menu li a i {
+  margin: var(--mg-small);
+}
+
+/*
+ * La table
+ *
+ * Contient le design de la table
+ */
+.table {
+  border-collapse: collapse;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, .6);
+}
+.table th:nth-child(2n + 0) {
+  background-color: var(--color-black-90);
+  color: var(--color-platinium);
+}
+.table th:nth-child(2n + 1) {
+  background-color: var(--color-cafe);
+  color: var(--color-platinium);
+}
+
+.table th {
+  padding: var(--mg-small);
+  text-align: center;
+}
+
+.table tr:nth-child(2n + 0) {
+  background-color: var(--color-gray);
+}
+
+.table td {
+  text-align: center;
+}
+
+.table td.action a {
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--color-black);
+}
+
+.table td.action a i {
+  font-size: 1.4rem;
+  padding: var(--mg-small);
+}
+
+.table td.action a.update {
+  color: var(--color-green);
+}
+
+.table td.action a.delete {
+  color: var(--color-red);
+}
+
+/*
+ * Les boutons
+ *
+ * Contient le style css de nos boutons
+ */
+
+.btn-group {
+  display: flex;
+  margin: var(--mg-medium) 0;
+}
+
+.btn {
+  padding: var(--mg-small) var(--mg-medium);
+  padding-left: 0;
+  text-align: center;
+  display: flex;
+  background-color: var(--color-black-90);
+  background-color: var(--color-gray);
+  border-radius: 5px;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color-black);
+  font-weight: bold;
+  cursor: pointer;
+  border: 1px solid var(--color-grey);
+  font-size: 1em;
+}
+.btn.success {
+  background-color: var(--color-green);
+  color: var(--color-platinium);
+}
+.btn.error {
+  background-color: var(--color-red);
+  color: var(--color-platinium);
+}
+.btn i {
+  padding: 0 var(--mg-small);
+}

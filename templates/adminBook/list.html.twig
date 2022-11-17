@@ -3,10 +3,44 @@
 {% block title %}LookBook Admin - Liste des livres{% endblock %}
 
 {% block body %}
-<h1>Liste des livres</h1>
 
-{% for book in books %}
-  <p>{{ book.title }}</p>
-{% endfor %}
+<div class="wrapper">
+  <h1>Liste des livres</h1>
+
+  <div class="btn-group">
+    <a class="btn" href="{{ path('app_adminBook_create') }}">
+      <i class="fa-solid fa-plus"></i>
+      Nouveau Livre
+    </a>
+  </div>
+
+  <table class="table">
+    <tr>
+      <th>Id</th>
+      <th>Titre</th>
+      <th>Date de création</th>
+      <th>Date de Mise à jour</th>
+      <th>Actions</th>
+    </tr>
+    {% for book in books %}
+      <tr>
+        <td>{{ book.id }}</td>
+        <td>{{ book.title }}</td>
+        <td>{{ book.createdAt|date('d/m/Y à H:i') }}</td>
+        <td>{{ book.updatedAt|date('d/m/Y à H:i') }}</td>
+        <td class="action">
+          <a href="{{ path('app_adminBook_update', {id: book.id}) }}" class="update">
+            <i class="fa-solid fa-square-pen"></i>
+          </a>
+
+          <a href="{{ path('app_adminBook_remove', {id: book.id}) }}" class="delete">
+            <i class="fa-solid fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+</div>
+
 
 {% endblock %}
