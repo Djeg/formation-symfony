@@ -22,7 +22,8 @@ class AdminBookController extends AbstractController
     #[Route('/admin/livres/nouveau', name: 'app_adminBook_create', methods: ['GET', 'POST'])]
     public function create(Request $request, BookRepository $repository): Response
     {
-        // On test si la méthod HTTP est POST :
+
+        // On test si la méthod HTTP est POS
         if ($request->isMethod(Request::METHOD_POST)) {
             // Créer un livre
             $book = new Book();

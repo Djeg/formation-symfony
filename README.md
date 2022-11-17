@@ -8,6 +8,7 @@
 4. [Le Model (Doctrine)](./assets/cours/doctrine.md)
 5. [La Vue (Twig)](./assets/cours/view.md)
 6. [Le request & les formulaires](./assets/cours/request-form.md)
+7. [Les formulaires](./assets/cours/form.md)
 
 ## Les execices :
 
