@@ -39,7 +39,7 @@ Tout d'abord, pour créer un « FormInterface ». Il faut utilise la méthode `b
 
 ```php
 // Création d'un formulaire de livre
-$form = $this->buildForm(BookType::class);
+$form = $this->createForm(BookType::class);
 ```
 
 Pour remplir un formulaire avec les données de l'utilisteur, il faut utiliser la méthode `handleRequest` de notre « FormInterface » :
@@ -82,3 +82,9 @@ Pour afficher le formulaire `bookForm` plus haut dans un fichier twig :
 ```twig
 {{ form(bookForm) }}
 ```
+
+## Personaliser l'affichage de votre formulaire
+
+Twig met à disposition des fonction permettant de personnaliser l'affichage d'un formulaire :
+
+![Form Twig](../images/form-twig.png)

@@ -14,22 +14,50 @@
     </a>
   </div>
 
-  <form method="POST">
+  {{ form_start(form) }}
+
+  <div>
     <div>
-      <input type="text" name="title" placeholder="Titre du livre" value="{% block bookTitleValue '' %}" />
+      {{ form_label(form.title) }}
     </div>
     <div>
-      <textarea name="description" placeholder="Description du livre">{% block bookDescriptionValue '' %}</textarea>
+      {{ form_errors(form.title) }}
+    </div>
+    {{ form_widget(form.title, {
+      attr: {
+        placeholder: 'Harry Potter ...',
+      }
+    })}}
+  </div>
+
+  <div>
+    <div>
+      {{ form_label(form.description) }}
     </div>
     <div>
-      <input type="text" name="genre" placeholder="Genre du livre" value="{% block bookGenreValue '' %}"/>
+      {{ form_errors(form.description) }}
     </div>
-    <div class="btn-group">
-      <button class="btn success" type="submit">
-        <i class="fa-regular fa-paper-plane"></i>
-        Envoyer
-      </button>
+    {{ form_widget(form.description)}}
+  </div>
+
+  <div>
+    <div>
+      {{ form_label(form.genre) }}
     </div>
-  </form>
+    <div>
+      {{ form_errors(form.genre) }}
+    </div>
+    {{ form_widget(form.genre)}}
+  </div>
+
+  <div class="btn-group">
+    {{ form_row(form.submit, {
+      attr: {
+        class: 'btn success',
+      }
+    }) }}
+  </div>
+
+  {{ form_end(form) }}
 </div>
 {% endblock %}
