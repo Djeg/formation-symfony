@@ -43,3 +43,18 @@ Pour installer des « dynos » (des adddons, des programmes ...) il faut obligat
 ```bash
 heroku addons:create cleardb:ignite
 ```
+
+## Configurer Heroku pour Symfony
+
+> Vous retrouverez des instructions plus compléte sur la documentation officiel : [https://devcenter.heroku.com/articles/deploying-symfony4](https://devcenter.heroku.com/articles/deploying-symfony4)
+
+### Installer le support sur server web Apache
+
+Heroku, utilise afin de mettre en ligne notre application symfony, un serveur HTTP nommé : « Apache ». Pour installer tout ce qu'il faut pour que notre application soit utilisé par apache, il suffit de lancer la commande :
+
+```bash
+# Sans docker
+composer require symfony/apache-pack
+# Avec docker
+bin/sf composer require symfony/apache-pack
+```
