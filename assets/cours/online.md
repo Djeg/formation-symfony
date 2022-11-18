@@ -17,3 +17,11 @@ Vous pouvez vous assurez de l'installation d'heroku en tapant la commande :
 ```bash
 heroku
 ```
+
+## Connécter son terminal à héroku
+
+Pour connécter votre ordinateur (votre terminal) à heroku, il suffit de rentrer la commande :
+
+```bash
+heroku login
+```
