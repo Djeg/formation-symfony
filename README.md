@@ -9,6 +9,7 @@
 5. [La Vue (Twig)](./assets/cours/view.md)
 6. [Le request & les formulaires](./assets/cours/request-form.md)
 7. [Les formulaires](./assets/cours/form.md)
+8. [Mettre en ligne son application avec Heroku](./assets/cours/online.md)
 
 ## Les execices :
 
