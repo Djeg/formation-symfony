@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'LookBook Admin - Nouvel utilisateur' %}
+
+{% block body %}
+  <div class="wrapper">
+    <h1>Nouvel Utilisateur</h1>
+
+    <div class="btn-group">
+      <a href="{{ path('app_adminUser_list') }}" class="btn">
+        <i class="fa-solid fa-arrow-left"></i>
+        Retour à la liste
+      </a>
+    </div>
+
+    {{ form(form) }}
+  </div>
+{% endblock %}
