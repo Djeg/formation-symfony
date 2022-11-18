@@ -35,3 +35,11 @@ Il suffit de lancer la commande :
 ```
 heroku create
 ```
+
+## Installer une base de données mysql dans l'application
+
+Pour installer des « dynos » (des adddons, des programmes ...) il faut obligatoirement spécfier dans votre compte heroku, des informations de carte bleu. Nous allons avoir besoin d'un « dyno » : « ClearDB » (une base de données MySQL compatible avec heroku)
+
+```bash
+heroku addons:create cleardb:ignite
+```
