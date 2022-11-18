@@ -58,3 +58,13 @@ composer require symfony/apache-pack
 # Avec docker
 bin/sf composer require symfony/apache-pack
 ```
+
+### Créer le « Procfile »
+
+Le « Procfile » c'est un petit fichier, expliquant à heroku comment mettre en ligne notre application. On parle de « recette de déploiement » :
+
+```bash
+echo 'web: heroku-php-apache2 public/' > Procfile
+git add Procfile
+git commit -m "Procfile"
+```
