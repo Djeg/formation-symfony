@@ -25,3 +25,13 @@ Pour connécter votre ordinateur (votre terminal) à heroku, il suffit de rentre
 ```bash
 heroku login
 ```
+
+## L'application Heroku
+
+Maintenant que nous avons un compte et que nous somme connécté à heroku, il est possible de créer une application. L'application ça peut-être n'importe quel programme, codé en n'importe quelle langage. Dans notre cas, nous allons configurer une application Symfony.
+
+Il suffit de lancer la commande :
+
+```
+heroku create
+```
