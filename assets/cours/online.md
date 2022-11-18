@@ -68,3 +68,35 @@ echo 'web: heroku-php-apache2 public/' > Procfile
 git add Procfile
 git commit -m "Procfile"
 ```
+
+### Mettre en place les variables d'environements
+
+Il faut que Heroku puisse contenir les bonnes « variables d'environement » (la bonne configuration). Notre contient un fichier `.env`, il nous faut envoyer les bonnes valeurs à Heroku :
+
+```bash
+heroku config:set APP_ENV=prod
+```
+
+### Mettre en ligne l'application
+
+Pour mettre en ligne l'application il suffit de lancer :
+
+```bash
+git push heroku <nom-de-la-branch>:master
+```
+
+### Créer le schèma de la base de données
+
+Maintenant que notre application est en ligne, il nous rest plus qu'a créer le schèma de la base de données :
+
+```bash
+heroku run php bin/console do:sc:up --force
+```
+
+### Ouvrir l'application
+
+Pour ouvrir l'application :
+
+```bash
+heroku open
+```
