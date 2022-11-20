@@ -3,41 +3,49 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HelloController extends AbstractController
 {
+    /**
+     * Afin d'utiliser l'objet Symfony Request (représentant la Request HTTP)
+     * il faut tout d'abord l'injécter (l'envoyer en paramètre de notre
+     * controller)
+     */
     #[Route('/hello', name: 'app_hello_hello', methods: ['GET', 'POST'])]
-    public function index(): Response
+    public function index(Request $request): Response
     {
         /**
-         * Un Response est un objet PHP symbolisant la Response HTTP.
+         * Grâce à l'bjet Request injécté plus haut, symfony met à disposition
+         * toutes les informations relatives à la Request HTTP !
          * 
-         * Vous retrouverez si dessous les instructions principal
-         * de cette objet. Cependant vous pouvez en apprendre bien
-         * plus :
+         * Vous trouverez ci dessous les cas d'utilisation les plus répandu,
+         * cependant rien ne vaut la documentation officiel :
          * 
-         * https://symfony.com/doc/current/components/http_foundation.html#response
+         * https://symfony.com/doc/current/components/http_foundation.html#request
          */
 
-        // Création d'une réponse
-        $response = new Response('Coucou les amis');
+        // Récupération et test de la méthod HTTP 
+        $request->isMethod(Request::METHOD_GET);
+        $method = $request->getMethod();
 
-        // Création d'une réponse avec un contenu et un status code !
-        $response = new Response('Coucou les amis', Response::HTTP_CREATED);
-
-        // Changement du status code et text :
-        $response->setStatusCode(Response::HTTP_OK);
-
-        // Ajout d'un header HTTP si ce dernier n'est pas dèja présent
-        if (!$response->headers->has('W-Powered-By')) {
-            $response->headers->set('X-Powered-By', 'Super Symfony !');
+        // Récupération des « Queries » de l'url (les filtres)
+        if ($request->query->has('id')) {
+            $request->query->get('id');
         }
 
-        // Changement du contenu de la réponse
-        $response->setContent('Youhouuuu !');
+        // Récupération des données de formulaire
+        if ($request->request->has('email') && $request->request->has('password')) {
+            $email = $request->request->get('email');
+            $password = $request->request->get('password');
+        }
 
-        return $response;
+        // récupération des cookies
+        $request->cookies->has('userId');
+        $request->cookies->get('userId');
+
+        return new Response('hello');
     }
 }
