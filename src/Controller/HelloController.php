@@ -17,6 +17,11 @@ class HelloController extends AbstractController
      * Pour utiliser un paramètre de route il faut tout d'abord le déclarer
      * dans l'URI de la route (ici "/hello/{name}"). Un paramètre posséde
      * un nom et c'est ce dernier qui est utilisé afin de le récupérer !
+     * 
+     * Vous pouvez en apprendre plus sur les routes en consultant la documentation officiel
+     * de symfony :
+     * 
+     * https://symfony.com/doc/current/routing.html#creating-routes-as-attributes
      */
     #[Route('/hello/{name}', name: 'app_hello_someone', methods: ['GET', 'POST'])]
     public function someone(string $name): Response
