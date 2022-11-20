@@ -72,4 +72,20 @@ class BookController extends AbstractController
 
         return new Response('Book');
     }
+
+    /**
+     * Il est aussi possible de convertir un paramètre de
+     * route en entité du moment que ce dernier corespond
+     * au noms de la clef primaire de notre entité. Ici id
+     * 
+     * Ici le paramètre de route {id} sera automatiquement
+     * convertit en Entity « Book ». Qui plus est, si le livre
+     * avec l'identifiant spécifié n'éxsite pas, symfon s'occupe
+     * de rtourner une belle erreur 404 !
+     */
+    #[Route('/book/{id}', name: 'app_book_show', methods: ['GET'])]
+    public function show(Book $book): Response
+    {
+        return new Response("Livre n°{$book->getId()} : {$book->getTitle()}");
+    }
 }
