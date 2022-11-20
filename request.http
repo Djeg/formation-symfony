@@ -1,4 +1,3 @@
 GET https://google.fr
-Set-Cookie: ...
 Accept: text/html
 User-Agent: google-chrome
