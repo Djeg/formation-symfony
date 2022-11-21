@@ -11,6 +11,7 @@
 7. [Les formulaires](./assets/cours/form.md)
 8. [Mettre en ligne son application avec Heroku](./assets/cours/online.md)
 9. [Les relations avec Doctrine](./assets/cours/relations.md)
+10. [Les fixtures avec Alice](./assets/cours/fixtures.md)
 
 ## Les execices :
 
@@ -18,3 +19,4 @@
 2. [Le CRUD de Livre](./assets/exos/crud-book.md)
 3. [Le design](./assets/exos/le-design.md)
 4. [Le CRUD des users](./assets/exos/crud-user.md)
+5. [Les annonces](./assets/exos/les-annonces.md)

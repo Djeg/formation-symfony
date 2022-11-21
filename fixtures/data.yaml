@@ -1,0 +1,82 @@
+# On commence par spécifier le nom complet de la classe de l'entité
+# que l'on veut générer
+App\Entity\Book:
+  # On commence par identifier le livre que l'on veut
+  # générer
+  book_test:
+    # Nous pouvons maintenant spécifier les valeurs de champs
+    # que l'on veut dans la base de données
+    title: "Harry Potter"
+    description: "Harry potter ..."
+    genre: "fantasy"
+    # Pour les dates, nous pouvons utiliser des fonctions « faker »
+    # ces fonctions permettent de générer certaines données, ici
+    # un DateTime
+    createdAt: <dateTimeBetween('-1 month', '-1 day')>
+    updatedAt: <dateTimeBetween('-1 month', '-1 day')>
+  book_error_1:
+    title: "Harry Potter"
+    description: "Harry potter ..."
+    genre: "fantasy"
+    createdAt: <dateTimeBetween('-1 month', '-1 day')>
+    updatedAt: <dateTimeBetween('-1 month', '-1 day')>
+  book_test2:
+    # Alice, utilise la librairie php « faker » afin de générer de fausse
+    # données ..
+    # Il est possible de « traduire » une fonction faker en spécifiant la locale
+    # juste avant la fonctioon :
+    title: <fr_FR:catchPhrase()>
+    description: <paragraph()>
+    genre: <randomElement(['fantasy', 'science-fiction', 'humor'])>
+    createdAt: <dateTimeBetween('-1 month', '-1 day')>
+    updatedAt: <dateTimeBetween('-1 month', '-1 day')>
+  # Alice offre la possibilité de créer des « fixtures range ». Soit, la possibilité
+  # de créer un nombre définie d'entité, d'un seul coup
+  book_generated{1..30}:
+    title: <fr_FR:catchPhrase()>
+    description: <paragraph()>
+    genre: <randomElement(['fantasy', 'science-fiction', 'humor'])>
+    createdAt: <dateTimeBetween('-1 month', '-1 day')>
+    updatedAt: <dateTimeBetween('-1 month', '-1 day')>
+
+App\Entity\User:
+  user_test1:
+    email: test@mail.com
+    password: test
+    firstname: test
+    lastname: test
+    profilePicture: <imageUrl(200, 200)>
+    createdAt: <dateTimeBetween('-1 month', '-1 day')>
+    updatedAt: <dateTimeBetween('-1 month', '-1 day')>
+  user_generated{1..20}:
+    email: <email()>
+    password: <password()>
+    firstname: <fr_FR:firstName()>
+    lastname: <fr_FR:lastName()>
+    profilePicture: <imageUrl(200, 200)>
+    createdAt: <dateTimeBetween('-1 month', '-1 day')>
+    updatedAt: <dateTimeBetween('-1 month', '-1 day')>
+
+App\Entity\Address:
+  address_test:
+    country: "france"
+    zipCode: "31000"
+    street: 25 rue des poney
+    city: Toulouse
+    createdAt: <dateTimeBetween('-1 month', '-1 day')>
+    updatedAt: <dateTimeBetween('-1 month', '-1 day')>
+    type: "delivery"
+    # Il est possible d'attacher des entités (faire des relations)
+    # en utilisant le @ suivie de l'identifiant alice de l'entité
+    user: "@user_test1"
+  address_generated{1..50}:
+    country: "france"
+    zipCode: "<fr_FR:postCode()>"
+    street: <fr_FR:streetAddress()>
+    city: <fr_FR:city()>
+    createdAt: <dateTimeBetween('-1 month', '-1 day')>
+    updatedAt: <dateTimeBetween('-1 month', '-1 day')>
+    type: <randomElement(['delivery', 'billing', 'both', 'none'])>
+    # Il est possible de spécifier un utilisateur aléatoire en
+    # utilisant simplement "*"
+    user: "@user_generated*"
