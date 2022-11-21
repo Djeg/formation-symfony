@@ -71,6 +71,30 @@
               </li>
             </ul>
           </section>
+          <section class="vertical-menu">
+            <div class="title" onClick="toggleVerticalMenu(this)">
+              <i class="fa-solid fa-address-book"></i>
+                <p class="label">
+                  Les Adresses
+                </p>
+                <i class="direction down fa-solid fa-chevron-down"></i>
+                <i class="direction up fa-solid fa-chevron-up"></i>
+            </div>
+            <ul class="menu">
+              <li>
+                <a href="{{ path('app_adminAddress_list') }}">
+                  <i class="fa-solid fa-table-list"></i>
+                  Liste des adresses
+                </a>
+              </li>
+              <li>
+                <a href="{{ path('app_adminAddress_create') }}">
+                  <i class="fa-solid fa-circle-plus"></i>
+                  Nouvelle adresse
+                </a>
+              </li>
+            </ul>
+          </section>
         </nav>
 
         <main class="page-content">
