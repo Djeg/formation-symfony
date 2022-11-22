@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  LookBook - {% block subtitle '' %}
+{% endblock %}
+
+{% block body %}
+  {% block header %}
+    <header class="top-bar">
+      <p class="logo">LookBook</p>
+    </header>
+  {% endblock %}
+
+  <div class="centered-content">
+    <main class="public-content">
+      {% block main '' %}
+    </main>
+  </div>
+
+  <footer class="footer">
+    <p>LookBook - Copyright 2022</p>
+  </footer>
+{% endblock %}

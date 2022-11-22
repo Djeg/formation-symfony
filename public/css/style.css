@@ -10,6 +10,7 @@
   --color-grey: #acacac;
   --color-black: #3F403F;
   --color-black-90: #4e504e;
+  --color-black-70: #707470;
   --color-cafe: #2b1b0f;
   --color-red: #964343;
   --color-green: #328136;
@@ -20,6 +21,7 @@
   --mg-small: .6rem;
   --mg-medium: 1rem;
   --mg-large: 1.8rem;
+  --content-size: 1024px;
 }
 
 html, body {
@@ -58,9 +60,56 @@ html, body {
   align-items: center;
 }
 
-.content {
+.content, .centered-content {
   display: flex;
   flex-grow: 2;
+}
+
+.hero-unit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--color-gray);
+  padding: var(--mg-large);
+  color: var(--color-black-90);
+  padding: 10em 0;
+}
+.hero-unit .title {
+  font-family: var(--font-fantasy);
+  font-size: 4em;
+  text-align: center;
+  font-weight: normal;
+  padding: 0;
+  margin: var(--mg-small) 0;
+}
+.hero-unit .subtitle {
+  font-size: .8em;
+  margin: 0;
+  font-style: italic;
+}
+
+.centered-content {
+  justify-content: center;
+}
+
+.public-content {
+  display: flex;
+  flex-direction: column;
+  width: var(--content-size);
+  border-left: 1px solid var(--color-gray);
+  border-right: 1px solid var(--color-gray);
+  padding: 0 var(--mg-medium);
+}
+
+footer.footer {
+  background-color: var(--color-black);
+  color: var(--color-platinium);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mg-large);
 }
 
 .sidebar {
@@ -95,6 +144,68 @@ html, body {
   font-size: 2em;
   padding: var(--mg-small);
   margin: var(--mg-none);
+}
+
+.grey-top-bar {
+  background-color: var(--color-gray);
+  color: var(--color-black-90);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.grey-top-bar .centered {
+  width: var(--content-size);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.grey-top-bar .menu {
+  display: flex;
+  align-items: center;
+}
+.grey-top-bar .menu p {
+  margin: 0;
+  padding: 0;
+}
+.grey-top-bar .menu p a {
+  display: flex;
+  padding: var(--mg-large) var(--mg-small);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all .25s;
+  color: var(--color-black-90);
+}
+.grey-top-bar .menu p a:hover {
+  background-color: var(--color-black-90);
+  color: var(--color-gray);
+}
+.grey-top-bar .search {
+  display: flex;
+  align-items: center;
+  transition: all .5s;
+}
+.grey-top-bar .search input {
+  border: none;
+  padding: var(--mg-small) 0;
+  outline: none;
+  transition: all .5s;
+  max-width: 0;
+}
+.grey-top-bar .search input:focus {
+  border: none;
+  outline: none;
+}
+.grey-top-bar .search label {
+  font-size: 1.5rem;
+  padding-right: var(--mg-medium);
+}
+.grey-top-bar .search:hover input {
+  max-width: none;
+  padding: var(--mg-small);
 }
 
 /*
@@ -271,4 +382,83 @@ html, body {
 }
 .btn i {
   padding: 0 var(--mg-small);
+}
+
+/**
+ * Les block listes
+ */
+.book-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.book-block {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 31%;
+  align-items: stretch;
+  padding: var(--mg-small);
+  border-right: none;
+  border-bottom: 1px solid var(--color-gray);
+  margin: var(--mg-small);
+}
+
+.book-block .background-image {
+  position: relative;
+  overflow: hidden;
+  height: 300px;
+}
+
+.book-block .background-image img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.book-block .title {
+  font-weight: bold;
+}
+
+.book-block .footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.book-block .footer .author {
+  color: var(--color-black-70);
+  font-style: italic;
+  font-size: .8em;
+}
+
+.book-block .footer .price {
+  padding: var(--mg-medium);
+  border-radius: 2px;
+  font-family: var(--font-fantasy);
+  font-size: 1.5rem;
+}
+
+.book-block .btn-group {
+  justify-content: center;
+  align-items: center;
+}
+
+.book-block .btn-group .btn {
+  border: none;
+  padding: var(--mg-medium) var(--mg-large);
+  border-radius: 0;
+  flex-basis: 100%; 
+  text-align: center;
+  justify-content: center;
+  transition: all .25s;
+
+}
+.book-block .btn-group .btn i {
+  padding-left: 0;
+}
+
+.book-block .btn-group .btn:hover {
+  background: var(--color-black-90);
+  color: var(--color-gray);
 }

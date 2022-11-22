@@ -1,0 +1,60 @@
+{% extends 'public.html.twig' %}
+
+{% block subtitle %}Bienvenue{% endblock %}
+
+{% block header %}
+  <div class="hero-unit">
+    <h1 class="title">LookBook</h1>
+    <p class="subtitle">Vente de livres entre particulier</p>
+  </div>
+  <header class="grey-top-bar">
+    <div class="centered">
+      <nav class="menu">
+        <p>
+          <a href="">Accueil</a>
+        </p>
+        <p>
+          <a href="">Rechercher</a>
+        </p>
+        <p>
+          <a href="">Les Nouveautés</a>
+        </p>
+      </nav>
+      <div class="search">
+        <label for="search-input">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        </label>
+        <input type="text" class="search-input" id="search-input" />
+      </div>
+    </div>
+  </header>
+{% endblock %}
+
+{% block main %}
+<div class="book-list">
+  {% for ad in ads %}
+    <div class="book-block">
+      {% if ad.pictures is not empty %}
+        <div class="background-image">
+          <img src="{{ ad.pictures[0] }}" alt="{{ ad.title }}" />
+        </div>
+      {% endif %}
+      <p class="title">{{ ad.title }}</p>
+      <div class="footer">
+        <p class="author">
+          Vendu par <br />{{ ad.author.firstname }} {{ ad.author.lastname }}
+        </p>
+        <p class="price">
+          {{ ad.price }} €
+        </p>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-gray">
+          <i class="fa-solid fa-cart-arrow-down"></i>
+          Ajouter 
+        </button>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -80,3 +80,27 @@ App\Entity\Address:
     # Il est possible de spécifier un utilisateur aléatoire en
     # utilisant simplement "*"
     user: "@user_generated*"
+
+App\Entity\Ad:
+  ad_test:
+    title: "Vend harry potter"
+    price: 9.5
+    pictures:
+      - <imageUrl(300, 400)>
+      - <imageUrl(350, 500)>
+      - <imageUrl(500, 350)>
+    book: "@book_test"
+    author: "@user_test1"
+    createdAt: <dateTimeBetween('-1 month', '-1 day')>
+    updatedAt: <dateTimeBetween('-1 month', '-1 day')>
+  ad_generated{1..100}:
+    title: "Vend <fr_FR:catchPhrase()>"
+    price: <randomFloat(2, 5, 45)>
+    pictures:
+      - <imageUrl(300, 400)>
+      - <imageUrl(350, 500)>
+      - <imageUrl(500, 350)>
+    book: "@book_generated*"
+    author: "@user_generated*"
+    createdAt: <dateTimeBetween('-1 month', '-1 day')>
+    updatedAt: <dateTimeBetween('-1 month', '-1 day')>
