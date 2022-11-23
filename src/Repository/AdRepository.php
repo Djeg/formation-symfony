@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\DTO\AdSearchCriteria;
 use App\Entity\Ad;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -37,6 +38,66 @@ class AdRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /**
+     * Lance une recherche d'annonce en spécifiant les critéres de recherche
+     */
+    public function findBySearchCriteria(AdSearchCriteria $criteria): array
+    {
+        // Création d'un query builder
+        $qb = $this->createQueryBuilder('ad');
+
+        // la pagination
+        $qb->setMaxResults($criteria->limit);
+        $qb->setFirstResult(($criteria->page - 1) * $criteria->limit);
+
+        // Le trie
+        $qb->orderBy("ad.{$criteria->orderBy}", $criteria->direction);
+
+        // La recherche par texte
+        if ($criteria->searchText !== null) {
+            $qb
+                ->leftJoin('ad.book', 'book')
+                ->andWhere('ad.title LIKE :searchText OR book.title LIKE :searchText')
+                ->setParameter('searchText', "%{$criteria->searchText}%");
+        }
+
+        // La recherche par genre !
+        if ($criteria->genre !== null) {
+            if ($criteria->searchText === null) {
+                $qb->leftJoin('ad.book', 'book');
+            }
+
+            $qb
+                ->andWhere('book.genre = :genre')
+                ->setParameter('genre', $criteria->genre);
+        }
+
+        // La recherche par auteur
+        if ($criteria->author !== null) {
+            $qb
+                ->leftJoin('ad.author', 'author')
+                ->andWhere('author.id = :authorId')
+                ->setParameter('authorId', $criteria->author->getId());
+        }
+
+        // Le recherche par prix minimum
+        if ($criteria->minPrice !== null) {
+            $qb
+                ->andWhere('ad.price >= :minPrice')
+                ->setParameter('minPrice', $criteria->minPrice);
+        }
+
+        // Le recherche par prix maximum
+        if ($criteria->maxPrice !== null) {
+            $qb
+                ->andWhere('ad.price <= :maxPrice')
+                ->setParameter('maxPrice', $criteria->maxPrice);
+        }
+
+        // Lancer le query builder
+        return $qb->getQuery()->getResult();
     }
 
     public function findBySearchText(string $search): array
