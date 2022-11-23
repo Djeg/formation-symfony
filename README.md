@@ -24,3 +24,4 @@
 4. [Le CRUD des users](./assets/exos/crud-user.md)
 5. [Les annonces](./assets/exos/les-annonces.md)
 6. [Rechercher des annonces](./assets/exos/search-form.md)
+7. [Créer un compte](./assets/exos/account.md)

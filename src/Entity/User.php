@@ -40,10 +40,6 @@ class User
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Ad::class, orphanRemoval: true)]
     private Collection $ads;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Account $account = null;
-
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
@@ -183,18 +179,6 @@ class User
                 $ad->setAuthor(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getAccount(): ?Account
-    {
-        return $this->account;
-    }
-
-    public function setAccount(?Account $account): self
-    {
-        $this->account = $account;
 
         return $this;
     }

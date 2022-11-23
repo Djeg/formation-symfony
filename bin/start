@@ -10,6 +10,7 @@ docker-compose up -d
 docker-compose exec app composer install
 
 # On met en place la base de données
+docker-compose exec app symfony console do:da:dr --force
 docker-compose exec app symfony console do:da:cr
 docker-compose exec app symfony console do:sc:up --force
 docker-compose exec app symfony console ha:fi:lo --purge-with-truncate -q
