@@ -75,3 +75,23 @@ public function getBlockPrefix(): string
     return '';
 }
 ```
+
+## Les Donnéees par défaut
+
+Afin de posséder un formulaire de recherche **toujours** fonctionnel (que l'on spécifie de la données ou pas), il faut impérativement ajouter ces deux options :
+
+```php
+public function configureOptions(OptionsResolver $resolver): void
+{
+    $resolver->setDefaults([
+        'data_class' => AdSearchCriteria::class,
+        'method' => 'GET',
+        'csrf_protection' => false,
+        'empty_data' => new AdSearchCriteria(),
+        'data' => new AdSearchCriteria(),
+    ]);
+}
+```
+
+> **NOTE**
+> Pour le **NumberType**, vous devez spécifier une "string" dans l'option "empty_data"

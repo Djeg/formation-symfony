@@ -94,6 +94,7 @@ class AdSearchType extends AbstractType
             'csrf_protection' => false,
             'method' => 'GET',
             'empty_data' => new AdSearchCriteria(),
+            'data' => new AdSearchCriteria(),
         ]);
     }
 

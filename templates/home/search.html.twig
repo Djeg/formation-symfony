@@ -2,29 +2,6 @@
 
 {% block subtitle %}Rechercher des annonces{% endblock %}
 
-{% block header %}
-  <header class="grey-top-bar">
-    <div class="centered">
-      <nav class="menu">
-        <p>
-          <a href="">Accueil</a>
-        </p>
-        <p>
-          <a href="">Rechercher</a>
-        </p>
-        <p>
-          <a href="">Les Nouveautés</a>
-        </p>
-      </nav>
-      <div class="search">
-        <label for="search-input">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        </label>
-        <input type="text" class="search-input" id="search-input" />
-      </div>
-    </div>
-  </header>
-{% endblock %}
 
 {% block main %}
 {{ form(form) }}
