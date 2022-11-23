@@ -14,6 +14,7 @@
 10. [Les fixtures avec Alice](./assets/cours/fixtures.md)
 11. [Le QueryBuilder](./assets/cours/query-builder.md)
 12. [Les formulaires de « recherche »](./assets/cours/search-form.md)
+13. [La sécurité (authentification et autorisation)](./assets/cours/security.md)
 
 ## Les execices :
 
