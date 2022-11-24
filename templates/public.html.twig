@@ -17,7 +17,10 @@
             <a href="{{ path('app_home_search') }}">Rechercher</a>
           </p>
           <p>
-            <a href="">Les Nouveautés</a>
+            <a href="{{ path('app_account_registration') }}">Inscription</a>
+          </p>
+          <p>
+            <a href="{{ path('app_account_login') }}">Connexion</a>
           </p>
         </nav>
         <form class="search" method="GET" action="{{ path('app_home_search') }}">

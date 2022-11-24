@@ -39,6 +39,20 @@ App\Entity\Book:
     createdAt: <dateTimeBetween('-1 month', '-1 day')>
     updatedAt: <dateTimeBetween('-1 month', '-1 day')>
 
+App\Entity\Account:
+  account_test:
+    email: test@mail.com
+    createdAt: <dateTimeBetween('-1 month', '-1 day')>
+    updatedAt: <dateTimeBetween('-1 month', '-1 day')>
+    # password : test
+    password: \$2y\$13\$E3KtN5hwWFQfzeRhuEfqoepTiVwbRdJ9pCfCVgDB4LXoj9JxvGzUG
+  account_generated{1..20}:
+    email: <email()>
+    createdAt: <dateTimeBetween('-1 month', '-1 day')>
+    updatedAt: <dateTimeBetween('-1 month', '-1 day')>
+    # password : password
+    password: \$2y\$13\$afYDpacuF1tPRmooVwB2ievMNtUbtnI3fEBCXtoZgjiYnV2XqOR9e
+
 App\Entity\User:
   user_test1:
     email: test@mail.com
@@ -47,6 +61,7 @@ App\Entity\User:
     profilePicture: <imageUrl(200, 200)>
     createdAt: <dateTimeBetween('-1 month', '-1 day')>
     updatedAt: <dateTimeBetween('-1 month', '-1 day')>
+    account: "@account_test"
   user_generated{1..20}:
     email: <email()>
     firstname: <fr_FR:firstName()>
@@ -54,6 +69,7 @@ App\Entity\User:
     profilePicture: <imageUrl(200, 200)>
     createdAt: <dateTimeBetween('-1 month', '-1 day')>
     updatedAt: <dateTimeBetween('-1 month', '-1 day')>
+    account: "@account_generated*"
 
 App\Entity\Address:
   address_test:

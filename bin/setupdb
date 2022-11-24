@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+bin/sf console do:da:dr --force
+bin/sf console do:da:cr
+bin/sf console do:sc:up --force
+bin/sf console ha:fi:lo -q
