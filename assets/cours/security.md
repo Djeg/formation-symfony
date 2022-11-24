@@ -104,3 +104,72 @@ Une fois cette étape passé, vous n'avez plus qu'a personnaliser :
 1. La route de redirection dans votre class « Authenticator »
 2. Le controller
 3. La vue
+
+## Authorization
+
+Afin de pouvoir authorize ou non certains utilisateurs sur certaines pages de notre site internet, symfony à mis en place un système de rôle. Il sont initialement au nombres de 2 :
+
+- **`ROLE_USER`** (celui par défault) : Celui qui peut utiliser l'application
+- **`ROLE_ADMIN`** : Celui qui peut utiliser l'application et aussi l'administrer
+
+### Ajouter des rôles
+
+Pour changer le role d'un utilisateur, rien de plus simple :
+
+- Dans les fixtures : Vous pouvez attacher des roles très simplements :
+
+```yaml
+roles: ["ROLE_ADMIN"]
+```
+
+- En PHP : Il suffit de récuperer l'entité qui s'authentifie (« Account ») :
+
+```php
+$entity->setRoles(['ROLE_ADMIN']);
+```
+
+### Sécuriser des controller
+
+En utilisant un attribut `IsGranted`, nous pouvons décider qu'un controller n'est accessible que pour certain role :
+
+```php
+/**
+ * Créer un nouvel utilisateur
+ */
+#[IsGranted('ROLE_ADMIN')]
+#[Route('/admin/utilisateurs/nouveau', name: 'app_adminUser_create', methods: ['GET', 'POST'])]
+public function create(Request $request, UserRepository $repository): Response
+{
+  // code de création d'un user ...
+}
+```
+
+> Vous pouvez aussi utiliser ce même attribut directement sur la class
+
+### Utiliser les rôles dans la vue
+
+Premièrement, dans un fichiet twig, nous pouvons acccéder à l'utilisateur connécté (notre account) grâce à une globale :
+
+```twig
+{{ app.user.email }}
+```
+
+> Attention, si aucun utilisateur n'est connécté, la variable est null !
+
+```twig
+{% if app.user %}
+  <p>Vouc êtes connécté</p>
+{% else %}
+  <p>Vous n'êtes connécté</p>
+{% endif %}
+```
+
+Il est aussi possible de tester le role d'un utilisateur en utilisant la fonction twig `is_granted` :
+
+```twig
+{% if is_granted('ROLE_ADMIN') %}
+  <p>Vous êtes admin</p>
+{% else %}
+  </p>Vous n'êtes pas admin</p>
+{% endif %}
+```

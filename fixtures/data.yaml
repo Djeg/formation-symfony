@@ -40,6 +40,13 @@ App\Entity\Book:
     updatedAt: <dateTimeBetween('-1 month', '-1 day')>
 
 App\Entity\Account:
+  account_admin:
+    email: admin@mail.com
+    createdAt: <dateTimeBetween('-1 month', '-1 day')>
+    updatedAt: <dateTimeBetween('-1 month', '-1 day')>
+    # password : test
+    password: \$2y\$13\$L0rMEvADCA1oqYPadxPlkeLT0UPTQ9OIvN7B5j2jt/vy5F4Cwskry
+    roles: ["ROLE_ADMIN"]
   account_test:
     email: test@mail.com
     createdAt: <dateTimeBetween('-1 month', '-1 day')>
