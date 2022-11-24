@@ -16,12 +16,24 @@
           <p>
             <a href="{{ path('app_home_search') }}">Rechercher</a>
           </p>
-          <p>
-            <a href="{{ path('app_account_registration') }}">Inscription</a>
-          </p>
-          <p>
-            <a href="{{ path('app_account_login') }}">Connexion</a>
-          </p>
+          {% if app.user %}
+            <p>
+              <a href="{{ path('app_account_logout') }}">Deconnexion</a>
+            </p>
+
+            {% if is_granted('ROLE_ADMIN') %}
+              <p>
+                <a href="{{ path('app_adminBook_list') }}">Administration</a>
+              </p>
+            {% endif %}
+          {% else %}
+            <p>
+              <a href="{{ path('app_account_registration') }}">Inscription</a>
+            </p>
+            <p>
+              <a href="{{ path('app_account_login') }}">Connexion</a>
+            </p>
+          {% endif %}
         </nav>
         <form class="search" method="GET" action="{{ path('app_home_search') }}">
           <label for="search-input">

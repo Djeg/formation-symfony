@@ -173,3 +173,15 @@ Il est aussi possible de tester le role d'un utilisateur en utilisant la fonctio
   </p>Vous n'êtes pas admin</p>
 {% endif %}
 ```
+
+### Récupérer l'utilisateur (Account) connécté dans un Controller
+
+Pour récupérer l'account (le user) connécté depuis un controller :
+
+```php
+// On test si on est connécté
+if ($this->getUser()) {
+  // On récupére l'account :
+  $account = $this->getUser();
+}
+```

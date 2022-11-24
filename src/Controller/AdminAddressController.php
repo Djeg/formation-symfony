@@ -6,6 +6,7 @@ use App\Entity\Address;
 use App\Form\AddressType;
 use App\Repository\AddressRepository;
 use DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Ce controller gére toutes les pages concernant les addresses
  */
+#[IsGranted('ROLE_ADMIN')]
 class AdminAddressController extends AbstractController
 {
     /**
