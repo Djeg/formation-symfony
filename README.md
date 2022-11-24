@@ -26,3 +26,4 @@
 6. [Rechercher des annonces](./assets/exos/search-form.md)
 7. [Créer un compte](./assets/exos/account.md)
 8. [Autorisation](./assets/exos/authorization.md)
+9. [La panier](./assets/exos/cart.md)
