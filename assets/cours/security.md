@@ -148,7 +148,7 @@ public function create(Request $request, UserRepository $repository): Response
 
 ### Utiliser les rôles dans la vue
 
-Premièrement, dans un fichiet twig, nous pouvons acccéder à l'utilisateur connécté (notre account) grâce à une globale :
+Premièrement, dans un fichier twig, nous pouvons acccéder à l'utilisateur connécté (notre account) grâce à une globale :
 
 ```twig
 {{ app.user.email }}
