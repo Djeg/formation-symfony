@@ -15,6 +15,7 @@
 11. [Le QueryBuilder](./assets/cours/query-builder.md)
 12. [Les formulaires de « recherche »](./assets/cours/search-form.md)
 13. [La sécurité (authentification et autorisation)](./assets/cours/security.md)
+14. [Les API Rest](./assets/cours/api-rest.md)
 
 ## Les execices :
 
@@ -27,3 +28,4 @@
 7. [Créer un compte](./assets/exos/account.md)
 8. [Autorisation](./assets/exos/authorization.md)
 9. [La panier](./assets/exos/cart.md)
+10. [Rest et les URI](./assets/exos/rest.md)
