@@ -1,17 +1,10 @@
 {% extends 'public.html.twig' %}
 
-{% block subtitle %}Bienvenue{% endblock %}
-
-{% block heroUnit %}
-  <div class="hero-unit">
-    <h1 class="title">LookBook</h1>
-    <p class="subtitle">Vente de livres entre particulier</p>
-  </div>
-{% endblock %}
+{% block subtitle %}Mon Panier{% endblock %}
 
 {% block main %}
 <div class="book-list">
-  {% for ad in ads %}
+  {% for ad in app.user.cart.ads %}
     <div class="book-block">
       {% if ad.pictures is not empty %}
         <div class="background-image">
@@ -28,12 +21,23 @@
         </p>
       </div>
       <div class="btn-group">
-        <a href="{{ path('app_cart_add', {id: ad.id}) }}" class="btn btn-gray">
-          <i class="fa-solid fa-cart-arrow-down"></i>
-          Ajouter 
+        <a href="{{ path('app_cart_remove', {id: ad.id}) }}" class="btn error">
+          <i class="fa-solid fa-trash"></i>
+          Supprimer 
         </a>
       </div>
     </div>
   {% endfor %}
+</div>
+
+<div>
+  <p>Prix Total : {{ app.user.cart.totalPrice }} €</p>
+</div>
+
+<div class="btn-group">
+  <a href="#" class="btn success">
+    <i class="fa-solid fa-credit-card"></i>
+    Valider mon achat
+  </a>
 </div>
 {% endblock %}

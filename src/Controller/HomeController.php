@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\DTO\AdSearchCriteria;
 use App\Form\AdSearchType;
 use App\Repository\AdRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

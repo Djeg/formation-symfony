@@ -24,10 +24,10 @@
         </p>
       </div>
       <div class="btn-group">
-        <button class="btn btn-gray">
+        <a href="{{ path('app_cart_add', {id: ad.id}) }}" class="btn btn-gray">
           <i class="fa-solid fa-cart-arrow-down"></i>
           Ajouter 
-        </button>
+        </a>
       </div>
     </div>
   {% endfor %}

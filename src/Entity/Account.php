@@ -39,9 +39,13 @@ class Account implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'account', targetEntity: User::class, orphanRemoval: true)]
     private Collection $users;
 
+    #[ORM\OneToOne(mappedBy: 'account', cascade: ['persist', 'remove'])]
+    private ?Cart $cart = null;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->setCart(new Cart());
     }
 
     public function getId(): ?int
@@ -164,6 +168,23 @@ class Account implements UserInterface, PasswordAuthenticatedUserInterface
                 $user->setAccount(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCart(): ?Cart
+    {
+        return $this->cart;
+    }
+
+    public function setCart(Cart $cart): self
+    {
+        // set the owning side of the relation if necessary
+        if ($cart->getAccount() !== $this) {
+            $cart->setAccount($this);
+        }
+
+        $this->cart = $cart;
 
         return $this;
     }

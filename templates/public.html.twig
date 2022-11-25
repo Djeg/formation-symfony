@@ -35,12 +35,22 @@
             </p>
           {% endif %}
         </nav>
-        <form class="search" method="GET" action="{{ path('app_home_search') }}">
-          <label for="search-input">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          </label>
-          <input type="text" name="searchText" class="search-input" id="search-input" />
-        </form>
+        <div class="right-bar">
+          <form class="search" method="GET" action="{{ path('app_home_search') }}">
+            <label for="search-input">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            </label>
+            <input type="text" name="searchText" class="search-input" id="search-input" />
+          </form>
+          {% if app.user %}
+            <a href="{{ path('app_cart_show') }}" class="cart">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <div class="items">
+                {{ app.user.cart.ads|length }}
+              </div>
+            </a>
+          {% endif %}
+        </div>
       </div>
     </header>
   {% endblock %}
