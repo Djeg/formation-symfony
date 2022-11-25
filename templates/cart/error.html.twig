@@ -1,0 +1,13 @@
+{% extends 'public.html.twig' %}
+
+{% block subtitle %}Erreur de paiement{% endblock %}
+
+{% block main %}
+<h1>Un erreur est survenu durant le paiement</h1>
+<p>Nous n'avons pas réussi à traiter votre paiement. Merci de réessayer ultérieurement.</p>
+<div class="btn-group">
+  <a href="{{ path('app_home_home') }}" class="btn success">
+    Retour à l'accueil
+  </a>
+</div>
+{% endblock %}

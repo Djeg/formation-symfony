@@ -68,6 +68,13 @@ class Cart
         return $this;
     }
 
+    public function removeAllAds(): self
+    {
+        $this->ads->clear();
+
+        return $this;
+    }
+
     public function getTotalPrice(): float
     {
         $total = 0;
