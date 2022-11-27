@@ -39,15 +39,20 @@ class AdminAddressController extends AbstractController
     #[Route('/admin/adresses/nouvelle', name: 'app_adminAddress_create', methods: ['GET', 'POST'])]
     public function create(Request $request, AddressRepository $repository): Response
     {
-        // Création du formulaire
+        // Création du formulaire.
+        // Nous devons spécifier le type et optionnelement la donnée
+        // que contient le formulaire :
         $form = $this->createForm(AddressType::class);
 
-        // On remplie le formulaire
+        // On remplie le formulaire avec les données de l'utilisateur.
+        // Cette étape remplie le « FormView »
         $form->handleRequest($request);
 
-        // On test si le formulaire est valide
+        // On test si le formulaire est valide. C'est durant cette
+        // étapes que le formulaire valide et créer les possibles
+        // erreur
         if ($form->isSubmitted() && $form->isValid()) {
-            // on récupére notre adresse :
+            // on récupére notre adresse (récupration de la data_class) :
             $address = $form->getData();
 
             // On met à jour les dates
@@ -64,6 +69,8 @@ class AdminAddressController extends AbstractController
 
         // On affiche le formulaire
         return $this->render('adminAddress/create.html.twig', [
+            // Pour afficher le formulaire il suffit de donner une instance
+            // de « FormView » à notre template twig :
             'form' => $form->createView(),
         ]);
     }
