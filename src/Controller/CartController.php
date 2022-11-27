@@ -15,19 +15,36 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * Contient toutes les pages concernant le panier
+ * Contient toutes les pages concernant le panier. Ce controller
+ * n'est accessible qu'au utilisateur ayant le ROLE_USER au moins ! 
+ * 
+ * Ainsi, il est impossible pour un utilisateur non connécté d'accéder à
+ * ce controller. Cela est possible grâce à l'attribut `IsGranted`.
+ * 
+ * Vous pouvez utiliser cette attribut php sur n'importe quelle controller,
+ * mais aussi sur une méthod spécifique du controller
  */
 #[IsGranted('ROLE_USER')]
 class CartController extends AbstractController
 {
     /**
-     * Ajoute une annonce dans la panier de l'utilisateur connécté
+     * Ajoute une annonce dans la panier de l'utilisateur connécté.
+     * 
+     * Puisque nous avons utilisé l'attribut « IsGranted », cette méthode
+     * est uniquement réserver aux utilisateurs connécté !
      */
     #[Route('/mon-panier/{id}/ajouter', name: 'app_cart_add', methods: ['GET'])]
     public function add(Ad $ad, CartRepository $repository): Response
     {
         /**
          * @var Account
+         * 
+         * Récupére l'utilisateur actuellement connécté. 
+         * 
+         * Attention cela peut renvoyer « null ». En effet, dans
+         * le cas d'un controller accessible à tous et même aux
+         * utilisateur non connécté, $this->getUser() retourne « null »
+         * pour ceux qui ne sont pas connécté.
          */
         $account = $this->getUser();
 
