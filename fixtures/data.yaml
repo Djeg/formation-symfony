@@ -2,7 +2,9 @@
 # que l'on veut générer
 App\Entity\Book:
   # On commence par identifier le livre que l'on veut
-  # générer
+  # générer. Ceci est un identifiant Alice qui ne concerne
+  # pas notre base de données, il sera utilisé afin de générer
+  # des « ranges » ou encore de faire des relations !
   book_test:
     # Nous pouvons maintenant spécifier les valeurs de champs
     # que l'on veut dans la base de données
@@ -12,12 +14,6 @@ App\Entity\Book:
     # Pour les dates, nous pouvons utiliser des fonctions « faker »
     # ces fonctions permettent de générer certaines données, ici
     # un DateTime
-    createdAt: <dateTimeBetween('-1 month', '-1 day')>
-    updatedAt: <dateTimeBetween('-1 month', '-1 day')>
-  book_error_1:
-    title: "Harry Potter"
-    description: "Harry potter ..."
-    genre: "fantasy"
     createdAt: <dateTimeBetween('-1 month', '-1 day')>
     updatedAt: <dateTimeBetween('-1 month', '-1 day')>
   book_test2:
@@ -76,6 +72,7 @@ App\Entity\User:
     profilePicture: <imageUrl(200, 200)>
     createdAt: <dateTimeBetween('-1 month', '-1 day')>
     updatedAt: <dateTimeBetween('-1 month', '-1 day')>
+    # Nous pouvons aussi choisir un relation aléatoire comme :
     account: "@account_generated*"
 
 App\Entity\Address:
