@@ -74,10 +74,30 @@ class RegistrationType extends AbstractType
             ]);
     }
 
+    /**
+     * Cette méthode configure les options générale de notre formulaire.
+     *
+     * Il recoit un « OptionsResolver », c'est un objet sumfony très pratique
+     * pour gérer des tableaux d'options complexe !
+     *
+     * Vous pouver consulter la documentation de cette « OptionsResolver » :
+     * https://symfony.com/doc/current/components/options_resolver.html
+     */
     public function configureOptions(OptionsResolver $resolver): void
     {
+        // Nous ajoutons des options par défaut :
         $resolver->setDefaults([
+            // Ici nous attachons l'objet php que le formulaire doit remplir.
+            // Le rôle principale d'un formulaire est de faire le lien entre
+            // un formulaire HTML et une class PHP !
+            //
+            // Ici, ce formulaire remplira la class App\Entity\Account
             'data_class' => Account::class,
+            // Nous pouvons aussi définir la méthode HTTP utilisé pour l'envoie :
+            'method' => 'POST',
+            // Vous pouvez aussi ajouter vos propres options !
+            // Vous retrouverez la liste des options disponible ici :
+            // https://symfony.com/doc/current/reference/forms/types/form.html
         ]);
     }
 }
