@@ -51,3 +51,110 @@ Afin d'éviter les boucles infinie, il suffit d'ouvrir l'entité « Address » e
 #[ORM\JoinColumn(nullable: false)]
 private ?User $user = null;
 ```
+
+## Les codes de retour (status code)
+
+Les api REST doivent respécter les status code HTTP. Il sont rangé en 5 catégories :
+
+1. Les codes commencant par `1XX` : Se sont des codes d'informations (très peu utilisé)
+2. Les codes commencant par `2XX` : Se sont des codes de success (très utilisé)
+3. Les codes commencant par `3XX` : Se sont des codes de redirection (très peu utilisé)
+4. Les codes commencant par `4XX` : Se sont des codes d'erreur de la part du client (très utilisé)
+5. Les codes commencant par `5XX` : Se sont des codes d'erreur du serveur (on ne veut surtout pas les utiliser)
+
+Parmis ces codes voici les plus célébres :
+
+- **`200`** : Signifie « OK » c'est le code utilisé dans 80% des cas lorsque tout c'est bien passé
+- **`201`** : Signifie « Created », c'est le code utilisé pour les requêtes POST !
+- **`204`** : Signifie « No Content », c'est le code utilisé lorsque l'on fait un GET et qu'il n'y as aucun résultat.
+- **`404`** : Signifie « Not Found », c'est le code utilisé lorsque l'url n'est pas bonne
+- **`400`** : Signifie « Bad Request », c'est le code utilisé lorsqu'une erreur de formulaire est présente.
+
+Pour utiliser ces codes, il suffit de spécfifier un second argument à la méthod JSON :
+
+```php
+$this->json($addresses, 200);
+```
+
+## Les formulaires pour les API
+
+Même si une api rest ne possède pas de formulaire HTML, les forms symfony sont toujours aussi utilisé. En effet, c'est eux qui s'occupe de valider, transformer et gérer les données envoyé par un client.
+
+Prenons un exemple : La création d'une adresse
+
+```http
+POST http://localhost:12000/api/addresses
+Content-Type: application/json
+
+{
+  "label": "Chez moi",
+  "city": "Toulouse",
+  "zipCode": "31000",
+  "street": "56 rue des carmes"
+}
+```
+
+Les formulaires d'api, ne **contienne pas de protection CSRF** et n'ont aucun prefix :
+
+```php
+class ApiAddressType extends AbstractType
+{
+  public function buildForm(FormBuilderInterface $builder, array $options)
+  {
+    // ! Les formulaires d'api n'ont pas de boutons !
+    $builder
+      ->add('label')
+      // ! les formulaires d'api n'ont pas besoin de label !
+      ->add('city')
+      ->add('zipCode')
+      ->add('street')
+  }
+
+  public function configureOptions(OptionsResolver $resolver)
+  {
+    $resolver->setDefaults([
+      'data_class' => Address::class,
+      // Il est obligatoire de désactiver la protection CSRF
+      'csrf_protection' => false
+    ]);
+  }
+
+  /**
+   * Il faut aussi un prefix vide
+   */
+  public function getBlockPrefix(): string
+  {
+    return '';
+  }
+}
+```
+
+Maintenant nous pouvons utiliser ce formulaire dans un controller :
+
+```php
+#[Route('/api/addresses', name: 'app_apiAddress_create', methods: ['POST'])]
+public function create(AddressRepository $repository, Request $request): Response
+{
+  // Création du formulaire
+  $form = $this->createForm(ApiAddressType::class);
+
+  // On remplie avec les données du client
+  $form->handleRequest($request);
+
+  // On test la validité de notre formulaire
+  if (!$form->isSubmitted() || !$form->isValid()) {
+    // On vas retourner en json les erreur du formulaires
+    // ! Il faut respecter les codes de retour : 400 !
+    return $this->json($form->getErrors(), 400);
+  }
+
+  // on récupére l'address du formulaire
+  $address = $form->getData();
+
+  // On enregistre l'address dans la base de données
+  $repository->save($address, true);
+
+  // On retourne l'address qui vient d'être créé
+  return $this->json($address, 201);
+}
+```

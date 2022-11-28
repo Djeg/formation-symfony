@@ -1,4 +1,10 @@
-GET https://google.fr
-Set-Cookie: ...
-Accept: text/html
-User-Agent: google-chrome
+GET http://localhost:12000/api/addresses
+
+###
+
+GET http://localhost:12000/api/addresses/7
+
+###
+
+POST http://localhost:12000/api/addresses
+Content-Type: application/json

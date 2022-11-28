@@ -30,3 +30,4 @@
 8. [Autorisation](./assets/exos/authorization.md)
 9. [La panier](./assets/exos/cart.md)
 10. [Rest et les URI](./assets/exos/rest.md)
+11. [L'api pour les adresses](./assets/exos/api-address.md)
