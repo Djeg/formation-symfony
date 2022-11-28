@@ -23,13 +23,13 @@ Solution :
 1. Je veux récupérer les 25 livres les plus chères
 2. Je veux récupérer mes données personnel
 3. Je veux créer un nouveau livre
-4. Je veux modifier le livre n°3 de l'auteur n° 10
+4. Je veux modifier le livre avec l'id 3 de l'auteur avec l'id 10
 5. Je veux supprimer mon panier
 6. Je veux récupérer l'auteur du livre avec l'id 5
 7. Je veux modifier l'email de l'utilisateur 14
-8. Je veux récupérer les 25 derniers commentaires du livre n°9
+8. Je veux récupérer les 25 derniers commentaires du livre avec l'id 9
 9. Je veux créer un nouveau commentaire sur le livre 12
-10. Je veux « liker » le comtout les commentaires mentaire n° 23 sur le livre n°9
+10. Je veux « liker » commentaire avec l'id 23 sur le livre avec l'id 9
 
 ## Les solutions
 
