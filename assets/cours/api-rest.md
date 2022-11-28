@@ -101,3 +101,57 @@ Avec l'utilisation de QueryString, nous pouvons « filtrer » nos resources ou c
 | Action | URI                                                | type       | explications                                                                   |
 | ------ | -------------------------------------------------- | ---------- | ------------------------------------------------------------------------------ |
 | GET    | /books?limit=10&page=2&ordery=price&direction=DESC | Collection | Grâce aux query string, je peux séléctionner et filtrer ma collection de livre |
+
+## Communiquer avec une API Rest
+
+Pour tester, ou communiquer avec un API Rest, il éxiste une extension VSCode permettant de lancer des requêtes à notre api et de recevoir des réponse JSON (affiché de manière Jolie).
+
+> Il éxiste des « clients » comme postman
+
+L'extension à installer est :
+[REST Cient](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+
+## Comment utiliser ce « REST Client »
+
+Pour utiliser le REST Client, il suffit de créer un fichier `<nomDeVotreChoix>.http` à la racine du projet (ex: `api.http`).
+
+Dans ce fichier `.http`, nous pouvons écrire nos requête HTTP :
+
+```http
+GET http://localhost:12000/books
+Content-Type: application/json
+```
+
+Vous pouvez écrire plusieur requête dans ce fichier, en les séparant par `###` :
+
+```http
+GET http://localhost:12000/books
+Content-Type: application/json
+
+###
+
+GET http://localhost:12000/comments
+```
+
+Il est possible dans un requête HTTP d'envoyer du contenu JSON à notre serveur :
+
+```http
+POST http://localhost:12000/books
+Content-Type: application/json
+
+{
+  "title": "Harry Potter",
+  "description": "klfhsdlfkhsdlfkhsdlfsdflskh"
+}
+```
+
+Exemple : Modification de mes données personnel, changer mon email
+
+```http
+PATCH http://localhost:12000/me
+Content-Type: application/json
+
+{
+  "email": "mon-nouveau-main@mail.com"
+}
+```

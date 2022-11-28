@@ -16,6 +16,7 @@
 12. [Les formulaires de « recherche »](./assets/cours/search-form.md)
 13. [La sécurité (authentification et autorisation)](./assets/cours/security.md)
 14. [Les API Rest](./assets/cours/api-rest.md)
+15. [Les API Rest avec Symfony](./assets/cours/sf-api-rest.md)
 
 ## Les execices :
 
