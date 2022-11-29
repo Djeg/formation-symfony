@@ -34,7 +34,7 @@ class ApiAddressController extends AbstractController
     #[OA\Response(
         response: 201,
         description: 'The address has been created successfully',
-        content: new Model(type: Address::class),
+        content: new Model(type: Address::class, groups: ['default']),
     )]
     #[OA\RequestBody(content: new Model(type: Address::class, groups: ['api_create']))]
     #[Route('/api/addresses', name: 'app_apiAddress_create', methods: ['POST'])]
@@ -62,7 +62,7 @@ class ApiAddressController extends AbstractController
 
         // si valide : on « serialise » en JSON l'adresse que l'on vient de créer,
         // et on retourne le code HTTP : 201 !
-        return $this->json($address, 201);
+        return $this->json($address, 201, [], ['groups' => ['default']]);
     }
 
     /**
@@ -99,6 +99,13 @@ class ApiAddressController extends AbstractController
     /**
      * Met à jour une address
      */
+    #[OA\Tag(name: 'Address')]
+    #[OA\Response(
+        response: 200,
+        description: 'The address has been updated successfully',
+        content: new Model(type: Address::class, groups: ['default']),
+    )]
+    #[OA\RequestBody(content: new Model(type: Address::class, groups: ['api_create']))]
     #[Route('/api/addresses/{id}', name: 'app_apiAddress_update', methods: ['PATCH'])]
     public function update(Address $address, AddressRepository $repository, Request $request): Response
     {
@@ -133,6 +140,12 @@ class ApiAddressController extends AbstractController
      * Supprime une adresse
      */
     #[Route('/api/addresses/{id}', name: 'app_apiAddress_remove', methods: ['DELETE'])]
+    #[OA\Tag(name: 'Address')]
+    #[OA\Response(
+        response: 200,
+        description: 'The address has been removed successfully',
+        content: new Model(type: Address::class, groups: ['default']),
+    )]
     public function remove(Address $address, AddressRepository $repository): Response
     {
         $repository->remove($address, true);
@@ -144,6 +157,12 @@ class ApiAddressController extends AbstractController
      * Récupére une adresse par son identifiant
      */
     #[Route('/api/addresses/{id}', name: 'app_apiAddress_get', methods: ['GET'])]
+    #[OA\Tag(name: 'Address')]
+    #[OA\Response(
+        response: 200,
+        description: 'The address has been retrieved successfully',
+        content: new Model(type: Address::class, groups: ['default']),
+    )]
     public function get(Address $address): Response
     {
         return $this->json($address);

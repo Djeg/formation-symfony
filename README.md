@@ -18,6 +18,7 @@
 14. [Les API Rest](./assets/cours/api-rest.md)
 15. [Les API Rest avec Symfony](./assets/cours/sf-api-rest.md)
 16. [Documenté son API Rest](./assets/cours/api-doc.md)
+17. [Les CORS et les API Rest](./assets/cours/cors.md)
 
 ## Les execices :
 
