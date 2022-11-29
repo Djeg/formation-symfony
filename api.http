@@ -1,10 +1,11 @@
-GET http://localhost:12000/api/addresses
-
-###
-
-GET http://localhost:12000/api/addresses/7
-
-###
-
 POST http://localhost:12000/api/addresses
 Content-Type: application/json
+
+{
+  "country": "FR",
+  "zipCode": "65332",
+  "street": "20 rue du bonheur",
+  "city": "Super City",
+  "type": "none",
+  "user": 1
+}
