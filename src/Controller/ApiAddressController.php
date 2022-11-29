@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Address;
 use App\Form\AddressSearchType;
 use App\Form\ApiAddressType;
 use App\Repository\AddressRepository;
@@ -16,6 +17,10 @@ use Symfony\Component\Routing\Annotation\Route;
  * notre api.
  * 
  * - La création
+ * - la liste
+ * - la mise à jour
+ * - la suppression
+ * - la récupération
  */
 class ApiAddressController extends AbstractController
 {
@@ -65,5 +70,58 @@ class ApiAddressController extends AbstractController
 
         // On retourne la réponse en json
         return $this->json($addresses);
+    }
+
+    /**
+     * Met à jour une address
+     */
+    #[Route('/api/addresses/{id}', name: 'app_apiAddress_update', methods: ['PATCH'])]
+    public function update(Address $address, AddressRepository $repository, Request $request): Response
+    {
+        // créer le formulaire avec l'address et en method PATCH
+        $form = $this->createForm(ApiAddressType::class, $address, [
+            'method' => 'PATCH',
+        ]);
+
+        // remplie le formulaire
+        $form->handleRequest($request);
+
+        // on test sa validité
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            // si non valide, on retourne les erreur du form avec le
+            // code HTTP : 400
+            return $this->json($form->getErrors(), 400);
+        }
+
+        // si valide : on créé les dates
+        $address = $form->getData();
+        $address->setUpdatedAt(new DateTime());
+
+        // si valide : on sauvegarde l'adresse
+        $repository->save($address, true);
+
+        // si valide : on « serialise » en JSON l'adresse que l'on vient de créer,
+        // et on retourne le code HTTP : 200 !
+        return $this->json($address);
+    }
+
+    /**
+     * Supprime une adresse
+     */
+    #[Route('/api/addresses/{id}', name: 'app_apiAddress_remove', methods: ['DELETE'])]
+    public function remove(Address $address, AddressRepository $repository): Response
+    {
+        $repository->remove($address, true);
+
+        return $this->json($address);
+    }
+
+    /**
+     * Récupére une adresse par son identifiant
+     */
+    #[Route('/api/addresses/{id}', name: 'app_apiAddress_get', methods: ['GET'])]
+    public function get(Address $address): Response
+    {
+        return $this->json($address);
     }
 }

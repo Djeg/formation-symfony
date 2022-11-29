@@ -16,12 +16,17 @@ GET http://localhost:12000/api/addresses?limit=10&orderBy=street&direction=DESC&
 
 ###
 
-PATCH http://localhost:12000/api/addresses
+PATCH http://localhost:12000/api/addresses/53
 Content-Type: application/json
 
-[
-  {
-    "id": 2,
-    "street": ""
-  }
-]
+{
+  "street": "53 rue des jardins"
+}
+
+###
+
+GET http://localhost:12000/api/addresses/2
+
+###
+
+DELETE http://localhost:12000/api/addresses/53
