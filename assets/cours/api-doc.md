@@ -4,7 +4,7 @@ Symfony possède un plugin (bundle) permettant de générer automatiquement une 
 
 ## NelmioApiDocBundle
 
-La première étape, c'est d'installer « NelmioApiDoc » :
+La première étape, c'est d'installer « [NelmioApiDoc](https://symfony.com/bundles/NelmioApiDocBundle/current/index.html) » :
 
 ```bash
 # sans docker
