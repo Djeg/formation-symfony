@@ -33,3 +33,4 @@
 9. [La panier](./assets/exos/cart.md)
 10. [Rest et les URI](./assets/exos/rest.md)
 11. [L'api pour les adresses](./assets/exos/api-address.md)
+12. [L'api pour les livres, users, account et Annonces](./assets/exos/api.md)
