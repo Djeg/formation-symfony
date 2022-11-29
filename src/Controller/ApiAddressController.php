@@ -2,15 +2,18 @@
 
 namespace App\Controller;
 
+use App\DTO\AddressSearchCriteria;
 use App\Entity\Address;
 use App\Form\AddressSearchType;
 use App\Form\ApiAddressType;
 use App\Repository\AddressRepository;
 use DateTime;
+use Nelmio\ApiDocBundle\Annotation\Model;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use OpenApi\Attributes as OA;
 
 /**
  * Ce controller contient toutes les routes des adresses pour
@@ -27,6 +30,13 @@ class ApiAddressController extends AbstractController
     /**
      * Route de création d'une address dans notre api
      */
+    #[OA\Tag(name: 'Address')]
+    #[OA\Response(
+        response: 201,
+        description: 'The address has been created successfully',
+        content: new Model(type: Address::class),
+    )]
+    #[OA\RequestBody(content: new Model(type: Address::class, groups: ['api_create']))]
     #[Route('/api/addresses', name: 'app_apiAddress_create', methods: ['POST'])]
     public function create(AddressRepository $repository, Request $request): Response
     {
@@ -58,6 +68,20 @@ class ApiAddressController extends AbstractController
     /**
      * Liste les adresses
      */
+    #[OA\Tag(name: 'Address')]
+    #[OA\Parameter(
+        in: 'query',
+        name: 'khfsdh',
+        schema: new OA\Schema(ref: new Model(type: AddressSearchCriteria::class), required: [])
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Retourne la collection d\'adresse',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: Address::class))
+        )
+    )]
     #[Route('/api/addresses', name: 'app_apiAddress_list', methods: ['GET'])]
     public function list(AddressRepository $repository, Request $request): Response
     {

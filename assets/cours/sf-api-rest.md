@@ -158,3 +158,98 @@ public function create(AddressRepository $repository, Request $request): Respons
   return $this->json($address, 201);
 }
 ```
+
+## L'authentification
+
+Afin de se connécté à une API Rest, nous utilisons un système de [JWT (Json Web Token)](https://jwt.io/). Pour schèmatiser le fonctionnement voici un petit dessin :
+
+![JWT](../images/jwt.png)
+
+### Installer le « bundle » (plugin) nous permettant de gérer le JWT
+
+Symfony à tout prévu, il éxiste un « bundle » (extension symfony) qui s'occupe de tout pour nous ! Voici sa [documentation officiel](https://symfony.com/bundles/LexikJWTAuthenticationBundle/current/index.html)
+
+La première étape est d'installer le bundle :
+
+```bash
+# sans docker
+symfony composer require lexik/jwt-authentication-bundle
+# avec docker
+bin/sf composer req lexik/jwt-authentication-bundle
+```
+
+### Configurer le « bundle » d'authentification
+
+Nous configurer devons l'extension, pour cela ouvrir le fichier `config/packages/lexik_jwt_athentication.yaml` et placer la configuration suivante :
+
+```yaml
+lexik_jwt_authentication:
+  secret_key: "%kernel.project_dir%/config/jwt/private.pem"
+  public_key: "%kernel.project_dir%/config/jwt/public.pem"
+```
+
+Il nous faut ensuite configurer les clé de cryptage avec la commande :
+
+```bash
+# sans docker
+symfony console lexik:jwt:generate-keypair
+# avec docker
+bin/sf console lexik:jwt:generate-keypair
+```
+
+L'étape suivante et de configurer la sécurité de notre application (Firewall et ACL) pour cela, ouvrir le fichier `config/package/security.yml` et placer les séctions suivante :
+
+```yaml
+security:
+  # Dans le firewall :
+  firewalls:
+        # On ajoute un firewall concernant la création du token
+        api_login:
+            pattern: ^/api/token
+            stateless: true
+            json_login:
+                check_path: /api/token
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+        # On configure le firewall de l'API
+        api:
+            pattern:   ^/api
+            stateless: true
+            jwt: ~
+
+    # Dans l'access control, on rend accesible l'url de création de token
+    access_control:
+        - { path: ^/api/token, roles: PUBLIC_ACCESS }
+        # Vous pouvez si vous le désirez, rendre l'intégralité de votre API
+        # accessible uniquement aux clients possédant un token
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+```
+
+Et enfin ajouter la route de connexion par token, pour ça rendez-vous dans le fichier `config/routes.yaml` et ajouter à la suite la configuration suivante
+
+```yaml
+api_login_check:
+  path: /api/token
+```
+
+> Vous pouvez personaliser les routes de création de token, ici nous avons spécifié `/api/token` mais cela peut-être ce que vous souhaitez !
+
+Maintenant que la connexion via JWT est configurer nous pouvons obtenir un token :
+
+```http
+POST http://localhost:12000/api/token
+Content-Type: application/json
+
+{
+  "username": "test@mail.com",
+  "password": "test"
+}
+```
+
+Cette requête vas nous retourner un token, grâce à ce token nous pouvons accéder à n'importe quelle endpoint de notre api facilement :
+
+```http
+GET http://localhost:12000/api/addresses
+Authorization: Bearer <token>
+```

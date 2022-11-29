@@ -1,0 +1,49 @@
+nelmio_api_doc:
+  # Les information generale de votre api
+  documentation:
+    # Nous pouvons configurer le server de l'api
+    servers:
+      - url: http://localhost:12000
+        description: Serveur de l'api
+    info:
+      # Titre de votre api
+      title: LookBook - API
+      # description de votre api
+      description: API Rest pour gérer les annonces de livres entre particulier
+      version: 1.0.0
+    # On peut ajouter des composants, notamant celui de l'authentification
+    components:
+      # On ajoute un schèma de sécurité
+      securitySchemes:
+        # On se connect via un Bearer
+        jwt:
+          type: http
+          scheme: Bearer
+          bearerFormat: JWT
+    # On spécifie la sécurité à utiliser
+    security:
+      - jwt: []
+    # On ajoute la route pour créer un token
+    paths:
+      # On ajoute la route pour le token
+      "/api/token":
+        # On spécifie la méthode HTTP
+        post:
+          summary: Create a new authentification token
+          tags:
+            - Security
+          security: []
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                    password:
+                      type: string
+  areas: # to filter documented areas
+    path_patterns:
+      - ^/api(?!/doc$) # Accepts routes under /api except /api/doc
+

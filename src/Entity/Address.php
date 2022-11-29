@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\AddressRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\Ignore;
 
 #[ORM\Entity(repositoryClass: AddressRepository::class)]
@@ -16,27 +17,35 @@ class Address
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['default', 'api_create'])]
     private ?string $country = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['default', 'api_create'])]
     private ?string $zipCode = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['api_create'])]
     private ?string $street = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['api_create'])]
     private ?string $city = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['api_create'])]
     private ?string $state = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['api_create'])]
     private ?string $phone = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['api_create'])]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['api_create'])]
     private ?string $lastname = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -48,6 +57,7 @@ class Address
     #[Ignore]
     #[ORM\ManyToOne(inversedBy: 'addresses')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['api_create'])]
     private ?User $user = null;
 
     #[ORM\Column(length: 255)]
