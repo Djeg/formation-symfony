@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\AddressSearchType;
 use App\Form\ApiAddressType;
 use App\Repository\AddressRepository;
 use DateTime;
@@ -47,5 +48,22 @@ class ApiAddressController extends AbstractController
         // si valide : on « serialise » en JSON l'adresse que l'on vient de créer,
         // et on retourne le code HTTP : 201 !
         return $this->json($address, 201);
+    }
+
+    /**
+     * Liste les adresses
+     */
+    #[Route('/api/addresses', name: 'app_apiAddress_list', methods: ['GET'])]
+    public function list(AddressRepository $repository, Request $request): Response
+    {
+        // Création du formulaire, et on le remplie
+        $form = $this->createForm(AddressSearchType::class);
+        $form->handleRequest($request);
+
+        // On lance la recherche
+        $addresses = $repository->findBySearchCriteria($form->getData());
+
+        // On retourne la réponse en json
+        return $this->json($addresses);
     }
 }

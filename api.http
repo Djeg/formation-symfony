@@ -9,3 +9,19 @@ Content-Type: application/json
   "type": "none",
   "user": 1
 }
+
+###
+
+GET http://localhost:12000/api/addresses?limit=10&orderBy=street&direction=DESC&user=1
+
+###
+
+PATCH http://localhost:12000/api/addresses
+Content-Type: application/json
+
+[
+  {
+    "id": 2,
+    "street": ""
+  }
+]

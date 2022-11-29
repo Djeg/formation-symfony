@@ -2,7 +2,10 @@
 
 namespace App\Repository;
 
+use App\DTO\AddressSearchCriteria;
 use App\Entity\Address;
+use App\Repository\Helper\BuildPagination;
+use App\Repository\Helper\BuildSort;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,6 +19,9 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class AddressRepository extends ServiceEntityRepository
 {
+    use BuildPagination;
+    use BuildSort;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Address::class);
@@ -37,6 +43,40 @@ class AddressRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /**
+     * Création d'un finder personalisé afin de récupérer des adresses
+     * en fonction de critéres de recherche.
+     * 
+     * @see AddressSearchCriteria
+     */
+    public function findBySearchCriteria(AddressSearchCriteria $criteria): array
+    {
+        // Création du query builder
+        $qb = $this->createQueryBuilder('address');
+
+        // Mise en place de la pagination et du trie :
+        $this
+            ->buildPagination($qb, $criteria)
+            ->buildSort($qb, 'address', $criteria);
+
+        // La recherche par search text
+        if ($criteria->searchText) {
+            $qb
+                ->andWhere('CONCAT(address.street, ", ", address.city, ", ", address.country) LIKE :searchText')
+                ->setParameter('searchText', "%{$criteria->searchText}%");
+        }
+
+        // La recherche par utilisateur
+        if ($criteria->user) {
+            $qb
+                ->leftJoin('address.user', 'user')
+                ->andWhere('user.id = :userId')
+                ->setParameter('userId', $criteria->user);
+        }
+
+        return $qb->getQuery()->getResult();
     }
 
     //    /**

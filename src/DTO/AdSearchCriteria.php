@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\DTO;
 
+use App\DTO\Shared\PaginationCriteria;
+use App\DTO\Shared\SearchTextCriteria;
+use App\DTO\Shared\SortCriteria;
 use App\Entity\User;
 
 /**
@@ -11,10 +14,9 @@ use App\Entity\User;
  */
 class AdSearchCriteria
 {
-    /**
-     * Contient le texte de recherche pour les annonces
-     */
-    public ?string $searchText = null;
+    use PaginationCriteria;
+    use SortCriteria;
+    use SearchTextCriteria;
 
     /**
      * Recherche des annonces par genre
@@ -35,24 +37,4 @@ class AdSearchCriteria
      * Contient le prix maximum de la recherche
      */
     public ?float $maxPrice = null;
-
-    /**
-     * Contient le champ de trie
-     */
-    public string $orderBy = 'createdAt';
-
-    /**
-     * Contient la direction du trie
-     */
-    public string $direction = 'DESC';
-
-    /**
-     * Contient la limit des résultats de recherche
-     */
-    public int $limit = 21;
-
-    /**
-     * Contient le numéro de la page
-     */
-    public int $page = 1;
 }

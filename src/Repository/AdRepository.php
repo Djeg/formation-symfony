@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\DTO\AdSearchCriteria;
 use App\Entity\Ad;
+use App\Repository\Helper\BuildPagination;
+use App\Repository\Helper\BuildSort;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +19,9 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class AdRepository extends ServiceEntityRepository
 {
+    use BuildPagination;
+    use BuildSort;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Ad::class);
@@ -48,12 +53,10 @@ class AdRepository extends ServiceEntityRepository
         // Création d'un query builder
         $qb = $this->createQueryBuilder('ad');
 
-        // la pagination
-        $qb->setMaxResults($criteria->limit);
-        $qb->setFirstResult(($criteria->page - 1) * $criteria->limit);
-
-        // Le trie
-        $qb->orderBy("ad.{$criteria->orderBy}", $criteria->direction);
+        // la pagination et le trie
+        $this
+            ->buildPagination($qb, $criteria)
+            ->buildSort($qb, 'ad', $criteria);
 
         // La recherche par texte
         if ($criteria->searchText !== null) {
