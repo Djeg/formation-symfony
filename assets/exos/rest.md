@@ -18,6 +18,12 @@ Solution :
 
 > Attention : Il peut éxister énormement de solutions différentes. C'est à vous de trouver celle qui vous semble le plus logique.
 
+Il vous faudra lancer la commande suivante permettant de crypter le JWT :
+
+```bash
+bin/sf console lexik:jwt:generate-key
+```
+
 ## Les propositions
 
 1. Je veux récupérer les 25 livres les plus chères
