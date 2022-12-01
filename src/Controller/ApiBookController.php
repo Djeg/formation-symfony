@@ -84,4 +84,70 @@ class ApiBookController extends AbstractController
         // On retourne la liste des livres
         return $this->json($books);
     }
+
+    /**
+     * Met à jour un livre
+     */
+    #[OA\Tag(name: 'Books')]
+    #[OA\RequestBody(content: new Model(type: Book::class, groups: ['api_create']))]
+    #[OA\Response(
+        response: 201,
+        description: 'Met à jour un livre',
+        content: new Model(type: Book::class, groups: ['default'])
+    )]
+    #[Route('/api/books/{id}', name: 'app_apiBook_update', methods: ['PATCH'])]
+    public function update(Book $book, BookRepository $repository, Request $request): Response
+    {
+        // Création du formulaire du livre
+        $form = $this->createForm(ApiBookType::class, $book, [
+            'method' => 'PATCH',
+        ]);
+
+        // On remplie le formulaire
+        $form->handleRequest($request);
+
+        // on test la validité du formulaire
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            // On retourne les erreur du formulaire avec le code http 400
+            return $this->json($form->getErrors(true), 400);
+        }
+
+        // On enregistre le livre
+        $repository->save($form->getData(), true);
+
+        // On retourne le livre avec le code HTTP 200
+        return $this->json($form->getData());
+    }
+
+    /**
+     * On supprime un livre
+     */
+    #[OA\Tag(name: 'Books')]
+    #[OA\Response(
+        response: 200,
+        description: 'Supprime un livre',
+        content: new Model(type: Book::class, groups: ['default'])
+    )]
+    #[Route('/api/books/{id}', name: 'app_apiBook_remove', methods: ['DELETE'])]
+    public function remove(Book $book, BookRepository $repository): Response
+    {
+        $repository->remove($book, true);
+
+        return $this->json($book);
+    }
+
+    /**
+     * On récupére un livre
+     */
+    #[OA\Tag(name: 'Books')]
+    #[OA\Response(
+        response: 200,
+        description: 'Récupération d\'un livre',
+        content: new Model(type: Book::class, groups: ['default'])
+    )]
+    #[Route('/api/books/{id}', name: 'app_apiBook_get', methods: ['GET'])]
+    public function get(Book $book): Response
+    {
+        return $this->json($book);
+    }
 }
