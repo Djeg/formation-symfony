@@ -2,7 +2,10 @@
 
 namespace App\Repository;
 
+use App\DTO\BookSearchCriteria;
 use App\Entity\Book;
+use App\Repository\Helper\BuildPagination;
+use App\Repository\Helper\BuildSort;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,6 +20,9 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class BookRepository extends ServiceEntityRepository
 {
+    use BuildPagination;
+    use BuildSort;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Book::class);
@@ -46,28 +52,34 @@ class BookRepository extends ServiceEntityRepository
         }
     }
 
-    //    /**
-    //     * @return Book[] Returns an array of Book objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('b')
-    //            ->andWhere('b.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('b.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    /**
+     * Récupére tout les livres en fonction de critéres de recherche
+     */
+    public function findAllBySearchCriteria(BookSearchCriteria $criteria): array
+    {
+        // Création d'un query builder
+        $qb = $this->createQueryBuilder('book');
 
-    //    public function findOneBySomeField($value): ?Book
-    //    {
-    //        return $this->createQueryBuilder('b')
-    //            ->andWhere('b.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        // Pagination & Trie des livres
+        $this
+            ->buildSort($qb, 'book', $criteria)
+            ->buildPagination($qb, $criteria);
+
+        // La recherche par text
+        if ($criteria->searchText) {
+            $qb
+                ->andWhere("CONCAT(book.title, ' ', book.description) LIKE :searchText")
+                ->setParameter('searchText', $criteria->searchText);
+        }
+
+        // La recherce par genre
+        if ($criteria->genre) {
+            $qb
+                ->andWhere('book.genre = :genre')
+                ->setParameter('genre', $criteria->genre);
+        }
+
+        // On retourne les résultats
+        return $qb->getQuery()->getResult();
+    }
 }
