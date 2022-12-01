@@ -8,6 +8,7 @@ use App\DTO\Shared\PaginationCriteria;
 use App\DTO\Shared\SearchTextCriteria;
 use App\DTO\Shared\SortCriteria;
 use App\Entity\User;
+use OpenApi\Attributes\Property;
 
 /**
  * Cet objet contient les champs du formulaire de recherche des annonces
@@ -26,6 +27,7 @@ class AdSearchCriteria
     /**
      * Recherche des annonces par auteut
      */
+    #[Property(type: 'number')]
     public ?User $author = null;
 
     /**

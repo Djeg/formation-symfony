@@ -36,12 +36,14 @@ class Ad
 
     #[ORM\ManyToOne(inversedBy: 'ads')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Ignore]
+    #[Groups(['api_create'])]
+    #[Property(type: 'number')]
     private ?Book $book = null;
 
     #[ORM\ManyToOne(inversedBy: 'ads')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Ignore]
+    #[Groups(['api_create'])]
+    #[Property(type: 'number')]
     private ?User $author = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]

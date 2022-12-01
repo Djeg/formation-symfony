@@ -6,6 +6,7 @@ use App\DTO\AdSearchCriteria;
 use App\Entity\Ad;
 use App\Repository\Helper\BuildPagination;
 use App\Repository\Helper\BuildSort;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -29,6 +30,12 @@ class AdRepository extends ServiceEntityRepository
 
     public function save(Ad $entity, bool $flush = false): void
     {
+        $entity->setUpdatedAt(new DateTime());
+
+        if (!$entity->getCreatedAt()) {
+            $entity->setCreatedAt(new DateTime());
+        }
+
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
@@ -48,7 +55,7 @@ class AdRepository extends ServiceEntityRepository
     /**
      * Lance une recherche d'annonce en spécifiant les critéres de recherche
      */
-    public function findBySearchCriteria(AdSearchCriteria $criteria): array
+    public function findAllBySearchCriteria(AdSearchCriteria $criteria): array
     {
         // Création d'un query builder
         $qb = $this->createQueryBuilder('ad');

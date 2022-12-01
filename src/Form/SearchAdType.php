@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Formulaire de recherche pour les annonces
  */
-class AdSearchType extends AbstractType
+class SearchAdType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

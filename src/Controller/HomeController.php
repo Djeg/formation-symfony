@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\AdSearchType;
+use App\Form\SearchAdType;
 use App\Repository\AdRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,13 +37,13 @@ class HomeController extends AbstractController
     public function search(Request $request, AdRepository $repository): Response
     {
         // Création du formulaire de recherche
-        $form = $this->createForm(AdSearchType::class);
+        $form = $this->createForm(SearchAdType::class);
 
         // Remplir le formulaire avec la requête
         $form->handleRequest($request);
 
         // Récupérer les critéres de recherche et lancer la recherche
-        $ads = $repository->findBySearchCriteria($form->getData());
+        $ads = $repository->findAllBySearchCriteria($form->getData());
 
         // Afficher la page twig
         return $this->render('home/search.html.twig', [
