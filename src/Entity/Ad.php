@@ -7,6 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use OpenApi\Attributes\Items;
+use OpenApi\Attributes\Property;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 #[ORM\Entity(repositoryClass: AdRepository::class)]
 class Ad
@@ -14,32 +18,42 @@ class Ad
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['default'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['default', 'api_create'])]
     private ?string $title = null;
 
     #[ORM\Column]
+    #[Groups(['default', 'api_create'])]
     private ?float $price = null;
 
     #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    #[Groups(['default', 'api_create'])]
+    #[Property(type: 'array', items: new Items(type: 'string'))]
     private array $pictures = [];
 
     #[ORM\ManyToOne(inversedBy: 'ads')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Ignore]
     private ?Book $book = null;
 
     #[ORM\ManyToOne(inversedBy: 'ads')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Ignore]
     private ?User $author = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups(['default'])]
     private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups(['default'])]
     private ?\DateTimeInterface $updatedAt = null;
 
     #[ORM\ManyToMany(targetEntity: Cart::class, mappedBy: 'ads')]
+    #[Ignore]
     private Collection $carts;
 
     public function __construct()

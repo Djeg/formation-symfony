@@ -2,9 +2,14 @@
 
 namespace App\Repository;
 
+use App\DTO\AccountSearchCriteria;
 use App\Entity\Account;
+use App\Repository\Helper\BuildPagination;
+use App\Repository\Helper\BuildSort;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Stripe\Service\FinancialConnections\AccountService;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
@@ -19,6 +24,9 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  */
 class AccountRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
+    use BuildPagination;
+    use BuildSort;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Account::class);
@@ -26,6 +34,12 @@ class AccountRepository extends ServiceEntityRepository implements PasswordUpgra
 
     public function save(Account $entity, bool $flush = false): void
     {
+        $entity->setUpdatedAt(new DateTime());
+
+        if (!$entity->getCreatedAt()) {
+            $entity->setCreatedAt(new DateTime());
+        }
+
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
@@ -56,28 +70,21 @@ class AccountRepository extends ServiceEntityRepository implements PasswordUpgra
         $this->save($user, true);
     }
 
-//    /**
-//     * @return Account[] Returns an array of Account objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * Récupére la liste des comptes en fonction de critére de recherche
+     */
+    public function findAllBySearchCriteria(AccountSearchCriteria $criteria): array
+    {
+        $qb = $this->createQueryBuilder('account');
 
-//    public function findOneBySomeField($value): ?Account
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $this
+            ->buildSort($qb, 'account', $criteria)
+            ->buildPagination($qb, $criteria);
+
+        if ($criteria->email) {
+            $qb->andWhere('account.email LIKE :email')->setParameter('email', "%{$criteria->email}%");
+        }
+
+        return $qb->getQuery()->getResult();
+    }
 }

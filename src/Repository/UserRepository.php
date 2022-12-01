@@ -2,7 +2,11 @@
 
 namespace App\Repository;
 
+use App\DTO\UserSearchCriteria;
 use App\Entity\User;
+use App\Repository\Helper\BuildPagination;
+use App\Repository\Helper\BuildSort;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,6 +20,9 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class UserRepository extends ServiceEntityRepository
 {
+    use BuildPagination;
+    use BuildSort;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
@@ -23,6 +30,12 @@ class UserRepository extends ServiceEntityRepository
 
     public function save(User $entity, bool $flush = false): void
     {
+        $entity->setUpdatedAt(new DateTime());
+
+        if (!$entity->getCreatedAt()) {
+            $entity->setCreatedAt(new DateTime());
+        }
+
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
@@ -39,28 +52,24 @@ class UserRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return User[] Returns an array of User objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('u.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * Récupére tout les utilisateurs correspondant aux critéres de
+     * recherche
+     */
+    public function findAllBySearchCriteria(UserSearchCriteria $criteria): array
+    {
+        // Création du query builder
+        $qb = $this->createQueryBuilder('user');
 
-//    public function findOneBySomeField($value): ?User
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        // Pagination & Trie
+        $this->buildSort($qb, 'user', $criteria)->buildPagination($qb, $criteria);
+
+        // La recheche par email
+        if ($criteria->email) {
+            $qb->andWhere('user.email = :email')->setParameter('email', $criteria->email);
+        }
+
+        // on retourne les résultats
+        return $qb->getQuery()->getResult();
+    }
 }
