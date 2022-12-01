@@ -51,7 +51,7 @@ class AddressRepository extends ServiceEntityRepository
      * 
      * @see AddressSearchCriteria
      */
-    public function findBySearchCriteria(AddressSearchCriteria $criteria): array
+    public function findAllBySearchCriteria(AddressSearchCriteria $criteria): array
     {
         // Création du query builder
         $qb = $this->createQueryBuilder('address');

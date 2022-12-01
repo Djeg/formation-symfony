@@ -65,6 +65,7 @@ class Address
     private ?User $user = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['default'])]
     private ?string $type = null;
 
     public function getId(): ?int

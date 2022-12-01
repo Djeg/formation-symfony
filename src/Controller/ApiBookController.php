@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Controller\Helper\ApiControllerHelper;
 use App\DTO\BookSearchCriteria;
 use App\Entity\Book;
 use App\Form\ApiBookType;
+use App\Form\BookType;
 use App\Form\SearchBookType;
 use App\Repository\BookRepository;
 use DateTime;
@@ -20,6 +22,8 @@ use OpenApi\Attributes as OA;
  */
 class ApiBookController extends AbstractController
 {
+    use ApiControllerHelper;
+
     /**
      * Créer un nouveau livre sur notre api
      */
@@ -33,23 +37,11 @@ class ApiBookController extends AbstractController
     #[Route('/api/books', name: 'app_apiBook_create', methods: ['POST'])]
     public function create(Request $request, BookRepository $repository): Response
     {
-        // Création du formulaire du livre
-        $form = $this->createForm(ApiBookType::class);
-
-        // On remplie le formulaire
-        $form->handleRequest($request);
-
-        // on test la validité du formulaire
-        if (!$form->isSubmitted() || !$form->isValid()) {
-            // On retourne les erreur du formulaire avec le code http 400
-            return $this->json($form->getErrors(true), 400);
-        }
-
-        // On enregistre le livre
-        $repository->save($form->getData(), true);
-
-        // On retourne le livre avec le code HTTP 201
-        return $this->json($form->getData(), 201);
+        return $this->apiInsert(
+            BookType::class,
+            $request,
+            $repository,
+        );
     }
 
     /**
@@ -72,17 +64,11 @@ class ApiBookController extends AbstractController
     #[Route('/api/books', name: 'app_apiBook_list', methods: ['GET'])]
     public function list(Request $request, BookRepository $repository): Response
     {
-        // Création du formulaire de recherche
-        $form = $this->createForm(SearchBookType::class);
-
-        // On remplie le formulaire
-        $form->handleRequest($request);
-
-        // On lance la recherche
-        $books = $repository->findAllBySearchCriteria($form->getData());
-
-        // On retourne la liste des livres
-        return $this->json($books);
+        return $this->apiList(
+            SearchBookType::class,
+            $request,
+            $repository,
+        );
     }
 
     /**
@@ -98,25 +84,12 @@ class ApiBookController extends AbstractController
     #[Route('/api/books/{id}', name: 'app_apiBook_update', methods: ['PATCH'])]
     public function update(Book $book, BookRepository $repository, Request $request): Response
     {
-        // Création du formulaire du livre
-        $form = $this->createForm(ApiBookType::class, $book, [
-            'method' => 'PATCH',
-        ]);
-
-        // On remplie le formulaire
-        $form->handleRequest($request);
-
-        // on test la validité du formulaire
-        if (!$form->isSubmitted() || !$form->isValid()) {
-            // On retourne les erreur du formulaire avec le code http 400
-            return $this->json($form->getErrors(true), 400);
-        }
-
-        // On enregistre le livre
-        $repository->save($form->getData(), true);
-
-        // On retourne le livre avec le code HTTP 200
-        return $this->json($form->getData());
+        return $this->apiInsert(
+            BookType::class,
+            $request,
+            $repository,
+            $book,
+        );
     }
 
     /**
@@ -131,9 +104,7 @@ class ApiBookController extends AbstractController
     #[Route('/api/books/{id}', name: 'app_apiBook_remove', methods: ['DELETE'])]
     public function remove(Book $book, BookRepository $repository): Response
     {
-        $repository->remove($book, true);
-
-        return $this->json($book);
+        return $this->apiRemove($book, $repository);
     }
 
     /**
@@ -148,6 +119,6 @@ class ApiBookController extends AbstractController
     #[Route('/api/books/{id}', name: 'app_apiBook_get', methods: ['GET'])]
     public function get(Book $book): Response
     {
-        return $this->json($book);
+        return $this->apiGet($book);
     }
 }
