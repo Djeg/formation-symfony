@@ -81,9 +81,6 @@ class SearchAdType extends AbstractType
                 'label' => 'Page :',
                 'empty_data' => (string)$defaultCriterias->page,
                 'required' => false,
-            ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'Rechercher :',
             ]);
     }
 

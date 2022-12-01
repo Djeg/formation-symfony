@@ -6,6 +6,7 @@ use App\Entity\Account;
 use App\Entity\Ad;
 use App\Repository\AdRepository;
 use App\Repository\CartRepository;
+use App\Service\Payment;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
@@ -99,43 +100,10 @@ class CartController extends AbstractController
      * Valide un paiement et redirige sur stripe
      */
     #[Route('/mon-panier/validation', name: 'app_cart_validate', methods: ['GET'])]
-    public function validate(): Response
+    public function validate(Payment $payment): Response
     {
-        // Contient les items (produits) stripe
-        $lineItems = [];
-
-        // On se connécte à Stripe
-        Stripe::setApiKey('sk_test_bxRlPNBMpA5734i4hzBc0sIA');
-
-        /**
-         * @var Account
-         */
-        $account = $this->getUser();
-
-        // Je boucle sur toutes les annonces du panier de l'utilisateur
-        foreach ($account->getCart()->getAds() as $ad) {
-            $lineItems[] = [
-                'price_data' => [
-                    'currency' => 'EUR',
-                    'product_data' => [
-                        'name' => "{$ad->getTitle()}-{$ad->getId()}"
-                    ],
-                    'unit_amount' => (int)$ad->getPrice() * 100,
-                ],
-                'quantity' => 1,
-            ];
-        }
-
-        // Créer l'url de paiment stripe
-        $checkout = Session::create([
-            'line_items' => $lineItems,
-            'mode' => 'payment',
-            'success_url' => $this->generateUrl('app_cart_confirm', [], UrlGeneratorInterface::ABSOLUTE_URL),
-            'cancel_url' => $this->generateUrl('app_cart_error', [], UrlGeneratorInterface::ABSOLUTE_URL),
-        ]);
-
         // On redirige vers l'url stripe
-        return $this->redirect($checkout->url);
+        return $this->redirect($payment->checkout($this->getUser()));
     }
 
     /**
