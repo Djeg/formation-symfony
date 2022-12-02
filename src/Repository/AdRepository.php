@@ -110,6 +110,9 @@ class AdRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * Cette méthd n'est pas utilisé, elle à juste vocation de documentation
+     */
     public function findBySearchText(string $search): array
     {
         // Afin de faire des reqûetes à la base de données il faut
