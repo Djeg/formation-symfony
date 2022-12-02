@@ -2,18 +2,15 @@ security:
   enable_authenticator_manager: true
 
   role_hierarchy:
-    ROLE_ADMIN: [ROLE_USER, ROLE_SELLER]
-    ROLE_SELLER: [ROLE_USER]
+    ROLE_CLIENT: [ROLE_USER, ROLE_API]
+    ROLE_ADMIN: [ROLE_CLIENT]
   # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
   password_hashers:
     Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: "auto"
   # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
   providers:
+    users_in_memory: { memory: null }
     # used to reload user from session & other features (e.g. switch_user)
-    app_user_provider:
-      entity:
-        class: App\Entity\Account
-        property: email
 
   firewalls:
     api_login:
@@ -32,10 +29,8 @@ security:
       security: false
     main:
       lazy: true
-      provider: app_user_provider
-      custom_authenticator: App\Security\AccountFormAuthenticator
-      logout:
-        path: app_account_logout
+      provider:
+        users_in_memory
         # where to redirect after logout
         # target: app_any_route
 

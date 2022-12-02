@@ -1,6 +1,24 @@
-# Formation Symfony 6
+# Formation Symfony 6 - Projet PrestigImmo
 
-## Les chapitres
+L'objectif de ce projet et de créer un site ainsi qu'une api pour vendre des bien immobilier de prestige.
+
+## Les supports
+
+Voici le schèma de nos entités :
+
+![UML BDD](./assets/images/uml-bdd.png)
+
+Voici le lien vers les maquettes :
+
+[Lien figma](https://www.figma.com/file/zIfLkXWzlZ2JGbld7rBDTe/PrestigImmo?node-id=0%3A1&t=F2nzh0xfhRIpv4GV-1)
+
+> Important : Nous allons uniquement réaliser une intégration pour les mobiles
+
+## Les étapes du projet
+
+1. [Mettre en place la sécurité](./assets/steps/security.md)
+
+## Les chapitres du cours
 
 1. [Installation (sans docker)](./assets/cours/installation.md)
 2. [Installation (avec docker)](./assets/cours/installation-docker.md)
@@ -21,18 +39,3 @@
 17. [Les CORS et les API Rest](./assets/cours/cors.md)
 18. [La validation](./assets/cours/validation.md)
 19. [Les Services et le Container](./assets/cours/services.md)
-
-## Les execices :
-
-1. [Le controller et les routes](./assets/exos/controller.md)
-2. [Le CRUD de Livre](./assets/exos/crud-book.md)
-3. [Le design](./assets/exos/le-design.md)
-4. [Le CRUD des users](./assets/exos/crud-user.md)
-5. [Les annonces](./assets/exos/les-annonces.md)
-6. [Rechercher des annonces](./assets/exos/search-form.md)
-7. [Créer un compte](./assets/exos/account.md)
-8. [Autorisation](./assets/exos/authorization.md)
-9. [La panier](./assets/exos/cart.md)
-10. [Rest et les URI](./assets/exos/rest.md)
-11. [L'api pour les adresses](./assets/exos/api-address.md)
-12. [L'api pour les livres, users, account et Annonces](./assets/exos/api.md)
