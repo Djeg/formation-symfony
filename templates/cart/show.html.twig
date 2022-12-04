@@ -1,6 +1,12 @@
 {% extends 'public.html.twig' %}
 
-{% block subtitle %}Mon Panier{% endblock %}
+{#
+  Nous utilisons le filtre twig : trans
+
+  cet dernier permet de traduire un mot clefs dans la
+  langue du client :
+#}
+{% block subtitle %}{{ 'my_cart'|trans }}{% endblock %}
 
 {% block main %}
 <div class="book-list">
