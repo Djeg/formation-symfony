@@ -13,6 +13,8 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\Ignore;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: AccountRepository::class)]
 class Account implements UserInterface, PasswordAuthenticatedUserInterface
@@ -23,8 +25,14 @@ class Account implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['default'])]
     private ?int $id = null;
 
+    /**
+     * Ici nous ajoutons les contraintes "NotBlank"
+     * et "Email" diréctement sur notre objet :
+     */
     #[ORM\Column(length: 180, unique: true)]
     #[Groups(['default', 'api_create'])]
+    #[NotBlank()]
+    #[Email()]
     private ?string $email = null;
 
     #[ORM\Column]
