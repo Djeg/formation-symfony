@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Contient toutes les pages concernant le panier. Ce controller
@@ -91,10 +92,18 @@ class CartController extends AbstractController
      * Affiche le contenue du panier
      */
     #[Route('/mon-panier', name: 'app_cart_show', methods: ['GET'])]
-    public function show(): Response
+    public function show(TranslatorInterface $translator): Response
     {
+        // traduction du mot clef « my_cart ». La langue utilisé par
+        // la traduction est celle du client. Si aucune traduction
+        // n'est disponible alors la langue par défaut est utilisé :
+        // config/packages/translations.yaml => default_locale
+        $translation = $translator->trans('my_cart');
+
         // on affiche la page
-        return $this->render('cart/show.html.twig');
+        return $this->render('cart/show.html.twig', [
+            'translation' => $translation,
+        ]);
     }
 
     /**
