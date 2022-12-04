@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * Formulaire d'inscription permettant la création d'un compte sur notre application.
@@ -57,6 +59,12 @@ class RegistrationType extends AbstractType
             // le champ
             ->add('email', EmailType::class, [
                 'label' => 'Votre email :',
+                // Il est possible de rajouter des contraintes de validation
+                // diréctement dans un champ de formulaire :
+                'constraints' => [
+                    new NotBlank(),
+                    new Email(),
+                ]
             ])
             // Ici nous ajoutons le champ « password ».
             ->add('password', RepeatedType::class, [
