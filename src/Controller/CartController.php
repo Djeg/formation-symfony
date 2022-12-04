@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Contient toutes les pages concernant le panier. Ce controller
@@ -98,11 +99,31 @@ class CartController extends AbstractController
 
     /**
      * Valide un paiement et redirige sur stripe.
-     * Pour cela nous utilisons notre propres service : Payment
+     * Pour cela nous utilisons notre propres service : Payment.
+     * 
+     * Nous injéctons aussi le service de validation afin de
+     * valider le panier en utilisant ces propres contraintes
      */
     #[Route('/mon-panier/validation', name: 'app_cart_validate', methods: ['GET'])]
-    public function validate(Payment $payment): Response
+    public function validate(Payment $payment, ValidatorInterface $validator): Response
     {
+        /**
+         * @var Account
+         */
+        $account = $this->getUser();
+
+        // Nous validons le panier en premier temps
+        $cart = $account->getCart();
+        $errors = $validator->validate($cart);
+
+        // Si il y a des erreurs :
+        if (count($errors) > 0) {
+            // Nous redirigons vers la page du panier
+            return $this->redirectToRoute('app_cart_show', [
+                'errors' => $errors,
+            ]);
+        }
+
         // On redirige vers l'url stripe
         return $this->redirect($payment->checkout($this->getUser()));
     }
