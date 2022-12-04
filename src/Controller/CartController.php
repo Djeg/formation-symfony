@@ -97,7 +97,8 @@ class CartController extends AbstractController
     }
 
     /**
-     * Valide un paiement et redirige sur stripe
+     * Valide un paiement et redirige sur stripe.
+     * Pour cela nous utilisons notre propres service : Payment
      */
     #[Route('/mon-panier/validation', name: 'app_cart_validate', methods: ['GET'])]
     public function validate(Payment $payment): Response
