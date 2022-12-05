@@ -12,18 +12,19 @@ Créé l'entité « Client » avec les champs spécifié dans le schèma de la b
 
 > Il vous faudra utiliser le `make:user`.
 
+> Pour ajouter des champs la commande `make:entity` peut vous être utile
+
 ## Étape 2 - Les fixtures
 
-Dans le fichier `fixtures/data.yml`, créé une 30aines de clients.
+Dans le fichier `fixtures/data.yml`, créé une 30 aines de clients.
 
 > Vous pouvez crypter un mot de passe en utilisant la commande : `secu:hash`
 
 ## Étape 3 - L'inscription
 
-Créer un formulaire afin d'inscrire un client sur le site internet. Pour ce formulaire vous pouvez aussi le ranger
-dans un dossier front (ex `make:form Front\\Registration`).
+Créer un formulaire afin d'inscrire un client sur le site internet.
 
-Créer un controller, dans un dossier `Front` nommé `ClientFrontController`.
+Créer un controller, dans un dossier `Front` nommé `ClientController`.
 
 > Pour générer un controller dans un dossier utiliser la commande : `make:controller Front\\ClientFrontController`
 
@@ -34,3 +35,5 @@ Dans ce controller, ajouter une méthode « inscription » (traduite en anglais)
 ## Étape 4 - L'authentification
 
 En utilisant la commande `make:auth`, mettre en place la connexion et la deconnexion d'un client :).
+
+> vous pouvez personnaliser le nom des routes dans la configuration symfony ;)
