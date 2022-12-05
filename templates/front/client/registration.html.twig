@@ -1,0 +1,89 @@
+{% extends 'front.html.twig' %}
+
+{% block main %}
+  <h1>Inscription</h1>
+
+  <p>
+    Vous-êtes dèja inscrit ?
+    <a href="{{ path('app_front_client_login') }}">Connéctez-vous</a>
+  </p>
+
+
+  {{ form_start(form) }}
+
+  <div class="form-group">
+    {{ form_row(form.email, {
+      'label': 'Email :',
+    }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.phone, {
+      'label': 'Téléphone :',
+    }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.password.first, {
+      'label': 'Mot de passe :',
+    }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.password.second, {
+      'label': 'Confirmation :',
+    }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.lastname, {
+      'label': 'Nom :',
+    }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.firstname, {
+      'label': 'Prénom :',
+    }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.sexe, {
+      'label': 'Genre :',
+    }) }}
+  </div>
+
+  <h3>Votre adresse</h3>
+
+  <div class="form-group">
+    {{ form_row(form.address.postCode, {
+      'label': 'Code Postale :',
+    }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.address.city, {
+      'label': 'Ville :',
+    }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.address.street, {
+      'label': 'N° de rue :',
+    }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.address.country, {
+      'label': 'Pays :',
+    }) }}
+  </div>
+
+  <div class="btn-group full-width">
+    <button class="btn">
+      <span class="label">S'inscrire</span>
+      <i class="fa-solid fa-paper-plane"></i>
+    </button>
+  </div>
+  {{ form_end(form) }}
+{% endblock %}

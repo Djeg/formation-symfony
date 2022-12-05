@@ -1,0 +1,10 @@
+{% extends 'front.html.twig' %}
+
+{% block main %}
+  <h1>Bienvenue</h1>
+
+  <p>
+    Bienvenue sur PrestigImmo {{ client.firstname }} {{ client.lastname }} !
+    Vous pouvez désormais <a href="{{ path('app_front_client_login') }}">vous connécter</a>
+  </p>
+{% endblock %}

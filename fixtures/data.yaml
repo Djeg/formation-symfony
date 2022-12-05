@@ -1,3 +1,73 @@
 # Placer ici les ficxtures de l'application :
 # La documentation d'alice : https://github.com/nelmio/alice
 # La documentation de faker : https://fakerphp.github.io/formatters/
+
+# Génération des clients de l'application
+App\Entity\Client:
+  # Génération d'un client de test
+  client_test:
+    email: test@mail.com
+    # password : test
+    password: \$2y\$13\$ijAtR1cudQlxPNIE5xpAsutWQ8nwTdt2uyP7Qi4.BDhsyLsgqY6NS
+    roles: ["ROLE_CLIENT"]
+    phone: "0235214284"
+    firstname: "John"
+    lastname: "Doe"
+    sexe: <(\App\Entity\Client::SEXES['homme'])>
+    createdAt: <(new \DateTime())>
+    updatedAt: <(new \DateTime())>
+    address: "@address_client_test"
+
+  # Génération d'un client administreur
+  client_admin:
+    email: admin@mail.com
+    # password : admin
+    password: \$2y\$13\$79TQGtP4x9kKlnCAuGsJXOUuw4XTWlto6rjzFw6vE04jtI.HJZLwy
+    roles: ["ROLE_ADMIN"]
+    phone: "0635211484"
+    firstname: "Jane"
+    lastname: "Doe"
+    sexe: <(\App\Entity\Client::SEXES['femme'])>
+    createdAt: <(new \DateTime())>
+    updatedAt: <(new \DateTime())>
+    address: "@address_admin"
+
+  # Génération de client aléatoire
+  client_{0..30}:
+    email (unique): <email()>
+    # password : client
+    password: \$2y\$13\$1qKKsXJWNWs6RI0ISnx9RuYCAHFnQKnYDkIDJa5MNLpE5YxdJ.DmK
+    roles: ["ROLE_CLIENT"]
+    phone: <fr_FR:phoneNumber()>
+    firstname: <fr_FR:firstName()>
+    lastname: <fr_FR:lastName()>
+    sexe: <(\App\Entity\Client::SEXES['femme'])>
+    createdAt: <(new \DateTime())>
+    updatedAt: <(new \DateTime())>
+    address: "@address_client_<current()>"
+
+# Génération des adresses de l'application
+App\Entity\Address:
+  # Génération d'une address pour le client
+  # de test
+  address_client_test:
+    postCode: "31000"
+    city: "Toulouse"
+    street: "2 boulevard Alsace Loraine"
+    country: "france"
+
+  # Génération d'une address pour le client
+  # admin
+  address_admin:
+    postCode: "44000"
+    city: "Nantes"
+    street: "2 boulevard Alsace Loraine"
+    country: "france"
+
+  # Génération d'address aléatoire pour tout
+  # les clients de l'application
+  address_client_{0..30}:
+    postCode: <fr_FR:postcode()>
+    city: <fr_FR:city()>
+    street: <fr_FR:streetAddress()>
+    country: "france"

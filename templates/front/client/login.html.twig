@@ -1,0 +1,40 @@
+{% extends 'front.html.twig' %}
+
+{% block main %}
+
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            Vous êtes dèja connécté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_front_client_logout') }}">Vous déconnécter ?</a>
+        </div>
+    {% endif %}
+
+    <h1 class="h3 mb-3 font-weight-normal">Connéxion</h1>
+
+    <div class="form-group">
+      <label for="inputEmail">Email :</label>
+      <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword">Mot de passe :</label>
+      <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    </div>
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+
+    <div class="btn-group full-width">
+      <button class="btn">
+        <span class="label">Se connécter</span>
+        <i class="fa-solid fa-paper-plane"></i>
+      </button>
+    </div>
+</form>
+
+{% endblock %}
