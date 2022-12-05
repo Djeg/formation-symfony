@@ -14,9 +14,20 @@ Voici le lien vers les maquettes :
 
 > Important : Nous allons uniquement réaliser une intégration pour les mobiles
 
+## Ordre de dévelopement d'une fonctionnalité
+
+1. Le Model / Le DTO
+2. Les fixtures
+3. Le repository (Query Builder)
+4. Le/Les formulaires
+5. Le controller
+6. La vue (twig)
+
 ## Les étapes du projet
 
 1. [Mettre en place la sécurité](./assets/steps/security.md)
+2. [Mettre en place la page d'accueil](./assets/steps/home.md)
+3. [Mettre en place la page de recherche](./assets/steps/search.md)
 
 ## Les chapitres du cours
 

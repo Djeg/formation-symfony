@@ -35,7 +35,7 @@ Par exemple :
 
 ## Les Filtres
 
-Afin de filtrer nos resources et surtout nos collections, il est possible de les filtrer en utilisant des query string :
+Afin de récupérer des resources et surtout des collections, il est possible de les filtrer en utilisant des query string :
 
 | URI                   | type       | JSON |
 | --------------------- | ---------- | ---- |
