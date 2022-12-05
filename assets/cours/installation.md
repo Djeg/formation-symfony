@@ -20,7 +20,7 @@ symfony new --webapp nomDuProjet
 Pour un projet éxistant, il faut tout d'abord le cloner en ligne de commande :
 
 ```
-git clone --branch session/14-11-22/18-11-22 https://url-du-projet-git.com
+git clone --branch session-projet/05-12-22/09-12-22 https://github.com/Djeg/formation-symfony.git PrestigImmo
 ```
 
 ## Configuration du projet
