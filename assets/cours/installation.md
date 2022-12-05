@@ -33,6 +33,8 @@ Pour continuer, il vous faudra créer votre base de données :
 
 ```
 symfony console doctrine:database:create
+symfony console doctrine:schema:update --force
+symfony console hautelook:fixtures:load
 ```
 
 ## Démarrer le serveur symfony
