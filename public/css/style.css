@@ -123,6 +123,9 @@ html, body {
 .main {
   margin: 0 var(--size-xs);
   flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .main h1 {
@@ -249,4 +252,53 @@ html, body {
 }
 .btn i {
   padding: 0 var(--size-s);
+}
+
+/* style des formulaires */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.form-group, .form-group > div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.form-group {
+  margin: var(--size-xs) 0;
+}
+.form-group label {
+  padding-right: var(--size-xs);
+}
+.form-group input, select {
+  border: none;
+  padding: var(--size-xs);
+  background-color: var(--color-gray);
+  border: none;
+  outline: none;
+  font-family: var(--font-normal);
+  font-size: var(--size-n);
+  flex-grow: 2;
+  min-width: 0;
+  display: flex;
+}
+.form-couple {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+}
+.form-couple .form-group {
+  flex-basis: 40%;
+  max-width: 48%;
+}
+.form-couple .form-group input {
+  flex-grow: 1;
+}
+
+.form-couple .form-group label {
+  flex-grow: 2;
+  min-width: 60%;
 }
