@@ -9,6 +9,8 @@
   --color-dark: #14082E;
   --color-gold: #FFDFAE;
   --color-gray: #EEEEEE;
+  --color-green: #BEFFAE;
+  --color-red: #FFAEAE;
 
   /* les polices */
   --font-normal: 'El Messiri', sans-serif;
@@ -240,6 +242,12 @@ html, body {
   background-color: var(--color-gold);
   padding: var(--size-xxs) 0;
   border: 0;
+}
+.btn.btn-green {
+  background-color: var(--color-green);
+}
+.btn.btn-red {
+  background-color: var(--color-red);
 }
 .btn .label {
   display: flex;

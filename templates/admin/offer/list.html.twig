@@ -1,0 +1,49 @@
+{% extends 'admin.html.twig' %}
+
+{% block main %}
+
+<h1>Liste des offres</h1>
+
+{% for offer in offers %}
+
+  {% embed 'front/partial/_realPropertyCard.html.twig' with {
+    realProperty: offer.realProperty
+  } %}
+
+    {% block details %}
+      <div class="detail">
+        <i class="fa-solid fa-user"></i>
+        <p>Par {{ offer.client.firstname }} {{ offer.client.lastname }}</p>
+      </div>
+      <div class="detail">
+        <i class="fa-regular fa-calendar"></i>
+        <p>Le {{ offer.createdAt|date('d/m/Y à H:i') }}</p>
+      </div>
+    {% endblock %}
+
+    {% block button %}
+        <div class="btn-container">
+          <button class="btn btn-yellow" type="button">
+            <span class="label">Montant : {{ offer.price }}</span>
+            <i class="fa-solid fa-euro-sign"></i>
+          </button>
+        </div>
+        <div class="btn-container">
+          <a href="{{ path('app_admin_offer_validate', {id: offer.id}) }}" class="btn btn-green">
+            <span class="label">Valider</span>
+            <i class="fa-solid fa-check"></i>
+          </a>
+        </div>
+        <div class="btn-container">
+          <a href="{{ path('app_admin_offer_denied', {id: offer.id}) }}" class="btn btn-red">
+            <span class="label">Refuser</span>
+            <i class="fa-solid fa-xmark"></i>
+          </a>
+        </div>
+    {% endblock %}
+
+  {% endembed %}
+
+{% endfor %}
+
+{% endblock %}

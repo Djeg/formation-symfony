@@ -15,30 +15,32 @@
     {% endif %}
   </div>
   <div class="detail-container">
-    <div class="detail">
-      <i class="fa-solid fa-location-dot"></i>
-      <p>{{ realProperty.address }}</p>
-    </div>
-    <div class="detail">
-      <i class="fa-solid fa-door-open"></i>
-      <p>{{ realProperty.numberOfRooms }}</p>
-    </div>
-    <div class="detail">
-      <i class="fa-solid fa-house"></i>
-      <p>{{ realProperty.totalArea }} m2</p>
+    {% block details %}
+      <div class="detail">
+        <i class="fa-solid fa-location-dot"></i>
+        <p>{{ realProperty.address }}</p>
+      </div>
+      <div class="detail">
+        <i class="fa-solid fa-door-open"></i>
+        <p>{{ realProperty.numberOfRooms }}</p>
+      </div>
+      <div class="detail">
+        <i class="fa-solid fa-house"></i>
+        <p>{{ realProperty.totalArea }} m2</p>
 
+      </div>
+      <div class="detail">
+        <i class="fa-solid fa-ruler-combined"></i>
+        <p>{{ realProperty.liveableArea }} m2</p>
+      </div>
     </div>
-    <div class="detail">
-      <i class="fa-solid fa-ruler-combined"></i>
-      <p>{{ realProperty.liveableArea }} m2</p>
+    <div class="price-container">
+      <div class="price">
+        <p>{{ realProperty.price }}</p>
+        <i class="fa-solid fa-euro-sign"></i>
+      </div>
     </div>
-  </div>
-  <div class="price-container">
-    <div class="price">
-      <p>{{ realProperty.price }}</p>
-      <i class="fa-solid fa-euro-sign"></i>
-    </div>
-  </div>
+  {% endblock %}
   {% block button %}
     <div class="btn-container">
       <a href="{{ path('app_front_offer_make', {id: realProperty.id}) }}" class="btn btn-yellow">

@@ -10,6 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
 class Offer
 {
     /**
+     * Contient le pourcentage d'une offre représentant
+     * les frais d'agence
+     */
+    const AGENCY_FEE_PERCENT = 3;
+
+    /**
      * Contient le label de l'offre en attente
      */
     const STATUS_WAITING = 'en attente';
@@ -70,6 +76,9 @@ class Offer
     #[ORM\ManyToOne(inversedBy: 'offers')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Client $client = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $agencyFee = null;
 
     public function getId(): ?int
     {
@@ -168,6 +177,18 @@ class Offer
     public function setClient(?Client $client): self
     {
         $this->client = $client;
+
+        return $this;
+    }
+
+    public function getAgencyFee(): ?float
+    {
+        return $this->agencyFee;
+    }
+
+    public function setAgencyFee(?float $agencyFee): self
+    {
+        $this->agencyFee = $agencyFee;
 
         return $this;
     }
