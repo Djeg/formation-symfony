@@ -8,7 +8,7 @@ L'objéctif de cette partie est de créer la page de profile d'un client. Cette 
 
 > Note : Le champs status contient le status de l'offre, ils sont au nombre de 4 :
 >
-> - en cours
+> - en attente
 > - validé
 > - refusé
 > - terminé

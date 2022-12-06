@@ -30,6 +30,8 @@ Voici le lien vers les maquettes :
 3. [Mettre en place la page de recherche](./assets/steps/search.md)
 4. [Mettre en place la page de profil](./assets/steps/profile.md)
 5. [Faire une offre](./assets/steps/order.md)
+6. [Administrer les offres](./assets/steps/admin-offer.md)
+7. [Terminer une offre](./assets/steps/end-offer.md)
 
 ## Les chapitres du cours
 
