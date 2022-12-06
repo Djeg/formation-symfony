@@ -82,6 +82,7 @@ class SearchRealPropertyType extends AbstractType
             'method' => 'GET',
             'empty_data' => new RealPropertySearchCriteria(),
             'data' => new RealPropertySearchCriteria(),
+            'csrf_protection' => false,
         ]);
     }
 

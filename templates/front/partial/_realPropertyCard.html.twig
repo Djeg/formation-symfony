@@ -41,7 +41,7 @@
   </div>
   {% block button %}
     <div class="btn-container">
-      <a href="#TODO" class="btn btn-yellow">
+      <a href="{{ path('app_front_offer_make', {id: realProperty.id}) }}" class="btn btn-yellow">
         <span class="label">Faire une offre</span>
         <i class="fa-solid fa-pen-nib"></i>
       </a>

@@ -1,0 +1,43 @@
+{% extends 'front.html.twig' %}
+
+{% block main %}
+
+<h1>Faire une offre</h1>
+
+{% embed 'front/partial/_realPropertyCard.html.twig' %}
+
+{% block button %}
+
+  {{ form_start(form) }}
+
+  <div class="form-group">
+    {{ form_row(form.price, {
+      'label': 'Prix de votre offre :',
+    }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.cash, {
+      'label': 'Cash ? :',
+    }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.message, {
+      'label': 'Parlez-nous de cette offre :',
+    }) }}
+  </div>
+
+  <div class="btn-container">
+    <button type="submit" class="btn btn-yellow">
+      <span class="label">Envoyer l'offre</span>
+      <i class="fa-solid fa-pen-nib"></i>
+    </button>
+  </div>
+
+  {{ form_end(form) }}
+{% endblock %}
+
+{% endembed %}
+
+{% endblock %}

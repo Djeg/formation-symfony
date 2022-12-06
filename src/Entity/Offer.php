@@ -9,6 +9,37 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: OfferRepository::class)]
 class Offer
 {
+    /**
+     * Contient le label de l'offre en attente
+     */
+    const STATUS_WAITING = 'en attente';
+
+    /**
+     * Contient le label de l'offre validé
+     */
+    const STATUS_VALIDATED = 'validé';
+
+    /**
+     * Contient le label de l'offre refusé
+     */
+    const STATUS_DENIED = 'refusé';
+
+    /**
+     * Contient le label de l'offre terminé
+     */
+    const STATUS_OVER = 'terminé';
+
+    /**
+     * Cette constante contient les différents status d'une
+     * offre
+     */
+    const STATUSES = [
+        self::STATUS_WAITING,
+        self::STATUS_VALIDATED,
+        self::STATUS_DENIED,
+        self::STATUS_OVER,
+    ];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
