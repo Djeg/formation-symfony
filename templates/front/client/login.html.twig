@@ -15,6 +15,11 @@
 
     <h1 class="h3 mb-3 font-weight-normal">Connéxion</h1>
 
+    <p>
+      Vous n'avez pas de compte ?
+      <a href="{{ path('app_front_client_registration') }}">Inscrivez-vous</a>
+    </p>
+
     <div class="form-group">
       <label for="inputEmail">Email :</label>
       <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>

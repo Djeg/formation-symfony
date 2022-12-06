@@ -1,0 +1,252 @@
+/*
+  Ce fichier contient le style de l'application
+*/
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=El+Messiri:wght@400;500;600;700&display=swap');
+
+/* Variable css */
+:root {
+  /* les couleurs */
+  --color-dark: #14082E;
+  --color-gold: #FFDFAE;
+  --color-gray: #EEEEEE;
+
+  /* les polices */
+  --font-normal: 'El Messiri', sans-serif;
+  --font-display: 'Abril Fatface', cursive;
+
+  /* les tailles */
+  --size-xxs: .3rem;
+  --size-xs: .5rem;
+  --size-s: .8rem;
+  --size-n: 1rem;
+  --size-m: 1.2rem;
+  --size-l: 1.6rem;
+  --size-xl: 2rem;
+  --size-xxl: 2.4rem;
+  --size-xxxl: 3rem;
+}
+
+/* Style Générale (les balises nue sans class) */
+* {
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 100vw;
+  min-height: 100vh;
+  font-family: var(--font-normal);
+  font-size: 18px;
+  color: var(--color-dark);
+}
+.ft-display {
+  font-family: var(--font-display);
+}
+
+/* Style du header */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100vw;
+  background-color: var(--color-dark);
+  color: var(--color-gold);
+}
+
+.header .logo {
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header .logo p {
+  padding: 0;
+  font-size: var(--size-xxxl);
+  text-align: center;
+  background-color: var(--color-gold);
+  color: var(--color-dark);
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  margin: var(--size-l) 0px;
+}
+
+.header .top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+}
+.header .top-nav .item {
+  cursor: pointer;
+  color: var(--color-gray);
+  text-decoration: none;
+  text-align: center;
+  flex-grow: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  font-size: var(--size-n);
+  font-weight: bold;
+  margin: var(--size-m) 0;
+}
+
+.header .hero-unit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: var(--size-xxxl) 0;
+}
+
+.header .hero-unit .title {
+  font-size: var(--size-xxl);
+  margin: 0;
+  padding-bottom: 0;
+}
+.header .hero-unit .subtitle {
+  font-size: var(--size-s);
+  padding-top: 0;
+  margin-top: var(--size-xs);
+  color: var(--color-gray);
+}
+
+
+/* Style de la balise main */
+.main {
+  margin: 0 var(--size-xs);
+  flex-grow: 2;
+}
+
+.main h1 {
+  text-align: center;
+}
+
+
+/* Style du footer */
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-dark);
+  color: var(--color-gold);
+  padding: var(--size-xl) 0;
+}
+
+/* Style des cartes */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-gray);
+}
+.card .title {
+  font-weight: bold;
+  text-align: center;
+  font-size: var(--size-m);
+  margin: var(--size-xs) 0;
+  padding: 0;
+}
+.card .img-container {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+.card .img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card .detail-container {
+  display: flex;
+  flex-direction: column;
+}
+.card .detail-container .detail {
+  display: flex;
+  align-items: center;
+}
+.card .detail-container .detail i {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.card .detail-container .detail p {
+  margin: 0;
+  padding: 0;
+}
+.card .price-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.card .price-container .price {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-gray);
+  padding: var(--size-xs) var(--size-m);
+}
+.card .price-container .price p {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-grow: 2;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  padding-right: var(--size-s);
+  font-size: var(--size-m);
+}
+.card .price-container .price i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transform: translateY(-2px);
+}
+
+/* les boutons */
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: var(--size-s) 0;
+}
+
+.btn {
+  outline: none;
+  text-decoration: none;
+  color: var(--color-dark);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: var(--color-gold);
+  padding: var(--size-xxs) 0;
+  border: 0;
+}
+.btn .label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-grow: 2;
+  font-weight: bold;
+  font-size: var(--size-m);
+}
+.btn i {
+  padding: 0 var(--size-s);
+}

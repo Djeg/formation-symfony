@@ -71,3 +71,66 @@ App\Entity\Address:
     city: <fr_FR:city()>
     street: <fr_FR:streetAddress()>
     country: "france"
+
+  # Adresse pour le bien immobilier de test
+  address_real_property_test:
+    postCode: "63215"
+    city: "Lezoux"
+    street: "2 boulevard Alsace Loraine"
+    country: "france"
+
+  # Génération d'address aléatoire pour les biens immobilier
+  address_real_property_{0..50}:
+    postCode: <fr_FR:postcode()>
+    city: <fr_FR:city()>
+    street: <fr_FR:streetAddress()>
+    country: "france"
+
+# Génération des biens immobilier
+App\Entity\RealProperty:
+  # Génération d'un bien immobilier de test
+  real_property_test:
+    label: "Chateau style Louis XIV"
+    price: 1800000
+    type: <(App\Entity\RealProperty::TYPES['castle'])>
+    totalArea: 3000
+    liveableArea: 400
+    groundArea: 2600
+    numberOfBedrooms: 8
+    numberOfRooms: 12
+    pictures:
+      - "https://images.pexels.com/photos/68389/pexels-photo-68389.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      - "https://images.pexels.com/photos/1006094/pexels-photo-1006094.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    extras: []
+    createdAt: <(new DateTime())>
+    updatedAt: <(new DateTime())>
+    address: "@address_real_property_test"
+
+  # Génération de biens immobilier aléatoire
+  real_property_{0..50}:
+    label: <fr_FR:catchPhrase()>
+    price: <numberBetween(90000, 8000000)>
+    totalArea: <numberBetween(200, 10000)>
+    liveableArea: <numberBetween(200, $totalArea)>
+    groundArea: <numberBetween(200, $liveableArea)>
+    numberOfRooms: <numberBetween(4, 20)>
+    numberOfBedrooms: <numberBetween(4, $numberOfRooms)>
+    type: <randomElement(<(App\Entity\RealProperty::TYPES)>)>
+    pictures:
+      - |
+        <randomElement([
+          'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1600',
+          'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          'https://images.pexels.com/photos/208736/pexels-photo-208736.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          'https://images.pexels.com/photos/1612351/pexels-photo-1612351.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          'https://images.pexels.com/photos/463996/pexels-photo-463996.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          "https://images.pexels.com/photos/262405/pexels-photo-262405.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          "https://images.pexels.com/photos/534151/pexels-photo-534151.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          "https://images.pexels.com/photos/2155202/pexels-photo-2155202.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          "https://images.pexels.com/photos/262048/pexels-photo-262048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          "https://images.pexels.com/photos/280216/pexels-photo-280216.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        ])>
+    extras: []
+    createdAt: <(new DateTime())>
+    updatedAt: <(new DateTime())>
+    address: "@address_real_property_<current()>"

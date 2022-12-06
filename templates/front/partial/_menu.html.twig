@@ -1,0 +1,17 @@
+<nav class="top-nav">
+  <a class="item" href="{{ path('app_front_home_home') }}">
+    Accueil
+  </a>
+  <a class="item" href="#TODO">
+    Rechercher
+  </a>
+  {% if not app.user %}
+    <a class="item" href="{{ path('app_front_client_login') }}">
+      Connexion
+    </a>
+  {% else %}
+    <a class="item" href="#TODO">
+      Mon Profil
+    </a>
+  {% endif %}
+</nav>

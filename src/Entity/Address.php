@@ -33,6 +33,9 @@ class Address
     #[ORM\OneToOne(inversedBy: 'address', cascade: ['persist', 'remove'])]
     private ?Client $client = null;
 
+    #[ORM\OneToOne(mappedBy: 'address', cascade: ['persist', 'remove'])]
+    private ?RealProperty $realProperty = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -96,5 +99,30 @@ class Address
         $this->client = $client;
 
         return $this;
+    }
+
+    public function getRealProperty(): ?RealProperty
+    {
+        return $this->realProperty;
+    }
+
+    public function setRealProperty(RealProperty $realProperty): self
+    {
+        // set the owning side of the relation if necessary
+        if ($realProperty->getAddress() !== $this) {
+            $realProperty->setAddress($this);
+        }
+
+        $this->realProperty = $realProperty;
+
+        return $this;
+    }
+
+    /**
+     * représente une adresse sous forme de chaine de character
+     */
+    public function __toString(): string
+    {
+        return sprintf('%s, %s, %s', $this->street, $this->postCode, $this->city);
     }
 }
