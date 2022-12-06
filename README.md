@@ -28,6 +28,8 @@ Voici le lien vers les maquettes :
 1. [Mettre en place la sécurité](./assets/steps/security.md)
 2. [Mettre en place la page d'accueil](./assets/steps/home.md)
 3. [Mettre en place la page de recherche](./assets/steps/search.md)
+4. [Mettre en place la page de profil](./assets/steps/profile.md)
+5. [Faire une commande](./assets/steps/order.md)
 
 ## Les chapitres du cours
 
