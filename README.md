@@ -29,7 +29,7 @@ Voici le lien vers les maquettes :
 2. [Mettre en place la page d'accueil](./assets/steps/home.md)
 3. [Mettre en place la page de recherche](./assets/steps/search.md)
 4. [Mettre en place la page de profil](./assets/steps/profile.md)
-5. [Faire une commande](./assets/steps/order.md)
+5. [Faire une offre](./assets/steps/order.md)
 
 ## Les chapitres du cours
 
