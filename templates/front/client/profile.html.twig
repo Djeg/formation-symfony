@@ -1,0 +1,113 @@
+{% extends 'front.html.twig' %}
+
+{% block main %}
+  <h1>Mon Profil</h1>
+
+  <div class="btn-group">
+    <a href="{{ path('app_front_client_logout') }}" class="btn btn-red">
+      <span class="label">Me déconnécter</span>
+      <i class="fa-solid fa-right-from-bracket"></i>
+    </a>
+  </div>
+
+  <h2>Mes Offres</h2>
+
+  {% for offer in app.user.offers %}
+    {% embed 'front/partial/_realPropertyCard.html.twig' with { realProperty: offer.realProperty } %}
+      {% block button %}
+        <div class="btn-container">
+          <button class="btn btn-yellow" type="button">
+            <span class="label">Mon offre : {{ offer.price }}</span>
+            <i class="fa-solid fa-euro-sign"></i>
+          </button>
+        </div>
+        <div class="btn-container">
+          <button class="btn btn-yellow" type="button">
+            <span class="label">Status : {{ offer.status }}</span>
+            <i class="fa-solid fa-user-tag"></i>
+          </button>
+        </div>
+      {% endblock %}
+    {% endembed %}
+  {% endfor %}
+
+  <h2>Mes information</h2>
+
+  {{ form_start(form) }}
+
+  <div class="form-group">
+    {{ form_row(form.email, {
+      'label': 'Email :',
+    }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.phone, {
+      'label': 'Téléphone :',
+    }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.password.first, {
+      'label': 'Mot de passe :',
+    }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.password.second, {
+      'label': 'Confirmation :',
+    }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.lastname, {
+      'label': 'Nom :',
+    }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.firstname, {
+      'label': 'Prénom :',
+    }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.sexe, {
+      'label': 'Genre :',
+    }) }}
+  </div>
+
+  <h3>Votre adresse</h3>
+
+  <div class="form-group">
+    {{ form_row(form.address.postCode, {
+      'label': 'Code Postale :',
+    }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.address.city, {
+      'label': 'Ville :',
+    }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.address.street, {
+      'label': 'N° de rue :',
+    }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.address.country, {
+      'label': 'Pays :',
+    }) }}
+  </div>
+
+  <div class="btn-group full-width">
+    <button class="btn">
+      <span class="label">Envoyer</span>
+      <i class="fa-solid fa-paper-plane"></i>
+    </button>
+  </div>
+  {{ form_end(form) }}
+{% endblock %}

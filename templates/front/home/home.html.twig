@@ -8,47 +8,10 @@
 
 <h1>Nos Nouveautés</h1>
 
-{% for property in properties %}
+{% for realProperty in properties %}
 
-<div class="card">
-  <p class="title">{{ property.label }}</p>
-  <div class="img-container">
-    {% if property.pictures and not property.pictures is empty %}
-      <img src="{{ property.pictures[0] }}" alt="{{ property.label }}" />
-    {% endif %}
-  </div>
-  <div class="detail-container">
-    <div class="detail">
-      <i class="fa-solid fa-location-dot"></i>
-      <p>{{ property.address }}</p>
-    </div>
-    <div class="detail">
-      <i class="fa-solid fa-door-open"></i>
-      <p>{{ property.numberOfRooms }}</p>
-    </div>
-    <div class="detail">
-      <i class="fa-solid fa-house"></i>
-      <p>{{ property.totalArea }} m2</p>
-
-    </div>
-    <div class="detail">
-      <i class="fa-solid fa-ruler-combined"></i>
-      <p>{{ property.liveableArea }} m2</p>
-    </div>
-  </div>
-  <div class="price-container">
-    <div class="price">
-      <p>{{ property.price }}</p>
-      <i class="fa-solid fa-euro-sign"></i>
-    </div>
-  </div>
-  <div class="btn-container">
-    <a href="#TODO" class="btn btn-yellow">
-      <span class="label">Faire une offre</span>
-      <i class="fa-solid fa-pen-nib"></i>
-    </a>
-  </div>
-</div>
+{% embed 'front/partial/_realPropertyCard.html.twig' %}
+{% endembed %}
 
 {% endfor %}
 

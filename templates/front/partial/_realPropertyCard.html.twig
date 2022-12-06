@@ -1,0 +1,50 @@
+{#
+  Contient l'affichage d'une carte d'un bien immobilier.
+
+  Ce petit template doit se « embed », car il utilise
+  lui même un système de block.
+
+  Vous pouvez en apprendre plus sur embed ici :
+  https://twig.symfony.com/doc/2.x/tags/embed.html
+#}
+<div class="card">
+  <p class="title">{{ realProperty.label }}</p>
+  <div class="img-container">
+    {% if realProperty.pictures and not realProperty.pictures is empty %}
+      <img src="{{ realProperty.pictures[0] }}" alt="{{ realProperty.label }}" />
+    {% endif %}
+  </div>
+  <div class="detail-container">
+    <div class="detail">
+      <i class="fa-solid fa-location-dot"></i>
+      <p>{{ realProperty.address }}</p>
+    </div>
+    <div class="detail">
+      <i class="fa-solid fa-door-open"></i>
+      <p>{{ realProperty.numberOfRooms }}</p>
+    </div>
+    <div class="detail">
+      <i class="fa-solid fa-house"></i>
+      <p>{{ realProperty.totalArea }} m2</p>
+
+    </div>
+    <div class="detail">
+      <i class="fa-solid fa-ruler-combined"></i>
+      <p>{{ realProperty.liveableArea }} m2</p>
+    </div>
+  </div>
+  <div class="price-container">
+    <div class="price">
+      <p>{{ realProperty.price }}</p>
+      <i class="fa-solid fa-euro-sign"></i>
+    </div>
+  </div>
+  {% block button %}
+    <div class="btn-container">
+      <a href="#TODO" class="btn btn-yellow">
+        <span class="label">Faire une offre</span>
+        <i class="fa-solid fa-pen-nib"></i>
+      </a>
+    </div>
+  {% endblock %}
+</div>

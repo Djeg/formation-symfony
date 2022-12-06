@@ -134,3 +134,16 @@ App\Entity\RealProperty:
     createdAt: <(new DateTime())>
     updatedAt: <(new DateTime())>
     address: "@address_real_property_<current()>"
+
+# Génération des offres
+App\Entity\Offer:
+  offer_test:
+    price: 1500000
+    status: "en attente"
+    message: |
+      Vous vendez le chateau de mes rêves, je souhaiterais faire une offre !
+    cash: false
+    client: "@client_test"
+    realProperty: "@real_property_test"
+    createdAt: <(new DateTime())>
+    updatedAt: <(new DateTime())>

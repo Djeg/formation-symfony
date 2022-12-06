@@ -5,6 +5,7 @@ namespace App\Controller\Front;
 use App\Entity\Client;
 use App\Form\ClientType;
 use App\Repository\ClientRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -89,5 +90,33 @@ class ClientController extends AbstractController
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+    /**
+     * Page d'affichage et d'édition du profile d'un utilisateur
+     */
+    #[IsGranted('ROLE_USER')]
+    #[Route('/mon-profil', name: 'app_front_client_profile', methods: ['GET', 'POST'])]
+    public function profile(Request $request, ClientRepository $repository): Response
+    {
+        /**
+         * @var Client
+         */
+        $client = $this->getUser();
+
+        // Création du formulaire d'édition des informations personnel
+        $form = $this->createForm(ClientType::class, $client);
+        $form->handleRequest($request);
+
+        // test de la validité du formulaire
+        if ($form->isSubmitted() && $form->isValid()) {
+            // on enregistre les données en base de données
+            $repository->save($client, true);
+        }
+
+        // on affiche la page du profile
+        return $this->render('front/client/profile.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

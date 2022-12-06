@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RealPropertyRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -70,6 +72,14 @@ class RealProperty
 
     #[ORM\Column(length: 255)]
     private ?string $label = null;
+
+    #[ORM\OneToMany(mappedBy: 'realProperty', targetEntity: Offer::class, orphanRemoval: true)]
+    private Collection $offers;
+
+    public function __construct()
+    {
+        $this->offers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -228,6 +238,36 @@ class RealProperty
     public function setLabel(string $label): self
     {
         $this->label = $label;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Offer>
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
+
+    public function addOffer(Offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers->add($offer);
+            $offer->setRealProperty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffer(Offer $offer): self
+    {
+        if ($this->offers->removeElement($offer)) {
+            // set the owning side to null (unless already changed)
+            if ($offer->getRealProperty() === $this) {
+                $offer->setRealProperty(null);
+            }
+        }
 
         return $this;
     }

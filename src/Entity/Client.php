@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ClientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -61,6 +63,14 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToOne(mappedBy: 'client', cascade: ['persist', 'remove'])]
     private ?Address $address = null;
+
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: Offer::class, orphanRemoval: true)]
+    private Collection $offers;
+
+    public function __construct()
+    {
+        $this->offers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -222,6 +232,36 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Offer>
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
+
+    public function addOffer(Offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers->add($offer);
+            $offer->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffer(Offer $offer): self
+    {
+        if ($this->offers->removeElement($offer)) {
+            // set the owning side to null (unless already changed)
+            if ($offer->getClient() === $this) {
+                $offer->setClient(null);
+            }
+        }
 
         return $this;
     }
