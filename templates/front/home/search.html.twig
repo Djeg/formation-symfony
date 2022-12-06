@@ -1,0 +1,139 @@
+{% extends 'front.html.twig' %}
+
+{% block main %}
+
+<h1>Rechercher</h1>
+
+{{ form_start(form) }}
+
+  <div class="form-couple">
+    <div class="form-group">
+      {{ form_row(form.page, {
+        'label': 'Page :',
+      }) }}
+    </div>
+    <div class="form-group">
+      {{ form_row(form.limit, {
+        'label': 'Limite :',
+      }) }}
+    </div>
+  </div>
+
+  <div class="form-couple">
+    <div class="form-group">
+      {{ form_row(form.orderBy, {
+        'label': 'Trier par :',
+      }) }}
+    </div>
+    <div class="form-group">
+      {{ form_row(form.direction, {
+        'label': 'Sens :',
+      }) }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.type, {
+      'label': 'Type :',
+    }) }}
+  </div>
+
+  <div class="form-couple">
+    <div class="form-group">
+      {{ form_row(form.minTotalArea, {
+        'label': 'Surface min :',
+      }) }}
+    </div>
+    <div class="form-group">
+      {{ form_row(form.maxTotalArea, {
+        'label': 'Surface max :',
+      }) }}
+    </div>
+  </div>
+
+  <div class="form-couple">
+    <div class="form-group">
+      {{ form_row(form.minPrice, {
+        'label': 'Prix min :',
+      }) }}
+    </div>
+    <div class="form-group">
+      {{ form_row(form.maxPrice, {
+        'label': 'Prix max :',
+      }) }}
+    </div>
+  </div>
+
+  <div class="form-couple">
+    <div class="form-group">
+      {{ form_row(form.minRooms, {
+        'label': 'Piéces min :',
+      }) }}
+    </div>
+    <div class="form-group">
+      {{ form_row(form.maxRooms, {
+        'label': 'Piéces max :',
+      }) }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    {{ form_row(form.address, {
+      'label': 'Adresse :',
+    }) }}
+  </div>
+
+<div class="btn-group full-width">
+  <button class="btn" type="submit">
+    <span class="label">Rechercher</span>
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+</div>
+
+{{ form_end(form) }}
+
+{% for property in realProperties %}
+
+<div class="card">
+  <p class="title">{{ property.label }}</p>
+  <div class="img-container">
+    {% if property.pictures and not property.pictures is empty %}
+      <img src="{{ property.pictures[0] }}" alt="{{ property.label }}" />
+    {% endif %}
+  </div>
+  <div class="detail-container">
+    <div class="detail">
+      <i class="fa-solid fa-location-dot"></i>
+      <p>{{ property.address }}</p>
+    </div>
+    <div class="detail">
+      <i class="fa-solid fa-door-open"></i>
+      <p>{{ property.numberOfRooms }}</p>
+    </div>
+    <div class="detail">
+      <i class="fa-solid fa-house"></i>
+      <p>{{ property.totalArea }} m2</p>
+
+    </div>
+    <div class="detail">
+      <i class="fa-solid fa-ruler-combined"></i>
+      <p>{{ property.liveableArea }} m2</p>
+    </div>
+  </div>
+  <div class="price-container">
+    <div class="price">
+      <p>{{ property.price }}</p>
+      <i class="fa-solid fa-euro-sign"></i>
+    </div>
+  </div>
+  <div class="btn-container">
+    <a href="#TODO" class="btn btn-yellow">
+      <span class="label">Faire une offre</span>
+      <i class="fa-solid fa-pen-nib"></i>
+    </a>
+  </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}
