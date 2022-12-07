@@ -13,42 +13,44 @@
   <h2>Mes Offres</h2>
 
   {% for offer in app.user.offers %}
-    {% embed 'front/partial/_realPropertyCard.html.twig' with { realProperty: offer.realProperty } %}
-      {% block button %}
-        <div class="btn-container">
-          <button class="btn btn-yellow" type="button">
-            <span class="label">Mon offre : {{ offer.price }}</span>
-            <i class="fa-solid fa-euro-sign"></i>
-          </button>
-        </div>
-        <div class="btn-container">
-          {% if offer.status is constant('App\\Entity\\Offer::STATUS_WAITING') %}
+    {% if offer.status is not constant('App\\Entity\\Offer::STATUS_OVER') %}
+      {% embed 'front/partial/_realPropertyCard.html.twig' with { realProperty: offer.realProperty } %}
+        {% block button %}
+          <div class="btn-container">
             <button class="btn btn-yellow" type="button">
-              <span class="label">Status : {{ offer.status }}</span>
-              <i class="fa-solid fa-user-tag"></i>
-            </button>
-          {% endif %}
-
-          {% if offer.status is constant('App\\Entity\\Offer::STATUS_VALIDATED') %}
-
-            <h3>Votre offre est validé !</h3>
-            <p>Vous n'avez plus qu'a régler les frais d'agence</p>
-
-            <a href="#TODO" class="btn btn-green">
-              <span class="label">Payer les frais d'agence {{ offer.agencyFee }}</span>
+              <span class="label">Mon offre : {{ offer.price }}</span>
               <i class="fa-solid fa-euro-sign"></i>
-            </a>
-          {% endif %}
-
-          {% if offer.status is constant('App\\Entity\\Offer::STATUS_DENIED') %}
-            <button class="btn btn-red" type="button">
-              <span class="label">Status : {{ offer.status }}</span>
-              <i class="fa-solid fa-user-tag"></i>
             </button>
-          {% endif %}
-        </div>
-      {% endblock %}
-    {% endembed %}
+          </div>
+          <div class="btn-container">
+            {% if offer.status is constant('App\\Entity\\Offer::STATUS_WAITING') %}
+              <button class="btn btn-yellow" type="button">
+                <span class="label">Status : {{ offer.status }}</span>
+                <i class="fa-solid fa-user-tag"></i>
+              </button>
+            {% endif %}
+
+            {% if offer.status is constant('App\\Entity\\Offer::STATUS_VALIDATED') %}
+
+              <h3>Votre offre est validé !</h3>
+              <p>Vous n'avez plus qu'a régler les frais d'agence</p>
+
+              <a href="{{ path('app_front_offer_checkout', {id: offer.id}) }}" class="btn btn-green">
+                <span class="label">Payer les frais d'agence {{ offer.agencyFee }}</span>
+                <i class="fa-solid fa-euro-sign"></i>
+              </a>
+            {% endif %}
+
+            {% if offer.status is constant('App\\Entity\\Offer::STATUS_DENIED') %}
+              <button class="btn btn-red" type="button">
+                <span class="label">Status : {{ offer.status }}</span>
+                <i class="fa-solid fa-user-tag"></i>
+              </button>
+            {% endif %}
+          </div>
+        {% endblock %}
+      {% endembed %}
+    {% endif %}
   {% endfor %}
 
   <h2>Mes information</h2>
