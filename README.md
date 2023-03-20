@@ -1,5 +1,10 @@
 # Formation Symfony 6
 
+Voici la formation symfony 6. Vous retrouverez aussi les liens des slides de la formation
+ici :
+
+- [Les slides](https://slides.com/davidjegat-1/sf5-training-foundation/fullscreen)
+
 ## Les chapitres
 
 1. [Installation (sans docker)](./assets/cours/installation.md)
