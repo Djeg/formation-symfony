@@ -46,8 +46,7 @@ class AdminBookController extends AbstractController
             $repository->save($book, true);
 
             // je veux rediriger vers la liste des livres
-            // @TODO : Ajouter le redirection !
-            return new Response('OK');
+            return $this->redirectToRoute('app_admin_book_list');
         }
 
         // Je veux afficher le formulaire de création d'un livre
@@ -67,6 +66,39 @@ class AdminBookController extends AbstractController
         return $this->render('admin_book/list.html.twig', [
             // On envoie à twig, tout nos livres
             'books' => $books,
+        ]);
+    }
+
+    /**
+     * Modifie un livre de la base de données
+     */
+    #[Route('/admin/livres/{id}', name: 'app_admin_book_update')]
+    public function update(Book $book, Request $request, BookRepository $repository): Response
+    {
+        // Je teste si le formulaire à bien été envoyé
+        if ($request->isMethod(Request::METHOD_POST)) {
+            // Je récupére les champs envoyé par l'utilisateur
+            $title = $request->request->get('title');
+            $description = $request->request->get('description');
+            $genre = $request->request->get('genre');
+
+            // Je modifie les données du livre
+            $book
+                ->setTitle($title)
+                ->setDescription($description)
+                ->setGenre($genre)
+                ->setUpdatedAt(new DateTime());
+
+            // Je sauvegarde le livre dans la base de données
+            $repository->save($book, true);
+
+            // Je redirige vers la liste des livres
+            return $this->redirectToRoute('app_admin_book_list');
+        }
+
+        // J'affiche le formulaire de modification d'un livre
+        return $this->render('admin_book/update.html.twig', [
+            'book' => $book,
         ]);
     }
 }

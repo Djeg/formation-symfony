@@ -13,8 +13,11 @@
 
 	<ul>
 		{% for book in books %}
-			<li>{{book.title}}
-				(#{{book.id}})</li>
+			<li>
+				{{book.title}}
+				(#{{book.id}})
+				<a href="{{ path('app_admin_book_update', {id: book.id}) }}">Modifier</a>
+			</li>
 		{% endfor %}
 	</ul>
 

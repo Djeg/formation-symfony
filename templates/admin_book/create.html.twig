@@ -1,34 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Admin Book - Création d'un livre
+{% block title %}Admin Book -
+	{% block subTitle %}Création d'un livre
+	{% endblock %}
 {% endblock %}
 
 {% block body %}
-	<h1>Créer un nouveau livre</h1>
+<h1>
+	{% block pageTitle %}Créer un nouveau livre
+	{% endblock %}
+</h1>
 
-	<p>
-		<a href="{{ path('app_admin_book_list') }}">Retour</a>
-	</p>
+<p>
+	<a href="{{ path('app_admin_book_list') }}">Retour</a>
+</p>
 
 
-	<form method="POST">
-		<div>
-			<label for="title">Titre :</label>
-			<input type="text" id="title" name="title"/>
+<form method="POST">
+	<div>
+		<label for="title">Titre :</label>
+		<input type="text" id="title" name="title" value="{% block titleValue '' %}"/>
+	</div>
+
+	<div>
+		<label for="description">Description :</label>
+		<textarea id="description" name="description">
+			{% block descriptionValue '' %}
+		</textarea>
+	</div>
+
+	<div>
+		<label for="genre">Genre :</label>
+		<input type="text" id="genre" name="genre"/>
+		value="{% block genreValue '' %}"
 		</div>
 
 		<div>
-			<label for="description">Description :</label>
-			<textarea id="description" name="description"></textarea>
-		</div>
-
-		<div>
-			<label for="genre">Genre :</label>
-			<input type="text" id="genre" name="genre"/>
-		</div>
-
-		<div>
-			<button type="submit">Créer le livre</button>
+			<button type="submit">
+				{% block buttonLabel %}Créer le livre
+				{% endblock %}
+			</button>
 		</div>
 	</form>
 {% endblock %}
