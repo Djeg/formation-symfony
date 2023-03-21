@@ -10,7 +10,7 @@ ici :
 En symfony, nous développons des applications « HTTP ». Il faut donc comprendre ce qu'est le « web »
 avant de commencer le code :
 
-1. [Découvrir le web](./assets/cours/web.mb)
+1. [Découvrir le web](./assets/cours/web.md)
 
 ## Les chapitres
 
