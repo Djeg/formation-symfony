@@ -53,4 +53,20 @@ class AdminBookController extends AbstractController
         // Je veux afficher le formulaire de création d'un livre
         return $this->render('admin_book/create.html.twig');
     }
+
+    /**
+     * Liste tout les livres de l'application
+     */
+    #[Route('/admin/livres', name: 'app_admin_book_list')]
+    public function list(BookRepository $repository): Response
+    {
+        // Je récupére tout les livres de ma base de données
+        $books = $repository->findAll();
+
+        // J'affiche la liste des livres
+        return $this->render('admin_book/list.html.twig', [
+            // On envoie à twig, tout nos livres
+            'books' => $books,
+        ]);
+    }
 }

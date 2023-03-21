@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin Book - Liste des livres
+{% endblock %}
+
+{% block body %}
+
+	<h1>Liste des livres</h1>
+
+	<p>
+		<a href="{{ path('app_admin_book_create') }}">Créer un livre</a>
+	</p>
+
+	<ul>
+		{% for book in books %}
+			<li>{{book.title}}
+				(#{{book.id}})</li>
+		{% endfor %}
+	</ul>
+
+{% endblock %}

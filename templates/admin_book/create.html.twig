@@ -4,6 +4,13 @@
 {% endblock %}
 
 {% block body %}
+	<h1>Créer un nouveau livre</h1>
+
+	<p>
+		<a href="{{ path('app_admin_book_list') }}">Retour</a>
+	</p>
+
+
 	<form method="POST">
 		<div>
 			<label for="title">Titre :</label>
