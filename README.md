@@ -5,6 +5,13 @@ ici :
 
 - [Les slides](https://slides.com/davidjegat-1/sf5-training-foundation/fullscreen)
 
+## La culture générale !
+
+En symfony, nous développons des applications « HTTP ». Il faut donc comprendre ce qu'est le « web »
+avant de commencer le code :
+
+1. [Découvrir le web](./assets/cours/web.mb)
+
 ## Les chapitres
 
 1. [Installation (sans docker)](./assets/cours/installation.md)
