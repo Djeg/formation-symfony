@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin Book - Création d'un livre
+{% endblock %}
+
+{% block body %}
+	<form method="POST">
+		<div>
+			<label for="title">Titre :</label>
+			<input type="text" id="title" name="title"/>
+		</div>
+
+		<div>
+			<label for="description">Description :</label>
+			<textarea id="description" name="description"></textarea>
+		</div>
+
+		<div>
+			<label for="genre">Genre :</label>
+			<input type="text" id="genre" name="genre"/>
+		</div>
+
+		<div>
+			<button type="submit">Créer le livre</button>
+		</div>
+	</form>
+{% endblock %}
