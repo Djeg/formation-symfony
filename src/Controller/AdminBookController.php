@@ -101,4 +101,17 @@ class AdminBookController extends AbstractController
             'book' => $book,
         ]);
     }
+
+    /**
+     * Supprime un livre de la base de données
+     */
+    #[Route('/admin/livres/{id}/supprimer', name: 'app_admin_book_remove')]
+    public function remove(Book $book, BookRepository $repository): Response
+    {
+        // Je supprime le livre dans la base de données
+        $repository->remove($book, true);
+
+        // Je redirige vers la liste des livres
+        return $this->redirectToRoute('app_admin_book_list');
+    }
 }

@@ -17,6 +17,7 @@
 				{{book.title}}
 				(#{{book.id}})
 				<a href="{{ path('app_admin_book_update', {id: book.id}) }}">Modifier</a>
+				<a href="{{ path('app_admin_book_remove', {id: book.id}) }}">Supprimer</a>
 			</li>
 		{% endfor %}
 	</ul>
