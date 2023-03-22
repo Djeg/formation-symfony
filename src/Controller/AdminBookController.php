@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Form\BookType;
 use App\Repository\BookRepository;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,18 +24,13 @@ class AdminBookController extends AbstractController
     #[Route('/admin/livres/nouveau', name: 'app_admin_book_create')]
     public function create(Request $request, BookRepository $repository): Response
     {
-        // je veux tester si le formulaire a était envoyé
-        if ($request->isMethod(Request::METHOD_POST)) {
-            // je veux récupérer les données envoyé dans le formulaire
-            $title = $request->request->get('title');
-            $description = $request->request->get('description');
-            $genre = $request->request->get('genre');
+        // Création d'un formulaire
+        $form = $this->createForm(BookType::class);
 
-            // je veux créer un livre
-            $book = new Book();
-            $book->setTitle($title);
-            $book->setDescription($description);
-            $book->setGenre($genre);
+        // je veux tester si le formulaire a était envoyé et aussi si il est valid
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Je récupére le livre du formulaire
+            $book = $form->getData();
             // https://www.php.net/manual/fr/class.datetime
             // $today = new DateTime();
             // $today->format('d/m/Y H:i');
@@ -50,7 +46,10 @@ class AdminBookController extends AbstractController
         }
 
         // Je veux afficher le formulaire de création d'un livre
-        return $this->render('admin_book/create.html.twig');
+        return $this->render('admin_book/create.html.twig', [
+            // On envoie notre formulaire à notre fichier twig
+            'form' => $form->createView(),
+        ]);
     }
 
     /**

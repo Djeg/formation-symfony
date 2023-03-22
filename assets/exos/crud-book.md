@@ -131,3 +131,29 @@ Toujours dans le même controller, ajouter une méthode `remove` avec la route s
 Dans ce controller, récupérer le livre avec l'identifiant passé en paramètre de route, puis en utilisant le repository, supprimer le livre.
 
 Un fois terminé, rediriger vers la route de la liste !
+
+## 6. Le formulaire `BookType`
+
+Avec la commande `symfony console make:form`, créé un form type `BookType` qui permet d'éditer les champs d'un livre :
+
+- title
+- description
+- genre
+
+Dans le `AdminBookController`, utiliser ce form type.
+
+## 7. Personnalisé et ajouter un champ
+
+1. Utiliser le `ChoiceType` (https://symfony.com/doc/current/reference/forms/types/choice.html) pour le champs `genre`. Donner la possibilité de choisir entre :
+
+- Fantaisie
+- Science-Fiction
+- Roman
+- Policier
+- Autobiographie
+
+2. Ajouter (avec la commande `symfony console make:entity`) un champ `price` au livre.
+
+3. Éditer votre `BookType` pour ajouter aussi le champ price (assurez-vous de lui donner le bon type ...)
+
+4. Tester, et assurez-vous que tout fonctionne :).
