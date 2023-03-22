@@ -24,30 +24,29 @@ class AdminBookController extends AbstractController
     #[Route('/admin/livres/nouveau', name: 'app_admin_book_create')]
     public function create(Request $request, BookRepository $repository): Response
     {
-        // Création d'un formulaire
+        // Je créer le formulaire
         $form = $this->createForm(BookType::class);
 
-        // je veux tester si le formulaire a était envoyé et aussi si il est valid
+        // Je remplie le formulaire avec les données saisie par l'utilisateur
+        $form->handleRequest($request);
+
+        // Je test si le formulaire est envoyé et valide
         if ($form->isSubmitted() && $form->isValid()) {
             // Je récupére le livre du formulaire
-            $book = $form->getData();
-            // https://www.php.net/manual/fr/class.datetime
-            // $today = new DateTime();
-            // $today->format('d/m/Y H:i');
-            // $hier = DateTime::createFromFormat('d/m/Y H:i:s', '20/03/2023 12:54:08')
-            $book->setCreatedAt(new DateTime());
-            $book->setUpdatedAt(new DateTime());
+            $book = $form
+                ->getData()
+                ->setCreatedAt(new DateTime())
+                ->setUpdatedAt(new DateTime());
 
-            // je veux enregistrer un livre dans la base de données
+            // Enregistrer le livre dans le base de données
             $repository->save($book, true);
 
-            // je veux rediriger vers la liste des livres
+            // Je redirige vers la liste des livres
             return $this->redirectToRoute('app_admin_book_list');
         }
 
-        // Je veux afficher le formulaire de création d'un livre
+        // J'affiche la page de création d'un livre
         return $this->render('admin_book/create.html.twig', [
-            // On envoie notre formulaire à notre fichier twig
             'form' => $form->createView(),
         ]);
     }
@@ -74,30 +73,24 @@ class AdminBookController extends AbstractController
     #[Route('/admin/livres/{id}', name: 'app_admin_book_update')]
     public function update(Book $book, Request $request, BookRepository $repository): Response
     {
-        // Je teste si le formulaire à bien été envoyé
-        if ($request->isMethod(Request::METHOD_POST)) {
-            // Je récupére les champs envoyé par l'utilisateur
-            $title = $request->request->get('title');
-            $description = $request->request->get('description');
-            $genre = $request->request->get('genre');
+        // Je créé le formulaire avec le livre
+        $form = $this->createForm(BookType::class, $book);
 
-            // Je modifie les données du livre
-            $book
-                ->setTitle($title)
-                ->setDescription($description)
-                ->setGenre($genre)
-                ->setUpdatedAt(new DateTime());
+        // Je remplie le formulaire avec les données saisie par l'utilisateur
+        $form->handleRequest($request);
 
-            // Je sauvegarde le livre dans la base de données
-            $repository->save($book, true);
+        // Je test si le formulaire est envoyé et valide
+        if ($form->isSubmitted() && $form->isValid()) {
+            // J'enregistre le livre dans la base de données
+            $repository->save($book->setUpdatedAt(new DateTime()), true);
 
             // Je redirige vers la liste des livres
             return $this->redirectToRoute('app_admin_book_list');
         }
 
-        // J'affiche le formulaire de modification d'un livre
+        // J'affiche la page de mise à jour d'un livre
         return $this->render('admin_book/update.html.twig', [
-            'book' => $book,
+            'form' => $form->createView(),
         ]);
     }
 
