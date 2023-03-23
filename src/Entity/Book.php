@@ -32,6 +32,12 @@ class Book
     #[ORM\Column]
     private ?float $price = null;
 
+    #[ORM\ManyToOne(inversedBy: 'books')]
+    private ?Author $author = null;
+
+    #[ORM\ManyToOne(inversedBy: 'books')]
+    private ?PublishingHouse $publishingHouse = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +111,30 @@ class Book
     public function setPrice(float $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?Author
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?Author $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getPublishingHouse(): ?PublishingHouse
+    {
+        return $this->publishingHouse;
+    }
+
+    public function setPublishingHouse(?PublishingHouse $publishingHouse): self
+    {
+        $this->publishingHouse = $publishingHouse;
 
         return $this;
     }

@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Author;
 use App\Entity\Book;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -54,6 +56,11 @@ class BookType extends AbstractType
                     'Autobiographie' => 'autobiograpie',
                     'Roman' => 'roman',
                 ]
+            ])
+            ->add('author', EntityType::class, [
+                'label' => 'Auteur du livre :',
+                'class' => Author::class,
+                'choice_label' => 'title',
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Envoyer'
