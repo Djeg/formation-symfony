@@ -5,6 +5,20 @@ ici :
 
 - [Les slides](https://slides.com/davidjegat-1/sf5-training-foundation/fullscreen)
 
+## Installer le projet
+
+1. [Télécharger](https://github.com/Djeg/formation-symfony/archive/refs/heads/session/20-03-23/24-03-23.zip) (et dézipper) ou cloner le projet
+2. Ouvrez le dossier du projet avec VSCode
+3. Dans un terminal à la racine du projet lancer la commande : `composer install`
+4. Éditer la fichier `.env` et placez-y la connection à votre base de données dans le `DATABASE_URL`
+5. Dans un terminal lancer les commandes :
+
+```bash
+$ symfony console do:da:cr
+$ symfony console do:sc:up --force
+$ symfony server:start
+```
+
 ## La culture générale !
 
 En symfony, nous développons des applications « HTTP ». Il faut donc comprendre ce qu'est le « web »
