@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Admin - {% block subTitle %}Créer une maison d'édition{% endblock %}{% endblock %}
+
+{% block body %}
+
+<h1>
+  {% block pageTitle %}
+    Créer une nouvelle maisons d'édition
+  {% endblock %} 
+</h1>
+
+<p>
+  <a href="{{ path('app_admin_publishing_house_list') }}">Retour à la liste</a>
+</p>
+
+{{ form(form) }}
+
+{% endblock %}
