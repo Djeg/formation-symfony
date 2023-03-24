@@ -1,0 +1,70 @@
+# Le diése permet d'écrire des commentaires dans un fichier `yaml`
+# Le principe de ce fichier est simple :
+# Ce sont des combinaison de clefs et de valeurs :
+# username: john.doe
+# age: 45
+# estMajeur: true
+# notes: [12, 15, 18, 5, 9]
+# # Les clefs, doivent obligatoirement se terminer par `:` et ce `:` doit être attaché
+# # à la clefs
+# username :  #Non valide
+# username: # Valide
+#
+# # Il est possible d'imbriquer des configurations :
+# eleve:
+#   nom: Doe
+#   prenom: John
+#   # Voici un tableaux sur plusieurs lignes
+#   notes:
+#     - 12
+#     - 13
+#     - 08
+#     - 5
+#     - 18
+
+# La première étape afin de remplir notre base de données
+# c'est de spécifier le « nom complet » (namespace + nom de la classe, séparé
+# par des `\`) de l'entité que l'on souhaite généré
+App\Entity\Author:
+  # Je vais devoir créer un « identifiant libre » afin d'identifier
+  # l'auteur que je souhaite générer
+  author_test:
+    # Maintenant je peux spécifier tout les champs
+    # ainsi que leurs valeurs de mon auteur
+    title: J.K. Rowling
+    description: Autrice anglaise de Harry Potter
+    nationality: en
+    # Il est possible d'utiliser des « fonctions » afin de
+    # générer des date
+    createdAt: <dateTimeBetween('-25 days', 'now')>
+    updatedAt: <dateTimeBetween($createdAt, 'now')>
+  # Il est possible de générer 1 à autant que l'on désire d'entité
+  # en une seule fois ! Pour cela on utilise
+  # un « range » :
+  author_{1..150}:
+    title: <fr_FR:name()>
+    description: <fr_FR:realText()>
+    nationality: <randomElement(['en', 'fr', 'es', 'de'])>
+    createdAt: <dateTimeBetween('-25 days', 'now')>
+    updatedAt: <dateTimeBetween($createdAt, 'now')>
+
+App\Entity\Book:
+  book_test:
+    title: test
+    description: test
+    genre: science-fiction
+    createdAt: <dateTimeBetween('-25 days', 'now')>
+    updatedAt: <dateTimeBetween($createdAt, 'now')>
+    price: 15.6
+    # Il est possible d'associer d'autres fixtures en utilisant
+    # `@` suivie de l'identifiant de la fixtures
+    author: "@author_test"
+  book_{1..500}:
+    title: <fr_FR:catchPhrase()>
+    description: <fr_FR:realText()>
+    genre: <randomElement(['science-fiction', 'policier', 'roman'])>
+    price: <randomFloat(2, 10, 50)>
+    createdAt: <dateTimeBetween('-25 days', 'now')>
+    updatedAt: <dateTimeBetween($createdAt, 'now')>
+    # Il est possible d'assosier un auteur aléatoire en utilisant `*`
+    author: "@author_*"
