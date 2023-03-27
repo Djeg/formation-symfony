@@ -11,9 +11,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * Formulaire d'inscription à notre application
- */
 class SignUpType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -29,10 +26,10 @@ class SignUpType extends AbstractType
                 ],
                 'second_options' => [
                     'label' => 'Répéter votre mot de passe :',
-                ]
+                ],
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Inscription'
+                'label' => 'Inscription',
             ]);
     }
 

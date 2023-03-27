@@ -11,40 +11,38 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Controller contenant toutes les pages qui concerne les utilisateurs
+ * Controlleur contenant toutes les pages concernant les utilisateurs
  */
 class UserController extends AbstractController
 {
     /**
-     * Page d'inscription à l'application
+     * Page d'inscription d'un utilisateur sur notre application
      */
     #[Route('/inscription', name: 'app_user_signUp')]
     public function signUp(Request $request, UserPasswordHasherInterface $encoder, UserRepository $repository): Response
     {
-        // je créer le formulaire d'inscription
+        // Je créer le formulaire d'inscription
         $form = $this->createForm(SignUpType::class);
 
-        // Je remplie le formulaire
+        // Je remplie le formulaire avec les données envoyé par l'utilisateur
         $form->handleRequest($request);
 
-        // Je test que le formulaires est envoyé et valide
+        // Je test si le formulaire est envoyé et est valide
         if ($form->isSubmitted() && $form->isValid()) {
-            // Je récupére le user du formulaire
+            // Je récupére l'utilisateur du formulaire
             $user = $form->getData();
 
             // Je crypte le mot de passe de l'utilisateur
-            $password = $user->getPassword();
-            $cryptedPassword = $encoder->hashPassword($user, $password);
-            $user->setPassword($cryptedPassword);
+            $user->setPassword($encoder->hashPassword($user, $user->getPassword()));
 
-            // J'enregistre le user du formulaire dans la base de données
+            // J'enregistre l'utilisateur dans le dépot des utilisateurs
             $repository->save($user, true);
 
             // @TODO Je redirige vers la page de connexion
             return new Response('OK');
         }
 
-        // J'affiche le formulaire d'inscription
+        // J'affiche la page d'inscription
         return $this->render('user/signUp.html.twig', [
             'form' => $form->createView(),
         ]);
