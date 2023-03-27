@@ -50,6 +50,7 @@ avant de commencer le code :
 3. [Le CRUD des maisons d'éditions et des auteurs](./assets/exos/crud-edition-author.md)
 4. [Les relations entre livres et auteurs / maisons d'édition](./assets/exos/relations.md)
 5. [Les fixtures](./assets/exos/fixtures.md)
+6. [L'inscription](./assets/exos/inscription.md)
 6. [Le design](./assets/exos/le-design.md)
 7. [Le CRUD des users](./assets/exos/crud-user.md)
 8. [Les annonces](./assets/exos/les-annonces.md)

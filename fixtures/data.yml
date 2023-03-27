@@ -82,3 +82,13 @@ App\Entity\Book:
     # Il est possible d'assosier un auteur aléatoire en utilisant `*`
     author: "@author_*"
     publishingHouse: "@house_*"
+
+App\Entity\User:
+  user_test:
+    email: test@mail.com
+    # password: test1234
+    password: \$2y\$13\$1D.rlxSJpBWgkmSjGjDT1OjAWWnYdVXNStFv846vnk6FzanzJh16G
+  user_{1..200}:
+    email (unique): <safeEmail()>
+    # password: 123456789
+    password: \$2y\$13\$ncvyqnfYVzvbsq0fxfU53Oik05z4N65rnmHzQd5IffanU7RMQ4UTy
