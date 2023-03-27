@@ -6,11 +6,13 @@ use App\Entity\Author;
 use App\Form\AuthorType;
 use App\Repository\AuthorRepository;
 use DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[IsGranted('ROLE_ADMIN')]
 class AdminAuthorController extends AbstractController
 {
     /**
@@ -21,6 +23,9 @@ class AdminAuthorController extends AbstractController
     {
         // Je récupére toutes les auteurs
         $authors = $repository->findAll();
+
+        // Il est possible de récupérer l'entité user qui est connécté
+        $user = $this->getUser();
 
         // J'affiche la liste des auteurs
         return $this->render('admin_author/list.html.twig', [
