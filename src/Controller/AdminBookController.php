@@ -6,6 +6,7 @@ use App\Entity\Book;
 use App\Form\BookType;
 use App\Repository\BookRepository;
 use DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * retrouvons 4 routes, la création d'un livre, la mise à jour, la suppression
  * et la liste des livres.
  */
+#[IsGranted('ROLE_ADMIN')]
 class AdminBookController extends AbstractController
 {
     /**

@@ -20,15 +20,7 @@
 	</head>
 	<body>
 		{# Il est possible d'utiliser le fonction twig is_granted #}
-		{% if is_granted('ROLE_ADMIN') %}
-			<h2>Administrateur</h2>
-		{% elseif is_granted('ROLE_USER') %}
-			<h2>Utilisateur :
-				{# Il est aussi possible de récupérer l'utilisateur connécté avec app.user #}
-				{{ app.user.email }}</h2>
-		{% else %}
-			<h2>Non connécté</h2>
-		{% endif %}
+		{% include 'partials/_menu.html.twig' %}
 
 		{% block body '' %}
 	</body>

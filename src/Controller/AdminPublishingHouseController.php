@@ -6,6 +6,7 @@ use App\Entity\PublishingHouse;
 use App\Form\PublishingHouseType;
 use App\Repository\PublishingHouseRepository;
 use DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Controlleur permettant d'administrer des maisons d'éditions
  */
+#[IsGranted('ROLE_ADMIN')]
 class AdminPublishingHouseController extends AbstractController
 {
     /**

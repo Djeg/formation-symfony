@@ -88,6 +88,11 @@ App\Entity\User:
     email: test@mail.com
     # password: test1234
     password: \$2y\$13\$1D.rlxSJpBWgkmSjGjDT1OjAWWnYdVXNStFv846vnk6FzanzJh16G
+  user_admin:
+    email: admin@mail.com
+    # password: admin1234
+    password: \$2y\$13\$CriqPvSAYe15k80s8HGMAehDcbnjzYtIR8ouGFkRPwKUFFIn/Uq7.
+    roles: ["ROLE_ADMIN"]
   user_{1..200}:
     email (unique): <safeEmail()>
     # password: 123456789

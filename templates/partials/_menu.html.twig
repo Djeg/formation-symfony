@@ -1,0 +1,16 @@
+<nav>
+	{% if is_granted('ROLE_USER') %}
+		<a href="{{ path('app_user_profil') }}">Mon Profil</a>
+		<a href="{{ path('app_logout') }}">Déconnexion</a>
+	{% else %}
+		<a href="{{ path('app_login') }}">Connexion</a>
+	{% endif %}
+
+	<a href="{{ path('app_author_list') }}">Nos auteurs</a>
+
+	{% if is_granted('ROLE_ADMIN') %}
+		<a href="{{ path('app_admin_publishing_house_list') }}">Administration des maisons d'édition</a>
+		<a href="{{ path('app_admin_author_list') }}">Administration des auteurs</a>
+		<a href="{{ path('app_admin_book_list') }}">Administration des livres</a>
+	{% endif %}
+</nav>

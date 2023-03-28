@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Form\ProfilType;
 use App\Form\SignUpType;
 use App\Repository\UserRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -68,5 +70,33 @@ class UserController extends AbstractController
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+    /**
+     * Page d'édition d'un profil utilisateur
+     */
+    #[IsGranted('ROLE_USER')]
+    #[Route('/mon-profil', name: 'app_user_profil')]
+    public function profil(Request $request, UserRepository $repository): Response
+    {
+        // Je créé le formulaire avec l'utilisateur connécté
+        $form = $this->createForm(ProfilType::class, $this->getUser());
+
+        // Je remplie le formulaire avec les données saisie par l'utilisateur
+        $form->handleRequest($request);
+
+        // Je test si le form est envoyé et est valide
+        if ($form->isSubmitted() && $form->isValid()) {
+            // J'enregistre l'utilisateur dans le dépot des users
+            $repository->save($this->getUser(), true);
+
+            // @TODO Je redirige vers la page d'accueil
+            return new Response('Ok');
+        }
+
+        // J'affiche le formulaire d'édition de profil
+        return $this->render('user/profil.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }
