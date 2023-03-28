@@ -1,4 +1,4 @@
-<nav>
+<nav class="header-menu">
 	{% if is_granted('ROLE_USER') %}
 		<a href="{{ path('app_user_profil') }}">Mon Profil</a>
 		<a href="{{ path('app_logout') }}">Déconnexion</a>
