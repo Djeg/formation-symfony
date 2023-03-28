@@ -16,6 +16,7 @@ ici :
 ```bash
 $ symfony console do:da:cr
 $ symfony console do:sc:up --force
+$ symfony console ha:fi:lo -q --purge-with-truncate
 $ symfony server:start
 ```
 
