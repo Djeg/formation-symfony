@@ -32,6 +32,8 @@ class AdminBookController extends AbstractController
         // Je remplie le formulaire avec les données saisie par l'utilisateur
         $form->handleRequest($request);
 
+        $books = $repository->findByExemple();
+
         // Je test si le formulaire est envoyé et valide
         if ($form->isSubmitted() && $form->isValid()) {
             // Je récupére le livre du formulaire
