@@ -40,6 +40,25 @@ class BookRepository extends ServiceEntityRepository
     }
 
     /**
+     * Récupére les 25 derniers livres trier par date de mise à
+     * jour décroissante
+     */
+    public function findLatest(): array
+    {
+        // Je créé un query builder
+        return $this
+            ->createQueryBuilder('book')
+            // Trier par date de mise à jour décroissante
+            ->orderBy('book.updatedAt', 'DESC')
+            // Je limite à 25 livres
+            ->setMaxResults(25)
+            // J'obtien la requête SQL
+            ->getQuery()
+            // Je lance la requête et récupére les livres
+            ->getResult();
+    }
+
+    /**
      * Voici un exemple de « finder ». C'est une méthode qui récupére
      * des données (ici des livres) de manière « filtré »
      */

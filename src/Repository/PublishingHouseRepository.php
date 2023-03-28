@@ -39,28 +39,46 @@ class PublishingHouseRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return PublishingHouse[] Returns an array of PublishingHouse objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * Récupére 5 maisons d'édition triée par date de mise à jour décroissante
+     */
+    public function findLatest(): array
+    {
+        // Je créé le query builder
+        return $this
+            ->createQueryBuilder('pubhouse')
+            // Je trie les maisons d'édition
+            ->orderBy('pubhouse.updatedAt', 'DESC')
+            // Je limite
+            ->setMaxResults(5)
+            // Je créé la requête SQL
+            ->getQuery()
+            // Je lance la requête et récupére les maisons d'édition
+            ->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?PublishingHouse
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    /**
+    //     * @return PublishingHouse[] Returns an array of PublishingHouse objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('p.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?PublishingHouse
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

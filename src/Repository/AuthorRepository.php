@@ -39,28 +39,46 @@ class AuthorRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Author[] Returns an array of Author objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * Récupére 10 auteurs triéé par date de mise à jour décroissant
+     */
+    public function findLatest(): array
+    {
+        // Je créé le query builder
+        return $this
+            ->createQueryBuilder('author')
+            // Je trie par date de mise à jour décroissante
+            ->orderBy('author.updatedAt', 'DESC')
+            // Je limite mes résultats
+            ->setMaxResults(10)
+            // Je créé la requête SQL
+            ->getQuery()
+            // Je récupére les livres
+            ->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?Author
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Author[] Returns an array of Author objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('a.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?Author
+    //    {
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }
