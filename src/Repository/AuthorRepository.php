@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\DTO\AuthorSearchCriteria;
 use App\Entity\Author;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -37,6 +38,33 @@ class AuthorRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /**
+     * Récupére tout les auteurs correspondant aux critéres
+     * de recherche
+     */
+    public function findAllByCriteria(AuthorSearchCriteria $criteria): array
+    {
+        // Je créé le query builder
+        $qb = $this->createQueryBuilder('author');
+
+        // Je limite mes résultats de recherche
+        $qb->setMaxResults($criteria->limit);
+
+        // Je réalise une pagination
+        $qb->setFirstResult($criteria->limit * ($criteria->page - 1));
+
+        // Si l'utilisateur à spécifié un titre
+        if ($criteria->title) {
+            // on réalise la recherche par titre
+            $qb
+                ->andWhere('author.title LIKE :title')
+                ->setParameter('title', "%{$criteria->title}%");
+        }
+
+        // Je récupére la requête ainsi que les résultats (des auteurs)
+        return $qb->getQuery()->getResult();
     }
 
     /**

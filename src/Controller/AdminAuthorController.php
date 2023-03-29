@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Author;
+use App\Form\AuthorSearchType;
 use App\Form\AuthorType;
 use App\Repository\AuthorRepository;
 use DateTime;
@@ -19,17 +20,27 @@ class AdminAuthorController extends AbstractController
      * Liste toute les auteurs de l'application
      */
     #[Route('/admin/auteurs', name: 'app_admin_author_list')]
-    public function list(AuthorRepository $repository): Response
+    public function list(AuthorRepository $repository, Request $request): Response
     {
-        // Je récupére toutes les auteurs
-        $authors = $repository->findAll();
+        // Je créé le formulaire de recherche des auteurs
+        $form = $this->createForm(AuthorSearchType::class);
 
-        // Il est possible de récupérer l'entité user qui est connécté
-        $user = $this->getUser();
+        // On remplie avec les données de l'utilisateur
+        $form->handleRequest($request);
+
+        // Dans le cas d'un formulaire de recherche, nous n'avons pas besoin
+        // de tester la soumission et la validité !
+        // Il suffit juste de récupérer le DTO (AuthorSearchCriteria) et l'envoyé
+        // à notre repository afin de lancer une recherche
+        $criteria = $form->getData();
+
+        // Je récupére toutes les auteurs filtré par les critères de recherche :
+        $authors = $repository->findAllByCriteria($criteria);
 
         // J'affiche la liste des auteurs
         return $this->render('admin_author/list.html.twig', [
             'authors' => $authors,
+            'form' => $form->createView(),
         ]);
     }
 
