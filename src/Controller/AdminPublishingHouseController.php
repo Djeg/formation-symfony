@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\PublishingHouse;
+use App\Form\PublishingHouseSearchType;
 use App\Form\PublishingHouseType;
 use App\Repository\PublishingHouseRepository;
 use DateTime;
@@ -22,14 +23,24 @@ class AdminPublishingHouseController extends AbstractController
      * Liste toute les maisons d'édition de l'application
      */
     #[Route('/admin/maisons-edition', name: 'app_admin_publishing_house_list')]
-    public function list(PublishingHouseRepository $repository): Response
+    public function list(PublishingHouseRepository $repository, Request $request): Response
     {
-        // Je récupére toutes les maisons d'édition
-        $publishingHouses = $repository->findAll();
+        // Je créé le formulaire de recherche
+        $form = $this->createForm(PublishingHouseSearchType::class);
+
+        // Je remplie ave les données de l'utilisateur
+        $form->handleRequest($request);
+
+        // Je récupére les critères de recherche
+        $criteria = $form->getData();
+
+        // Je récupére toutes les maisons d'édition correspondant aux critères de recherche
+        $publishingHouses = $repository->findAllByCriteria($criteria);
 
         // J'affiche la liste des maisons d'éditions
         return $this->render('admin_publishing_house/list.html.twig', [
             'publishingHouses' => $publishingHouses,
+            'form' => $form->createView(),
         ]);
     }
 

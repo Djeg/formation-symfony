@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\DTO\PublishingHouseSearchCriteria;
 use App\Entity\PublishingHouse;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -37,6 +38,31 @@ class PublishingHouseRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /**
+     * Méthode permettant de rechercher des maisons d'éditions en fonctions
+     * de critères de recherche
+     */
+    public function findAllByCriteria(PublishingHouseSearchCriteria $criteria): array
+    {
+        // Je créé le query builder
+        $qb = $this
+            ->createQueryBuilder('pubhouse')
+            // Je limite les résultat et je calcule la pagination
+            ->setMaxResults($criteria->limit)
+            ->setFirstResult($criteria->limit * ($criteria->page - 1));
+
+        // Je test si il y a une recherche par titre
+        if ($criteria->title) {
+            // Je lance une recherhe par titre
+            $qb
+                ->andWhere('pubhouse.title LIKE :title')
+                ->setParameter('title', "%{$criteria->title}%");
+        }
+
+        // J'obtiens la requête SQL et je l'éxécute
+        return $qb->getQuery()->getResult();
     }
 
     /**

@@ -1,23 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Admin - Maisons d'édition{% endblock %}
+{% block title %}Admin - Maisons d'édition
+{% endblock %}
 
 {% block body %}
 
-<h1>Liste des maisons d'édition</h1>
+	<h1>Liste des maisons d'édition</h1>
 
-<p><a href="{{ path('app_admin_publishing_house_create') }}">Créer une maison d'édition</a></p>
+	<p>
+		<a href="{{ path('app_admin_publishing_house_create') }}">Créer une maison d'édition</a>
+	</p>
 
-<ul>
+	{{ form(form) }}
 
-  {% for publishingHouse in publishingHouses %}
-    <li>
-      {{ publishingHouse.title }}
-      <a href="{{ path('app_admin_publishing_house_update', {id: publishingHouse.id}) }}">Modifier</a>
-      <a href="{{ path('app_admin_publishing_house_remove', {id: publishingHouse.id}) }}">Supprimer</a>
-    </li>
-  {% endfor %}
+		<ul>
 
-</ul>
+			{% for publishingHouse in publishingHouses %}
+				<li>
+					{{ publishingHouse.title }}
+					<a href="{{ path('app_admin_publishing_house_update', {id: publishingHouse.id}) }}">Modifier</a>
+					<a href="{{ path('app_admin_publishing_house_remove', {id: publishingHouse.id}) }}">Supprimer</a>
+				</li>
+			{% endfor %}
 
-{% endblock %}
+		</ul>
+
+	{% endblock %}
