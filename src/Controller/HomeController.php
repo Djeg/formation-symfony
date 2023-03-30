@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Form\BookSearchType;
 use App\Repository\AuthorRepository;
 use App\Repository\BookRepository;
 use App\Repository\PublishingHouseRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -34,6 +36,31 @@ class HomeController extends AbstractController
             'books' => $books,
             'authors' => $authors,
             'pubHouses' => $pubHouses,
+        ]);
+    }
+
+    /**
+     * Page de recherche de livre
+     */
+    #[Route('/rechercher', name: 'app_home_search')]
+    public function search(Request $request, BookRepository $repository): Response
+    {
+        // Je créé le formulaire de recherche
+        $form = $this->createForm(BookSearchType::class);
+
+        // Je remplie le formulaire avec les données de l'utilisateur
+        $form->handleRequest($request);
+
+        // Je récupére les critères de recherche
+        $criteria = $form->getData();
+
+        // Je lance la recherche
+        $books = $repository->findAllByCriteria($criteria);
+
+        // J'affiche la page de recherche
+        return $this->render('home/search.html.twig', [
+            'books' => $books,
+            'form' => $form->createView(),
         ]);
     }
 }

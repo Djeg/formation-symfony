@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\DTO\BookSearchCriteria;
 use App\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -37,6 +38,60 @@ class BookRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /**
+     * Récupére tout les livres correspondant aux critères de recherche
+     */
+    public function findAllByCriteria(BookSearchCriteria $criteria): array
+    {
+        // Je créé le query builder
+        $qb = $this->createQueryBuilder('book');
+
+        // Je pagine les résultat
+        $qb
+            ->setMaxResults($criteria->limit)
+            ->setFirstResult($criteria->limit * ($criteria->page - 1));
+
+        // Je filtre par titre, si il y a besoin
+        if ($criteria->title) {
+            $qb
+                ->andWhere('book.title LIKE :title')
+                ->setParameter('title', "%{$criteria->title}%");
+        }
+
+        // Je filtre par auteur, si y a besoin
+        if ($criteria->author) {
+            $qb
+                ->leftJoin('book.author', 'author')
+                ->andWhere('author.title LIKE :author')
+                ->setParameter('author', "%{$criteria->author}%");
+        }
+
+        // Je filtre par maison d'édition, si il y a besoin
+        if ($criteria->publishingHouse) {
+            $qb
+                ->leftJoin('book.publishingHouse', 'pubhouse')
+                ->andWhere('pubhouse.title LIKE :pubhouse')
+                ->setParameter('pubhouse', "%{$criteria->publishingHouse}%");
+        }
+
+        // Je filtre par date de départ si il y a besoin
+        if ($criteria->startAt) {
+            $qb
+                ->andWhere('book.createdAt >= :startAt')
+                ->setParameter('startAt', $criteria->startAt);
+        }
+
+        // Je filtre par date de fin, si il y a besoin
+        if ($criteria->endAt) {
+            $qb
+                ->andWhere('book.createdAt <= :endAt')
+                ->setParameter('endAt', $criteria->endAt);
+        }
+
+        // Je lance la requête
+        return $qb->getQuery()->getResult();
     }
 
     /**
