@@ -81,3 +81,54 @@ Avec l'utilisation de QueryString, nous pouvons « filtrer » nos resources ou c
 | Action | URI                                                | type       | explications                                                                   |
 | ------ | -------------------------------------------------- | ---------- | ------------------------------------------------------------------------------ |
 | GET    | /books?limit=10&page=2&ordery=price&direction=DESC | Collection | Grâce aux query string, je peux séléctionner et filtrer ma collection de livre |
+
+## Dévélopper une API REST avec symfony
+
+Pour commencer à dévélopper une api avec symfony, il faut tout d'abord que Symfony puisse comprendre le `JSON` :
+
+```
+symfony composer require symfony-bundles/json-request-bundle
+```
+
+### Retourner du JSON, à la place de HTML ?
+
+L'idée d'une api REST est de retourner soit des collections, soit des resources. En symfony, une resource correspond généralement à une entité et les collections se sont généralement des tableaux d'entités !
+
+Pour retourner dans nos controller notre entité ou notre tableaux d'entité en json :
+
+```php
+public function test(BookRepository $repository): Response
+{
+  // Je récupére un tableaux contenant tout les livres
+  $books = $repository->findAll();
+
+  // Pour afficher du json :
+  return $this->json($books);
+}
+
+public function test2(Book $book): Response
+{
+  return $this->json($book);
+}
+```
+
+### Ignorer des champs dans votre JSON !
+
+Dans certains cas, nous ne souhaitons pas afficher le champs dans notre objet JSON (information confidentiel etc ...). Il suffit de retoucher l'entité concerné et d'utiliser l'attribut `#[Ignore]` :
+
+```php
+class User implements UserInterface, PasswordAuthenticatedUserInterface
+{
+    //....
+
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
+    #[Ignore]
+    private ?string $password = null;
+
+    // ...
+}
+
+```
