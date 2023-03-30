@@ -63,3 +63,4 @@ avant de commencer le code :
 15. [Autorisation](./assets/exos/authorization.md)
 16. [La panier](./assets/exos/cart.md)
 17. [Rest et les URI](./assets/exos/rest.md)
+18. [API Rest - Partie 2](./assets/exos/rest-part1.md)

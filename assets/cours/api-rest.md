@@ -132,3 +132,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 }
 
 ```
+
+## Tester des api REST
+
+Pour tester des API Rest (qui utilise JSON et le protocole HTTP), nous avons différents choix.
+
+1. Vous pouvez un client « rest » comme par exemple : [postman](https://www.postman.com/)
+2. Une extension VSCode très pratique [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+
+Pour utiliser VSCode et le REST Client, il faut ou d'abord créer un fichier à la racine du projet nommé `cequevousouhaitez.http` (`request.http`)
+
+Dans ce fichier nous allons pouvoir écrire nos propres HTTP et consulter la vértiable réponse HTTP !
+
+Exemple de fichier `request.http` :
+
+```http
+# Le diése permet d'écrire des commentaires
+# Le principe est simple, écrire nos propres requêtes HTTP :
+GET http://127.0.0.1:12000/api/users
+Content-Type: application/json
+
+# Le triple diése permet d'écrire une nouvelle requête
+###
+
+GET http://127.0.0.1:12000/api/books
+Content-Type: application/json
+```

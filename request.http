@@ -1,4 +1,10 @@
-GET https://google.fr
-Set-Cookie: ...
-Accept: text/html
-User-Agent: google-chrome
+# Le diése permet d'écrire des commentaires
+# Le principe est simple, écrire nos propres requêtes HTTP :
+GET http://127.0.0.1:12000/api/users
+Content-Type: application/json
+
+# Le triple diése permet d'écrire une nouvelle requête
+###
+
+GET http://127.0.0.1:12000/api/books
+Content-Type: application/json
