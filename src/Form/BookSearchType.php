@@ -33,9 +33,11 @@ class BookSearchType extends AbstractType
             ])
             ->add('limit', NumberType::class, [
                 'label' => 'Limite :',
+                'empty_data' => 25,
             ])
             ->add('page', NumberType::class, [
                 'label' => 'Page :',
+                'empty_data' => 1,
             ])
             ->add('startAt', DateTimeType::class, [
                 'label' => 'Créé à partir de :',
