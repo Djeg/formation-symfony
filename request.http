@@ -30,6 +30,21 @@ Content-Type: application/json
 
 ###
 
+PATCH http://127.0.0.1:12000/api/authors/10
+Content-Type: application/json
+
+{
+  "title": "Testouille"
+}
+
+###
+
+DELETE http://127.0.0.1:12000/api/authors/10
+Content-Type: application/json
+
+
+###
+
 GET http://127.0.0.1:12000/api/publishing-houses
 Content-Type: application/json
 

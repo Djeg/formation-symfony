@@ -76,6 +76,46 @@ class ApiAuthorController extends AbstractController
         );
 
         // Je retourne l'auteur en json
-        return $this->json($form->getData());
+        return $this->json($form->getData(), 201);
+    }
+
+    /**
+     * Edite un auteur
+     */
+    #[Route('/api/authors/{id}', name: 'app_api_author_edit', methods: ['PATCH'])]
+    public function edit(Author $author, AuthorRepository $repository, Request $request): Response
+    {
+        // Création du formulaire
+        $form = $this->createForm(ApiAuthorType::class, $author, [
+            'method' => 'PATCH',
+        ]);
+
+        // Remplissage du formulaire
+        $form->handleRequest($request);
+
+        // Test de la validité du formulaire
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            // Affichage des erreurs en json
+            return $this->json($form->getErrors(true, true), 400);
+        }
+
+        // Enregistrement de l'auteur
+        $repository->save($author->setUpdatedAt(new DateTime()), true);
+
+        // On affiche l'auteur :)
+        return $this->json($author);
+    }
+
+    /**
+     * Suppression d'un auteur
+     */
+    #[Route('/api/authors/{id}', name: 'app_api_author_remove', methods: ['DELETE'])]
+    public function remove(Author $author, AuthorRepository $repository): Response
+    {
+        // Suppressuion de l'auteur
+        $repository->remove($author, true);
+
+        // On retourne l'auteur
+        return $this->json($author);
     }
 }
