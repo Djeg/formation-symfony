@@ -11,8 +11,17 @@ Content-Type: application/json
 
 ###
 
-GET http://127.0.0.1:12000/api/authors
+GET http://127.0.0.1:12000/api/authors?limit=64
 Content-Type: application/json
+
+###
+
+POST http://127.0.0.1:12000/api/authors
+Content-Type: application/json
+
+{
+  "title": "John Doe",
+}
 
 ###
 

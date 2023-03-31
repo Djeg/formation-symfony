@@ -20,10 +20,16 @@ class AuthorSearchType extends AbstractType
                 'required' => false,
             ])
             ->add('limit', NumberType::class, [
-                'label' => 'Limite :'
+                'label' => 'Limite :',
+                // Il nous faut pas oublier de spécifier
+                // une valeur par défaut pour les api !
+                'empty_data' => 25,
             ])
             ->add('page', NumberType::class, [
-                'label' => 'Page :'
+                'label' => 'Page :',
+                // Il nous faut pas oublier de spécifier
+                // une valeur par défaut pour les api !
+                'empty_data' => 1,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Rechercher',

@@ -158,3 +158,248 @@ Content-Type: application/json
 GET http://127.0.0.1:12000/api/books
 Content-Type: application/json
 ```
+
+## Les api et les formulaires !
+
+Dans une api, nous avons aussi des formulaires cependant nous n'utilisons sa « view » (il n'y a pas de HTML).
+
+Tout d'abord, pour envoyer des données à notre API dans une requête http, il faut utiliser le format JSON comme ceci :
+
+```http
+POST http://127.0.0.1:12000/api/authors
+Content-Type: application/json
+
+{
+  "title": "John Doe",
+  "description": "John Doe description"
+}
+```
+
+### Le format JSON
+
+JSON est le format de référence des api web aujourd'hui, il est très simple !
+
+```json
+// Il existe des types de données :
+true // boolean
+false // bollean
+
+12 // number
+13.5 // number
+-15 // number
+
+"John Doe" // string (guillement double obligatoire !)
+
+[12, 15, 18, 9, 12] // array
+
+{
+  "username": "john",
+  "age": 24
+} // objects
+```
+
+Il existe des validateurs de JSON directement en ligne :
+
+https://jsoneditoronline.org
+
+### Symfony et les formulaires d'api
+
+Les formulaires d'api en symfony, fonctionne de la même manière que des formulaires classique, avec 2 petites différences :
+
+```php
+<?php
+
+namespace App\Form;
+
+use App\Entity\Author;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+
+/**
+ * Formulaire d'api pour un auteur
+ */
+class ApiAuthorType extends AbstractType
+{
+    /**
+     * Les formulaires fonctionne de la même manière que les formulaires classique,
+     * cependant, il n'y a pas besoin de spécifier des labels ou un bouton
+     * de soumissions (car il n'y pas de HTML, de visuel).
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('title', TextType::class)
+            ->add('description', TextareaType::class)
+            ->add('nationality', ChoiceType::class, [
+                'choices' => [
+                    'fr' => 'fr',
+                    'en' => 'en',
+                    'de' => 'de',
+                    'es' => 'es',
+                ],
+                // Voici les contraintes de validation, il en existe
+                // un bon paquet permettant de valider notre données
+                // Ici par exemple, nous utilisons `NotBlank`
+                // Vous les retrouverez sur le documentation de symfony :
+                // https://symfony.com/doc/current/reference/constraints.html
+                "constraints" => [
+                    new NotBlank(),
+                ]
+            ]);
+    }
+
+    /**
+     * Au niveau des options, il suffit tout simplement de désactiver la protection
+     * CSRF pour en faire un formulaire d'api
+     */
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Author::class,
+            'csrf_protection' => false,
+        ]);
+    }
+
+    /**
+     * Il est fortement conseillé de supprimer le prefix
+     */
+    public function getBlockPrefix()
+    {
+        return '';
+    }
+}
+
+```
+
+### Et le controlleur ?
+
+Pour gérer un formulaire dans un controlleur, c'est encore plus simple :
+
+```php
+/**
+ * Créer un nouvel auteur
+ */
+#[Route('/api/authors', name: 'app_api_author_create', methods: ['POST'])]
+public function create(Request $request, AuthorRepository $repository): Response
+{
+    // Je créé le formulaire
+    $form = $this->createForm(ApiAuthorType::class);
+
+    // Je remplie le formulaire
+    $form->handleRequest($request);
+
+    // Je vérifie si le formulaire est envoyé et valide
+    if (!$form->isSubmitted() || !$form->isValid()) {
+        // On retourne les erreurs du formulaire ave le code
+        // http 400, utilisé pour les erreurs du client
+        return $this->json($form->getErrors(true, true), 400);
+    }
+
+    // J'enregistre mon auteur
+    $repository->save($form->getData(), true);
+
+    // Je retourne l'auteur en json
+    return $this->json($form->getData());
+}
+```
+
+### Et les formulaires de recherche ?
+
+Les formulaire fonctionne de la même manière que les formulaire classique. Il nous faut un DTO contenant les champs de recherche, un form type et ensuite il suffit de spécifier la rechercher graçe à des filtres dans notre requête :
+
+#### Exemple la recherche d'auteur
+
+Le form type :
+
+```php
+<?php
+
+namespace App\Form;
+
+use App\DTO\AuthorSearchCriteria;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class AuthorSearchType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('title', TextType::class, [
+                'label' => 'Titre :',
+                'required' => false,
+            ])
+            ->add('limit', NumberType::class, [
+                'label' => 'Limite :',
+                // Il nous faut pas oublier de spécifier
+                // une valeur par défaut pour les api !
+                'empty_data' => 25,
+            ])
+            ->add('page', NumberType::class, [
+                'label' => 'Page :',
+                // Il nous faut pas oublier de spécifier
+                // une valeur par défaut pour les api !
+                'empty_data' => 1,
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Rechercher',
+            ]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => AuthorSearchCriteria::class,
+            'method' => 'GET',
+            'empty_data' => new AuthorSearchCriteria(),
+            'data' => new AuthorSearchCriteria(),
+            'csrf_protection' => false,
+        ]);
+    }
+
+    /**
+     * Nous pouvons enlever le petit préfix envoyé dans l'url
+     * en personnalisant et vidant la méthode `getBlockPrefix`
+     */
+    public function getBlockPrefix()
+    {
+        return '';
+    }
+}
+
+```
+
+Le controlleur :
+
+```php
+/**
+ * Liste tout les auteurs
+ */
+#[Route('/api/authors', name: 'app_api_author_list', methods: ['GET'])]
+public function list(AuthorRepository $repository, Request $request): Response
+{
+    // Je créé mon formulaire de recherche
+    $form = $this->createForm(AuthorSearchType::class);
+
+    // Je remplie les données du formulaire
+    $form->handleRequest($request);
+
+    // Je récupére les critères de recherche
+    $criteria = $form->getData();
+
+    // Je lance la recherche en utilisant le repository
+    $authors = $repository->findAllByCriteria($criteria);
+
+    return $this->json($authors);
+}
+```
