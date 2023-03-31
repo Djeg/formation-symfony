@@ -30,7 +30,7 @@ class PublishingHouse
     private ?\DateTimeInterface $updatedAt = null;
 
     #[Ignore]
-    #[ORM\OneToMany(mappedBy: 'publishingHouse', targetEntity: Book::class)]
+    #[ORM\OneToMany(mappedBy: 'publishingHouse', targetEntity: Book::class, cascade: ['all'])]
     private Collection $books;
 
     public function __construct()

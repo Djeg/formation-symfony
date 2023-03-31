@@ -24,9 +24,11 @@ class PublishingHouseSearchType extends AbstractType
             ])
             ->add('limit', NumberType::class, [
                 'label' => 'Limite :',
+                'empty_data' => 25,
             ])
             ->add('page', NumberType::class, [
                 'label' => 'Page :',
+                'empty_data' => 1,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Rechercher',
@@ -42,5 +44,10 @@ class PublishingHouseSearchType extends AbstractType
             'data' => new PublishingHouseSearchCriteria(),
             'csrf_protection' => false,
         ]);
+    }
+
+    public function getBlockPrefix()
+    {
+        return '';
     }
 }

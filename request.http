@@ -45,8 +45,17 @@ Content-Type: application/json
 
 ###
 
-GET http://127.0.0.1:12000/api/publishing-houses
+GET http://127.0.0.1:12000/api/publishing-houses?limit=64
 Content-Type: application/json
+
+###
+
+POST http://127.0.0.1:12000/api/publishing-houses
+Content-Type: application/json
+
+{
+  "title": "John Doe"
+}
 
 ###
 
@@ -55,10 +64,15 @@ Content-Type: application/json
 
 ###
 
-GET http://127.0.0.1:12000/api/books
+PATCH http://127.0.0.1:12000/api/publishing-houses/10
 Content-Type: application/json
+
+{
+  "title": "Testouille"
+}
 
 ###
 
-GET http://127.0.0.1:12000/api/books/10
+DELETE http://127.0.0.1:12000/api/publishing-houses/10
 Content-Type: application/json
+
