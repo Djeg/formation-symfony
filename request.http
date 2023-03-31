@@ -6,5 +6,35 @@ Content-Type: application/json
 # Le triple diése permet d'écrire une nouvelle requête
 ###
 
+GET http://127.0.0.1:12000/api/users/4
+Content-Type: application/json
+
+###
+
+GET http://127.0.0.1:12000/api/authors
+Content-Type: application/json
+
+###
+
+GET http://127.0.0.1:12000/api/authors/10
+Content-Type: application/json
+
+###
+
+GET http://127.0.0.1:12000/api/publishing-houses
+Content-Type: application/json
+
+###
+
+GET http://127.0.0.1:12000/api/publishing-houses/10
+Content-Type: application/json
+
+###
+
 GET http://127.0.0.1:12000/api/books
+Content-Type: application/json
+
+###
+
+GET http://127.0.0.1:12000/api/books/10
 Content-Type: application/json
