@@ -3,7 +3,7 @@
 Dans ce projet, pour installer la totalité de l'application
 avec docker :
 
-1. Cloner l'application `git clone --branch session/21-11-22/25-11-22 https://url-de-lapp-sur-git.com`
+1. Cloner l'application `git clone --branch session-projet/04-04-23/07-04-23 https://github.com/Djeg/formation-symfony`
 2. À la racine du projet lancer la commande : `bin/start`
 
 ## Petite note
