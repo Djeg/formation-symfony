@@ -44,24 +44,8 @@ avant de commencer le code :
 13. [La sécurité (authentification et autorisation)](./assets/cours/security.md)
 14. [Les API Rest](./assets/cours/api-rest.md)
 
-## Les execices :
+## Le projet :
 
-1. [Le controller et les routes](./assets/exos/controller.md)
-2. [Le CRUD de Livre](./assets/exos/crud-book.md)
-3. [Le CRUD des maisons d'éditions et des auteurs](./assets/exos/crud-edition-author.md)
-4. [Les relations entre livres et auteurs / maisons d'édition](./assets/exos/relations.md)
-5. [Les fixtures](./assets/exos/fixtures.md)
-6. [L'inscription](./assets/exos/inscription.md)
-7. [Connexion, Profile et navigation](./assets/exos/connection.md)
-8. [Le design](./assets/exos/le-design.md)
-9. [Le CRUD des users](./assets/exos/crud-user.md)
-10. [La page d'accueil](./assets/exos/accueil.md)
-11. [La recherche](./assets/exos/search.md)
-12. [Les annonces](./assets/exos/les-annonces.md)
-13. [Rechercher des annonces](./assets/exos/search-form.md)
-14. [Créer un compte](./assets/exos/account.md)
-15. [Autorisation](./assets/exos/authorization.md)
-16. [La panier](./assets/exos/cart.md)
-17. [Rest et les URI](./assets/exos/rest.md)
-18. [API Rest - Partie 1](./assets/exos/rest-part1.md)
-19. [API Rest - Partie 2](./assets/exos/rest-part2.md)
+LookBook est votre objectif de cette semaine ! Un site de vente de livres entre particulier :).
+
+1. [La connexion et l'inscription](./assets/projet/01-security.md)
