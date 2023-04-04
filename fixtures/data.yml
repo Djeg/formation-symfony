@@ -1,27 +1,52 @@
-# Le diése permet d'écrire des commentaires dans un fichier `yaml`
-# Le principe de ce fichier est simple :
-# Ce sont des combinaison de clefs et de valeurs :
-# username: john.doe
-# age: 45
-# estMajeur: true
-# notes: [12, 15, 18, 5, 9]
-# # Les clefs, doivent obligatoirement se terminer par `:` et ce `:` doit être attaché
-# # à la clefs
-# username :  #Non valide
-# username: # Valide
-#
-# # Il est possible d'imbriquer des configurations :
-# eleve:
-#   nom: Doe
-#   prenom: John
-#   # Voici un tableaux sur plusieurs lignes
-#   notes:
-#     - 12
-#     - 13
-#     - 08
-#     - 5
-#     - 18
+# Génération des utilisateurs
+App\Entity\User:
+  user_test:
+    email: test@mail.com
+    # password: test1234
+    password: \$2y\$13\$FPhRcL.0VaYl3mL9Rgh0X.juYc.5RDvHtMgcnCKaE3nr/2n9UglGa
+    firstname: John
+    lastname: Doe
+    profilePicture: https://cdn.pixabay.com/photo/2023/03/30/17/31/swan-7888389_960_720.jpg
+    createdAt: <dateTime()>
+    updatedAt: <dateTime()>
+  # Génération de faux utilisateur
+  user_fake_{1..50}:
+    email: <safeEmail()>
+    # password: test1234
+    password: \$2y\$13\$FPhRcL.0VaYl3mL9Rgh0X.juYc.5RDvHtMgcnCKaE3nr/2n9UglGa
+    firstname: <fr_FR:firstName()>
+    lastname: <fr_FR:lastName()>
+    profilePicture: <imageUrl(640, 640, $email)>
+    createdAt: <dateTimeBetween('-1 month', 'now')>
+    updatedAt: <dateTimeBetween($createdAt, 'now')>
 
-# La première étape afin de remplir notre base de données
-# c'est de spécifier le « nom complet » (namespace + nom de la classe, séparé
-# par des `\`) de l'entité que l'on souhaite généré
+# Génération des addresse
+App\Entity\Address:
+  address_test_1:
+    label: Chez moi
+    city: Paris
+    postCode: 75003
+    adddress: 25 avenue des paquerettes
+    type: "delivery"
+    user: "@user_test"
+  address_test_2:
+    label: Au bureau
+    city: Paris
+    postCode: 75003
+    adddress: 14 rue de Toulouse
+    type: "billing"
+    user: "@user_test"
+  address_test_{1..5}:
+    label: <fr_FR:catchPhrase()>
+    city: <fr_FR:city()>
+    postCode: <fr_FR:postcode()>
+    address: <fr_FR:address()>
+    type: "none"
+    user: "@user_test"
+  address_fake_{1..100}:
+    label: <fr_FR:catchPhrase()>
+    city: <fr_FR:city()>
+    postCode: <fr_FR:postcode()>
+    address: <fr_FR:address()>
+    type: "none"
+    user: "@user_fake_*"
