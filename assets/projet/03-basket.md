@@ -43,3 +43,5 @@ Créer une route `/mon-panier/supprimer/{id}` accessible uniquement aux utilisat
 livre avec son identifiant et supprimer le du panier.
 
 > Une fois supprimé, redirigé vers la page `/mon-panier`
+
+> **BONUS** : N'hésitez pas à faire un jolie panier, du style etc ...
