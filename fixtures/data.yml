@@ -50,3 +50,31 @@ App\Entity\Address:
     address: <fr_FR:address()>
     type: "none"
     user: "@user_fake_*"
+
+# Génération d'annonce de vente de livre
+App\Entity\BookAd:
+  book_test:
+    title: Test
+    description: <fr_FR:realText()>
+    imagesUrl:
+      [
+        "https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_960_720.jpg",
+      ]
+    state: '<(App\Entity\BookAd::STATE_GOOD)>'
+    author: <fr_FR:name()>
+    publishingHouse: <fr_FR:company()>
+    price: 12.53
+    createdAt: <dateTime()>
+    updatedAt: <dateTime()>
+    user: "@user_test"
+  book_test_{1..500}:
+    title: <fr_FR:catchPhrase()>
+    description: <fr_FR:realText()>
+    imagesUrl: ["<imageUrl(640, 640, $title)>"]
+    state: <(App\Entity\BookAd::STATE_GOOD)>'
+    author: <fr_FR:name()>
+    publishingHouse: <fr_FR:company()>
+    price: <randomFloat(2, 5, 80)>
+    createdAt: <dateTimeBetween('-1 month', 'now')>
+    updatedAt: <dateTimeBetween($createdAt, 'now')>
+    user: "@user_fake_*"

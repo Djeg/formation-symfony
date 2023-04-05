@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LookBook - Vente de livres entre particulier
+{% endblock %}
+
+{% block body %}
+
+	<h1>Nos nouveautés</h1>
+
+	<div>
+		{% for book in books %}
+			<div>
+				<p>{{ book.title }}
+					({{ book.price }}
+					€)</p>
+				<p>Vendu par :
+					{{ book.user.firstname }}
+					{{ book.user.lastname }}</p>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

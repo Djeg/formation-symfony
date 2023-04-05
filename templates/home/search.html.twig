@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LookBook - Rechercher
+{% endblock %}
+
+{% block body %}
+
+	<h1>Rechercher</h1>
+
+	{{ form(form) }}
+
+		<div>
+			{% for book in books %}
+				<div>
+					<p>{{ book.title }}
+						({{ book.price }}
+						€)</p>
+					<p>Vendu par :
+						{{ book.user.firstname }}
+						{{ book.user.lastname }}</p>
+				</div>
+			{% endfor %}
+		</div>
+
+	{% endblock %}
