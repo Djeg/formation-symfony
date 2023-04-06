@@ -19,7 +19,9 @@
 						{{ book.user.firstname }}
 						{{ book.user.lastname }}</p>
 					<p>
-						<a href="{{ path('app_basket_add', {id: book.id}) }}">Ajouter au panier</a>
+						{% if not app.user or not app.user.basket.books.contains(book) %}
+							<a href="{{ path('app_basket_add', {id: book.id}) }}">Ajouter au panier</a>
+						{% endif %}
 					</p>
 				</div>
 			{% endfor %}

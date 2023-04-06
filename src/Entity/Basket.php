@@ -67,4 +67,19 @@ class Basket
 
         return $this;
     }
+
+    public function getTotal(): float
+    {
+        // Je créer une variable total
+        $total = 0;
+
+        // Je boucle sur tout les livres
+        foreach ($this->books as $book) {
+            // Je rajoute au total
+            $total = $total + $book->getPrice();
+        }
+
+        // Je retourne le total
+        return $total;
+    }
 }

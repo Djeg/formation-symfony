@@ -25,4 +25,10 @@
 
 	{% endif %}
 
+	<p>
+		Prix Total :
+		{{ app.user.basket.getTotal() }}
+		€
+	</p>
+
 {% endblock %}
