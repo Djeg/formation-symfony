@@ -16,6 +16,9 @@
 				<p>Vendu par :
 					{{ book.user.firstname }}
 					{{ book.user.lastname }}</p>
+				<p>
+					<a href="{{ path('app_basket_add', {id: book.id}) }}">Ajouter au panier</a>
+				</p>
 			</div>
 		{% endfor %}
 	</div>

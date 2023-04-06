@@ -51,10 +51,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: BookAd::class, orphanRemoval: true)]
     private Collection $bookAds;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Basket $basket = null;
+
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
         $this->bookAds = new ArrayCollection();
+
+        // On attache un panier vide à l'utilisateur
+        $this->setBasket(new Basket());
     }
 
     public function getId(): ?int
@@ -243,6 +249,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $bookAd->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBasket(): ?Basket
+    {
+        return $this->basket;
+    }
+
+    public function setBasket(Basket $basket): self
+    {
+        // set the owning side of the relation if necessary
+        if ($basket->getUser() !== $this) {
+            $basket->setUser($this);
+        }
+
+        $this->basket = $basket;
 
         return $this;
     }

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LookBook - Votre panier
+{% endblock %}
+
+{% block body %}
+
+	<h1>Mon Panier</h1>
+
+	{% if app.user.basket.books.count() == 0 %}
+		<p>Votre panier est vide</p>
+	{% else %}
+
+		{% for book in app.user.basket.books %}
+			<p>
+				{{ book.title }}
+				:
+				{{ book.price }}
+				€
+			</p>
+			<p>
+				<a href="{{ path('app_basket_remove', {id: book.id}) }}">Supprimer</a>
+			</p>
+		{% endfor %}
+
+	{% endif %}
+
+{% endblock %}
