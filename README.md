@@ -51,3 +51,4 @@ LookBook est votre objectif de cette semaine ! Un site de vente de livres entre 
 1. [La connexion et l'inscription](./assets/projet/01-security.md)
 2. [La page d'accueil et les annonces](./assets/projet/02-home.md)
 3. [Le panier](./assets/projet/03-basket.md)
+4. [Déposser une annonce & Mon Profil](./assets/projet/04-create-and-profile.md)
