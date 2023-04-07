@@ -15,7 +15,9 @@
 		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
 		{% block stylesheets %}{% endblock %}
 
-		{% block javascripts %}{% endblock %}
+		{% block javascripts %}
+			<script src="/js/collection.js" async></script>
+		{% endblock %}
 	</head>
 	<body>
 		<header class="header">
@@ -28,6 +30,13 @@
 				</form>
 			</div>
 			<div>
+				{% if app.user %}
+					<a href="{{ path('app_logout') }}">Se déconnecter</a>
+					<a href="{{ path('app_book_ad_sell') }}">Vendre un livre</a>
+					<a href="{{ path('app_profile_show') }}">Mon Profil</a>
+				{% else %}
+					<a href="{{ path('app_login') }}">Se connécter</a>
+				{% endif %}
 				<a href="{{ path('app_basket_show') }}">Mon Panier</a>
 			</div>
 		</header>

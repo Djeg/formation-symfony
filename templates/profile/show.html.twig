@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LookBook - Mon Profil
+{% endblock %}
+
+{% block body %}
+
+
+	<h1>Mon Profil</h1>
+
+	<h2>Mes informations personnel</h2>
+
+	<p>Email :
+		{{ app.user.email }}</p>
+	<p>Nom :
+		{{ app.user.lastname }}</p>
+	<p>Prénom :
+		{{ app.user.firstname }}</p>
+	<p>Inscrit depuis :
+		{{ app.user.createdAt|date('d/m/Y') }}</p>
+
+	<h2>Mes annonces</h2>
+
+	{% if not app.user.bookAds.count() %}
+		<p>Vous n'avez aucune annonces</p>
+		<p>
+			<a href="{{ path('app_book_ad_sell') }}">Ajouter une annonce</a>
+		</p>
+	{% else %}
+
+		{% for bookAd in app.user.bookAds %}
+			<p>
+				{{ bookAd.title }}
+				:
+				{{ bookAd.price }}
+				€
+			</p>
+			<p>
+				<a href="{{ path('app_book_ad_update', {id: bookAd.id}) }}">Modifier</a>
+			</p>
+		{% endfor %}
+
+	{% endif %}
+
+
+{% endblock %}

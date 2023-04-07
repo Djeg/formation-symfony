@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LookBook - Modifier un livre
+{% endblock %}
+
+{% block body %}
+
+	<h1>Modifier :
+		{{ book.title }}</h1>
+
+	{{ form(form) }}{% endblock %}
