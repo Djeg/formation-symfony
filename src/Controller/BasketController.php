@@ -7,8 +7,10 @@ use App\Entity\User;
 use App\Repository\BasketRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 #[IsGranted('ROLE_USER')]
 class BasketController extends AbstractController
@@ -30,6 +32,7 @@ class BasketController extends AbstractController
          * @var User
          */
         $user = $this->getUser();
+        $this->generateUrl('app_basket_success', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
         // Je récupére son panier
         $basket = $user->getBasket();
