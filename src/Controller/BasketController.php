@@ -6,6 +6,7 @@ use App\Entity\BookAd;
 use App\Entity\User;
 use App\Repository\BasketRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Stripe\StripeClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -66,5 +67,65 @@ class BasketController extends AbstractController
 
         // Je redirige vers la page du panier
         return $this->redirectToRoute('app_basket_show');
+    }
+
+    #[Route('/mon-panier/payer', name: 'app_basket_pay')]
+    public function pay(): Response
+    {
+        // Je récupére l'utilisateur connécté
+        /**
+         * @var User
+         */
+        $user = $this->getUser();
+
+        // Je récupére son panier
+        $basket = $user->getBasket();
+
+        // Création du client stripe
+        $stripe = new StripeClient('sk_test_bxRlPNBMpA5734i4hzBc0sIA');
+
+        // Création des produits stripe
+        $lineItems = [];
+
+        // Je boucle sur tout les livres de mon panier
+        foreach ($basket->getBooks() as $book) {
+            // Création d'un item
+            $item = [
+                'quantity' => 1,
+                'price_data' => [
+                    'currency' => 'eur',
+                    'product_data' => [
+                        'name' => $book->getTitle(),
+                    ],
+                    'unit_amount' => $book->getPrice() * 100,
+                ],
+            ];
+
+            // J'ajoute l'item :
+            array_push($lineItems, $item);
+        }
+
+        // Création du lien de paiment
+        $checkout = $stripe->checkout->sessions->create([
+            'mode' => 'payment',
+            'success_url' => $this->generateUrl('app_basket_success', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'cancel_url' => $this->generateUrl('app_basket_failure', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'line_items' => $lineItems,
+        ]);
+
+        // Je redirige vers la page de paiment
+        return new RedirectResponse($checkout->url);
+    }
+
+    #[Route('/mon-panier/success', name: 'app_basket_success')]
+    public function success(): Response
+    {
+        return new Response('Ok');
+    }
+
+    #[Route('/mon-panier/echec', name: 'app_basket_failure')]
+    public function failure(): Response
+    {
+        return new Response('Echec');
     }
 }
