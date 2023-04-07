@@ -101,8 +101,6 @@ class BasketController extends AbstractController
                 ],
             ];
 
-            //test
-
             // J'ajoute l'item :
             array_push($lineItems, $item);
         }
