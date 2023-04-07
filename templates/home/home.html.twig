@@ -10,6 +10,9 @@
 	<div>
 		{% for book in books %}
 			<div>
+				{% if book.imagesUrl|length %}
+					<img src="{{ book.imagesUrl[0] }}" alt="{{ book.title }}"/>
+				{% endif %}
 				<p>{{ book.title }}
 					({{ book.price }}
 					€)</p>

@@ -89,4 +89,26 @@ class BookAdController extends AbstractController
             'book' => $bookAd,
         ]);
     }
+
+    #[Route('/livres/{id}/supprimer', name: 'app_book_ad_remove')]
+    public function remove(BookAd $bookAd, BookAdRepository $repository): Response
+    {
+        // Je récupére l'utilisateur connécté
+        /**
+         * @var User
+         */
+        $user = $this->getUser();
+
+        // Je vérifie que le livre appartiennent à l'utilisateur connécté
+        if ($bookAd->getUser()->getId() !== $user->getId()) {
+            // Si l'utilisateur n'est pas le même alors, je renvoie une 404
+            throw new NotFoundHttpException('');
+        }
+
+        // on supprime le livre
+        $repository->remove($bookAd, true);
+
+        // On redirige vers la page du profil
+        return $this->redirectToRoute('app_profile_show');
+    }
 }
